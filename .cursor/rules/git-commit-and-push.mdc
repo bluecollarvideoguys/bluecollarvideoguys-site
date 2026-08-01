@@ -1,0 +1,29 @@
+---
+description: Commit, praise be, and say my name mean commit + push
+alwaysApply: true
+---
+
+# Git: commit / "praise be" / "say my name" mean commit + push
+
+When the user asks to **commit**, says **praise be**, says **say my name**, asks to **save to GitHub**, **push**, or uses a similarly short request to persist work:
+
+1. Stage the relevant changes (`git add` as appropriate, or all if they did not narrow scope).
+2. Create the commit with a clear message.
+3. **Immediately run `git push`** to `origin` for the **current branch** (unless they explicitly asked for commit-only or named a different remote/branch).
+
+If there is **nothing to commit**, check for **unpushed commits** (`git log origin/<branch>..HEAD` or equivalent) and **push** those.
+
+Report push failures (auth, permissions, branch protection) and what to fix; do not assume push succeeded without verifying exit code.
+
+## Confirmation phrases
+
+After the workflow completes **successfully** (commit + push OK, or branch was already fully synced with nothing pending after you verified), end the user-facing reply with **exactly one** of these lines on its own, based on what the user said:
+
+| User said | Success line |
+|-----------|--------------|
+| **say my name** (or a clear variant) | `heisenberg` |
+| **praise be**, **commit**, **save to GitHub**, **push**, or other persist requests | `blessed be the fruit` |
+
+If both triggers appear in the same message, prefer **heisenberg**.
+
+If the workflow **failed** (e.g. push rejected), do **not** use either phrase; explain the failure instead.

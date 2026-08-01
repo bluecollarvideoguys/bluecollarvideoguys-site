@@ -1,0 +1,26 @@
+/* Version 03 — ARCA-inspired, independent from V01–V02 */
+.v03-root {
+  --v03-ink: #111110;
+  --v03-ink-soft: #171716;
+  --v03-panel: #161615;
+  --v03-cream: #f1efe9;
+  --v03-copper: #b83a32;
+  --v03-copper-hot: #d44a40;
+  --v03-copper-deep: #9a2f28;
+  --v03-copper-cta: #c23f36;
+  --v03-copper-hover: #e55a50;
+
+  font-family: var(--font-v03-sans), system-ui, sans-serif;
+  color: white;
+  background: var(--v03-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.v03-root ::selection {
+  background: var(--v03-copper);
+  color: white;
+}
+
+.v03-mono {
+  font-family: var(--font-v03-mono), ui-monospace, monospace;
+}

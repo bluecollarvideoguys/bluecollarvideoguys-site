@@ -1,0 +1,21 @@
+/* Version 07 — Northline dark studio + Blueprint brand */
+.v07-root {
+  --v07-ink: #111213;
+  --v07-paper: #f5f3ee;
+  --v07-cream: #efede7;
+  --v07-work: #e9e7e1;
+  --v07-orange: #fa6b20;
+  --v07-orange-hover: #ff854a;
+  --v07-teal: #153b46;
+  --v07-red: #ac261e;
+
+  font-family: var(--font-v07-sans), system-ui, sans-serif;
+  color: var(--v07-paper);
+  background: var(--v07-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.v07-root ::selection {
+  background: var(--v07-orange);
+  color: #000;
+}

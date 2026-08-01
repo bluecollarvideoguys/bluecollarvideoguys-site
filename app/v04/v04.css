@@ -1,0 +1,25 @@
+/* Version 04 — Matos-inspired, independent from V01–V03 */
+.v04-root {
+  --v04-ink: #0b0c0b;
+  --v04-panel: #101110;
+  --v04-card: #121412;
+  --v04-input: #0d0e0d;
+  --v04-form: #151715;
+  --v04-amber: #fcd34d;
+  --v04-amber-hot: #fde68a;
+  --v04-amber-dim: rgba(251, 191, 36, 0.1);
+
+  font-family: var(--font-v04-sans), system-ui, sans-serif;
+  color: #d6d3d1;
+  background: var(--v04-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.v04-root ::selection {
+  background: #fcd34d;
+  color: #0c0a09;
+}
+
+.v04-script {
+  font-family: var(--font-v04-script), cursive;
+}

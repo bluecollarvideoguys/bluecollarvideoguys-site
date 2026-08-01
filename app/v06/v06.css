@@ -1,0 +1,23 @@
+/* Version 06 — Coronado editorial + Blueprint brand */
+.v06-root {
+  --v06-ink: #1c1917;
+  --v06-paper: #fafaf9;
+  --v06-muted: #78716c;
+  --v06-emerald: #065f46;
+  --v06-emerald-deep: #022c22;
+  --v06-emerald-soft: #a7f3d0;
+
+  font-family: var(--font-v06-sans), system-ui, sans-serif;
+  color: var(--v06-ink);
+  background: var(--v06-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.v06-mono {
+  font-family: var(--font-v06-mono), ui-monospace, monospace;
+}
+
+.v06-root ::selection {
+  background: var(--v06-emerald-deep);
+  color: white;
+}

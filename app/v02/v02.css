@@ -1,0 +1,40 @@
+/* Version 02 design tokens — independent from Version 01 */
+.v02-root {
+  --v02-ink: #16202d;
+  --v02-navy: #111a26;
+  --v02-navy-deep: #0d1520;
+  --v02-paper: #f5f5f2;
+  --v02-gold: #f2ae26;
+  --v02-gold-hot: #ffc64d;
+  --v02-gold-deep: #bd7c00;
+  --v02-gold-mid: #d58d00;
+  --v02-slate: #64748b;
+  --v02-slate-light: #94a3b8;
+
+  font-family: var(--font-v02-body), system-ui, sans-serif;
+  color: var(--v02-ink);
+  background: var(--v02-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.v02-root ::selection {
+  background: var(--v02-gold);
+  color: var(--v02-ink);
+}
+
+.v02-display {
+  font-family: var(--font-v02-display), ui-sans-serif, sans-serif;
+}
+
+@keyframes v02marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-40%);
+  }
+}
+
+.v02-marquee {
+  animation: v02marquee 35s linear infinite;
+}
