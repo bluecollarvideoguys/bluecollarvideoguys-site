@@ -508,8 +508,8 @@ export function Version02Page() {
               {/* CLIENT ASSET: Replace with real crew / job-site photo */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1600&q=85"
-                alt="Trade crew on a job site"
+                src="/images/purpose-videographer.png"
+                alt="Videographer filming with a camera gimbal on location"
                 className="relative h-[26rem] w-full rounded object-cover grayscale-[20%] sm:h-[32rem]"
               />
             </div>

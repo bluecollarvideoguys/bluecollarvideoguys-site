@@ -1,7 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useState, type FormEvent, type ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type FormEvent,
+  type ReactNode,
+} from "react";
+import { HeroYouTubeBackground } from "@/components/HeroYouTubeBackground";
 
 const VERSIONS = [
   { href: "/v01", label: "Version 01" },
@@ -13,10 +20,15 @@ const VERSIONS = [
   { href: "/v07", label: "Version 07" },
 ] as const;
 
-const PLACEHOLDER_MP4 =
-  "https://res.cloudinary.com/dq9aym4ad/video/upload/v1778758779/mp__qhpetb.mp4";
-const MEDIA_POSTER =
-  "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1600&q=90";
+const VIDEOGRAPHER_IMAGE = "/images/purpose-videographer.png";
+
+const HERO_YT = "7gGRBMdAQ2k";
+const HERO_START_SEC = 15;
+const TESTIMONIALS = [
+  { id: "jzdRmbzji-A", label: "Client story" },
+  { id: "emhLh58qP94", label: "Client story" },
+  { id: "ss-3eS8oCTs", label: "Client story" },
+] as const;
 
 function IconArrowUpRight({ className }: { className?: string }) {
   return (
@@ -96,11 +108,113 @@ function IconHardHat({ className }: { className?: string }) {
   );
 }
 
-function IconStars({ className }: { className?: string }) {
+/** 16:9 YouTube embed sized to cover its parent (no letterbox bars). */
+function CoverYouTubeEmbed({
+  videoId,
+  title,
+}: {
+  videoId: string;
+  title: string;
+}) {
+  const hostRef = useRef<HTMLDivElement>(null);
+  const [size, setSize] = useState({ w: 0, h: 0 });
+
+  useEffect(() => {
+    const el = hostRef.current;
+    if (!el) return;
+    const update = () => {
+      setSize({ w: el.clientWidth, h: el.clientHeight });
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const ratio = 16 / 9;
+  const zoom = 1.28;
+  let frameW = 0;
+  let frameH = 0;
+  if (size.w > 0 && size.h > 0) {
+    if (size.w / size.h > ratio) {
+      frameW = size.w * zoom;
+      frameH = (size.w / ratio) * zoom;
+    } else {
+      frameH = size.h * zoom;
+      frameW = size.h * ratio * zoom;
+    }
+  }
+
+  const origin =
+    typeof window !== "undefined" ? window.location.origin : "";
+
   return (
-    <svg className={className} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-      <path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8L12 3z" strokeLinejoin="round" />
-    </svg>
+    <div ref={hostRef} className="absolute inset-0 overflow-hidden bg-[var(--v04-card)]">
+      {frameW > 0 ? (
+        <iframe
+          className="absolute left-1/2 top-1/2 border-0"
+          style={{
+            width: frameW,
+            height: frameH,
+            transform: "translate(-50%, -50%)",
+          }}
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=${encodeURIComponent(origin)}`}
+          title={title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          referrerPolicy="strict-origin-when-cross-origin"
+        />
+      ) : null}
+    </div>
+  );
+}
+
+function TestimonialVideoCard({
+  videoId,
+  label,
+  playing,
+  onPlay,
+}: {
+  videoId: string;
+  label: string;
+  playing: boolean;
+  onPlay: () => void;
+}) {
+  return (
+    <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-[var(--v04-card)]">
+      <div className="relative min-h-[14rem] flex-1 overflow-hidden bg-[var(--v04-card)]">
+        {playing ? (
+          <CoverYouTubeEmbed videoId={videoId} title={label} />
+        ) : (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/30" />
+            <button
+              type="button"
+              onClick={onPlay}
+              className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 text-white transition hover:bg-black/20"
+              aria-label={`Play ${label}`}
+            >
+              <span className="flex h-14 w-14 items-center justify-center rounded-full border border-white/40 bg-black/40 text-amber-300 backdrop-blur-sm">
+                <IconPlay />
+              </span>
+              <span className="text-xs font-medium uppercase tracking-[0.14em] text-white/90">
+                Watch testimonial
+              </span>
+            </button>
+          </>
+        )}
+      </div>
+      <div className="border-t border-white/10 p-7">
+        <p className="text-sm font-medium text-amber-300">{label}</p>
+        <p className="mt-1 text-xs text-stone-500">From the field · Video</p>
+      </div>
+    </article>
   );
 }
 
@@ -128,6 +242,9 @@ function Pill({ children }: { children: ReactNode }) {
 export function Version04Page() {
   const [formSent, setFormSent] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [playingTestimonial, setPlayingTestimonial] = useState<string | null>(
+    null,
+  );
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -140,16 +257,10 @@ export function Version04Page() {
         {/* HERO */}
         <header className="relative min-h-screen overflow-hidden">
           <div className="absolute inset-0">
-            {/* CLIENT ASSET: Branded production / job-site hero still or reel */}
-            <video
-              className="h-full w-full object-cover"
-              src={PLACEHOLDER_MP4}
-              poster={MEDIA_POSTER}
-              autoPlay
-              muted
-              loop
-              playsInline
-              aria-label="Brand film background"
+            {/* CLIENT ASSET: Branded production / job-site hero reel */}
+            <HeroYouTubeBackground
+              videoId={HERO_YT}
+              startSec={HERO_START_SEC}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/20 to-[var(--v04-ink)]" />
             <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-transparent to-transparent" />
@@ -317,26 +428,6 @@ export function Version04Page() {
           </div>
         </section>
 
-        {/* MEDIA BAND */}
-        <section className="relative h-[28rem] overflow-hidden sm:h-[36rem]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={MEDIA_POSTER}
-            alt="Film production on set"
-            className="h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[var(--v04-ink)] via-transparent to-[var(--v04-ink)]/60" />
-          <div className="absolute bottom-8 left-6 right-6 mx-auto flex max-w-7xl items-end justify-between lg:left-10 lg:right-10">
-            <p className="max-w-xs text-sm leading-6 text-white">
-              Blue-collar businesses deserve to be seen — not buried behind
-              outdated websites and word-of-mouth alone.
-            </p>
-            <span className="hidden rounded-full border border-white/20 bg-black/20 px-3 py-1.5 text-xs text-white backdrop-blur-md sm:block">
-              Trust Framework™
-            </span>
-          </div>
-        </section>
-
         {/* BLUEPRINT / SERVICES */}
         <section
           id="services"
@@ -373,25 +464,25 @@ export function Version04Page() {
                 badge="Stage 01"
                 title="Build Trust"
                 meta="Stories · Testimonials · Crew films"
-                image="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=85"
+                image={VIDEOGRAPHER_IMAGE}
               />
               <ServiceCard
                 badge="Stage 02"
                 title="Stand Out"
                 meta="Project films · Web · Branding"
-                image={MEDIA_POSTER}
+                image={VIDEOGRAPHER_IMAGE}
               />
               <ServiceCard
                 badge="Stage 03"
                 title="Win More Work"
                 meta="Leads · Referrals · Growth"
-                image="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=900&q=85"
+                image={VIDEOGRAPHER_IMAGE}
               />
               <ServiceCard
                 badge="Partner"
                 title="Growth partner"
                 meta="Strategy · Not just footage"
-                image="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=85"
+                image={VIDEOGRAPHER_IMAGE}
               />
             </div>
           </div>
@@ -406,7 +497,7 @@ export function Version04Page() {
                   <Pill>What makes us different</Pill>
                 </div>
                 <h2 className="text-4xl font-medium tracking-tight text-white sm:text-5xl">
-                  We don&apos;t sell cameras.
+                  We don&apos;t sell videos.
                   <br />
                   <span className="v04-script font-normal text-amber-300">
                     We sell trust.
@@ -460,12 +551,12 @@ export function Version04Page() {
           <div className="mx-auto max-w-7xl px-6 lg:px-10">
             <div className="mb-12">
               <div className="mb-5">
-                <Pill>From the field</Pill>
+                <Pill>Testimonials</Pill>
               </div>
               <h2 className="text-4xl font-medium tracking-tight text-white sm:text-5xl">
-                Kind words from{" "}
+                From the{" "}
                 <span className="v04-script font-normal text-amber-300">
-                  the trades.
+                  Field.
                 </span>
               </h2>
               <p className="mt-3 text-xs uppercase tracking-[0.14em] text-stone-500">
@@ -473,37 +564,15 @@ export function Version04Page() {
               </p>
             </div>
 
-            <div className="grid gap-5 lg:grid-cols-3">
-              {[
-                {
-                  q: "They didn't just shoot pretty footage. They helped us look like the company people already trust.",
-                  n: "[Client Name]",
-                  m: "Electrical · Placeholder",
-                },
-                {
-                  q: "No fluff. Just a blueprint that made us look as solid as our installs — and the phone rang differently.",
-                  n: "[Client Name]",
-                  m: "HVAC · Placeholder",
-                },
-                {
-                  q: "We stopped sounding like every other truck on Facebook. GCs know who we are before we bid.",
-                  n: "[Client Name]",
-                  m: "Roofing · Placeholder",
-                },
-              ].map((t) => (
-                <article
-                  key={t.q}
-                  className="rounded-2xl border border-white/10 bg-[var(--v04-card)] p-7"
-                >
-                  <IconStars className="text-amber-300" />
-                  <p className="mt-8 text-xl leading-8 tracking-tight text-white">
-                    “{t.q}”
-                  </p>
-                  <div className="mt-8 border-t border-white/10 pt-5">
-                    <p className="text-sm font-medium text-amber-300">{t.n}</p>
-                    <p className="mt-1 text-xs text-stone-500">{t.m}</p>
-                  </div>
-                </article>
+            <div className="grid items-stretch gap-5 lg:grid-cols-3">
+              {TESTIMONIALS.map((clip) => (
+                <TestimonialVideoCard
+                  key={clip.id}
+                  videoId={clip.id}
+                  label={clip.label}
+                  playing={playingTestimonial === clip.id}
+                  onPlay={() => setPlayingTestimonial(clip.id)}
+                />
               ))}
             </div>
           </div>
@@ -681,7 +750,7 @@ function ServiceCard({
       <img
         src={image}
         alt=""
-        className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+        className="h-full w-full object-cover object-top transition duration-700 group-hover:scale-105"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-transparent" />
       <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium text-stone-950">

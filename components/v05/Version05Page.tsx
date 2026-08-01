@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
+import { HeroYouTubeBackground } from "@/components/HeroYouTubeBackground";
 
 const VERSIONS = [
   { href: "/v01", label: "Version 01" },
@@ -15,8 +16,9 @@ const VERSIONS = [
 
 const MEDIA_POSTER =
   "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1600&q=90";
-const PLACEHOLDER_MP4 =
-  "https://res.cloudinary.com/dq9aym4ad/video/upload/v1778758779/mp__qhpetb.mp4";
+
+const HERO_YT = "7gGRBMdAQ2k";
+const HERO_START_SEC = 15;
 
 function IconArrowRight({ className }: { className?: string }) {
   return (
@@ -163,12 +165,6 @@ export function Version05Page() {
                 {v.label.replace("Version ", "V")}
               </Link>
             ))}
-            <a href="#blueprint" className="transition hover:text-stone-950">
-              Blueprint
-            </a>
-            <a href="#about" className="transition hover:text-stone-950">
-              About
-            </a>
           </div>
 
           <div className="flex items-center gap-2">
@@ -202,9 +198,6 @@ export function Version05Page() {
                   {v.label}
                 </Link>
               ))}
-              <a href="#blueprint" onClick={() => setMenuOpen(false)}>
-                Blueprint
-              </a>
               <a href="#contact" onClick={() => setMenuOpen(false)}>
                 Contact
               </a>
@@ -217,17 +210,12 @@ export function Version05Page() {
         {/* HERO */}
         <section className="relative min-h-screen overflow-hidden px-4 pb-12 pt-28 sm:px-6 sm:pt-32">
           <div className="absolute inset-0">
-            <video
-              className="size-full object-cover"
-              src={PLACEHOLDER_MP4}
-              poster={MEDIA_POSTER}
-              autoPlay
-              muted
-              loop
-              playsInline
-              aria-label="Brand film background"
+            <HeroYouTubeBackground
+              videoId={HERO_YT}
+              startSec={HERO_START_SEC}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-stone-950/25 via-stone-950/10 to-stone-950/65" />
+            <div className="absolute inset-0 bg-stone-600/40" />
+            <div className="absolute inset-0 bg-gradient-to-b from-stone-950/30 via-stone-950/15 to-stone-950/70" />
             {/* Blueprint grid overlay */}
             <div
               className="absolute inset-0 opacity-25 mix-blend-overlay"
@@ -322,7 +310,7 @@ export function Version05Page() {
         {/* BLUEPRINT STAGES */}
         <section
           id="blueprint"
-          className="v05-grid mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:py-28"
+          className="mx-auto max-w-7xl bg-[var(--v05-paper)] px-4 py-20 sm:px-6 lg:py-28"
         >
           <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <div>
@@ -413,7 +401,7 @@ export function Version05Page() {
         {/* ABOUT / DIFFERENCE */}
         <section
           id="about"
-          className="v05-grid-dark bg-[var(--v05-blueprint)] px-4 py-16 text-white sm:px-6 lg:py-24"
+          className="bg-[var(--v05-blueprint)] px-4 py-16 text-white sm:px-6 lg:py-24"
         >
           <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center">
             <div className="v05-frame v05-frame-light relative overflow-hidden rounded-2xl border border-white/15">

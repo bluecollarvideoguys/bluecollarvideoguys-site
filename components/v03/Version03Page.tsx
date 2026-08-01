@@ -2,13 +2,16 @@
 
 import Link from "next/link";
 import { useEffect, useState, type FormEvent } from "react";
+import { HeroYouTubeBackground } from "@/components/HeroYouTubeBackground";
 
 /** Full-bleed still — avoid YouTube thumbs (often letterboxed) */
-const MEDIA_POSTER =
-  "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1600&q=90";
+const MEDIA_POSTER = "/images/purpose-videographer.png";
 /** Direct MP4 so we can object-fit: cover (YouTube iframes letterbox) */
 const PLACEHOLDER_MP4 =
   "https://res.cloudinary.com/dq9aym4ad/video/upload/v1778758779/mp__qhpetb.mp4";
+
+const HERO_YT = "7gGRBMdAQ2k";
+const HERO_START_SEC = 15;
 
 const VERSIONS = [
   { href: "/v01", label: "Version 01" },
@@ -238,16 +241,10 @@ export function Version03Page() {
         {/* HERO — full-viewport media */}
         <section className="relative flex min-h-screen items-end overflow-hidden px-5 pb-10 pt-28 sm:px-8 sm:pb-14 lg:px-12 lg:pb-16">
           <div className="absolute inset-0">
-            {/* CLIENT ASSET: Replace with branded production reel */}
-            <video
-              className="absolute inset-0 h-full w-full object-cover"
-              src={PLACEHOLDER_MP4}
-              poster={MEDIA_POSTER}
-              autoPlay
-              muted
-              loop
-              playsInline
-              aria-label="Brand film background"
+            {/* CLIENT ASSET: Branded production reel */}
+            <HeroYouTubeBackground
+              videoId={HERO_YT}
+              startSec={HERO_START_SEC}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-[var(--v03-ink)]" />
             <div className="absolute inset-0 bg-black/10" />
@@ -382,9 +379,9 @@ export function Version03Page() {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={MEDIA_POSTER}
-                      alt=""
+                      alt="Videographer filming with a camera gimbal on location"
                       className="h-full w-full transition duration-700 group-hover:scale-105"
-                      style={{ objectFit: "cover" }}
+                      style={{ objectFit: "cover", objectPosition: "center top" }}
                     />
                     <div className="absolute inset-0 bg-black/40" />
                     <button
