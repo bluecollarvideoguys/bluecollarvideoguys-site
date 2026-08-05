@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { DM_Mono, Inter } from "next/font/google";
+import { Bebas_Neue, DM_Mono, Inter } from "next/font/google";
 import "./v06.css";
 
 const sans = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   variable: "--font-v06-sans",
+});
+
+const display = Bebas_Neue({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-v06-display",
 });
 
 const mono = DM_Mono({
@@ -27,7 +33,7 @@ export default function Version06Layout({
 }) {
   return (
     <div
-      className={`${sans.variable} ${mono.variable} v06-root min-h-screen`}
+      className={`${sans.variable} ${display.variable} ${mono.variable} v06-root min-h-screen`}
     >
       {children}
     </div>

@@ -4,9 +4,10 @@ import Link from "next/link";
 import { useState } from "react";
 import { IconClose, IconMenu } from "./icons";
 
-export type SiteVersion = 1 | 2 | 3 | 4 | 5 | 6 | 7;
+export type SiteVersion = 1 | 2 | 3 | 4 | 5 | 6 | 7 | "master";
 
 const VERSIONS: { version: SiteVersion; href: string; label: string }[] = [
+  { version: "master", href: "/master", label: "Version 02 Master" },
   { version: 1, href: "/v01", label: "Version 01" },
   { version: 2, href: "/v02", label: "Version 02" },
   { version: 3, href: "/v03", label: "Version 03" },

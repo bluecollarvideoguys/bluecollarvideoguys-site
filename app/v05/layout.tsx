@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { DM_Sans, Playfair_Display } from "next/font/google";
+import { DM_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./v05.css";
 
 const sans = DM_Sans({
@@ -8,11 +9,11 @@ const sans = DM_Sans({
   variable: "--font-v05-sans",
 });
 
-const display = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["500", "600"],
-  style: ["normal", "italic"],
+const display = localFont({
+  src: "../fonts/sketchup/Sketchup.woff2",
   variable: "--font-v05-display",
+  display: "swap",
+  weight: "400",
 });
 
 export const metadata: Metadata = {

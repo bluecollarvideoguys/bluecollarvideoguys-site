@@ -11,6 +11,7 @@ import {
 import { HeroYouTubeBackground } from "@/components/HeroYouTubeBackground";
 
 const VERSIONS = [
+  { href: "/master", label: "Version 02 Master" },
   { href: "/v01", label: "Version 01" },
   { href: "/v02", label: "Version 02" },
   { href: "/v03", label: "Version 03" },
@@ -228,11 +229,28 @@ function IconCamera({ className }: { className?: string }) {
   );
 }
 
-function Pill({ children }: { children: ReactNode }) {
+function Pill({
+  children,
+  tone = "dark",
+}: {
+  children: ReactNode;
+  tone?: "dark" | "light";
+}) {
+  const light = tone === "light";
   return (
-    <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5">
+    <div
+      className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 ${
+        light
+          ? "border-stone-300/80 bg-stone-900/5"
+          : "border-white/10 bg-white/5"
+      }`}
+    >
       <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-      <span className="text-xs font-medium uppercase tracking-[0.14em] text-stone-200">
+      <span
+        className={`text-xs font-medium uppercase tracking-[0.14em] ${
+          light ? "text-stone-700" : "text-stone-200"
+        }`}
+      >
         {children}
       </span>
     </div>
@@ -383,24 +401,24 @@ export function Version04Page() {
         {/* PURPOSE / BELIEF */}
         <section
           id="about"
-          className="border-b border-white/5 bg-[var(--v04-ink)] py-24 lg:py-32"
+          className="border-b border-stone-200/80 bg-[var(--v04-paper)] py-24 text-stone-800 lg:py-32"
         >
           <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-12 lg:px-10">
             <div className="lg:col-span-3">
-              <Pill>Our belief</Pill>
+              <Pill tone="light">Our belief</Pill>
             </div>
 
             <div className="lg:col-span-9">
-              <p className="max-w-4xl text-2xl font-normal leading-relaxed tracking-tight text-stone-400 sm:text-3xl">
+              <p className="max-w-4xl text-2xl font-normal leading-relaxed tracking-tight text-stone-600 sm:text-3xl">
                 Trust Wins Jobs. People don&apos;t hire the cheapest contractor —
                 they hire the one they trust. We make sure the answer is{" "}
-                <span className="text-white">yes</span> before they ever pick up
+                <span className="text-stone-950">yes</span> before they ever pick up
                 the phone.
               </p>
 
-              <div className="mt-12 grid grid-cols-1 gap-6 border-t border-white/10 pt-7 sm:grid-cols-3">
+              <div className="mt-12 grid grid-cols-1 gap-6 border-t border-stone-300 pt-7 sm:grid-cols-3">
                 <div>
-                  <p className="text-3xl font-medium tracking-tight text-white">
+                  <p className="text-3xl font-medium tracking-tight text-stone-950">
                     Build Trust
                   </p>
                   <p className="mt-2 text-xs uppercase tracking-[0.13em] text-stone-500">
@@ -408,7 +426,7 @@ export function Version04Page() {
                   </p>
                 </div>
                 <div>
-                  <p className="text-3xl font-medium tracking-tight text-white">
+                  <p className="text-3xl font-medium tracking-tight text-stone-950">
                     Stand Out
                   </p>
                   <p className="mt-2 text-xs uppercase tracking-[0.13em] text-stone-500">
@@ -416,7 +434,7 @@ export function Version04Page() {
                   </p>
                 </div>
                 <div>
-                  <p className="text-3xl font-medium tracking-tight text-white">
+                  <p className="text-3xl font-medium tracking-tight text-stone-950">
                     Win More Work
                   </p>
                   <p className="mt-2 text-xs uppercase tracking-[0.13em] text-stone-500">
@@ -489,14 +507,17 @@ export function Version04Page() {
         </section>
 
         {/* WHY US */}
-        <section id="projects" className="bg-[var(--v04-panel)] py-24 lg:py-32">
+        <section
+          id="projects"
+          className="bg-[var(--v04-paper)] py-24 text-stone-800 lg:py-32"
+        >
           <div className="mx-auto max-w-7xl px-6 lg:px-10">
             <div className="grid gap-10 lg:grid-cols-2 lg:items-end">
               <div>
                 <div className="mb-5">
-                  <Pill>What makes us different</Pill>
+                  <Pill tone="light">What makes us different</Pill>
                 </div>
-                <h2 className="text-4xl font-medium tracking-tight text-white sm:text-5xl">
+                <h2 className="text-4xl font-medium tracking-tight text-stone-950 sm:text-5xl">
                   We don&apos;t sell videos.
                   <br />
                   <span className="v04-script font-normal text-amber-300">
@@ -504,14 +525,14 @@ export function Version04Page() {
                   </span>
                 </h2>
               </div>
-              <p className="max-w-xl text-base leading-7 text-stone-400 lg:justify-self-end">
+              <p className="max-w-xl text-base leading-7 text-stone-600 lg:justify-self-end">
                 Most agencies chase attention. We create content that earns
                 confidence — every video, website, and strategy moves you through
                 The Blue Collar Blueprint™.
               </p>
             </div>
 
-            <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 md:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-stone-200 bg-stone-200 md:grid-cols-2 lg:grid-cols-4">
               {[
                 {
                   icon: <IconChat className="text-amber-300" />,
@@ -534,12 +555,12 @@ export function Version04Page() {
                   d: "Established shops that care about quality — we help more people see it.",
                 },
               ].map((item) => (
-                <div key={item.t} className="bg-[var(--v04-panel)] p-7">
-                  <div className="mb-8 flex h-11 w-11 items-center justify-center rounded-xl bg-amber-300/10">
+                <div key={item.t} className="bg-[var(--v04-paper-card)] p-7">
+                  <div className="mb-8 flex h-11 w-11 items-center justify-center rounded-xl bg-amber-300/20">
                     {item.icon}
                   </div>
-                  <h3 className="text-base font-medium text-white">{item.t}</h3>
-                  <p className="mt-3 text-sm leading-6 text-stone-500">{item.d}</p>
+                  <h3 className="text-base font-medium text-stone-950">{item.t}</h3>
+                  <p className="mt-3 text-sm leading-6 text-stone-600">{item.d}</p>
                 </div>
               ))}
             </div>
@@ -581,21 +602,21 @@ export function Version04Page() {
         {/* CONTACT */}
         <section
           id="contact"
-          className="border-t border-white/5 bg-[var(--v04-panel)] py-24 lg:py-32"
+          className="border-t border-stone-200 bg-[var(--v04-paper)] py-24 text-stone-800 lg:py-32"
         >
           <div className="mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-2 lg:px-10">
             <div>
               <div className="mb-5">
-                <Pill>Let&apos;s talk</Pill>
+                <Pill tone="light">Let&apos;s talk</Pill>
               </div>
-              <h2 className="text-4xl font-medium tracking-tight text-white sm:text-5xl">
+              <h2 className="text-4xl font-medium tracking-tight text-stone-950 sm:text-5xl">
                 Your story
                 <br />
                 <span className="v04-script font-normal text-amber-300">
                   deserves to be told.
                 </span>
               </h2>
-              <p className="mt-7 max-w-md text-base leading-7 text-stone-400">
+              <p className="mt-7 max-w-md text-base leading-7 text-stone-600">
                 Tell us about your shop. We&apos;ll frame up how The Blue Collar
                 Blueprint™ turns trust into more of the right work.
               </p>
@@ -604,18 +625,18 @@ export function Version04Page() {
                 {/* CLIENT ASSET: Replace placeholder phone */}
                 <a
                   href="tel:+10000000000"
-                  className="flex items-center gap-3 text-stone-300 transition hover:text-amber-300"
+                  className="flex items-center gap-3 text-stone-700 transition hover:text-amber-300"
                 >
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-amber-300">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full border border-stone-300 bg-white text-amber-300">
                     <IconPhone />
                   </span>
                   [Phone — placeholder]
                 </a>
                 <a
                   href="mailto:hello@bluecollarvideoguys.com"
-                  className="flex items-center gap-3 text-stone-300 transition hover:text-amber-300"
+                  className="flex items-center gap-3 text-stone-700 transition hover:text-amber-300"
                 >
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-amber-300">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full border border-stone-300 bg-white text-amber-300">
                     <IconMail />
                   </span>
                   hello@bluecollarvideoguys.com
@@ -625,63 +646,63 @@ export function Version04Page() {
 
             <form
               onSubmit={onSubmit}
-              className="rounded-2xl border border-white/10 bg-[var(--v04-form)] p-6 sm:p-8"
+              className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm sm:p-8"
             >
               <div className="grid gap-5 sm:grid-cols-2">
                 <label className="block">
-                  <span className="mb-2 block text-xs font-medium text-stone-300">
+                  <span className="mb-2 block text-xs font-medium text-stone-600">
                     First name
                   </span>
                   <input
                     type="text"
                     required
                     placeholder="Your first name"
-                    className="w-full rounded-xl border border-white/10 bg-[var(--v04-input)] px-4 py-3 text-sm text-white outline-none placeholder:text-stone-600 focus:border-amber-300/60"
+                    className="w-full rounded-xl border border-stone-200 bg-[var(--v04-paper)] px-4 py-3 text-sm text-stone-900 outline-none placeholder:text-stone-400 focus:border-amber-300"
                   />
                 </label>
                 <label className="block">
-                  <span className="mb-2 block text-xs font-medium text-stone-300">
+                  <span className="mb-2 block text-xs font-medium text-stone-600">
                     Last name
                   </span>
                   <input
                     type="text"
                     required
                     placeholder="Your last name"
-                    className="w-full rounded-xl border border-white/10 bg-[var(--v04-input)] px-4 py-3 text-sm text-white outline-none placeholder:text-stone-600 focus:border-amber-300/60"
+                    className="w-full rounded-xl border border-stone-200 bg-[var(--v04-paper)] px-4 py-3 text-sm text-stone-900 outline-none placeholder:text-stone-400 focus:border-amber-300"
                   />
                 </label>
                 <label className="block">
-                  <span className="mb-2 block text-xs font-medium text-stone-300">
+                  <span className="mb-2 block text-xs font-medium text-stone-600">
                     Email
                   </span>
                   <input
                     type="email"
                     required
                     placeholder="you@company.com"
-                    className="w-full rounded-xl border border-white/10 bg-[var(--v04-input)] px-4 py-3 text-sm text-white outline-none placeholder:text-stone-600 focus:border-amber-300/60"
+                    className="w-full rounded-xl border border-stone-200 bg-[var(--v04-paper)] px-4 py-3 text-sm text-stone-900 outline-none placeholder:text-stone-400 focus:border-amber-300"
                   />
                 </label>
                 <label className="block">
-                  <span className="mb-2 block text-xs font-medium text-stone-300">
+                  <span className="mb-2 block text-xs font-medium text-stone-600">
                     Phone
                   </span>
                   <input
                     type="tel"
                     placeholder="(000) 000-0000"
-                    className="w-full rounded-xl border border-white/10 bg-[var(--v04-input)] px-4 py-3 text-sm text-white outline-none placeholder:text-stone-600 focus:border-amber-300/60"
+                    className="w-full rounded-xl border border-stone-200 bg-[var(--v04-paper)] px-4 py-3 text-sm text-stone-900 outline-none placeholder:text-stone-400 focus:border-amber-300"
                   />
                 </label>
               </div>
 
               <label className="mt-5 block">
-                <span className="mb-2 block text-xs font-medium text-stone-300">
+                <span className="mb-2 block text-xs font-medium text-stone-600">
                   What are you building?
                 </span>
                 <textarea
                   rows={5}
                   required
                   placeholder="Trade, company size, and what you want customers to trust you for..."
-                  className="w-full resize-none rounded-xl border border-white/10 bg-[var(--v04-input)] px-4 py-3 text-sm text-white outline-none placeholder:text-stone-600 focus:border-amber-300/60"
+                  className="w-full resize-none rounded-xl border border-stone-200 bg-[var(--v04-paper)] px-4 py-3 text-sm text-stone-900 outline-none placeholder:text-stone-400 focus:border-amber-300"
                 />
               </label>
 

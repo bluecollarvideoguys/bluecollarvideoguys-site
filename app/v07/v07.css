@@ -6,8 +6,8 @@
   --v07-work: #e9e7e1;
   --v07-orange: #fa6b20;
   --v07-orange-hover: #ff854a;
-  --v07-teal: #153b46;
-  --v07-red: #ac261e;
+  --v07-blue: #1b3558;
+  --v07-blue-soft: #93c5fd;
 
   font-family: var(--font-v07-sans), system-ui, sans-serif;
   color: var(--v07-paper);

@@ -5,6 +5,7 @@ import { useState, type FormEvent } from "react";
 import { HeroYouTubeBackground } from "@/components/HeroYouTubeBackground";
 
 const VERSIONS = [
+  { href: "/master", label: "Version 02 Master" },
   { href: "/v01", label: "Version 01" },
   { href: "/v02", label: "Version 02" },
   { href: "/v03", label: "Version 03" },
@@ -214,7 +215,7 @@ export function Version05Page() {
               videoId={HERO_YT}
               startSec={HERO_START_SEC}
             />
-            <div className="absolute inset-0 bg-stone-600/40" />
+            <div className="absolute inset-0 bg-black/35" />
             <div className="absolute inset-0 bg-gradient-to-b from-stone-950/30 via-stone-950/15 to-stone-950/70" />
             {/* Blueprint grid overlay */}
             <div
@@ -238,12 +239,12 @@ export function Version05Page() {
               <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-stone-200">
                 Authentic video marketing for blue-collar businesses
               </p>
-              <h1 className="v05-display max-w-4xl text-5xl font-medium leading-[0.92] tracking-tight sm:text-7xl lg:text-8xl">
+              <h1 className="v05-display max-w-4xl text-5xl leading-[0.92] tracking-tight sm:text-7xl lg:text-8xl">
                 Build Trust.
                 <br />
                 Stand Out.
                 <br />
-                <span className="italic">Win More Work.</span>
+                <span>Win More Work.</span>
               </h1>
               <p className="mt-7 max-w-xl text-base leading-relaxed text-stone-200 sm:text-lg">
                 You&apos;ve spent years earning your reputation. Our job is to make
@@ -315,7 +316,7 @@ export function Version05Page() {
           <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <div>
               <SheetLabel>Drawing A — Process</SheetLabel>
-              <h2 className="v05-display mt-4 text-4xl font-medium leading-[1.04] tracking-tight text-stone-900 sm:text-5xl">
+              <h2 className="v05-display mt-4 text-4xl leading-[1.04] tracking-tight text-stone-900 sm:text-5xl">
                 Every project follows a clear plan.
               </h2>
               <p className="mt-6 max-w-md text-base leading-relaxed text-stone-600">
@@ -426,7 +427,7 @@ export function Version05Page() {
 
             <div className="lg:pl-12">
               <SheetLabel light>Drawing B — Positioning</SheetLabel>
-              <h2 className="v05-display mt-4 text-4xl font-medium leading-[1.05] tracking-tight text-white sm:text-5xl">
+              <h2 className="v05-display mt-4 text-4xl leading-[1.05] tracking-tight text-white sm:text-5xl">
                 Experience the trades can feel good about.
               </h2>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-stone-300">
@@ -465,7 +466,7 @@ export function Version05Page() {
           <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
             <div>
               <SheetLabel>Field notes</SheetLabel>
-              <h2 className="v05-display mt-4 text-4xl font-medium tracking-tight sm:text-5xl">
+              <h2 className="v05-display mt-4 text-4xl tracking-tight sm:text-5xl">
                 Trusted through every chapter.
               </h2>
               <p className="mt-2 text-xs uppercase tracking-widest text-stone-400">
@@ -552,7 +553,7 @@ export function Version05Page() {
             <div className="relative grid gap-12 lg:grid-cols-[1fr_0.85fr]">
               <div>
                 <SheetLabel light>Punch list — Contact</SheetLabel>
-                <h2 className="v05-display mt-4 max-w-xl text-4xl font-medium leading-[1.04] tracking-tight text-white sm:text-5xl">
+                <h2 className="v05-display mt-4 max-w-xl text-4xl leading-[1.04] tracking-tight text-white sm:text-5xl">
                   Your story deserves to be told.
                 </h2>
                 <p className="mt-6 max-w-lg text-base leading-relaxed text-stone-300">

@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
+import { CoverYouTubeEmbed } from "@/components/CoverYouTubeEmbed";
+import { HeroYouTubeBackground } from "@/components/HeroYouTubeBackground";
 
 const VERSIONS = [
+  { href: "/master", label: "Version 02 Master" },
   { href: "/v01", label: "Version 01" },
   { href: "/v02", label: "Version 02" },
   { href: "/v03", label: "Version 03" },
@@ -15,16 +18,12 @@ const VERSIONS = [
 
 const MEDIA_POSTER =
   "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1600&q=90";
-const PLACEHOLDER_MP4 =
-  "https://res.cloudinary.com/dq9aym4ad/video/upload/v1778758779/mp__qhpetb.mp4";
-const GALLERY = {
-  main: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1600&q=90",
-  interior:
-    "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&q=90",
-  detail:
-    "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200&q=90",
-  turnkey:
-    "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=90",
+const HERO_YT = "7gGRBMdAQ2k";
+const HERO_START_SEC = 15;
+const WORK_VIDEOS = {
+  jobSite: "ss-3eS8oCTs",
+  brandStories: "jzdRmbzji-A",
+  craftEdit: "emhLh58qP94",
 } as const;
 
 function IconArrowRight({ className }: { className?: string }) {
@@ -319,15 +318,9 @@ export function Version06Page() {
 
       <main id="top">
         <header className="relative min-h-screen overflow-hidden bg-stone-900">
-          <video
-            className="absolute inset-0 h-full w-full object-cover"
-            src={PLACEHOLDER_MP4}
-            poster={MEDIA_POSTER}
-            autoPlay
-            muted
-            loop
-            playsInline
-            aria-label="Brand film background"
+          <HeroYouTubeBackground
+            videoId={HERO_YT}
+            startSec={HERO_START_SEC}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/5 to-black/65" />
           <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/40 to-transparent" />
@@ -343,7 +336,7 @@ export function Version06Page() {
                   Authentic video for the trades
                 </span>
               </div>
-              <h1 className="max-w-3xl text-5xl font-medium leading-[0.92] tracking-tight text-white sm:text-7xl lg:text-8xl">
+              <h1 className="v06-display max-w-3xl text-5xl leading-[0.92] tracking-tight text-white sm:text-7xl lg:text-8xl">
                 Build Trust.
                 <br />
                 Stand Out.
@@ -400,10 +393,10 @@ export function Version06Page() {
         >
           <div className="grid gap-14 lg:grid-cols-12 lg:gap-20">
             <div className="lg:col-span-4">
-              <p className="text-xs font-medium uppercase tracking-[0.16em] text-emerald-800">
+              <p className="text-xs font-medium uppercase tracking-[0.16em] text-blue-800">
                 A clear plan
               </p>
-              <h2 className="mt-5 text-3xl font-medium leading-tight tracking-tight text-stone-900 sm:text-4xl">
+              <h2 className="v06-display mt-5 text-3xl leading-tight tracking-tight text-stone-900 sm:text-4xl">
                 Content that earns
                 <br />
                 confidence.
@@ -416,21 +409,10 @@ export function Version06Page() {
                 growth — powered by the Trust Framework™. We don&apos;t sell
                 cameras. We sell trust.
               </p>
-              <div className="mt-10 grid gap-7 border-t border-stone-200 pt-8 sm:grid-cols-2">
-                <p className="text-sm leading-7 text-stone-600">
-                  Brand stories, testimonials, and crew films answer the
-                  question every buyer asks: “Can I trust this company?” Before
-                  the first call is ever made.
-                </p>
-                <p className="text-sm leading-7 text-stone-600">
-                  Project films, photography, web, and branding make you the
-                  shop people remember — so better leads and bigger jobs follow.
-                </p>
-              </div>
 
               <div className="mt-12 grid border-y border-stone-200 sm:grid-cols-2">
                 <div className="flex gap-4 border-b border-stone-200 py-5 sm:mr-8 sm:border-b-0">
-                  <IconShield className="mt-0.5 shrink-0 text-emerald-800" />
+                  <IconShield className="mt-0.5 shrink-0 text-blue-800" />
                   <div>
                     <p className="text-sm font-medium text-stone-900">
                       Build Trust
@@ -441,7 +423,7 @@ export function Version06Page() {
                   </div>
                 </div>
                 <div className="flex gap-4 border-b border-stone-200 py-5 sm:border-b-0 sm:border-l sm:border-stone-200 sm:pl-8">
-                  <IconStar className="mt-0.5 shrink-0 text-emerald-800" />
+                  <IconStar className="mt-0.5 shrink-0 text-blue-800" />
                   <div>
                     <p className="text-sm font-medium text-stone-900">
                       Stand Out
@@ -452,7 +434,7 @@ export function Version06Page() {
                   </div>
                 </div>
                 <div className="flex gap-4 border-b border-stone-200 py-5 sm:mr-8 sm:border-b-0">
-                  <IconWrench className="mt-0.5 shrink-0 text-emerald-800" />
+                  <IconWrench className="mt-0.5 shrink-0 text-blue-800" />
                   <div>
                     <p className="text-sm font-medium text-stone-900">
                       Win More Work
@@ -463,7 +445,7 @@ export function Version06Page() {
                   </div>
                 </div>
                 <div className="flex gap-4 py-5 sm:border-l sm:border-stone-200 sm:pl-8">
-                  <IconChart className="mt-0.5 shrink-0 text-emerald-800" />
+                  <IconChart className="mt-0.5 shrink-0 text-blue-800" />
                   <div>
                     <p className="text-sm font-medium text-stone-900">
                       Built for the trades
@@ -482,10 +464,10 @@ export function Version06Page() {
           <div className="mx-auto max-w-7xl px-5 sm:px-8">
             <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
               <div>
-                <p className="text-xs font-medium uppercase tracking-[0.16em] text-emerald-800">
+                <p className="text-xs font-medium uppercase tracking-[0.16em] text-blue-800">
                   Job Sites
                 </p>
-                <h2 className="mt-4 text-3xl font-medium tracking-tight text-stone-900 sm:text-4xl">
+                <h2 className="v06-display mt-4 text-3xl tracking-tight text-stone-900 sm:text-4xl">
                   Work that looks like the job.
                 </h2>
                 <p className="mt-2 text-xs uppercase tracking-widest text-stone-500">
@@ -502,36 +484,36 @@ export function Version06Page() {
             </div>
 
             <div className="grid gap-3 md:grid-cols-12 md:grid-rows-2">
-              <figure className="relative min-h-80 overflow-hidden bg-stone-300 md:col-span-7 md:row-span-2 md:min-h-[42rem]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={GALLERY.main}
-                  alt="Crew on a job site"
-                  className="h-full w-full object-cover"
+              <figure className="relative min-h-80 overflow-hidden bg-stone-900 md:col-span-7 md:row-span-2 md:min-h-[42rem]">
+                <CoverYouTubeEmbed
+                  videoId={WORK_VIDEOS.jobSite}
+                  title="Job-site films testimonial"
+                  background
+                  zoom={1.45}
                 />
-                <figcaption className="absolute bottom-0 left-0 bg-stone-950/70 px-4 py-3 text-xs uppercase tracking-[0.14em] text-white backdrop-blur-sm">
+                <figcaption className="pointer-events-none absolute bottom-0 left-0 z-10 bg-stone-950/70 px-4 py-3 text-xs uppercase tracking-[0.14em] text-white backdrop-blur-sm">
                   Job-site films
                 </figcaption>
               </figure>
-              <figure className="relative min-h-64 overflow-hidden bg-stone-300 md:col-span-5">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={GALLERY.interior}
-                  alt="Camera on set"
-                  className="h-full w-full object-cover"
+              <figure className="relative min-h-64 overflow-hidden bg-stone-900 md:col-span-5">
+                <CoverYouTubeEmbed
+                  videoId={WORK_VIDEOS.brandStories}
+                  title="Brand stories testimonial"
+                  background
+                  zoom={1.45}
                 />
-                <figcaption className="absolute bottom-0 left-0 bg-stone-950/70 px-4 py-3 text-xs uppercase tracking-[0.14em] text-white backdrop-blur-sm">
+                <figcaption className="pointer-events-none absolute bottom-0 left-0 z-10 bg-stone-950/70 px-4 py-3 text-xs uppercase tracking-[0.14em] text-white backdrop-blur-sm">
                   Brand stories
                 </figcaption>
               </figure>
-              <figure className="relative min-h-64 overflow-hidden bg-stone-300 md:col-span-5">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={GALLERY.detail}
-                  alt="Editing detail"
-                  className="h-full w-full object-cover"
+              <figure className="relative min-h-64 overflow-hidden bg-stone-900 md:col-span-5">
+                <CoverYouTubeEmbed
+                  videoId={WORK_VIDEOS.craftEdit}
+                  title="Craft and edit testimonial"
+                  background
+                  zoom={1.45}
                 />
-                <figcaption className="absolute bottom-0 left-0 bg-stone-950/70 px-4 py-3 text-xs uppercase tracking-[0.14em] text-white backdrop-blur-sm">
+                <figcaption className="pointer-events-none absolute bottom-0 left-0 z-10 bg-stone-950/70 px-4 py-3 text-xs uppercase tracking-[0.14em] text-white backdrop-blur-sm">
                   Craft &amp; edit
                 </figcaption>
               </figure>
@@ -540,30 +522,30 @@ export function Version06Page() {
         </section>
 
         <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 md:py-28">
-          <div className="grid overflow-hidden bg-emerald-950 lg:grid-cols-2">
+          <div className="grid overflow-hidden bg-blue-950 lg:grid-cols-2">
             <div className="relative min-h-80">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={GALLERY.turnkey}
-                alt="Strategy conversation"
-                className="absolute inset-0 h-full w-full object-cover"
+                src="/images/purpose-videographer.png"
+                alt="Videographer filming with a camera gimbal on location"
+                className="absolute inset-0 h-[120%] w-full object-cover object-[center_20%] -translate-y-[8%]"
               />
             </div>
             <div className="flex flex-col justify-center px-7 py-14 sm:px-12 lg:px-16">
-              <p className="text-xs font-medium uppercase tracking-[0.16em] text-emerald-200">
+              <p className="text-xs font-medium uppercase tracking-[0.16em] text-blue-200">
                 The partner advantage
               </p>
-              <h2 className="mt-5 text-3xl font-medium leading-tight tracking-tight text-white sm:text-4xl">
+              <h2 className="v06-display mt-5 text-3xl leading-tight tracking-tight text-white sm:text-4xl">
                 Prepared for lasting growth.
               </h2>
-              <p className="mt-6 max-w-md text-sm leading-7 text-emerald-50/75">
+              <p className="mt-6 max-w-md text-sm leading-7 text-blue-50/75">
                 Not a one-off edit. A growth partner who maps every film,
                 website, and strategy to the Blueprint — so reputation turns
                 into jobs.
               </p>
               <a
                 href="#contact"
-                className="mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-medium text-emerald-950 transition hover:bg-emerald-100"
+                className="mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-medium text-blue-950 transition hover:bg-blue-100"
               >
                 Frame up your Blueprint
                 <IconArrowRight />
@@ -579,13 +561,13 @@ export function Version06Page() {
             alt=""
             className="absolute inset-0 h-full w-full object-cover opacity-25 grayscale"
           />
-          <div className="absolute inset-0 bg-emerald-950/50" />
+          <div className="absolute inset-0 bg-blue-950/50" />
           <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 md:grid-cols-2 md:py-28">
             <div>
-              <p className="text-xs font-medium uppercase tracking-[0.16em] text-emerald-200">
+              <p className="text-xs font-medium uppercase tracking-[0.16em] text-blue-200">
                 Who we serve
               </p>
-              <h2 className="mt-5 text-4xl font-medium tracking-tight text-white sm:text-5xl">
+              <h2 className="v06-display mt-5 text-4xl tracking-tight text-white sm:text-5xl">
                 Built for
                 <br />
                 blue-collar shops.
@@ -610,10 +592,10 @@ export function Version06Page() {
         <section id="contact" className="bg-stone-50 py-20 sm:py-28">
           <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:gap-20">
             <div className="lg:col-span-5">
-              <p className="text-xs font-medium uppercase tracking-[0.16em] text-emerald-800">
+              <p className="text-xs font-medium uppercase tracking-[0.16em] text-blue-800">
                 Private inquiries
               </p>
-              <h2 className="mt-5 text-3xl font-medium leading-tight tracking-tight text-stone-900 sm:text-4xl">
+              <h2 className="v06-display mt-5 text-3xl leading-tight tracking-tight text-stone-900 sm:text-4xl">
                 Your story deserves
                 <br />
                 to be told.
@@ -637,14 +619,14 @@ export function Version06Page() {
               <div className="mt-7 space-y-3">
                 <a
                   href="tel:+10000000000"
-                  className="flex w-fit items-center gap-2 text-sm text-stone-600 transition hover:text-emerald-800"
+                  className="flex w-fit items-center gap-2 text-sm text-stone-600 transition hover:text-blue-800"
                 >
                   <IconPhone />
                   [Phone — placeholder]
                 </a>
                 <a
                   href="mailto:hello@bluecollarvideoguys.com"
-                  className="flex w-fit items-center gap-2 text-sm text-stone-600 transition hover:text-emerald-800"
+                  className="flex w-fit items-center gap-2 text-sm text-stone-600 transition hover:text-blue-800"
                 >
                   <IconMail />
                   hello@bluecollarvideoguys.com
@@ -700,7 +682,7 @@ export function Version06Page() {
               </div>
               <button
                 type="submit"
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-emerald-950 px-6 py-3.5 text-sm font-medium text-white transition hover:bg-emerald-800"
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-blue-950 px-6 py-3.5 text-sm font-medium text-white transition hover:bg-blue-800"
               >
                 {formSent ? "Thank you — we'll be in touch" : "Send inquiry"}
                 <IconArrowRight />

@@ -1,4 +1,4 @@
-/* Version 02 design tokens (independent from Version 01) */
+/* Version 02 design tokens — independent from Version 01 */
 .v02-root {
   --v02-ink: #16202d;
   --v02-navy: #111a26;
@@ -10,9 +10,6 @@
   --v02-gold-mid: #d58d00;
   --v02-slate: #64748b;
   --v02-slate-light: #94a3b8;
-  /* Manifesto hairline: use for all structural linework */
-  --v02-line: color-mix(in srgb, var(--v02-ink) 10%, transparent);
-  --v02-line-on-dark: rgba(255, 255, 255, 0.1);
 
   font-family: var(--font-v02-body), system-ui, sans-serif;
   color: var(--v02-ink);
@@ -29,14 +26,6 @@
   font-family: var(--font-v02-display), ui-sans-serif, sans-serif;
 }
 
-.v02-hairline {
-  border-color: var(--v02-line);
-}
-
-.v02-hairline-dark {
-  border-color: var(--v02-line-on-dark);
-}
-
 @keyframes v02marquee {
   from {
     transform: translateX(0);
@@ -48,9 +37,4 @@
 
 .v02-marquee {
   animation: v02marquee 35s linear infinite;
-}
-
-/* Smooth scroll fights ScrollTrigger pin/scrub on the Blueprint section */
-html:has(.v02-root) {
-  scroll-behavior: auto;
 }

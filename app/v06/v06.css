@@ -3,9 +3,9 @@
   --v06-ink: #1c1917;
   --v06-paper: #fafaf9;
   --v06-muted: #78716c;
-  --v06-emerald: #065f46;
-  --v06-emerald-deep: #022c22;
-  --v06-emerald-soft: #a7f3d0;
+  --v06-blue: #1b3a5c;
+  --v06-blue-deep: #0f2740;
+  --v06-blue-soft: #93c5fd;
 
   font-family: var(--font-v06-sans), system-ui, sans-serif;
   color: var(--v06-ink);
@@ -17,7 +17,15 @@
   font-family: var(--font-v06-mono), ui-monospace, monospace;
 }
 
+.v06-display {
+  font-family: var(--font-v06-display), Impact, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .v06-root ::selection {
-  background: var(--v06-emerald-deep);
+  background: var(--v06-blue-deep);
   color: white;
 }

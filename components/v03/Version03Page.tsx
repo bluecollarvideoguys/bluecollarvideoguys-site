@@ -14,6 +14,7 @@ const HERO_YT = "7gGRBMdAQ2k";
 const HERO_START_SEC = 15;
 
 const VERSIONS = [
+  { href: "/master", label: "Version 02 Master" },
   { href: "/v01", label: "Version 01" },
   { href: "/v02", label: "Version 02" },
   { href: "/v03", label: "Version 03", active: true },

@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { CoverYouTubeEmbed } from "@/components/CoverYouTubeEmbed";
+import { HeroYouTubeBackground } from "@/components/HeroYouTubeBackground";
 
 const VERSIONS = [
+  { href: "/master", label: "Version 02 Master" },
   { href: "/v01", label: "Version 01" },
   { href: "/v02", label: "Version 02" },
   { href: "/v03", label: "Version 03" },
@@ -13,17 +16,15 @@ const VERSIONS = [
   { href: "/v07", label: "Version 07", active: true },
 ] as const;
 
-const MEDIA_POSTER =
-  "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1600&q=90";
-const PLACEHOLDER_MP4 =
-  "https://res.cloudinary.com/dq9aym4ad/video/upload/v1778758779/mp__qhpetb.mp4";
+const HERO_YT = "7gGRBMdAQ2k";
+const HERO_START_SEC = 15;
 
 const WORK = [
   {
     title: "Job-site films",
     subtitle: "Crew stories that earn trust before the bid",
     year: "Blueprint",
-    src: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1600&q=90",
+    videoId: "ss-3eS8oCTs",
     span: "lg:col-span-7",
     aspect: "aspect-[4/3]",
   },
@@ -31,7 +32,7 @@ const WORK = [
     title: "Brand stories",
     subtitle: "Why your shop exists — told like it matters",
     year: "Trust",
-    src: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&q=90",
+    videoId: "jzdRmbzji-A",
     span: "lg:col-span-5 lg:pt-24",
     aspect: "aspect-square",
     selfEnd: true,
@@ -40,7 +41,7 @@ const WORK = [
     title: "Project films",
     subtitle: "Installs and builds that make you memorable",
     year: "Stand Out",
-    src: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200&q=90",
+    videoId: "emhLh58qP94",
     span: "lg:col-span-5",
     aspect: "aspect-[4/5]",
   },
@@ -48,7 +49,7 @@ const WORK = [
     title: "Web & brand",
     subtitle: "Sites and systems that convert reputation into jobs",
     year: "Win Work",
-    src: MEDIA_POSTER,
+    videoId: "jzdRmbzji-A",
     span: "lg:col-span-7 lg:pl-16",
     aspect: "aspect-[16/10]",
     selfCenter: true,
@@ -494,19 +495,14 @@ export function Version07Page() {
       <main id="main-content">
         <section
           id="home"
-          className="relative flex min-h-screen items-end overflow-hidden bg-[#e9631e]"
+          className="relative flex min-h-screen items-end overflow-hidden bg-[#111213]"
         >
           <div className="absolute inset-0">
-            <video
-              className="h-full w-full object-cover object-center mix-blend-multiply"
-              src={PLACEHOLDER_MP4}
-              poster={MEDIA_POSTER}
-              autoPlay
-              muted
-              loop
-              playsInline
-              aria-label="Brand film background"
+            <HeroYouTubeBackground
+              videoId={HERO_YT}
+              startSec={HERO_START_SEC}
             />
+            <div className="absolute inset-0 bg-black/30" />
             <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/55" />
           </div>
 
@@ -636,10 +632,10 @@ export function Version07Page() {
                 </div>
               </article>
 
-              <article className="relative min-h-72 overflow-hidden rounded-md bg-[#153b46] p-6 sm:p-8">
+              <article className="relative min-h-72 overflow-hidden rounded-md bg-[#1b3558] p-6 sm:p-8">
                 <div className="flex items-start justify-between">
                   <span className="text-sm text-white/45">03</span>
-                  <IconNotes className="text-cyan-200" />
+                  <IconNotes className="text-[#93c5fd]" />
                 </div>
                 <div className="absolute inset-x-6 bottom-6 sm:inset-x-8 sm:bottom-8">
                   <h3 className="text-3xl font-medium tracking-tight">
@@ -655,20 +651,20 @@ export function Version07Page() {
                 </div>
               </article>
 
-              <article className="relative min-h-72 overflow-hidden rounded-md bg-[#ac261e] p-6 sm:p-8">
+              <article className="relative min-h-72 overflow-hidden rounded-md bg-[#fa6b20] p-6 text-black sm:p-8">
                 <div className="flex items-start justify-between">
-                  <span className="text-sm text-white/50">04</span>
-                  <IconClapper className="text-red-100" />
+                  <span className="text-sm text-black/50">04</span>
+                  <IconClapper className="text-black/80" />
                 </div>
                 <div className="absolute inset-x-6 bottom-6 sm:inset-x-8 sm:bottom-8">
                   <h3 className="text-3xl font-medium tracking-tight">
                     Win More Work
                   </h3>
-                  <p className="mt-3 max-w-xl text-lg leading-relaxed text-white/70">
+                  <p className="mt-3 max-w-xl text-lg leading-relaxed text-black/70">
                     Better leads, bigger projects, more referrals — growth that
                     compounds with every frame.
                   </p>
-                  <p className="mt-5 text-sm text-white/50">
+                  <p className="mt-5 text-sm text-black/50">
                     Leads · Referrals · Equity
                   </p>
                 </div>
@@ -700,9 +696,8 @@ export function Version07Page() {
 
             <div className="mt-10 grid gap-x-5 gap-y-14 lg:grid-cols-12">
               {WORK.map((item) => (
-                <a
+                <div
                   key={item.title}
-                  href="#contact"
                   className={`group block ${item.span} ${
                     "selfEnd" in item && item.selfEnd ? "self-end" : ""
                   } ${
@@ -712,15 +707,21 @@ export function Version07Page() {
                   <div
                     className={`relative overflow-hidden rounded-md bg-[#c9c8c3] ${item.aspect}`}
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={item.src}
-                      alt={item.title}
-                      className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
-                    />
-                    <span className="absolute right-4 top-4 inline-flex items-center gap-2 rounded-md bg-black px-3 py-2 text-xs text-white opacity-0 transition group-hover:opacity-100">
-                      View project <IconArrowUpRight />
-                    </span>
+                    {"videoId" in item && item.videoId ? (
+                      <CoverYouTubeEmbed
+                        videoId={item.videoId}
+                        title={item.title}
+                        background
+                        zoom={1.45}
+                      />
+                    ) : "src" in item && item.src ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={item.src}
+                        alt={item.title}
+                        className="h-full w-full object-cover object-top transition duration-700 group-hover:scale-[1.03]"
+                      />
+                    ) : null}
                   </div>
                   <div className="mt-4 flex justify-between gap-5">
                     <div>
@@ -731,7 +732,7 @@ export function Version07Page() {
                     </div>
                     <span className="text-sm text-black/45">{item.year}</span>
                   </div>
-                </a>
+                </div>
               ))}
             </div>
           </div>
