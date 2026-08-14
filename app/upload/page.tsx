@@ -90,8 +90,8 @@ export default function UploadPage() {
         Worth the Ride
       </h1>
       <p className="mt-3 max-w-lg text-base text-charcoal/80">
-        I&apos;m just over here providing... solving problems one battle at a
-        time ❤️‍🔥
+        I&apos;m just over here providing 💁‍♀️... solving problems one battle at
+        a time ❤️‍🔥
       </p>
 
       <label
