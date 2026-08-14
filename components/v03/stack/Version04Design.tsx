@@ -14,11 +14,7 @@ const VERSIONS = [
   { href: "/master", label: "Version 02 Master" },
   { href: "/v01", label: "Version 01" },
   { href: "/v02", label: "Version 02" },
-  { href: "/v03", label: "Version 03" },
-  { href: "/v04", label: "Version 04", active: true },
-  { href: "/v05", label: "Version 05" },
-  { href: "/v06", label: "Version 06" },
-  { href: "/v07", label: "Version 07" },
+  { href: "/v03", label: "Archive 03–07", active: true },
 ] as const;
 
 const VIDEOGRAPHER_IMAGE = "/images/purpose-videographer.png";
@@ -257,7 +253,7 @@ function Pill({
   );
 }
 
-export function Version04Page() {
+export function Version04Design() {
   const [formSent, setFormSent] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [playingTestimonial, setPlayingTestimonial] = useState<string | null>(
@@ -286,7 +282,7 @@ export function Version04Page() {
 
           <nav className="absolute inset-x-0 top-0 z-20 mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-10">
             <Link
-              href="/v04"
+              href="/v03#v04"
               className="v04-script text-2xl leading-none text-white sm:text-3xl"
             >
               Blue Collar Video Guys™
@@ -723,7 +719,7 @@ export function Version04Page() {
       <footer className="border-t border-white/5 bg-[var(--v04-ink)]">
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-8 sm:flex-row sm:items-center sm:justify-between lg:px-10">
           <Link
-            href="/v04"
+            href="/v03#v04"
             className="v04-script text-2xl leading-none text-white sm:text-3xl"
           >
             Blue Collar Video Guys™

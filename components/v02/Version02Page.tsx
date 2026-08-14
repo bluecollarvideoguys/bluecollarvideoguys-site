@@ -18,11 +18,9 @@ const VERSIONS = [
   { href: "/master", label: "Version 02 Master", active: false },
   { href: "/v01", label: "Version 01", active: false },
   { href: "/v02", label: "Version 02", active: true },
-  { href: "/v03", label: "Version 03", active: false },
-  { href: "/v04", label: "Version 04", active: false },
-  { href: "/v05", label: "Version 05", active: false },
-  { href: "/v06", label: "Version 06", active: false },
-  { href: "/v07", label: "Version 07", active: false },
+  { href: "/services", label: "Services", active: false },
+  { href: "/testimonials", label: "Testimonials", active: false },
+  { href: "/v03", label: "Archive 03–07", active: false },
 ] as const;
 
 function ytId(url: string) {
@@ -315,14 +313,6 @@ function IconMegaphone({ className }: { className?: string }) {
   );
 }
 
-function IconQuote({ className }: { className?: string }) {
-  return (
-    <svg className={className} width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M9 7C6 7 4 9.5 4 12.5S6 18 9 18v-2.2c-1.4 0-2-1-2-2.3h2V7zm9 0c-3 0-5 2.5-5 5.5S15 18 18 18v-2.2c-1.4 0-2-1-2-2.3h2V7z" />
-    </svg>
-  );
-}
-
 export function Version02Page() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -403,95 +393,6 @@ export function Version02Page() {
       window.setTimeout(() => ScrollTrigger.refresh(), ms),
     );
 
-    // Manifesto particle network
-    const canvas = document.getElementById("v02-phil-canvas") as HTMLCanvasElement | null;
-    let canvasRaf = 0;
-    let resizeObserver: ResizeObserver | null = null;
-    if (canvas) {
-      const ctx = canvas.getContext("2d");
-      let W = 0;
-      let H = 0;
-      let pts: { x: number; y: number; vx: number; vy: number; r: number }[] = [];
-      const N = 40;
-      const DIST = 180;
-      const COLOR = "17,26,38";
-
-      const resize = () => {
-        W = canvas.width = canvas.offsetWidth;
-        H = canvas.height = canvas.offsetHeight;
-      };
-      const mkPts = () => {
-        pts = Array.from({ length: N }, () => ({
-          x: Math.random() * W,
-          y: Math.random() * H,
-          vx: (Math.random() - 0.5) * 0.2,
-          vy: (Math.random() - 0.5) * 0.2,
-          r: Math.random() * 1.5 + 0.5,
-        }));
-      };
-      const frame = () => {
-        if (!ctx) return;
-        ctx.clearRect(0, 0, W, H);
-        pts.forEach((p) => {
-          p.x += p.vx;
-          p.y += p.vy;
-          if (p.x < 0 || p.x > W) p.vx *= -1;
-          if (p.y < 0 || p.y > H) p.vy *= -1;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${COLOR},.22)`;
-          ctx.fill();
-        });
-        for (let i = 0; i < pts.length; i++) {
-          for (let j = i + 1; j < pts.length; j++) {
-            const dx = pts[i].x - pts[j].x;
-            const dy = pts[i].y - pts[j].y;
-            const d = Math.sqrt(dx * dx + dy * dy);
-            if (d < DIST) {
-              ctx.beginPath();
-              ctx.moveTo(pts[i].x, pts[i].y);
-              ctx.lineTo(pts[j].x, pts[j].y);
-              ctx.strokeStyle = `rgba(${COLOR},${(1 - d / DIST) * 0.1})`;
-              ctx.lineWidth = 0.5;
-              ctx.stroke();
-            }
-          }
-        }
-        canvasRaf = requestAnimationFrame(frame);
-      };
-      resize();
-      mkPts();
-      if (canvas.parentElement) {
-        resizeObserver = new ResizeObserver(() => {
-          resize();
-          mkPts();
-        });
-        resizeObserver.observe(canvas.parentElement);
-      }
-      frame();
-    }
-
-    // Manifesto block + header reveals
-    const philObservers: IntersectionObserver[] = [];
-    document.querySelectorAll(".v02-phil-block").forEach((block) => {
-      const lines = block.querySelectorAll(".v02-phil-line");
-      const fades = block.querySelectorAll(".v02-phil-fade");
-      const nums = block.querySelectorAll(".v02-phil-num");
-      const obs = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (!e.isIntersecting) return;
-            lines.forEach((l) => l.classList.remove("opacity-0", "translate-y-10"));
-            fades.forEach((f) => f.classList.remove("opacity-0"));
-            nums.forEach((n) => n.classList.remove("opacity-0"));
-          });
-        },
-        { threshold: 0.3 },
-      );
-      obs.observe(block);
-      philObservers.push(obs);
-    });
-
     const scrollObserver = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach((entry) => {
@@ -511,9 +412,6 @@ export function Version02Page() {
       window.removeEventListener("load", onLoadRefresh);
       refreshTimers.forEach((id) => window.clearTimeout(id));
       teardownUsp();
-      cancelAnimationFrame(canvasRaf);
-      resizeObserver?.disconnect();
-      philObservers.forEach((o) => o.disconnect());
       scrollObserver.disconnect();
     };
   }, []);
@@ -614,7 +512,7 @@ export function Version02Page() {
             <div className="max-w-4xl">
               <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-[var(--v02-gold)]/40 bg-[var(--v02-ink)]/70 px-4 py-2 text-xs font-semibold tracking-wide text-[#f7bd45]">
                 <IconStar className="text-base" />
-                AUTHENTIC VIDEO MARKETING FOR BLUE-COLLAR BUSINESSES
+                MARKETING FOR CONTRACTORS
               </div>
 
               <h1 className="v02-display text-5xl font-bold leading-[0.9] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl">
@@ -748,10 +646,10 @@ export function Version02Page() {
 
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold-deep)]">
-                Our purpose
+                Our Purpose
               </p>
               <h2 className="mt-3 v02-display text-4xl font-bold leading-none tracking-tight text-[var(--v02-ink)] sm:text-5xl">
-                YOUR STORY DESERVES TO BE TOLD.
+                YOUR REPUTATION. YOUR STORY.
               </h2>
               <div className="mt-6 h-px w-16 bg-[var(--v02-line)]" />
               <p className="mt-7 text-base leading-relaxed text-slate-600">
@@ -773,91 +671,6 @@ export function Version02Page() {
               </p>
             </div>
           </div>
-        </section>
-
-        {/* MANIFESTO */}
-        <section
-          id="manifesto"
-          className="relative z-40 overflow-hidden border-t border-[var(--v02-line)] bg-[var(--v02-paper)]"
-        >
-          <div
-            className="pointer-events-none absolute inset-0 select-none overflow-hidden"
-            aria-hidden="true"
-          >
-            <canvas
-              id="v02-phil-canvas"
-              className="absolute inset-0 h-full w-full opacity-50"
-            />
-          </div>
-
-          <div className="relative z-10 border-b border-[var(--v02-line)]">
-            <div className="mx-auto max-w-7xl px-5 pb-16 pt-24 sm:px-6 lg:px-8">
-              <div className="v02-scroll-reveal translate-y-10 opacity-0 transition-all duration-1000 ease-out">
-                <span className="mb-4 block text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold-deep)]">
-                  Why we exist
-                </span>
-                <h2 className="v02-display text-5xl font-bold tracking-tight text-[var(--v02-ink)] sm:text-6xl md:text-7xl">
-                  MANIFESTO
-                </h2>
-              </div>
-            </div>
-          </div>
-
-          <PhilBlock
-            num="01"
-            label="Belief"
-            line1="Blue-collar businesses"
-            line2="deserve to be seen."
-            body="You've built something real: crews that show up, work that lasts, a name people trust. That story shouldn't sit buried under the same stock photos every competitor uses. We believe the trades deserve the same sharp storytelling the big brands get."
-          />
-
-          <div className="relative z-10 border-b border-[var(--v02-line)]">
-            <div className="mx-auto max-w-7xl px-5 py-12 sm:px-6 md:py-16 lg:px-8">
-              <div className="grid items-center gap-8 md:grid-cols-[1fr_1.2fr] md:gap-12">
-                <div className="v02-scroll-reveal translate-y-10 opacity-0 transition-all duration-1000 ease-out">
-                  <span className="mb-4 block text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold-deep)]">
-                    See it land
-                  </span>
-                  <h3 className="v02-display mb-4 text-3xl font-bold leading-tight tracking-tight text-[var(--v02-ink)] md:text-4xl">
-                    Trust on camera.
-                    <br />
-                    <span className="text-[var(--v02-ink)]/45">
-                      Not just on a truck door.
-                    </span>
-                  </h3>
-                  <p className="max-w-md text-sm leading-relaxed text-slate-600 md:text-base">
-                    A brand film that shows how you work (the crew, the craft,
-                    the finish) does more than any slogan. Slot your best story
-                    film here.
-                  </p>
-                </div>
-                <VideoSlot
-                  className="v02-scroll-reveal translate-y-10 opacity-0 transition-all delay-100 duration-1000 ease-out"
-                  label="Featured Brand Film"
-                  trade="Placeholder"
-                  aspect="video"
-                  tone="light"
-                />
-              </div>
-            </div>
-          </div>
-
-          <PhilBlock
-            num="02"
-            label="Difference"
-            line1="We don't sell cameras."
-            line2="We sell trust."
-            body="Plenty of vendors will shoot a video and walk away. We're a growth partner. Powered by the Trust Framework™, every piece of content is built to earn belief, then demand, then jobs, not just fill a feed."
-          />
-          <PhilBlock
-            num="03"
-            label="Right Fit"
-            line1="Established shops."
-            line2="Quality first."
-            body="We work with contractors, electricians, plumbers, HVAC, roofers, welders, concrete crews: businesses that already care about reputation and treat marketing like an investment. Not a startup with no track record looking for a miracle."
-            cta
-            onCta={() => scrollToSection("contact")}
-          />
         </section>
 
         {/* PROCESS / TRUST FRAMEWORK */}
@@ -924,9 +737,9 @@ export function Version02Page() {
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold)]">
                     The Blue Collar Blueprint™
                   </p>
-                  <p className="mt-2 text-sm text-slate-400">
-                    Three stages. One promise.
-                  </p>
+                  <h2 className="mt-2 v02-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                    THREE STAGES. ONE PROMISE.
+                  </h2>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="v02-usp-dot h-1 w-6 rounded-sm bg-[var(--v02-gold)] transition-all duration-500" />
@@ -944,7 +757,7 @@ export function Version02Page() {
                     num="01"
                     label="Build Trust"
                     icon={<IconShield className="mb-6 text-4xl text-[var(--v02-gold)]" />}
-                    title="People buy confidence before they buy your service."
+                    title="Trust First. Sale Second."
                     body="Answer the questions every customer already asks: who you are, if you're experienced, if you care about quality. Brand stories, testimonials, crew films, education, culture. Trust you can see."
                     items={[
                       "Brand story films",
@@ -957,7 +770,7 @@ export function Version02Page() {
                     num="02"
                     label="Stand Out"
                     icon={<IconCamera className="mb-6 text-4xl text-[var(--v02-gold)]" />}
-                    title="The most memorable contractor usually wins."
+                    title="Get Noticed. Get Hired."
                     body="Most shops look the same online. We help you separate with a clear brand, sharp footage, and a site that looks as solid as your work."
                     items={[
                       "Cinematic project videos",
@@ -970,7 +783,7 @@ export function Version02Page() {
                     num="03"
                     label="Win More Work"
                     icon={<IconHammer className="mb-6 text-4xl text-[var(--v02-gold)]" />}
-                    title="Trust creates opportunity."
+                    title="More Trust. More Work."
                     body="Stop competing on price alone. Attract better customers, earn referrals, and build brand value that compounds."
                     items={[
                       "Better leads & bigger projects",
@@ -990,19 +803,19 @@ export function Version02Page() {
             <MobileBlueprint
               num="01"
               label="Build Trust"
-              title="People buy confidence before they buy your service."
+              title="Trust First. Sale Second."
               body="Brand stories, testimonials, crew films, education, culture. Trust you can see."
             />
             <MobileBlueprint
               num="02"
               label="Stand Out"
-              title="The most memorable contractor usually wins."
+              title="Get Noticed. Get Hired."
               body="Project films, photo, web, branding, social, so you don't blend in with every other truck."
             />
             <MobileBlueprint
               num="03"
               label="Win More Work"
-              title="Trust creates opportunity."
+              title="More Trust. More Work."
               body="Growth built on reputation, not gimmicks."
               cta
               onCta={() => scrollToSection("contact")}
@@ -1016,10 +829,10 @@ export function Version02Page() {
             <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold-deep)]">
-                  What we build
+                  Full Scope
                 </p>
                 <h2 className="mt-3 v02-display text-4xl font-bold tracking-tight text-[var(--v02-ink)] sm:text-5xl">
-                  SERVICES
+                  ONE CREW. EVERY TRADE YOU NEED.
                 </h2>
               </div>
               <p className="max-w-md text-sm leading-relaxed text-slate-600">
@@ -1079,19 +892,19 @@ export function Version02Page() {
           </div>
         </section>
 
-        {/* PORTFOLIO / JOB SITES — from Version 06 */}
+        {/* PORTFOLIO — cover gallery from Version 06 */}
         <section
-          id="jobsites"
+          id="work"
           className="border-t border-[var(--v02-line)] bg-[var(--v02-paper)] py-20 sm:py-28"
         >
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold-deep)]">
-                  Job Sites
+                  Proven Results
                 </p>
                 <h2 className="mt-4 v02-display text-3xl font-bold tracking-tight text-[var(--v02-ink)] sm:text-4xl md:text-5xl">
-                  Work that looks like the job.
+                  REAL JOBS. REAL PROOF.
                 </h2>
                 <p className="mt-2 text-xs font-semibold uppercase tracking-widest text-slate-500">
                   Client films and testimonials
@@ -1144,66 +957,17 @@ export function Version02Page() {
           </div>
         </section>
 
-        {/* CASE STUDIES */}
-        <section id="case-studies" className="border-t border-[var(--v02-line)] bg-[var(--v02-paper)] py-20 sm:py-24">
-          <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-3xl text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold-deep)]">
-                Proof, not promises
-              </p>
-              <h2 className="mt-3 v02-display text-4xl font-bold tracking-tight text-[var(--v02-ink)] sm:text-5xl">
-                CASE STUDIES
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-slate-600">
-                A closer look at how the Blueprint plays out in the field.
-              </p>
-            </div>
-
-            {/* CLIENT ASSET: Swap these placeholder templates for real client names, numbers, and quotes as projects wrap. */}
-            <div className="mt-12 grid gap-8 lg:grid-cols-2">
-              <CaseStudyCard
-                trade="[Trade / Industry]"
-                client="[Client Name]"
-                location="[City, State]"
-                challenge="[What was holding this business back before Blue Collar Video Guys, e.g. no video presence, inconsistent branding, low web traffic.]"
-                solution="[Which stages of the Blueprint were used and what was produced, e.g. brand story film, testimonials, new site, SEO overhaul.]"
-                results={[
-                  "[+X% increase in leads]",
-                  "[X new jobs booked in 90 days]",
-                  "[+X% website traffic]",
-                ]}
-                quote="[Client quote about the experience and results goes here.]"
-                quoteAttribution="[Client Name, Title / Company]"
-              />
-              <CaseStudyCard
-                trade="[Trade / Industry]"
-                client="[Client Name]"
-                location="[City, State]"
-                challenge="[What was holding this business back before Blue Collar Video Guys.]"
-                solution="[Which stages of the Blueprint were used and what was produced.]"
-                results={[
-                  "[+X% increase in leads]",
-                  "[X new jobs booked in 90 days]",
-                  "[+X% website traffic]",
-                ]}
-                quote="[Client quote about the experience and results goes here.]"
-                quoteAttribution="[Client Name, Title / Company]"
-              />
-            </div>
-          </div>
-        </section>
-
         {/* WHY DIFFERENT */}
         <section className="border-t border-[var(--v02-line-on-dark)] bg-[var(--v02-ink)] py-20 sm:py-24">
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl border-b border-[var(--v02-line-on-dark)] pb-12 text-center">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold)]">
-                What makes us different
+                Clear Advantage
               </p>
               <h2 className="mt-3 v02-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
                 WE DON&apos;T SELL VIDEOS.
                 <br />
-                WE BUILD THE TRUST FRAMEWORK.
+                WE BUILD TRUST.
               </h2>
             </div>
 
@@ -1251,122 +1015,15 @@ export function Version02Page() {
           </div>
         </section>
 
-        {/* MANIFESTO STRIP */}
-        <section className="border-t border-[var(--v02-line)] bg-[var(--v02-paper)] py-16 sm:py-20">
-          <div className="mx-auto max-w-4xl px-5 text-center sm:px-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold-deep)]">
-              Manifesto
-            </p>
-            <h2 className="mt-4 v02-display text-3xl font-bold leading-tight tracking-tight text-[var(--v02-ink)] sm:text-5xl">
-              AMERICA WASN&apos;T BUILT BY INFLUENCERS.
-              <br />
-              <span className="text-slate-500">
-                IT WAS BUILT BY PEOPLE WHO GET UP BEFORE SUNRISE.
-              </span>
-            </h2>
-            <p className="mt-6 text-base leading-relaxed text-slate-600">
-              Electricians. Plumbers. Welders. Mechanics. HVAC techs. Roofers.
-              Concrete crews. Small business owners who put their name on every
-              job. Their work deserves to be seen. Their stories deserve to be
-              told. That&apos;s why we exist.
-            </p>
-          </div>
-        </section>
-
-        {/* TRUST GAP: education section */}
-        <section id="why-trust" className="border-t border-[var(--v02-line)] bg-[var(--v02-paper)] py-20 sm:py-24">
-          <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-3xl text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold-deep)]">
-                Why trust matters
-              </p>
-              <h2 className="mt-3 v02-display text-4xl font-bold leading-tight tracking-tight text-[var(--v02-ink)] sm:text-5xl">
-                PEOPLE DECIDE BEFORE THEY EVER DIAL YOUR NUMBER.
-              </h2>
-              <p className="mt-6 text-base leading-relaxed text-slate-600">
-                By the time a homeowner picks up the phone, they&apos;ve already
-                looked you up. They&apos;ve checked your site, your reviews, your
-                photos, and quietly decided whether you&apos;re the shop they
-                trust. If the answer isn&apos;t yes before the call, the phone
-                never rings at all.
-              </p>
-            </div>
-
-            <div className="mt-14 grid gap-px overflow-hidden rounded border border-[var(--v02-line)] bg-[var(--v02-line)] sm:grid-cols-2 lg:grid-cols-5">
-              {[
-                "Who are these people?",
-                "Can I trust them?",
-                "Are they experienced?",
-                "Do they care about quality?",
-                "What do their customers say?",
-              ].map((q) => (
-                <div key={q} className="bg-white p-6">
-                  <p className="v02-display text-lg font-semibold leading-snug text-[var(--v02-ink)]">
-                    {q}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-14 flex flex-col items-center gap-6 rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] p-8 text-center sm:p-12">
-              <p className="max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
-                Video. Testimonials. Behind-the-scenes footage. Reviews. Every
-                one of those questions has a specific answer, and on your
-                discovery call, we&apos;ll map out exactly which methods fit
-                your shop and how we&apos;ll put them to work.
-              </p>
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 rounded bg-[var(--v02-gold)] px-7 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
-              >
-                Schedule Your Discovery Call
-                <IconArrowRight />
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA BAND */}
-        <section
-          className="relative overflow-hidden border-t border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] py-20 sm:py-24"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(17,26,38,.9),rgba(17,26,38,.9)),url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=2000&q=85')",
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-          }}
-        >
-          <div className="relative mx-auto max-w-4xl px-5 text-center sm:px-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold)]">
-              Our closing message
-            </p>
-            <h2 className="mt-3 v02-display text-5xl font-bold leading-none tracking-tight text-white sm:text-6xl">
-              YOUR STORY
-              <br />
-              <span className="text-[var(--v02-gold)]">DESERVES TO BE TOLD.</span>
-            </h2>
-            <p className="mt-5 text-base text-slate-300 sm:text-lg">
-              You built your business one project, one handshake, one reputation
-              at a time. Let&apos;s make sure the world sees it.
-            </p>
-            <a
-              href="#contact"
-              className="mt-9 inline-flex items-center justify-center gap-3 rounded bg-[var(--v02-gold)] px-8 py-4 v02-display text-2xl font-bold tracking-tight text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
-            >
-              Schedule Your Free Discovery Call
-            </a>
-          </div>
-        </section>
-
         {/* CONTACT */}
         <section id="contact" className="border-t border-[var(--v02-line)] bg-[var(--v02-paper)] py-20 sm:py-24">
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl border-b border-[var(--v02-line)] pb-12 text-center">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold-deep)]">
-                Discovery call
+                Let&apos;s Talk
               </p>
               <h2 className="mt-3 v02-display text-4xl font-bold tracking-tight sm:text-5xl">
-                SCHEDULE YOUR FREE DISCOVERY CALL
+                ONE CALL. ONE BLUEPRINT.
               </h2>
               <p className="mt-4 text-base text-slate-600">
                 Tell us about your shop and we&apos;ll set up a free call to
@@ -1533,69 +1190,6 @@ export function Version02Page() {
   );
 }
 
-function PhilBlock({
-  num,
-  label,
-  line1,
-  line2,
-  body,
-  cta,
-  onCta,
-}: {
-  num: string;
-  label: string;
-  line1: string;
-  line2: string;
-  body: string;
-  cta?: boolean;
-  onCta?: () => void;
-}) {
-  return (
-    <div className="v02-phil-block group/block relative z-10 border-b border-[var(--v02-line)] last:border-b-0">
-      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-        <div className="grid min-h-[40vh] md:grid-cols-[200px_1fr]">
-          <div className="hidden flex-col justify-between border-r border-[var(--v02-line)] py-16 pr-10 md:flex">
-            <div>
-              <span className="v02-phil-num v02-display block text-3xl font-bold tracking-tight text-[var(--v02-ink)]/25 opacity-0 transition-colors duration-500 group-hover/block:text-[var(--v02-ink)]">
-                {num}
-              </span>
-              <span className="mt-2 block text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold-deep)]">
-                {label}
-              </span>
-            </div>
-          </div>
-          <div className="flex flex-col justify-center py-16 md:pl-16">
-            <span className="mb-4 block text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold-deep)] md:hidden">
-              {num} · {label}
-            </span>
-            <h3 className="v02-display mb-8 text-3xl font-bold leading-tight tracking-tight text-[var(--v02-ink)] md:text-5xl lg:text-6xl">
-              <span className="v02-phil-line block translate-y-10 opacity-0 transition-all duration-700 ease-out">
-                {line1}
-              </span>
-              <span className="v02-phil-line block translate-y-10 text-[var(--v02-ink)]/45 opacity-0 transition-all delay-100 duration-700 ease-out">
-                {line2}
-              </span>
-            </h3>
-            <p className="v02-phil-fade max-w-xl text-sm leading-relaxed text-slate-600 opacity-0 transition-opacity delay-300 duration-700 md:text-base">
-              {body}
-            </p>
-            {cta && onCta ? (
-              <button
-                type="button"
-                onClick={onCta}
-                className="v02-phil-fade mt-10 inline-flex w-fit items-center gap-2 rounded bg-[var(--v02-gold)] px-6 py-3 text-sm font-semibold text-[var(--v02-ink)] opacity-0 transition-all delay-400 duration-700 hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
-              >
-                Schedule a Discovery Call
-                <IconArrowRight />
-              </button>
-            ) : null}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function BlueprintPanel({
   num,
   label,
@@ -1721,83 +1315,6 @@ function ServiceCard({
         {title}
       </h3>
       <p className="mt-3 text-sm leading-relaxed text-slate-600">{body}</p>
-    </div>
-  );
-}
-
-function CaseStudyCard({
-  trade,
-  client,
-  location,
-  challenge,
-  solution,
-  results,
-  quote,
-  quoteAttribution,
-}: {
-  trade: string;
-  client: string;
-  location: string;
-  challenge: string;
-  solution: string;
-  results: string[];
-  quote: string;
-  quoteAttribution: string;
-}) {
-  return (
-    <div className="flex flex-col rounded border border-[var(--v02-line)] bg-white p-7 sm:p-9">
-      <p className="text-xs font-semibold uppercase tracking-wider text-[var(--v02-gold-deep)]">
-        {trade} · {location}
-      </p>
-      <h3 className="mt-2 v02-display text-2xl font-bold tracking-tight text-[var(--v02-ink)]">
-        {client}
-      </h3>
-
-      <div className="mt-6 space-y-5 border-t border-[var(--v02-line)] pt-6">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-            Challenge
-          </p>
-          <p className="mt-1 text-sm leading-relaxed text-slate-600">
-            {challenge}
-          </p>
-        </div>
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-            Solution
-          </p>
-          <p className="mt-1 text-sm leading-relaxed text-slate-600">
-            {solution}
-          </p>
-        </div>
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-            Results
-          </p>
-          <ul className="mt-2 flex flex-wrap gap-2">
-            {results.map((r) => (
-              <li
-                key={r}
-                className="rounded bg-[var(--v02-gold)]/15 px-3 py-1.5 text-xs font-semibold text-[var(--v02-gold-deep)]"
-              >
-                {r}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <div className="mt-7 flex gap-3 border-t border-[var(--v02-line)] pt-6">
-        <IconQuote className="mt-1 shrink-0 text-2xl text-[var(--v02-gold)]" />
-        <div>
-          <p className="text-sm italic leading-relaxed text-slate-600">
-            {quote}
-          </p>
-          <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-slate-500">
-            {quoteAttribution}
-          </p>
-        </div>
-      </div>
     </div>
   );
 }

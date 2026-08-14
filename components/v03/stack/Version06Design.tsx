@@ -9,11 +9,7 @@ const VERSIONS = [
   { href: "/master", label: "Version 02 Master" },
   { href: "/v01", label: "Version 01" },
   { href: "/v02", label: "Version 02" },
-  { href: "/v03", label: "Version 03" },
-  { href: "/v04", label: "Version 04" },
-  { href: "/v05", label: "Version 05" },
-  { href: "/v06", label: "Version 06", active: true },
-  { href: "/v07", label: "Version 07" },
+  { href: "/v03", label: "Archive 03–07", active: true },
 ] as const;
 
 const MEDIA_POSTER =
@@ -211,7 +207,7 @@ function IconMail({ className }: { className?: string }) {
   );
 }
 
-export function Version06Page() {
+export function Version06Design() {
   const [formSent, setFormSent] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -225,7 +221,7 @@ export function Version06Page() {
       <nav className="absolute inset-x-0 top-0 z-30">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8">
           <Link
-            href="/v06"
+            href="/v03#v06"
             className="flex items-center gap-3 text-white"
             aria-label="The Blue Collar Video Guys home"
           >
@@ -708,14 +704,14 @@ export function Version06Page() {
             <Link href="/v03" className="transition hover:text-stone-900">
               V03
             </Link>
-            <Link href="/v04" className="transition hover:text-stone-900">
+            <Link href="/v03#v04" className="transition hover:text-stone-900">
               V04
             </Link>
-            <Link href="/v05" className="transition hover:text-stone-900">
+            <Link href="/v03#v05" className="transition hover:text-stone-900">
               V05
             </Link>
             <span className="text-stone-900">V06</span>
-            <Link href="/v07" className="transition hover:text-stone-900">
+            <Link href="/v03#v07" className="transition hover:text-stone-900">
               V07
             </Link>
           </div>

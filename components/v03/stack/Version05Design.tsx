@@ -8,11 +8,7 @@ const VERSIONS = [
   { href: "/master", label: "Version 02 Master" },
   { href: "/v01", label: "Version 01" },
   { href: "/v02", label: "Version 02" },
-  { href: "/v03", label: "Version 03" },
-  { href: "/v04", label: "Version 04" },
-  { href: "/v05", label: "Version 05", active: true },
-  { href: "/v06", label: "Version 06" },
-  { href: "/v07", label: "Version 07" },
+  { href: "/v03", label: "Archive 03–07", active: true },
 ] as const;
 
 const MEDIA_POSTER =
@@ -127,7 +123,7 @@ function SheetLabel({
   );
 }
 
-export function Version05Page() {
+export function Version05Design() {
   const [formSent, setFormSent] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -141,7 +137,7 @@ export function Version05Page() {
       <nav className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
         <div className="mx-auto flex max-w-7xl items-center justify-between rounded-2xl border border-white/70 bg-white/85 px-3 py-3 shadow-[0_0.25rem_2rem_rgba(28,25,23,0.08)] backdrop-blur-xl sm:px-4">
           <Link
-            href="/v05"
+            href="/v03#v05"
             className="flex items-center gap-3"
             aria-label="The Blue Collar Video Guys home"
           >
@@ -643,13 +639,13 @@ export function Version05Page() {
                 <Link href="/v03" className="transition hover:text-white">
                   V03
                 </Link>
-                <Link href="/v04" className="transition hover:text-white">
+                <Link href="/v03#v04" className="transition hover:text-white">
                   V04
                 </Link>
-                <Link href="/v06" className="transition hover:text-white">
+                <Link href="/v03#v06" className="transition hover:text-white">
                   V06
                 </Link>
-                <Link href="/v07" className="transition hover:text-white">
+                <Link href="/v03#v07" className="transition hover:text-white">
                   V07
                 </Link>
                 <a href="#" className="transition hover:text-white">

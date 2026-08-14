@@ -4,17 +4,21 @@ import Link from "next/link";
 import { useState } from "react";
 import { IconClose, IconMenu } from "./icons";
 
-export type SiteVersion = 1 | 2 | 3 | 4 | 5 | 6 | 7 | "master";
+export type SiteVersion =
+  | 1
+  | 2
+  | 3
+  | "master"
+  | "services"
+  | "testimonials";
 
 const VERSIONS: { version: SiteVersion; href: string; label: string }[] = [
   { version: "master", href: "/master", label: "Version 02 Master" },
   { version: 1, href: "/v01", label: "Version 01" },
   { version: 2, href: "/v02", label: "Version 02" },
-  { version: 3, href: "/v03", label: "Version 03" },
-  { version: 4, href: "/v04", label: "Version 04" },
-  { version: 5, href: "/v05", label: "Version 05" },
-  { version: 6, href: "/v06", label: "Version 06" },
-  { version: 7, href: "/v07", label: "Version 07" },
+  { version: "services", href: "/services", label: "Services" },
+  { version: "testimonials", href: "/testimonials", label: "Testimonials" },
+  { version: 3, href: "/v03", label: "Archive 03–07" },
 ];
 
 type VersionNavProps = {

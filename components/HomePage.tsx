@@ -8,7 +8,6 @@ import {
   IconArrowUp,
   IconBlueprint,
   IconHardHat,
-  IconPlus,
   IconWrench,
 } from "./icons";
 import { VideoSlot } from "./VideoSlot";
@@ -316,38 +315,7 @@ export function HomePage() {
       philObservers.push(obs);
     });
 
-    // ── SERVICE accordion ───────────────────────────────────────────────────
-    const accordionTriggers = document.querySelectorAll(".accordion-trigger");
-    const onAccordionClick = (btn: Element) => () => {
-      const item = btn.closest(".accordion-item");
-      if (!item) return;
-      const body = item.querySelector<HTMLElement>(".accordion-body");
-      const icon = item.querySelector<HTMLElement>(".acc-plus");
-      const isOpen = item.classList.contains("active");
-
-      document.querySelectorAll(".accordion-item").forEach((i) => {
-        i.classList.remove("active");
-        const b = i.querySelector<HTMLElement>(".accordion-body");
-        const ic = i.querySelector<HTMLElement>(".acc-plus");
-        if (b) b.style.maxHeight = "";
-        if (ic) ic.style.transform = "rotate(0deg)";
-      });
-
-      if (!isOpen && body && icon) {
-        item.classList.add("active");
-        body.style.maxHeight = body.scrollHeight + "px";
-        icon.style.transform = "rotate(45deg)";
-      }
-    };
-    const accordionHandlers: { btn: Element; handler: () => void }[] = [];
-    accordionTriggers.forEach((btn) => {
-      const handler = onAccordionClick(btn);
-      btn.addEventListener("click", handler);
-      accordionHandlers.push({ btn, handler });
-    });
-
-    // ── CTA & Scroll Reveals ────────────────────────────────────────────────
-    let counted = false;
+    // ── Scroll Reveals ──────────────────────────────────────────────────────
     const scrollObserver = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach((entry) => {
@@ -363,48 +331,6 @@ export function HomePage() {
       scrollObserver.observe(el),
     );
 
-    const cta = document.getElementById("cta");
-    let ctaObs: IntersectionObserver | null = null;
-    if (cta) {
-      ctaObs = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (!e.isIntersecting) return;
-            cta.querySelectorAll(".cta-anim").forEach((el) => {
-              el.classList.remove("opacity-0", "translate-y-6");
-            });
-            if (!counted) {
-              counted = true;
-              setTimeout(() => {
-                cta.querySelectorAll<HTMLElement>(".cta-stat").forEach((s) => {
-                  const target = parseFloat(s.dataset.target || "0");
-                  const isFloat = s.dataset.float === "true";
-                  let step = 0;
-                  const steps = 60;
-                  const t = setInterval(() => {
-                    step++;
-                    const ease = 1 - Math.pow(1 - step / steps, 3);
-                    const val = target * ease;
-                    s.textContent =
-                      step >= steps
-                        ? isFloat
-                          ? target.toFixed(1)
-                          : String(target)
-                        : isFloat
-                          ? val.toFixed(1)
-                          : String(Math.floor(val));
-                    if (step >= steps) clearInterval(t);
-                  }, 1500 / steps);
-                });
-              }, 300);
-            }
-          });
-        },
-        { threshold: 0.3 },
-      );
-      ctaObs.observe(cta);
-    }
-
     return () => {
       window.removeEventListener("scroll", onScrollNav);
       window.removeEventListener("resize", onResizeUsp);
@@ -417,11 +343,7 @@ export function HomePage() {
       cancelAnimationFrame(canvasRaf);
       resizeObserver?.disconnect();
       philObservers.forEach((o) => o.disconnect());
-      accordionHandlers.forEach(({ btn, handler }) =>
-        btn.removeEventListener("click", handler),
-      );
       scrollObserver.disconnect();
-      ctaObs?.disconnect();
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);
@@ -766,105 +688,6 @@ export function HomePage() {
         />
       </section>
 
-      {/* ─── TOOLBOX (Services) ────────────────────────────────────────────── */}
-      <section
-        className="relative z-40 overflow-hidden py-24 md:py-32 bg-paper border-t border-denim/10"
-        id="toolbox"
-      >
-        <div className="w-full max-w-7xl mx-auto px-6 md:px-10 pb-16 scroll-reveal opacity-0 translate-y-10 transition-all duration-1000 ease-out">
-          <span className="text-xs font-light text-steel uppercase tracking-widest block mb-4">
-            What&apos;s in the kit
-          </span>
-          <h2 className="font-display text-5xl md:text-7xl font-semibold tracking-wide text-denim uppercase">
-            Toolbox
-          </h2>
-          <p className="mt-6 max-w-xl text-steel text-sm md:text-base font-light leading-relaxed">
-            Services framed under The Blue Collar Blueprint™ — so every deliverable
-            has a job on the job site.
-          </p>
-        </div>
-
-        <div
-          id="serviceAccordion"
-          className="w-full max-w-7xl mx-auto px-6 md:px-10 border-t border-denim/10"
-        >
-          <AccordionItem
-            num="01"
-            title="Build Trust"
-            delay=""
-            body="Content that proves who you are before the first handshake. Story films, testimonials, crew intros, education, BTS, culture, and community — the foundation of the Trust Framework™."
-            items={[
-              "Brand story films",
-              "Customer testimonials",
-              "Meet-the-crew videos",
-              "Educational / how-we-work content",
-              "Behind-the-scenes & culture",
-              "Community involvement pieces",
-            ]}
-            onCta={() => scrollToSection("contact")}
-          />
-          <AccordionItem
-            num="02"
-            title="Stand Out"
-            delay="delay-100"
-            body="Make your brand impossible to confuse with the next truck on the street. Cinematic project films, photography, web, identity, and a steady social cadence that keeps you top of mind."
-            items={[
-              "Cinematic project videos",
-              "Job-site photography",
-              "Modern website design",
-              "Brand identity systems",
-              "Social strategy & monthly content",
-            ]}
-            onCta={() => scrollToSection("contact")}
-          />
-          <AccordionItem
-            num="03"
-            title="Win More Work"
-            delay="delay-200"
-            body="The punch list that matters: leads that convert, projects that grow, referrals that compound, and a brand strong enough to attract better people and bigger work."
-            items={[
-              "Lead-quality strategy",
-              "Referral-ready content systems",
-              "Hiring & culture films",
-              "Long-term brand equity plays",
-            ]}
-            onCta={() => scrollToSection("contact")}
-          />
-        </div>
-
-        {/* Toolbox portfolio strip */}
-        <div className="w-full max-w-7xl mx-auto px-6 md:px-10 pt-20">
-          <div className="scroll-reveal opacity-0 translate-y-10 transition-all duration-1000 ease-out mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-            <h3 className="font-display text-2xl md:text-3xl font-semibold tracking-wide text-denim uppercase">
-              Sample cuts
-            </h3>
-            <p className="text-xs text-steel uppercase tracking-widest">
-              One clip per Blueprint stage — swap with real work
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-4 md:gap-5">
-            <VideoSlot
-              className="scroll-reveal opacity-0 translate-y-10 transition-all duration-1000 ease-out"
-              label="Build Trust cut"
-              trade="Testimonials"
-              tone="light"
-            />
-            <VideoSlot
-              className="scroll-reveal opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-100"
-              label="Stand Out cut"
-              trade="Project film"
-              tone="light"
-            />
-            <VideoSlot
-              className="scroll-reveal opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-200"
-              label="Win More Work cut"
-              trade="Lead magnet"
-              tone="light"
-            />
-          </div>
-        </div>
-      </section>
-
       {/* ─── JOB SITES (case studies) ──────────────────────────────────────── */}
       {/* CLIENT ASSET: Replace placeholder case studies with real clients, footage, and results */}
       <section
@@ -919,109 +742,6 @@ export function HomePage() {
               result="Better-fit leads. Bigger tickets. A brand that hired easier."
               reverse={false}
             />
-          </div>
-        </div>
-      </section>
-
-      {/* ─── SOCIAL PROOF ──────────────────────────────────────────────────── */}
-      {/* CLIENT ASSET: Replace placeholder testimonials and case-study stats with real client quotes, names, trades, and results */}
-      <section
-        id="proof"
-        className="relative z-40 bg-concrete-dark border-t border-denim/10 py-24 md:py-32 texture-grain"
-      >
-        <div className="max-w-7xl mx-auto px-6 md:px-10">
-          <div className="scroll-reveal opacity-0 translate-y-10 transition-all duration-1000 ease-out mb-16">
-            <span className="text-xs font-light text-steel uppercase tracking-widest block mb-4">
-              From the job site
-            </span>
-            <h2 className="font-display text-5xl md:text-7xl font-semibold tracking-wide text-denim uppercase">
-              Proof
-            </h2>
-            <p className="mt-4 text-xs text-rust uppercase tracking-widest">
-              Placeholder quotes — swap with real client stories
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-10 md:gap-12">
-            <Testimonial
-              quote="They didn't just shoot pretty footage. They framed up how we talk about our work — and the phone started ringing differently."
-              name="[Client Name]"
-              trade="[Trade / Company — placeholder]"
-            />
-            <Testimonial
-              quote="Finally a crew that gets the trades. No fluff. Just a blueprint that made us look as solid as our installs."
-              name="[Client Name]"
-              trade="[Trade / Company — placeholder]"
-            />
-            <Testimonial
-              quote="We stopped sounding like every other contractor on Facebook. Now GCs know who we are before we bid."
-              name="[Client Name]"
-              trade="[Trade / Company — placeholder]"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* ─── CLOSING CTA ───────────────────────────────────────────────────── */}
-      <section
-        id="cta"
-        className="relative z-40 bg-denim border-t border-white/10 w-full min-h-[70vh] flex flex-col justify-between py-24 overflow-hidden texture-grain"
-      >
-        <div className="w-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col flex-1 justify-between h-full">
-          <div className="flex flex-col items-start justify-center h-full">
-            <span className="cta-anim opacity-0 translate-y-6 transition-all duration-1000 ease-out text-xs font-light tracking-widest uppercase text-concrete/50 mb-8">
-              Ready to break ground?
-            </span>
-            <h2 className="cta-anim opacity-0 translate-y-6 transition-all duration-1000 delay-100 ease-out font-display text-5xl md:text-7xl lg:text-8xl font-semibold tracking-wide text-concrete mb-6 leading-tight uppercase">
-              Your story
-              <br />
-              <span className="text-concrete/45">deserves to be told.</span>
-            </h2>
-            <p className="cta-anim opacity-0 translate-y-6 transition-all duration-1000 delay-150 ease-out text-concrete/70 font-light text-sm md:text-base max-w-lg mb-10 leading-relaxed">
-              You&apos;ve spent years earning your reputation. Let&apos;s build the
-              trust system that turns it into more of the right work.
-            </p>
-            <button
-              type="button"
-              onClick={() => scrollToSection("contact")}
-              className="cta-anim opacity-0 translate-y-6 transition-all duration-1000 delay-200 ease-out btn-stamp bg-rust hover:bg-rust-hover text-paper text-sm px-8 py-4 group"
-            >
-              Get Your Blueprint
-              <IconArrowRight className="group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-
-          {/* CLIENT ASSET: Replace placeholder stats with real metrics when available */}
-          <div className="cta-anim opacity-0 translate-y-6 transition-all duration-1000 delay-300 ease-out flex flex-wrap border-t border-white/10 pt-12 mt-20 gap-16 md:gap-32 items-end justify-start">
-            <div className="flex flex-col">
-              <div className="font-display text-5xl md:text-6xl font-semibold tracking-wide text-concrete flex items-end">
-                <span className="cta-stat" data-target="3">
-                  0
-                </span>
-              </div>
-              <span className="text-xs font-light text-concrete/50 mt-3 uppercase tracking-wider">
-                Blueprint stages
-              </span>
-            </div>
-            <div className="flex flex-col">
-              <div className="font-display text-5xl md:text-6xl font-semibold tracking-wide text-concrete flex items-end">
-                <span className="cta-stat" data-target="100">
-                  0
-                </span>
-                <span className="text-3xl text-concrete/40 ml-1">%</span>
-              </div>
-              <span className="text-xs font-light text-concrete/50 mt-3 uppercase tracking-wider">
-                Built for the trades
-              </span>
-            </div>
-            <div className="flex flex-col">
-              <div className="font-display text-5xl md:text-6xl font-semibold tracking-wide text-concrete flex items-end">
-                <span className="text-rust">∞</span>
-              </div>
-              <span className="text-xs font-light text-concrete/50 mt-3 uppercase tracking-wider">
-                Trust compounds
-              </span>
-            </div>
           </div>
         </div>
       </section>
@@ -1251,72 +971,6 @@ function PhilBlock({
   );
 }
 
-function AccordionItem({
-  num,
-  title,
-  body,
-  items,
-  delay,
-  onCta,
-}: {
-  num: string;
-  title: string;
-  body: string;
-  items: string[];
-  delay: string;
-  onCta: () => void;
-}) {
-  return (
-    <div
-      className={`accordion-item border-b border-denim/10 scroll-reveal opacity-0 translate-y-10 transition-all duration-1000 ease-out ${delay}`}
-    >
-      <button
-        type="button"
-        className="accordion-trigger w-full flex items-center justify-between py-10 text-left group"
-      >
-        <div className="flex items-center gap-8 md:gap-16">
-          <span className="text-sm font-display tracking-wide text-denim/30 group-hover:text-rust transition-colors w-6">
-            {num}
-          </span>
-          <h3 className="font-display text-2xl md:text-4xl font-semibold tracking-wide text-denim/50 group-hover:text-denim transition-colors duration-300 uppercase">
-            {title}
-          </h3>
-        </div>
-        <span className="acc-plus text-steel group-hover:text-denim transition-transform duration-300 flex items-center justify-center">
-          <IconPlus />
-        </span>
-      </button>
-      <div className="accordion-body max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
-        <div className="pb-12 flex flex-col md:flex-row gap-8 md:gap-16 pl-14 md:pl-[5.5rem]">
-          <div className="md:w-1/2">
-            <p className="text-sm text-charcoal/70 font-light leading-relaxed">
-              {body}
-            </p>
-          </div>
-          <div className="md:w-1/2 flex flex-col gap-3 border-l border-denim/15 pl-6">
-            {items.map((item) => (
-              <span
-                key={item}
-                className="text-sm font-light text-charcoal/80"
-              >
-                {item}
-              </span>
-            ))}
-            <button
-              type="button"
-              onClick={onCta}
-              className="cursor-pointer mt-4 inline-flex items-center gap-2 text-xs font-medium text-rust group uppercase tracking-wider"
-            >
-              Get a Blueprint
-              <IconArrowRight className="group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function JobSiteCase({
   num,
   trade,
@@ -1388,29 +1042,5 @@ function JobSiteCase({
         </dl>
       </div>
     </article>
-  );
-}
-
-function Testimonial({
-  quote,
-  name,
-  trade,
-}: {
-  quote: string;
-  name: string;
-  trade: string;
-}) {
-  return (
-    <blockquote className="scroll-reveal opacity-0 translate-y-10 transition-all duration-1000 ease-out border-t-2 border-rust pt-8">
-      <p className="text-charcoal/80 font-light text-base md:text-lg leading-relaxed mb-8">
-        &ldquo;{quote}&rdquo;
-      </p>
-      <footer>
-        <cite className="not-italic font-display text-sm tracking-wide text-denim uppercase">
-          {name}
-        </cite>
-        <p className="text-xs text-steel mt-1">{trade}</p>
-      </footer>
-    </blockquote>
   );
 }

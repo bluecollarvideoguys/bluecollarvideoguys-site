@@ -9,11 +9,7 @@ const VERSIONS = [
   { href: "/master", label: "Version 02 Master" },
   { href: "/v01", label: "Version 01" },
   { href: "/v02", label: "Version 02" },
-  { href: "/v03", label: "Version 03" },
-  { href: "/v04", label: "Version 04" },
-  { href: "/v05", label: "Version 05" },
-  { href: "/v06", label: "Version 06" },
-  { href: "/v07", label: "Version 07", active: true },
+  { href: "/v03", label: "Archive 03–07", active: true },
 ] as const;
 
 const HERO_YT = "7gGRBMdAQ2k";
@@ -348,7 +344,7 @@ function IconClapper({ className }: { className?: string }) {
   );
 }
 
-export function Version07Page() {
+export function Version07Design() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openStep, setOpenStep] = useState(0);
@@ -385,7 +381,7 @@ export function Version07Page() {
       >
         <div className="mx-auto flex h-16 max-w-screen-2xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Link
-            href="/v07"
+            href="/v03#v07"
             aria-label="The Blue Collar Video Guys home"
             className="inline-flex items-center gap-2.5 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#fa6b20]"
           >
@@ -713,13 +709,6 @@ export function Version07Page() {
                         title={item.title}
                         background
                         zoom={1.45}
-                      />
-                    ) : "src" in item && item.src ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={item.src}
-                        alt={item.title}
-                        className="h-full w-full object-cover object-top transition duration-700 group-hover:scale-[1.03]"
                       />
                     ) : null}
                   </div>

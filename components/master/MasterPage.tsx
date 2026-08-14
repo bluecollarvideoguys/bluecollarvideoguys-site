@@ -8,11 +8,9 @@ const VERSIONS = [
   { href: "/master", label: "Version 02 Master", active: true },
   { href: "/v01", label: "Version 01", active: false },
   { href: "/v02", label: "Version 02", active: false },
-  { href: "/v03", label: "Version 03", active: false },
-  { href: "/v04", label: "Version 04", active: false },
-  { href: "/v05", label: "Version 05", active: false },
-  { href: "/v06", label: "Version 06", active: false },
-  { href: "/v07", label: "Version 07", active: false },
+  { href: "/services", label: "Services", active: false },
+  { href: "/testimonials", label: "Testimonials", active: false },
+  { href: "/v03", label: "Archive 03–07", active: false },
 ] as const;
 
 function ytId(url: string) {

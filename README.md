@@ -17,12 +17,11 @@ Design explorations live as separate routes:
 | Route | Status |
 |-------|--------|
 | `/` → `/v01` | Version 01 (scroll-video / denim-rust) |
-| `/v02` | Version 02 (construction-template / gold-navy) |
-| `/v03` | Version 03 (ARCA dark / copper-red) |
-| `/v04` | Version 04 (Matos dark / amber) |
-| `/v05` | Version 05 (Fellwock + blueprint motifs) |
-| `/v06` | Version 06 (Coronado editorial / emerald) |
-| `/v07` | Version 07 (Northline dark / orange) |
+| `/v02` | Version 02 (active exploration / gold-navy) |
+| `/services` | Job Sites / field reports |
+| `/testimonials` | Toolbox + Sample cuts + Proof |
+| `/master` | Frozen snapshot of Version 02 |
+| `/v03` | Archive stack of former Versions 03–07 (element reference) |
 
 Header nav switches between versions.
 
