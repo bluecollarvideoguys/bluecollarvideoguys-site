@@ -34,6 +34,14 @@ Placeholder comments in `components/HomePage.tsx` mark spots for:
 - Live phone number and contact details
 - Optional project photography
 
+## Video hosting (Vercel Blob)
+
+Portfolio MP4s should live on Vercel Blob (not YouTube), so playback stays on-site with no “up next” suggestions.
+
+Unlisted public drop page: `/upload` (not in the site menu, `noindex`). Send
+`https://www.bluecollarvideoguys.com/upload` privately. MP4 / MOV go to the
+`bluecollarvideoguys-videos` Blob store.
+
 ## Deploy
 
 Push to `main` — Vercel should pick up the GitHub repo automatically.
