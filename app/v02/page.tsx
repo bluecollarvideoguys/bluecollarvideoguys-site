@@ -1,5 +1,5 @@
-import { Version02Page } from "@/components/v02/Version02Page";
+import { redirect } from "next/navigation";
 
 export default function Page() {
-  return <Version02Page />;
+  redirect("/");
 }

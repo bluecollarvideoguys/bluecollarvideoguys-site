@@ -15,12 +15,10 @@ function scrollToSection(id: string) {
 }
 
 const VERSIONS = [
-  { href: "/master", label: "Version 02 Master", active: false },
-  { href: "/v01", label: "Version 01", active: false },
-  { href: "/v02", label: "Version 02", active: true },
+  { href: "/", label: "Home", active: true },
   { href: "/services", label: "Services", active: false },
   { href: "/testimonials", label: "Testimonials", active: false },
-  { href: "/v03", label: "Archive 03–07", active: false },
+  { href: "/v03", label: "Archive", active: false },
 ] as const;
 
 function ytId(url: string) {
@@ -424,7 +422,7 @@ export function Version02Page() {
         className="fixed inset-x-0 top-0 z-50 border-b border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)]/80 text-white backdrop-blur-md"
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
-          <Link href="/v02" className="v02-display text-xl font-bold tracking-tight sm:text-2xl">
+          <Link href="/" className="v02-display text-xl font-bold tracking-tight sm:text-2xl">
             BLUE COLLAR{" "}
             <span className="text-[var(--v02-gold)]">VIDEO GUYS™</span>
           </Link>
@@ -844,31 +842,26 @@ export function Version02Page() {
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               <ServiceCard
                 icon={<IconCamera className="text-3xl text-[var(--v02-gold-deep)]" />}
-                tag="Build Trust · Stand Out"
                 title="Cinematic Video & Photo Storytelling"
                 body="Brand story films, project showcases, crew profiles, and photography that show your craftsmanship, not stock photos."
               />
               <ServiceCard
                 icon={<IconGlobe className="text-3xl text-[var(--v02-gold-deep)]" />}
-                tag="Stand Out"
                 title="Website Design"
                 body="A site that looks as solid as your work, built to turn visitors into discovery calls, not just page views."
               />
               <ServiceCard
                 icon={<IconChart className="text-3xl text-[var(--v02-gold-deep)]" />}
-                tag="Stand Out · Win More Work"
                 title="SEO"
                 body="Show up when local homeowners search for the trade you do best, before they ever find your competitor."
               />
               <ServiceCard
                 icon={<IconUsers className="text-3xl text-[var(--v02-gold-deep)]" />}
-                tag="Stand Out"
                 title="Social Media"
                 body="Monthly content that keeps your crew, culture, and craftsmanship in front of the right people, consistently."
               />
               <ServiceCard
                 icon={<IconMegaphone className="text-3xl text-[var(--v02-gold-deep)]" />}
-                tag="Win More Work"
                 title="Digital Marketing"
                 body="Strategy, ad management, and content planning that turns your story into a steady pipeline of the right jobs."
               />
@@ -1152,7 +1145,7 @@ export function Version02Page() {
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-8 px-5 sm:px-6 md:flex-row md:items-end lg:px-8">
           <div>
             <Link
-              href="/v02"
+              href="/"
               className="v02-display text-2xl font-bold tracking-tight text-white"
             >
               BLUE COLLAR{" "}
@@ -1296,12 +1289,10 @@ function MobileBlueprint({
 
 function ServiceCard({
   icon,
-  tag,
   title,
   body,
 }: {
   icon: ReactNode;
-  tag: string;
   title: string;
   body: string;
 }) {
@@ -1309,11 +1300,8 @@ function ServiceCard({
     <div className="rounded border border-[var(--v02-line)] bg-white p-7 transition hover:-translate-y-1 hover:shadow-lg">
       {icon}
       <p className="mt-5 text-xs font-semibold uppercase tracking-wider text-[var(--v02-gold-deep)]">
-        {tag}
-      </p>
-      <h3 className="mt-2 v02-display text-xl font-semibold tracking-tight text-[var(--v02-ink)]">
         {title}
-      </h3>
+      </p>
       <p className="mt-3 text-sm leading-relaxed text-slate-600">{body}</p>
     </div>
   );

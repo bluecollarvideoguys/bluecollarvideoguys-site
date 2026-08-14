@@ -13,13 +13,17 @@ export type SiteVersion =
   | "testimonials";
 
 const VERSIONS: { version: SiteVersion; href: string; label: string }[] = [
-  { version: "master", href: "/master", label: "Version 02 Master" },
-  { version: 1, href: "/v01", label: "Version 01" },
-  { version: 2, href: "/v02", label: "Version 02" },
+  { version: 2, href: "/", label: "Home" },
   { version: "services", href: "/services", label: "Services" },
   { version: "testimonials", href: "/testimonials", label: "Testimonials" },
-  { version: 3, href: "/v03", label: "Archive 03–07" },
+  { version: 3, href: "/v03", label: "Archive" },
 ];
+
+function isNavActive(version: SiteVersion, active: SiteVersion) {
+  if (version === active) return true;
+  // v01 + master live under Archive now
+  return version === 3 && (active === 1 || active === "master");
+}
 
 type VersionNavProps = {
   active: SiteVersion;
@@ -50,7 +54,7 @@ export function VersionNav({ active, cta }: VersionNavProps) {
 
             <div className="hidden md:flex items-center gap-6 lg:gap-8">
               {VERSIONS.map(({ version, href, label }) => {
-                const isActive = version === active;
+                const isActive = isNavActive(version, active);
                 return (
                   <Link
                     key={version}
@@ -108,7 +112,7 @@ export function VersionNav({ active, cta }: VersionNavProps) {
         </button>
         <div className="flex flex-col gap-6 text-center">
           {VERSIONS.map(({ version, href, label }) => {
-            const isActive = version === active;
+            const isActive = isNavActive(version, active);
             return (
               <Link
                 key={version}

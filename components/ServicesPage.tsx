@@ -6,12 +6,10 @@ import { VideoSlot } from "@/components/VideoSlot";
 import { IconArrowRight } from "@/components/icons";
 
 const NAV = [
-  { href: "/master", label: "Version 02 Master" },
-  { href: "/v01", label: "Version 01" },
-  { href: "/v02", label: "Version 02" },
+  { href: "/", label: "Home" },
   { href: "/services", label: "Services", active: true },
   { href: "/testimonials", label: "Testimonials" },
-  { href: "/v03", label: "Archive 03–07" },
+  { href: "/v03", label: "Archive" },
 ] as const;
 
 function IconMenu({ className }: { className?: string }) {
@@ -104,7 +102,7 @@ export function ServicesPage() {
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
           <Link
-            href="/v02"
+            href="/"
             className="v02-display text-xl font-bold tracking-tight sm:text-2xl"
           >
             BLUE COLLAR{" "}
@@ -127,7 +125,7 @@ export function ServicesPage() {
           </div>
 
           <Link
-            href="/v02#contact"
+            href="/#contact"
             className="hidden rounded bg-[var(--v02-gold)] px-5 py-2.5 text-sm font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)] lg:inline-flex"
           >
             Book a Discovery Call
@@ -159,7 +157,7 @@ export function ServicesPage() {
                 </Link>
               ))}
               <Link
-                href="/v02#contact"
+                href="/#contact"
                 className="mt-2 font-semibold text-[var(--v02-gold)]"
                 onClick={() => setMenuOpen(false)}
               >
@@ -271,7 +269,7 @@ export function ServicesPage() {
                 your shop and how we&apos;ll put them to work.
               </p>
               <a
-                href="/v02#contact"
+                href="/#contact"
                 className="inline-flex items-center gap-2 rounded bg-[var(--v02-gold)] px-7 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
               >
                 Schedule Your Discovery Call
@@ -300,7 +298,7 @@ export function ServicesPage() {
                 the trust system that turns it into more of the right work.
               </p>
               <Link
-                href="/v02#contact"
+                href="/#contact"
                 className="cta-anim group inline-flex translate-y-6 items-center gap-2 rounded bg-[var(--v02-gold)] px-8 py-4 text-sm font-semibold uppercase tracking-wide text-[var(--v02-ink)] opacity-0 transition-all delay-200 duration-1000 ease-out hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
               >
                 Get Your Blueprint
@@ -344,8 +342,8 @@ export function ServicesPage() {
       </main>
 
       <footer className="border-t border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] py-10 text-center text-sm text-slate-500">
-        <Link href="/v02" className="text-[var(--v02-gold)] hover:underline">
-          ← Back to Version 02
+        <Link href="/" className="text-[var(--v02-gold)] hover:underline">
+          ← Back to Home
         </Link>
       </footer>
     </div>

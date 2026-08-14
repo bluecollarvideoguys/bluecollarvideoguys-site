@@ -14,10 +14,10 @@ const HERO_YT = "7gGRBMdAQ2k";
 const HERO_START_SEC = 15;
 
 const VERSIONS = [
-  { href: "/master", label: "Version 02 Master" },
-  { href: "/v01", label: "Version 01" },
-  { href: "/v02", label: "Version 02" },
-  { href: "/v03", label: "Archive 03–07", active: true },
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/testimonials", label: "Testimonials" },
+  { href: "/v03", label: "Archive", active: true },
 ] as const;
 
 function IconArrowDown({ className }: { className?: string }) {
@@ -717,7 +717,7 @@ export function Version03Design() {
             <Link href="/v01" className="transition hover:text-white">
               V01
             </Link>
-            <Link href="/v02" className="transition hover:text-white">
+            <Link href="/" className="transition hover:text-white">
               V02
             </Link>
             <Link href="/v03#v04" className="transition hover:text-white">

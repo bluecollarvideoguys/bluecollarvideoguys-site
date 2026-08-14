@@ -6,10 +6,10 @@ import { CoverYouTubeEmbed } from "@/components/CoverYouTubeEmbed";
 import { HeroYouTubeBackground } from "@/components/HeroYouTubeBackground";
 
 const VERSIONS = [
-  { href: "/master", label: "Version 02 Master" },
-  { href: "/v01", label: "Version 01" },
-  { href: "/v02", label: "Version 02" },
-  { href: "/v03", label: "Archive 03–07", active: true },
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/testimonials", label: "Testimonials" },
+  { href: "/v03", label: "Archive", active: true },
 ] as const;
 
 const HERO_YT = "7gGRBMdAQ2k";

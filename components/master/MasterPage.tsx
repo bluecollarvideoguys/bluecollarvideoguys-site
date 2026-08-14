@@ -5,12 +5,10 @@ import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "rea
 import { PLACEHOLDER_VIDEO } from "@/components/VideoSlot";
 
 const VERSIONS = [
-  { href: "/master", label: "Version 02 Master", active: true },
-  { href: "/v01", label: "Version 01", active: false },
-  { href: "/v02", label: "Version 02", active: false },
+  { href: "/", label: "Home", active: false },
   { href: "/services", label: "Services", active: false },
   { href: "/testimonials", label: "Testimonials", active: false },
-  { href: "/v03", label: "Archive 03–07", active: false },
+  { href: "/v03", label: "Archive", active: true },
 ] as const;
 
 function ytId(url: string) {

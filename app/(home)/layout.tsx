@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Barlow_Condensed, Inter } from "next/font/google";
-import "./v02.css";
+import "../v02/v02.css";
 
 const display = Barlow_Condensed({
   subsets: ["latin"],
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     "Authentic video marketing for blue-collar businesses. Build Trust. Stand Out. Win More Work.",
 };
 
-export default function Version02Layout({
+export default function HomeLayout({
   children,
 }: {
   children: React.ReactNode;

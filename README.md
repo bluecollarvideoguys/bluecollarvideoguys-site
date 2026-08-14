@@ -16,12 +16,12 @@ Design explorations live as separate routes:
 
 | Route | Status |
 |-------|--------|
-| `/` → `/v01` | Version 01 (scroll-video / denim-rust) |
-| `/v02` | Version 02 (active exploration / gold-navy) |
+| `/` → `/v01` | Version 01 (archived under Archive) |
+| `/` | Home (active exploration / gold-navy) |
 | `/services` | Job Sites / field reports |
-| `/testimonials` | Toolbox + Sample cuts + Proof |
-| `/master` | Frozen snapshot of Version 02 |
-| `/v03` | Archive stack of former Versions 03–07 (element reference) |
+| `/testimonials` | Manifesto + Toolbox + Proof |
+| `/master` | Frozen snapshot of Version 02 (via Archive) |
+| `/v03` | Archive: Version 01, Master, and former Versions 03–07 |
 
 Header nav switches between versions.
 

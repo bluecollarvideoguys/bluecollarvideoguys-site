@@ -6,12 +6,10 @@ import { VideoSlot } from "@/components/VideoSlot";
 import { IconArrowRight, IconPlus } from "@/components/icons";
 
 const NAV = [
-  { href: "/master", label: "Version 02 Master" },
-  { href: "/v01", label: "Version 01" },
-  { href: "/v02", label: "Version 02" },
+  { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/testimonials", label: "Testimonials", active: true },
-  { href: "/v03", label: "Archive 03–07" },
+  { href: "/v03", label: "Archive" },
 ] as const;
 
 const TOOLBOX = [
@@ -219,7 +217,7 @@ export function TestimonialsPage() {
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
           <Link
-            href="/v02"
+            href="/"
             className="v02-display text-xl font-bold tracking-tight sm:text-2xl"
           >
             BLUE COLLAR{" "}
@@ -242,7 +240,7 @@ export function TestimonialsPage() {
           </div>
 
           <Link
-            href="/v02#contact"
+            href="/#contact"
             className="hidden rounded bg-[var(--v02-gold)] px-5 py-2.5 text-sm font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)] lg:inline-flex"
           >
             Book a Discovery Call
@@ -274,7 +272,7 @@ export function TestimonialsPage() {
                 </Link>
               ))}
               <Link
-                href="/v02#contact"
+                href="/#contact"
                 className="mt-2 font-semibold text-[var(--v02-gold)]"
                 onClick={() => setMenuOpen(false)}
               >
@@ -368,7 +366,7 @@ export function TestimonialsPage() {
             body="We work with contractors, electricians, plumbers, HVAC, roofers, welders, concrete crews: businesses that already care about reputation and treat marketing like an investment. Not a startup with no track record looking for a miracle."
             cta
             onCta={() => {
-              window.location.href = "/v02#contact";
+              window.location.href = "/#contact";
             }}
           />
         </section>
@@ -440,7 +438,7 @@ export function TestimonialsPage() {
                           </span>
                         ))}
                         <Link
-                          href="/v02#contact"
+                          href="/#contact"
                           className="group mt-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--v02-gold-deep)]"
                         >
                           Get a Blueprint
@@ -548,7 +546,7 @@ export function TestimonialsPage() {
               at a time. Let&apos;s make sure the world sees it.
             </p>
             <a
-              href="/v02#contact"
+              href="/#contact"
               className="mt-9 inline-flex items-center justify-center gap-3 rounded bg-[var(--v02-gold)] px-8 py-4 v02-display text-2xl font-bold tracking-tight text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
             >
               Schedule Your Free Discovery Call
@@ -558,8 +556,8 @@ export function TestimonialsPage() {
       </main>
 
       <footer className="border-t border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] py-10 text-center text-sm text-slate-500">
-        <Link href="/v02" className="text-[var(--v02-gold)] hover:underline">
-          ← Back to Version 02
+        <Link href="/" className="text-[var(--v02-gold)] hover:underline">
+          ← Back to Home
         </Link>
       </footer>
     </div>
