@@ -87,11 +87,11 @@ export default function UploadPage() {
         The Blue Collar Video Guys™
       </p>
       <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-denim-deep">
-        Send a video
+        Worth the Ride
       </h1>
       <p className="mt-3 max-w-lg text-base text-charcoal/80">
-        Drop an MP4 or MOV here. It goes straight to our video library. You can
-        send more than one file.
+        I&apos;m just over here providing... solving problems one battle at a
+        time ❤️‍🔥
       </p>
 
       <label
