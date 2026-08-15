@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { VideoSlot } from "@/components/VideoSlot";
 import { IconArrowRight } from "@/components/icons";
+import { CALENDLY_URL } from "@/lib/calendly";
 
 const NAV = [
   { href: "/", label: "Home" },
@@ -125,7 +126,9 @@ export function ServicesPage() {
           </div>
 
           <Link
-            href="/#contact"
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noreferrer"
             className="hidden rounded bg-[var(--v02-gold)] px-5 py-2.5 text-sm font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)] lg:inline-flex"
           >
             Book a Discovery Call
@@ -157,7 +160,9 @@ export function ServicesPage() {
                 </Link>
               ))}
               <Link
-                href="/#contact"
+                href={CALENDLY_URL}
+            target="_blank"
+            rel="noreferrer"
                 className="mt-2 font-semibold text-[var(--v02-gold)]"
                 onClick={() => setMenuOpen(false)}
               >
@@ -269,7 +274,9 @@ export function ServicesPage() {
                 your shop and how we&apos;ll put them to work.
               </p>
               <a
-                href="/#contact"
+                href={CALENDLY_URL}
+            target="_blank"
+            rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded bg-[var(--v02-gold)] px-7 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
               >
                 Schedule Your Discovery Call
@@ -298,7 +305,9 @@ export function ServicesPage() {
                 the trust system that turns it into more of the right work.
               </p>
               <Link
-                href="/#contact"
+                href={CALENDLY_URL}
+            target="_blank"
+            rel="noreferrer"
                 className="cta-anim group inline-flex translate-y-6 items-center gap-2 rounded bg-[var(--v02-gold)] px-8 py-4 text-sm font-semibold uppercase tracking-wide text-[var(--v02-ink)] opacity-0 transition-all delay-200 duration-1000 ease-out hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
               >
                 Get Your Blueprint

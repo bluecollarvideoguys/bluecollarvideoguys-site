@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { VideoSlot } from "@/components/VideoSlot";
 import { IconArrowRight, IconPlus } from "@/components/icons";
+import { CALENDLY_URL } from "@/lib/calendly";
 
 const NAV = [
   { href: "/", label: "Home" },
@@ -240,7 +241,9 @@ export function TestimonialsPage() {
           </div>
 
           <Link
-            href="/#contact"
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noreferrer"
             className="hidden rounded bg-[var(--v02-gold)] px-5 py-2.5 text-sm font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)] lg:inline-flex"
           >
             Book a Discovery Call
@@ -272,7 +275,9 @@ export function TestimonialsPage() {
                 </Link>
               ))}
               <Link
-                href="/#contact"
+                href={CALENDLY_URL}
+            target="_blank"
+            rel="noreferrer"
                 className="mt-2 font-semibold text-[var(--v02-gold)]"
                 onClick={() => setMenuOpen(false)}
               >
@@ -366,7 +371,7 @@ export function TestimonialsPage() {
             body="We work with contractors, electricians, plumbers, HVAC, roofers, welders, concrete crews: businesses that already care about reputation and treat marketing like an investment. Not a startup with no track record looking for a miracle."
             cta
             onCta={() => {
-              window.location.href = "/#contact";
+              window.open(CALENDLY_URL, "_blank", "noopener,noreferrer");
             }}
           />
         </section>
@@ -438,7 +443,9 @@ export function TestimonialsPage() {
                           </span>
                         ))}
                         <Link
-                          href="/#contact"
+                          href={CALENDLY_URL}
+            target="_blank"
+            rel="noreferrer"
                           className="group mt-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--v02-gold-deep)]"
                         >
                           Get a Blueprint
@@ -546,7 +553,9 @@ export function TestimonialsPage() {
               at a time. Let&apos;s make sure the world sees it.
             </p>
             <a
-              href="/#contact"
+              href={CALENDLY_URL}
+            target="_blank"
+            rel="noreferrer"
               className="mt-9 inline-flex items-center justify-center gap-3 rounded bg-[var(--v02-gold)] px-8 py-4 v02-display text-2xl font-bold tracking-tight text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
             >
               Schedule Your Free Discovery Call

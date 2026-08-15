@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CoverYouTubeEmbed } from "@/components/CoverYouTubeEmbed";
 import { VideoSlot } from "@/components/VideoSlot";
+import { CALENDLY_URL } from "@/lib/calendly";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,6 +21,35 @@ const VERSIONS = [
   { href: "/testimonials", label: "Testimonials", active: false },
   { href: "/v03", label: "Archive", active: false },
 ] as const;
+
+/** Home type system — Inter eyebrows/body, Barlow titles, gold accents */
+const type = {
+  eyebrowLight:
+    "text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold-deep)]",
+  eyebrowDark:
+    "text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold)]",
+  eyebrowMuted:
+    "text-xs font-semibold uppercase tracking-[0.18em] text-slate-500",
+  titleLight:
+    "v02-display text-4xl font-bold tracking-tight text-[var(--v02-ink)] sm:text-5xl",
+  titleDark:
+    "v02-display text-4xl font-bold tracking-tight text-white sm:text-5xl",
+  titleHero:
+    "v02-display text-5xl font-bold leading-[0.9] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl",
+  subtitleLight:
+    "v02-display text-2xl font-semibold tracking-tight text-[var(--v02-ink)]",
+  subtitleDark:
+    "v02-display text-2xl font-semibold tracking-tight text-white",
+  bodyLight: "text-base leading-relaxed text-slate-600",
+  bodyDark: "text-base leading-relaxed text-slate-400",
+  bodySmLight: "text-sm leading-relaxed text-slate-600",
+  bodySmDark: "text-sm leading-relaxed text-slate-400",
+  highlight: "text-[var(--v02-gold)]",
+  labelLight:
+    "text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold-deep)]",
+  labelOnDarkPanel:
+    "text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold)]",
+} as const;
 
 function ytId(url: string) {
   try {
@@ -36,6 +66,10 @@ const WORK_VIDEOS = {
   brandStories: "jzdRmbzji-A",
   craftEdit: "emhLh58qP94",
 } as const;
+
+function openCalendly() {
+  window.open(CALENDLY_URL, "_blank", "noopener,noreferrer");
+}
 
 const HERO_VIDEO =
   "https://youtu.be/7gGRBMdAQ2k?si=TiP0zkxE69bXVT1F";
@@ -197,6 +231,21 @@ function IconArrowRight({ className }: { className?: string }) {
   );
 }
 
+function IconPlay({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      width="1em"
+      height="1em"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M8 5.5v13l11-6.5L8 5.5z" />
+    </svg>
+  );
+}
+
 function IconArrowDown({ className }: { className?: string }) {
   return (
     <svg className={className} width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
@@ -313,10 +362,29 @@ function IconMegaphone({ className }: { className?: string }) {
 
 export function Version02Page() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [lightbox, setLightbox] = useState<{
+    videoId: string;
+    title: string;
+  } | null>(null);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
+    openCalendly();
   };
+
+  useEffect(() => {
+    if (!lightbox) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null);
+    };
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [lightbox]);
 
   useEffect(() => {
     let uspTween: gsap.core.Tween | null = null;
@@ -424,7 +492,7 @@ export function Version02Page() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
           <Link href="/" className="v02-display text-xl font-bold tracking-tight sm:text-2xl">
             BLUE COLLAR{" "}
-            <span className="text-[var(--v02-gold)]">VIDEO GUYS™</span>
+            <span className={type.highlight}>VIDEO GUYS™</span>
           </Link>
 
           <div className="hidden items-center gap-7 text-sm font-medium lg:flex">
@@ -444,7 +512,9 @@ export function Version02Page() {
 
           <div className="hidden items-center gap-5 lg:flex">
             <a
-              href="#contact"
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noreferrer"
               className="rounded bg-[var(--v02-gold)] px-5 py-2.5 text-sm font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
             >
               Book a Discovery Call
@@ -475,7 +545,9 @@ export function Version02Page() {
                 </Link>
               ))}
               <a
-                href="#contact"
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noreferrer"
                 className="mt-2 font-semibold text-[var(--v02-gold)]"
                 onClick={() => setMenuOpen(false)}
               >
@@ -508,17 +580,19 @@ export function Version02Page() {
 
           <div className="relative mx-auto w-full max-w-7xl px-5 pb-20 pt-36 sm:px-6 lg:px-8">
             <div className="max-w-4xl">
-              <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-[var(--v02-gold)]/40 bg-[var(--v02-ink)]/70 px-4 py-2 text-xs font-semibold tracking-wide text-[#f7bd45]">
+              <div
+                className={`mb-7 inline-flex items-center gap-2 rounded-full border border-[var(--v02-gold)]/40 bg-[var(--v02-ink)]/70 px-4 py-2 ${type.eyebrowDark}`}
+              >
                 <IconStar className="text-base" />
-                MARKETING FOR CONTRACTORS
+                Marketing for Contractors
               </div>
 
-              <h1 className="v02-display text-5xl font-bold leading-[0.9] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl">
+              <h1 className={type.titleHero}>
                 BUILD TRUST.
                 <br />
                 STAND OUT.
                 <br />
-                <span className="text-[var(--v02-gold)]">WIN MORE WORK.</span>
+                <span className={type.highlight}>WIN MORE WORK.</span>
               </h1>
 
               <p className="mt-7 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
@@ -529,7 +603,9 @@ export function Version02Page() {
 
               <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <a
-                  href="#contact"
+                  href={CALENDLY_URL}
+                  target="_blank"
+                  rel="noreferrer"
                   className="flex items-center justify-center gap-2 rounded bg-[var(--v02-gold)] px-7 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
                 >
                   Schedule Your Discovery Call
@@ -543,7 +619,7 @@ export function Version02Page() {
                 </a>
               </div>
 
-              <p className="mt-5 text-xs font-medium text-slate-400">
+              <p className="mt-5 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
                 Trust Wins Jobs · Not just another video company · Strategic
                 growth partner
               </p>
@@ -561,7 +637,7 @@ export function Version02Page() {
 
         {/* MARQUEE */}
         <section className="overflow-hidden bg-[var(--v02-navy-deep)] py-3 text-white">
-          <div className="v02-marquee flex min-w-max items-center gap-7 text-xs font-medium tracking-wide sm:text-sm">
+          <div className="v02-marquee flex min-w-max items-center gap-7 text-xs font-semibold uppercase tracking-[0.18em] sm:text-sm">
             {[
               "ELECTRICIANS",
               "PLUMBERS",
@@ -583,7 +659,7 @@ export function Version02Page() {
               <span key={`${item}-${i}`} className={i === 0 ? "ml-7" : undefined}>
                 {item}
               </span>,
-              <span key={`d-${i}`} className="text-[var(--v02-gold)]">
+              <span key={`d-${i}`} className={type.highlight}>
                 ◆
               </span>,
             ])}
@@ -597,7 +673,7 @@ export function Version02Page() {
               "CONCRETE CREWS",
             ].flatMap((item, i) => [
               <span key={`b-${item}-${i}`}>{item}</span>,
-              <span key={`bd-${i}`} className="text-[var(--v02-gold)]">
+              <span key={`bd-${i}`} className={type.highlight}>
                 ◆
               </span>,
             ])}
@@ -617,10 +693,10 @@ export function Version02Page() {
               ["™", "Trust Framework"],
             ].map(([stat, label]) => (
               <div key={label}>
-                <p className="v02-display text-4xl font-bold tracking-tight">
+                <p className="v02-display text-4xl font-bold tracking-tight text-[var(--v02-ink)]">
                   {stat}
                 </p>
-                <p className="mt-1 text-xs font-semibold uppercase tracking-wider">
+                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-ink)]">
                   {label}
                 </p>
               </div>
@@ -643,27 +719,25 @@ export function Version02Page() {
             </div>
 
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold-deep)]">
-                Our Purpose
-              </p>
-              <h2 className="mt-3 v02-display text-4xl font-bold leading-none tracking-tight text-[var(--v02-ink)] sm:text-5xl">
+              <p className={type.eyebrowLight}>Our Purpose</p>
+              <h2 className={`mt-3 ${type.titleLight} leading-none`}>
                 YOUR REPUTATION. YOUR STORY.
               </h2>
               <div className="mt-6 h-px w-16 bg-[var(--v02-line)]" />
-              <p className="mt-7 text-base leading-relaxed text-slate-600">
+              <p className={`mt-7 ${type.bodyLight}`}>
                 Blue Collar Video Guys helps you build trust through cinematic
                 video and photography, websites that convert, SEO, and social
                 media. No more hiding behind outdated sites and word of mouth
                 alone.
               </p>
-              <p className="mt-5 text-base leading-relaxed text-slate-600">
+              <p className={`mt-5 ${type.bodyLight}`}>
                 We work with electricians, plumbers, HVAC techs, roofers,
                 welders, and concrete crews across Southern Oregon and Northern
                 California, from Medford to Sacramento. You&apos;re the backbone
                 of America. It&apos;s time your marketing caught up to your
                 craftsmanship.
               </p>
-              <p className="mt-7 border-l border-[var(--v02-line)] pl-4 text-base font-semibold italic leading-relaxed text-[var(--v02-ink)]">
+              <p className="mt-7 border-l-2 border-[var(--v02-gold-deep)] pl-4 text-base font-semibold italic leading-relaxed text-[var(--v02-ink)]">
                 People don&apos;t hire the cheapest contractor.
                 They hire the one they trust.
               </p>
@@ -671,14 +745,15 @@ export function Version02Page() {
           </div>
         </section>
 
-        {/* PROCESS / TRUST FRAMEWORK */}
-        <section id="framework" className="border-t border-[var(--v02-line)] bg-white py-20 sm:py-24">
+        {/* PROCESS / TRUST FRAMEWORK — desktop only (matches Blueprint scroll breakpoint) */}
+        <section
+          id="framework"
+          className="hidden border-t border-[var(--v02-line)] bg-white py-20 sm:py-24 md:block"
+        >
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold-deep)]">
-                The Trust Framework™
-              </p>
-              <h2 className="mt-3 v02-display text-4xl font-bold tracking-tight sm:text-5xl">
+              <p className={type.eyebrowLight}>The Trust Framework™</p>
+              <h2 className={`mt-3 ${type.titleLight}`}>
                 OUR PROCESS. OUR PROMISE.
               </h2>
             </div>
@@ -705,15 +780,11 @@ export function Version02Page() {
                   key={step.n}
                   className="border-t border-[var(--v02-line)] pt-5"
                 >
-                  <span className="v02-display text-4xl font-bold text-[var(--v02-gold)]">
+                  <span className={`v02-display text-4xl font-bold ${type.highlight}`}>
                     {step.n}
                   </span>
-                  <h3 className="mt-3 v02-display text-2xl font-semibold tracking-tight">
-                    {step.t}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                    {step.d}
-                  </p>
+                  <h3 className={`mt-3 ${type.subtitleLight}`}>{step.t}</h3>
+                  <p className={`mt-2 ${type.bodySmLight}`}>{step.d}</p>
                 </div>
               ))}
             </div>
@@ -732,10 +803,8 @@ export function Version02Page() {
             <div className="flex h-screen w-full flex-col overflow-hidden">
               <div className="mx-auto flex w-full max-w-7xl shrink-0 items-center justify-between px-5 pb-0 pt-24 sm:px-6 lg:px-8">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold)]">
-                    The Blue Collar Blueprint™
-                  </p>
-                  <h2 className="mt-2 v02-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                  <p className={type.eyebrowDark}>The Blue Collar Blueprint™</p>
+                  <h2 className="mt-2 v02-display text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
                     THREE STAGES. ONE PROMISE.
                   </h2>
                 </div>
@@ -790,7 +859,7 @@ export function Version02Page() {
                       "Long-term growth consulting",
                     ]}
                     cta
-                    onCta={() => scrollToSection("contact")}
+                    onCta={openCalendly}
                   />
                 </div>
               </div>
@@ -816,7 +885,7 @@ export function Version02Page() {
               title="More Trust. More Work."
               body="Growth built on reputation, not gimmicks."
               cta
-              onCta={() => scrollToSection("contact")}
+              onCta={openCalendly}
             />
           </div>
         </section>
@@ -826,14 +895,12 @@ export function Version02Page() {
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold-deep)]">
-                  Full Scope
-                </p>
-                <h2 className="mt-3 v02-display text-4xl font-bold tracking-tight text-[var(--v02-ink)] sm:text-5xl">
+                <p className={type.eyebrowLight}>Full Scope</p>
+                <h2 className={`mt-3 ${type.titleLight}`}>
                   ONE CREW. EVERY TRADE YOU NEED.
                 </h2>
               </div>
-              <p className="max-w-md text-sm leading-relaxed text-slate-600">
+              <p className={`max-w-md ${type.bodySmLight}`}>
                 Every service ties back to one outcome: Build Trust, Stand Out,
                 or Win More Work. Nothing on this list is filler.
               </p>
@@ -842,7 +909,7 @@ export function Version02Page() {
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               <ServiceCard
                 icon={<IconCamera className="text-3xl text-[var(--v02-gold-deep)]" />}
-                title="Cinematic Video & Photo Storytelling"
+                title="Cinematic Video and Photo"
                 body="Brand story films, project showcases, crew profiles, and photography that show your craftsmanship, not stock photos."
               />
               <ServiceCard
@@ -866,15 +933,15 @@ export function Version02Page() {
                 body="Strategy, ad management, and content planning that turns your story into a steady pipeline of the right jobs."
               />
               <div className="flex flex-col justify-center rounded border border-dashed border-[var(--v02-line)] bg-[var(--v02-paper)] p-7">
-                <p className="v02-display text-xl font-semibold text-[var(--v02-ink)]">
-                  Not sure what you need?
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                <p className={type.labelLight}>Not sure what you need?</p>
+                <p className={`mt-3 ${type.bodySmLight}`}>
                   That&apos;s what the discovery call is for. We&apos;ll figure
                   out the right mix together.
                 </p>
-                <a
-                  href="#contact"
+                  <a
+                  href={CALENDLY_URL}
+                  target="_blank"
+                  rel="noreferrer"
                   className="mt-5 inline-flex w-fit items-center gap-2 text-sm font-semibold text-[var(--v02-gold-deep)] transition hover:text-[var(--v02-ink)]"
                 >
                   Schedule Your Discovery Call
@@ -893,13 +960,11 @@ export function Version02Page() {
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold-deep)]">
-                  Proven Results
-                </p>
-                <h2 className="mt-4 v02-display text-3xl font-bold tracking-tight text-[var(--v02-ink)] sm:text-4xl md:text-5xl">
+                <p className={type.eyebrowLight}>Proven Results</p>
+                <h2 className={`mt-3 ${type.titleLight}`}>
                   REAL JOBS. REAL PROOF.
                 </h2>
-                <p className="mt-2 text-xs font-semibold uppercase tracking-widest text-slate-500">
+                <p className={`mt-3 ${type.eyebrowMuted}`}>
                   Client films and testimonials
                 </p>
               </div>
@@ -907,45 +972,30 @@ export function Version02Page() {
                 href="#contact"
                 className="group inline-flex items-center gap-2 border-b border-[var(--v02-line)] pb-1 text-sm font-semibold text-[var(--v02-ink)] transition hover:border-[var(--v02-gold-deep)] hover:text-[var(--v02-gold-deep)]"
               >
-                Request the full reel
+                View all
                 <IconArrowRight className="transition group-hover:translate-x-0.5" />
               </a>
             </div>
 
             <div className="grid gap-3 md:grid-cols-12 md:grid-rows-2">
-              <figure className="relative min-h-80 overflow-hidden bg-[var(--v02-navy)] md:col-span-7 md:row-span-2 md:min-h-[42rem]">
-                <CoverYouTubeEmbed
-                  videoId={WORK_VIDEOS.jobSite}
-                  title="Job-site films testimonial"
-                  background
-                  zoom={1.45}
-                />
-                <figcaption className="pointer-events-none absolute bottom-0 left-0 z-10 bg-[var(--v02-navy-deep)]/80 px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm">
-                  Job-site films
-                </figcaption>
-              </figure>
-              <figure className="relative min-h-64 overflow-hidden bg-[var(--v02-navy)] md:col-span-5">
-                <CoverYouTubeEmbed
-                  videoId={WORK_VIDEOS.brandStories}
-                  title="Brand stories testimonial"
-                  background
-                  zoom={1.45}
-                />
-                <figcaption className="pointer-events-none absolute bottom-0 left-0 z-10 bg-[var(--v02-navy-deep)]/80 px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm">
-                  Brand stories
-                </figcaption>
-              </figure>
-              <figure className="relative min-h-64 overflow-hidden bg-[var(--v02-navy)] md:col-span-5">
-                <CoverYouTubeEmbed
-                  videoId={WORK_VIDEOS.craftEdit}
-                  title="Craft and edit testimonial"
-                  background
-                  zoom={1.45}
-                />
-                <figcaption className="pointer-events-none absolute bottom-0 left-0 z-10 bg-[var(--v02-navy-deep)]/80 px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm">
-                  Craft &amp; edit
-                </figcaption>
-              </figure>
+              <WorkVideoTile
+                className="min-h-80 md:col-span-7 md:row-span-2 md:min-h-[42rem]"
+                videoId={WORK_VIDEOS.jobSite}
+                label="Promo video"
+                onOpen={setLightbox}
+              />
+              <WorkVideoTile
+                className="min-h-64 md:col-span-5"
+                videoId={WORK_VIDEOS.brandStories}
+                label="Testimonial"
+                onOpen={setLightbox}
+              />
+              <WorkVideoTile
+                className="min-h-64 md:col-span-5"
+                videoId={WORK_VIDEOS.craftEdit}
+                label="Testimonials"
+                onOpen={setLightbox}
+              />
             </div>
           </div>
         </section>
@@ -954,10 +1004,8 @@ export function Version02Page() {
         <section className="border-t border-[var(--v02-line-on-dark)] bg-[var(--v02-ink)] py-20 sm:py-24">
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl border-b border-[var(--v02-line-on-dark)] pb-12 text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold)]">
-                Clear Advantage
-              </p>
-              <h2 className="mt-3 v02-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
+              <p className={type.eyebrowDark}>Clear Advantage</p>
+              <h2 className={`mt-3 ${type.titleDark}`}>
                 WE DON&apos;T SELL VIDEOS.
                 <br />
                 WE BUILD TRUST.
@@ -995,12 +1043,8 @@ export function Version02Page() {
                 >
                   {item.icon}
                   <div>
-                    <h3 className="v02-display text-2xl font-semibold tracking-tight text-white">
-                      {item.t}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-400">
-                      {item.d}
-                    </p>
+                    <h3 className={type.subtitleDark}>{item.t}</h3>
+                    <p className={`mt-2 ${type.bodySmDark}`}>{item.d}</p>
                   </div>
                 </div>
               ))}
@@ -1012,13 +1056,11 @@ export function Version02Page() {
         <section id="contact" className="border-t border-[var(--v02-line)] bg-[var(--v02-paper)] py-20 sm:py-24">
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl border-b border-[var(--v02-line)] pb-12 text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold-deep)]">
-                Let&apos;s Talk
-              </p>
-              <h2 className="mt-3 v02-display text-4xl font-bold tracking-tight sm:text-5xl">
+              <p className={type.eyebrowLight}>Let&apos;s Talk</p>
+              <h2 className={`mt-3 ${type.titleLight}`}>
                 ONE CALL. ONE BLUEPRINT.
               </h2>
-              <p className="mt-4 text-base text-slate-600">
+              <p className={`mt-4 ${type.bodyLight}`}>
                 Tell us about your shop and we&apos;ll set up a free call to
                 map out your Blueprint. No pressure, no obligation.
               </p>
@@ -1031,9 +1073,7 @@ export function Version02Page() {
               >
                 <div className="grid gap-5 sm:grid-cols-2">
                   <label className="block">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                      Name
-                    </span>
+                    <span className={type.labelOnDarkPanel}>Name</span>
                     <input
                       type="text"
                       required
@@ -1042,9 +1082,7 @@ export function Version02Page() {
                     />
                   </label>
                   <label className="block">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                      Phone
-                    </span>
+                    <span className={type.labelOnDarkPanel}>Phone</span>
                     <input
                       type="tel"
                       required
@@ -1055,7 +1093,7 @@ export function Version02Page() {
                 </div>
 
                 <label className="mt-5 block">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  <span className={type.labelOnDarkPanel}>
                     What are you building?
                   </span>
                   <textarea
@@ -1079,11 +1117,9 @@ export function Version02Page() {
               </form>
 
               <div className="flex flex-col justify-center border border-[var(--v02-line)] bg-white p-7 sm:p-9">
-                <h3 className="v02-display text-3xl font-semibold tracking-tight">
-                  What to expect on the call
-                </h3>
+                <h3 className={type.subtitleLight}>What to expect on the call</h3>
 
-                <ul className="mt-6 space-y-3 border-b border-[var(--v02-line)] pb-7 text-sm leading-relaxed text-slate-600">
+                <ul className={`mt-6 space-y-3 border-b border-[var(--v02-line)] pb-7 ${type.bodySmLight}`}>
                   <li className="flex gap-3">
                     <IconCheck className="mt-0.5 shrink-0 text-[var(--v02-gold-deep)]" />
                     We&apos;ll walk through your current brand, site, and
@@ -1110,10 +1146,8 @@ export function Version02Page() {
                     <IconPhone />
                   </span>
                   <span>
-                    <span className="block text-xs font-semibold uppercase tracking-wider text-slate-500">
-                      Call us
-                    </span>
-                    <span className="mt-1 block v02-display text-2xl font-bold tracking-tight">
+                    <span className={type.eyebrowMuted}>Call us</span>
+                    <span className={`mt-1 block ${type.subtitleLight}`}>
                       [Phone placeholder]
                     </span>
                   </span>
@@ -1127,10 +1161,8 @@ export function Version02Page() {
                     <IconMail />
                   </span>
                   <span>
-                    <span className="block text-xs font-semibold uppercase tracking-wider text-slate-500">
-                      Email
-                    </span>
-                    <span className="mt-1 block text-sm font-semibold">
+                    <span className={type.eyebrowMuted}>Email</span>
+                    <span className="mt-1 block text-sm font-semibold text-[var(--v02-ink)]">
                       hello@bluecollarvideoguys.com
                     </span>
                   </span>
@@ -1149,9 +1181,9 @@ export function Version02Page() {
               className="v02-display text-2xl font-bold tracking-tight text-white"
             >
               BLUE COLLAR{" "}
-              <span className="text-[var(--v02-gold)]">VIDEO GUYS™</span>
+              <span className={type.highlight}>VIDEO GUYS™</span>
             </Link>
-            <p className="mt-3 max-w-md text-sm leading-relaxed">
+            <p className={`mt-3 max-w-md ${type.bodySmDark}`}>
               Build Trust. Stand Out. Win More Work. Authentic video marketing
               for blue-collar businesses, powered by The Blue Collar Blueprint™
               and Trust Framework™.
@@ -1173,12 +1205,120 @@ export function Version02Page() {
       </footer>
 
       <a
-        href="#contact"
+        href={CALENDLY_URL}
+        target="_blank"
+        rel="noreferrer"
         aria-label="Schedule a discovery call"
         className="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--v02-gold)] text-2xl text-[var(--v02-ink)] shadow-xl transition hover:scale-110"
       >
         <IconPhone />
       </a>
+
+      {lightbox ? (
+        <YouTubeLightbox
+          videoId={lightbox.videoId}
+          title={lightbox.title}
+          onClose={() => setLightbox(null)}
+        />
+      ) : null}
+    </div>
+  );
+}
+
+function WorkVideoTile({
+  videoId,
+  label,
+  className = "",
+  onOpen,
+}: {
+  videoId: string;
+  label: string;
+  className?: string;
+  onOpen: (video: { videoId: string; title: string }) => void;
+}) {
+  return (
+    <figure
+      className={`relative overflow-hidden bg-[var(--v02-navy)] ${className}`}
+    >
+      <CoverYouTubeEmbed
+        videoId={videoId}
+        title={label}
+        background
+        zoom={1.45}
+      />
+      <button
+        type="button"
+        onClick={() => onOpen({ videoId, title: label })}
+        className="absolute inset-0 z-20 flex cursor-pointer items-center justify-center bg-black/0 transition hover:bg-black/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[var(--v02-gold)]"
+        aria-label={`Play ${label}`}
+      >
+        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--v02-gold)] text-[var(--v02-ink)] shadow-lg transition group-hover:scale-105">
+          <IconPlay className="ml-0.5 text-2xl" />
+        </span>
+      </button>
+      <figcaption className="pointer-events-none absolute bottom-0 left-0 z-30 bg-[var(--v02-navy-deep)]/80 px-4 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-sm">
+        {label}
+      </figcaption>
+    </figure>
+  );
+}
+
+function YouTubeLightbox({
+  videoId,
+  title,
+  onClose,
+}: {
+  videoId: string;
+  title: string;
+  onClose: () => void;
+}) {
+  const origin =
+    typeof window !== "undefined" ? window.location.origin : "";
+  const params = new URLSearchParams({
+    autoplay: "1",
+    rel: "0",
+    modestbranding: "1",
+    playsinline: "1",
+    controls: "1",
+    enablejsapi: "1",
+    origin,
+  });
+
+  return (
+    <div
+      className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 p-4 sm:p-8"
+      role="dialog"
+      aria-modal="true"
+      aria-label={title}
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-5xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="mb-3 flex items-center justify-between gap-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/80">
+            {title}
+          </p>
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-white transition hover:bg-white/20"
+          >
+            Close
+          </button>
+        </div>
+        <div className="aspect-video overflow-hidden bg-black shadow-2xl">
+          <iframe
+            className="h-full w-full border-0"
+            src={`https://www.youtube.com/embed/${videoId}?${params.toString()}`}
+            title={title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
+          />
+        </div>
+      </div>
     </div>
   );
 }
@@ -1213,19 +1353,15 @@ function BlueprintPanel({
       <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-center px-5 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
           {icon}
-          <span className="mb-5 block text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold)]">
-            {label}
-          </span>
+          <span className={`mb-5 block ${type.eyebrowDark}`}>{label}</span>
           <h3 className="v02-display mb-6 text-4xl font-bold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl">
             {title}
           </h3>
-          <p className="text-base leading-relaxed text-slate-400 md:text-lg">
-            {body}
-          </p>
+          <p className={`${type.bodyDark} md:text-lg`}>{body}</p>
           <ul className="mt-8 space-y-3 border-t border-[var(--v02-line-on-dark)] pt-6 text-sm font-medium text-slate-200">
             {items.map((item) => (
               <li key={item} className="flex gap-2">
-                <IconCheck className="shrink-0 text-[var(--v02-gold)]" />
+                <IconCheck className={`shrink-0 ${type.highlight}`} />
                 {item}
               </li>
             ))}
@@ -1234,7 +1370,7 @@ function BlueprintPanel({
             <button
               type="button"
               onClick={onCta}
-              className="group mt-10 inline-flex cursor-pointer items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--v02-gold)]"
+              className={`group mt-10 inline-flex cursor-pointer items-center gap-2 ${type.eyebrowDark}`}
             >
               Schedule Your Discovery Call
               <IconArrowRight className="transition-transform group-hover:translate-x-1" />
@@ -1266,18 +1402,16 @@ function MobileBlueprint({
       <span className="v02-display mb-2 text-sm tracking-wide text-slate-500">
         {num}
       </span>
-      <span className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold)]">
-        {label}
-      </span>
+      <span className={`mb-5 ${type.eyebrowDark}`}>{label}</span>
       <h3 className="v02-display mb-5 text-3xl font-bold leading-tight tracking-tight text-white">
         {title}
       </h3>
-      <p className="text-sm leading-relaxed text-slate-400">{body}</p>
+      <p className={type.bodySmDark}>{body}</p>
       {cta && onCta ? (
         <button
           type="button"
           onClick={onCta}
-          className="group mt-8 inline-flex cursor-pointer items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--v02-gold)]"
+          className={`group mt-8 inline-flex cursor-pointer items-center gap-2 ${type.eyebrowDark}`}
         >
           Schedule Your Discovery Call
           <IconArrowRight className="transition-transform group-hover:translate-x-1" />
@@ -1299,10 +1433,8 @@ function ServiceCard({
   return (
     <div className="rounded border border-[var(--v02-line)] bg-white p-7 transition hover:-translate-y-1 hover:shadow-lg">
       {icon}
-      <p className="mt-5 text-xs font-semibold uppercase tracking-wider text-[var(--v02-gold-deep)]">
-        {title}
-      </p>
-      <p className="mt-3 text-sm leading-relaxed text-slate-600">{body}</p>
+      <p className={`mt-5 ${type.labelLight}`}>{title}</p>
+      <p className={`mt-3 ${type.bodySmLight}`}>{body}</p>
     </div>
   );
 }
