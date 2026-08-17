@@ -24,7 +24,8 @@ export async function POST(request: Request): Promise<NextResponse> {
             "video/x-quicktime",
           ],
           addRandomSuffix: true,
-          maximumSizeInBytes: 500 * 1024 * 1024,
+          // Blob client-upload ceiling (5 TB) — no smaller app cap
+          maximumSizeInBytes: 5 * 1024 * 1024 * 1024 * 1024,
         };
       },
       onUploadCompleted: async ({ blob }) => {

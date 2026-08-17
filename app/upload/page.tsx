@@ -5,7 +5,6 @@ import { useState } from "react";
 
 const ACCEPT = "video/mp4,video/quicktime,video/x-m4v,video/webm,.mp4,.mov,.m4v,.webm";
 const ALLOWED_EXTENSIONS = /\.(mp4|mov|m4v|webm)$/i;
-const MAX_BYTES = 500 * 1024 * 1024;
 
 type UploadedItem = {
   url: string;
@@ -36,10 +35,6 @@ export default function UploadPage() {
     for (const file of files) {
       if (!ALLOWED_EXTENSIONS.test(file.name)) {
         setError(`Skipped ${file.name}: use an MP4 or MOV file.`);
-        continue;
-      }
-      if (file.size > MAX_BYTES) {
-        setError(`${file.name} is over 500 MB.`);
         continue;
       }
 
@@ -123,7 +118,7 @@ export default function UploadPage() {
             : "Drop a video or click to choose"}
         </span>
         <span className="mt-2 text-xs text-charcoal/60">
-          MP4 or MOV · up to 500 MB
+          MP4 or MOV
         </span>
         <input
           type="file"
