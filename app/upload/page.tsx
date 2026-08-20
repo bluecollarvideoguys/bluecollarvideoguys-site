@@ -1,10 +1,12 @@
 "use client";
 
-import { upload } from "@vercel/blob/client";
 import { useState } from "react";
 
-const ACCEPT = "video/mp4,video/quicktime,video/x-m4v,video/webm,.mp4,.mov,.m4v,.webm";
+const ACCEPT =
+  "video/mp4,video/quicktime,video/x-m4v,video/webm,.mp4,.mov,.m4v,.webm";
 const ALLOWED_EXTENSIONS = /\.(mp4|mov|m4v|webm)$/i;
+/** 10 MB parts — works well for multi-GB R2 multipart uploads */
+const PART_SIZE = 10 * 1024 * 1024;
 
 type UploadedItem = {
   url: string;
@@ -12,9 +14,83 @@ type UploadedItem = {
   name: string;
 };
 
-function safeFileName(name: string) {
-  const cleaned = name.replace(/[^\w.\-]+/g, "-").replace(/^\.+/, "");
-  return cleaned || "video.mp4";
+async function readJson(res: Response) {
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || "Upload request failed");
+  return data;
+}
+
+async function uploadFileToR2(
+  file: File,
+  onProgress: (percent: number) => void,
+): Promise<UploadedItem> {
+  const create = await readJson(
+    await fetch("/api/r2/multipart", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "create",
+        filename: file.name,
+        contentType: file.type || "video/mp4",
+      }),
+    }),
+  );
+
+  const { key, uploadId } = create as { key: string; uploadId: string };
+  const totalParts = Math.max(1, Math.ceil(file.size / PART_SIZE));
+  const parts: { partNumber: number; etag: string }[] = [];
+
+  for (let partNumber = 1; partNumber <= totalParts; partNumber++) {
+    const start = (partNumber - 1) * PART_SIZE;
+    const end = Math.min(start + PART_SIZE, file.size);
+    const chunk = file.slice(start, end);
+
+    const { url } = (await readJson(
+      await fetch("/api/r2/multipart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "sign-part",
+          key,
+          uploadId,
+          partNumber,
+        }),
+      }),
+    )) as { url: string };
+
+    const put = await fetch(url, {
+      method: "PUT",
+      body: chunk,
+    });
+    if (!put.ok) {
+      throw new Error(`Failed uploading part ${partNumber} of ${totalParts}`);
+    }
+
+    const etag = put.headers.get("etag") || put.headers.get("ETag");
+    if (!etag) throw new Error(`Missing ETag for part ${partNumber}`);
+
+    parts.push({ partNumber, etag });
+    onProgress(Math.round((partNumber / totalParts) * 100));
+  }
+
+  const done = (await readJson(
+    await fetch("/api/r2/multipart", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "complete",
+        key,
+        uploadId,
+        parts,
+      }),
+    }),
+  )) as { url: string; key: string };
+
+  return {
+    url: done.url,
+    pathname: done.key,
+    name: file.name,
+  };
 }
 
 export default function UploadPage() {
@@ -43,22 +119,8 @@ export default function UploadPage() {
       setStatus(`Uploading ${file.name}…`);
 
       try {
-        const blob = await upload(`videos/${safeFileName(file.name)}`, file, {
-          access: "public",
-          handleUploadUrl: "/api/blob/upload",
-          multipart: true,
-          onUploadProgress: ({ percentage }) => {
-            setPercent(Math.round(percentage));
-          },
-        });
-        setItems((prev) => [
-          {
-            url: blob.url,
-            pathname: blob.pathname,
-            name: file.name,
-          },
-          ...prev,
-        ]);
+        const uploaded = await uploadFileToR2(file, setPercent);
+        setItems((prev) => [uploaded, ...prev]);
         setStatus(`${file.name} uploaded.`);
       } catch (err) {
         setError(err instanceof Error ? err.message : String(err));
@@ -118,7 +180,7 @@ export default function UploadPage() {
             : "Drop a video or click to choose"}
         </span>
         <span className="mt-2 text-xs text-charcoal/60">
-          MP4 or MOV
+          MP4 or MOV · Cloudflare R2
         </span>
         <input
           type="file"

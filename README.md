@@ -34,13 +34,13 @@ Placeholder comments in `components/HomePage.tsx` mark spots for:
 - Live phone number and contact details
 - Optional project photography
 
-## Video hosting (Vercel Blob)
-
-Portfolio MP4s should live on Vercel Blob (not YouTube), so playback stays on-site with no “up next” suggestions.
+## Video hosting (Cloudflare R2)
 
 Unlisted public drop page: `/upload` (not in the site menu, `noindex`). Send
-`https://www.bluecollarvideoguys.com/upload` privately. MP4 / MOV go to the
-`bluecollarvideoguys-videos` Blob store.
+`https://www.bluecollarvideoguys.com/upload` privately.
+
+Uploads go to **Cloudflare R2** (10 GB free tier) so multi‑GB files work without
+Hobby Blob’s 1 GB cap. Set `R2_*` env vars locally and in Vercel (see `.env.example`).
 
 ## Deploy
 
