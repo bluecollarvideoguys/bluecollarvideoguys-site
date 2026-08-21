@@ -7,8 +7,6 @@ import { PLACEHOLDER_VIDEO } from "@/components/VideoSlot";
 const VERSIONS = [
   { href: "/", label: "Home", active: false },
   { href: "/services", label: "Services", active: false },
-  { href: "/testimonials", label: "Testimonials", active: false },
-  { href: "/v03", label: "Archive", active: true },
 ] as const;
 
 function ytId(url: string) {

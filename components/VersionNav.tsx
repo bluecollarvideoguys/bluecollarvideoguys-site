@@ -15,8 +15,6 @@ export type SiteVersion =
 const VERSIONS: { version: SiteVersion; href: string; label: string }[] = [
   { version: 2, href: "/", label: "Home" },
   { version: "services", href: "/services", label: "Services" },
-  { version: "testimonials", href: "/testimonials", label: "Testimonials" },
-  { version: 3, href: "/v03", label: "Archive" },
 ];
 
 function isNavActive(version: SiteVersion, active: SiteVersion) {

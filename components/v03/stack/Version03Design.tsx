@@ -16,8 +16,6 @@ const HERO_START_SEC = 15;
 const VERSIONS = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
-  { href: "/testimonials", label: "Testimonials" },
-  { href: "/v03", label: "Archive", active: true },
 ] as const;
 
 function IconArrowDown({ className }: { className?: string }) {

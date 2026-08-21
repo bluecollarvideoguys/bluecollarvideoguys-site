@@ -13,8 +13,6 @@ import { HeroYouTubeBackground } from "@/components/HeroYouTubeBackground";
 const VERSIONS = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
-  { href: "/testimonials", label: "Testimonials" },
-  { href: "/v03", label: "Archive", active: true },
 ] as const;
 
 const VIDEOGRAPHER_IMAGE = "/images/purpose-videographer.png";

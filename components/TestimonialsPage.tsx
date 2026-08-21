@@ -9,8 +9,6 @@ import { CALENDLY_URL } from "@/lib/calendly";
 const NAV = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
-  { href: "/testimonials", label: "Testimonials", active: true },
-  { href: "/v03", label: "Archive" },
 ] as const;
 
 const TOOLBOX = [

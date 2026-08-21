@@ -9,8 +9,6 @@ import { CALENDLY_URL } from "@/lib/calendly";
 const NAV = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services", active: true },
-  { href: "/testimonials", label: "Testimonials" },
-  { href: "/v03", label: "Archive" },
 ] as const;
 
 const FULL_SCOPE = [
@@ -293,6 +291,32 @@ export function ServicesPage() {
           </div>
         </section>
 
+        {/* TRUST STRATEGY PACKAGES */}
+        <section
+          id="packages"
+          className="border-t border-[var(--v02-line-on-dark)] bg-[var(--v02-navy-deep)] py-20 sm:py-24"
+        >
+          <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+            <div className="v02-scroll-reveal mx-auto max-w-3xl translate-y-10 text-center opacity-0 transition-all duration-1000 ease-out">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold)]">
+                The Blue Collar Blueprint™
+              </p>
+              <h2 className="mt-3 v02-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
+                TRUST STRATEGY PACKAGES
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-slate-400">
+                Built for blue collar businesses.
+              </p>
+            </div>
+
+            <div className="mt-14 grid items-stretch gap-6 lg:grid-cols-3 lg:gap-5">
+              {PACKAGES.map((pkg) => (
+                <PackageCard key={pkg.tier} {...pkg} />
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* FULL SCOPE */}
         <section
           id="full-scope"
@@ -353,34 +377,6 @@ export function ServicesPage() {
                 Schedule Your Discovery Call
                 <IconArrowRight />
               </a>
-            </div>
-          </div>
-        </section>
-
-        {/* VIDEO STRATEGY PACKAGES */}
-        <section
-          id="packages"
-          className="border-t border-[var(--v02-line-on-dark)] bg-[var(--v02-navy-deep)] py-20 sm:py-24"
-        >
-          <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-            <div className="v02-scroll-reveal mx-auto max-w-3xl translate-y-10 text-center opacity-0 transition-all duration-1000 ease-out">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold)]">
-                The Blue Collar Blueprint™
-              </p>
-              <h2 className="mt-3 v02-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
-                TRUST STRATEGY PACKAGES
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-slate-400">
-                Built for shops ready to invest in trust and marketing, not
-                one-off videos. Video is a tool inside the system. Pick the
-                timeline that matches how hard you want to grow.
-              </p>
-            </div>
-
-            <div className="mt-14 grid items-stretch gap-6 lg:grid-cols-3 lg:gap-5">
-              {PACKAGES.map((pkg) => (
-                <PackageCard key={pkg.tier} {...pkg} />
-              ))}
             </div>
           </div>
         </section>

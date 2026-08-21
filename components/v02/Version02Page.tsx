@@ -18,8 +18,6 @@ function scrollToSection(id: string) {
 const VERSIONS = [
   { href: "/", label: "Home", active: true },
   { href: "/services", label: "Services", active: false },
-  { href: "/testimonials", label: "Testimonials", active: false },
-  { href: "/v03", label: "Archive", active: false },
 ] as const;
 
 /** Home type system — Inter eyebrows/body, Barlow titles, gold accents */
