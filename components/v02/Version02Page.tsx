@@ -18,6 +18,7 @@ function scrollToSection(id: string) {
 const VERSIONS = [
   { href: "/", label: "Home", active: true },
   { href: "/services", label: "Services", active: false },
+  { href: "/contact", label: "Contact", active: false },
 ] as const;
 
 /** Home type system — Inter eyebrows/body, Barlow titles, gold accents */
@@ -364,6 +365,32 @@ export function Version02Page() {
     videoId: string;
     title: string;
   } | null>(null);
+  const pageLiftRef = useRef<HTMLDivElement>(null);
+  const stickyFooterRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const setStickyMargin = () => {
+      const footer = stickyFooterRef.current;
+      const lift = pageLiftRef.current;
+      if (!footer || !lift) return;
+      const h = footer.scrollHeight;
+      const vh = window.innerHeight || document.documentElement.clientHeight || 0;
+      lift.style.marginBottom = `${Math.min(h, vh)}px`;
+    };
+
+    setStickyMargin();
+    window.addEventListener("resize", setStickyMargin);
+    const ro =
+      typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(setStickyMargin)
+        : null;
+    if (stickyFooterRef.current && ro) ro.observe(stickyFooterRef.current);
+
+    return () => {
+      window.removeEventListener("resize", setStickyMargin);
+      ro?.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     if (!lightbox) return;
@@ -476,11 +503,13 @@ export function Version02Page() {
   }, []);
 
   return (
-    <div className="bg-[var(--v02-paper)] text-[var(--v02-ink)] antialiased">
+    <div className="v02-page-shell text-[var(--v02-ink)] antialiased">
+      <div ref={pageLiftRef} className="v02-page-lift">
       {/* NAV */}
       <nav
         id="navigation"
         className="fixed inset-x-0 top-0 z-50 border-b border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)]/80 text-white backdrop-blur-md"
+        aria-label="Main navigation"
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
           <Link href="/" className="v02-display text-xl font-bold tracking-tight sm:text-2xl">
@@ -1199,35 +1228,71 @@ export function Version02Page() {
           </div>
         </section>
       </main>
+      </div>
 
-      <footer className="border-t border-[var(--v02-line-on-dark)] bg-[var(--v02-navy-deep)] py-12 text-slate-400">
-        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-8 px-5 sm:px-6 md:flex-row md:items-end lg:px-8">
-          <div>
-            <Link
-              href="/"
-              className="v02-display text-2xl font-bold tracking-tight text-white"
-            >
-              BLUE COLLAR{" "}
-              <span className={type.highlight}>VIDEO GUYS™</span>
-            </Link>
-            <p className={`mt-3 max-w-md ${type.bodySmDark}`}>
-              Build Trust. Stand Out. Win More Work. Authentic video marketing
-              for blue-collar businesses, powered by The Blue Collar Blueprint™
-              and Trust Framework™.
-            </p>
-          </div>
-          <div className="text-sm md:text-right">
+      <footer
+        ref={stickyFooterRef}
+        className="v02-sticky-footer"
+        aria-label="Site footer"
+      >
+        <div className="v02-footer-reveal">
+          <div className="v02-footer-reveal__inner">
             <a
-              href="mailto:hello@bluecollarvideoguys.com"
-              className="font-semibold text-white transition hover:text-[var(--v02-gold)]"
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="v02-footer-reveal__cta"
             >
-              hello@bluecollarvideoguys.com
+              <span className="v02-footer-reveal__eyebrow">
+                Ready to break ground?
+              </span>
+              <span className="v02-footer-reveal__title">Let&apos;s build</span>
+              <div className="v02-footer-reveal__rule" aria-hidden="true" />
             </a>
-            <p className="mt-2 text-xs">
-              © {new Date().getFullYear()} The Blue Collar Video Guys™. All
-              rights reserved.
-            </p>
+
+            <div className="v02-footer-reveal__grid">
+              <div>
+                <Link href="/" className="v02-footer-reveal__brand">
+                  BLUE COLLAR <span>VIDEO GUYS™</span>
+                </Link>
+              </div>
+              <div>
+                <span className="v02-footer-reveal__label">Let&apos;s chat</span>
+                <div className="v02-footer-reveal__links">
+                  <a href="mailto:hello@bluecollarvideoguys.com">
+                    hello@bluecollarvideoguys.com
+                  </a>
+                  <a href={CALENDLY_URL} target="_blank" rel="noreferrer">
+                    Book a discovery call
+                  </a>
+                </div>
+              </div>
+              <div>
+                <span className="v02-footer-reveal__label">Explore</span>
+                <div className="v02-footer-reveal__links">
+                  <Link href="/">Home</Link>
+                  <Link href="/services">Services</Link>
+                  <Link href="/contact">Contact</Link>
+                </div>
+              </div>
+              <div>
+                <span className="v02-footer-reveal__label">The Blueprint</span>
+                <p className="v02-footer-reveal__copy">
+                  Build Trust. Stand Out. Win More Work. Authentic video
+                  marketing for blue-collar businesses.
+                </p>
+              </div>
+            </div>
           </div>
+        </div>
+        <div className="v02-footer-legal">
+          <p>
+            © {new Date().getFullYear()} The Blue Collar Video Guys™. All
+            rights reserved.
+          </p>
+          <a href="mailto:hello@bluecollarvideoguys.com">
+            hello@bluecollarvideoguys.com
+          </a>
         </div>
       </footer>
 

@@ -10,11 +10,13 @@ export type SiteVersion =
   | 3
   | "master"
   | "services"
+  | "contact"
   | "testimonials";
 
 const VERSIONS: { version: SiteVersion; href: string; label: string }[] = [
   { version: 2, href: "/", label: "Home" },
   { version: "services", href: "/services", label: "Services" },
+  { version: "contact", href: "/contact", label: "Contact" },
 ];
 
 function isNavActive(version: SiteVersion, active: SiteVersion) {

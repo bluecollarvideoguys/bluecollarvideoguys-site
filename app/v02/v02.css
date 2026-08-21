@@ -54,3 +54,193 @@
 html:has(.v02-root) {
   scroll-behavior: auto;
 }
+
+/* Sticky footer reveal (Luma-style: page lifts, footer fixed underneath) */
+.v02-page-shell {
+  position: relative;
+  background: var(--v02-navy-deep);
+}
+
+.v02-page-lift {
+  position: relative;
+  z-index: 10;
+  background: var(--v02-paper);
+}
+
+.v02-sticky-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  max-height: 100vh;
+  max-height: 100dvh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--v02-navy-deep);
+}
+
+.v02-footer-reveal {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--v02-line-on-dark);
+  padding: clamp(4.5rem, 11vw, 7.5rem) clamp(1.25rem, 4vw, 3.25rem)
+    clamp(2.5rem, 5vw, 3.5rem);
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.4) 100%),
+    var(--v02-navy);
+  isolation: isolate;
+}
+
+.v02-footer-reveal__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 72rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.v02-footer-reveal__cta {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  margin: 0 auto;
+  padding: clamp(0.75rem, 2vw, 1.25rem) clamp(1rem, 3vw, 1.75rem);
+}
+
+.v02-footer-reveal__cta:hover {
+  background: transparent;
+}
+
+.v02-footer-reveal__eyebrow {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--v02-gold);
+  margin-bottom: 0.75rem;
+}
+
+.v02-footer-reveal__title {
+  display: block;
+  font-family: var(--font-v02-display), ui-sans-serif, sans-serif;
+  font-size: clamp(3.25rem, 12vw, min(8rem, 18vw));
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.96);
+  transition: color 0.45s ease;
+}
+
+.v02-footer-reveal__cta:hover .v02-footer-reveal__title {
+  color: var(--v02-gold);
+}
+
+.v02-footer-reveal__rule {
+  height: 1px;
+  width: 0;
+  margin: clamp(1.75rem, 4vw, 2.75rem) auto 0;
+  background: var(--v02-gold);
+  transition: width 0.9s cubic-bezier(0.22, 0.68, 0, 1);
+}
+
+.v02-footer-reveal__cta:hover .v02-footer-reveal__rule {
+  width: min(100%, 26rem);
+}
+
+.v02-footer-reveal__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: clamp(3.5rem, 10vw, 6.25rem);
+  padding-top: clamp(2.5rem, 6vw, 3.5rem);
+  border-top: 1px solid var(--v02-line-on-dark);
+  text-align: left;
+}
+
+@media (min-width: 640px) {
+  .v02-footer-reveal__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .v02-footer-reveal__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+  }
+}
+
+.v02-footer-reveal__label {
+  display: block;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--v02-gold);
+  margin-bottom: 1rem;
+}
+
+.v02-footer-reveal__brand {
+  font-family: var(--font-v02-display), ui-sans-serif, sans-serif;
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: white;
+  text-decoration: none;
+  line-height: 1.15;
+}
+
+.v02-footer-reveal__brand span {
+  color: var(--v02-gold);
+}
+
+.v02-footer-reveal__links a,
+.v02-footer-reveal__copy {
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: rgba(148, 163, 184, 1);
+  text-decoration: none;
+  margin-bottom: 0.4rem;
+}
+
+.v02-footer-reveal__links a:hover {
+  color: white;
+}
+
+.v02-footer-legal {
+  background: var(--v02-navy-deep);
+  padding: 1.5rem clamp(1.25rem, 4vw, 3.25rem)
+    calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--v02-line-on-dark);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.v02-footer-legal p,
+.v02-footer-legal a {
+  margin: 0;
+  font-size: 0.625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #64748b;
+  text-decoration: none;
+}
+
+.v02-footer-legal a:hover {
+  color: var(--v02-gold);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v02-footer-reveal__rule,
+  .v02-footer-reveal__title {
+    transition: none;
+  }
+}
