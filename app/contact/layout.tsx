@@ -17,7 +17,7 @@ const body = Inter({
 export const metadata: Metadata = {
   title: "Contact | The Blue Collar Video Guys™",
   description:
-    "Tell us about your shop. Book a discovery call or send a message — we'll map the right trust tools for your business.",
+    "Tell us about your business. Book a discovery call or send a message — we'll map the right trust tools for your business.",
 };
 
 export default function ContactLayout({

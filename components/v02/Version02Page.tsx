@@ -1074,7 +1074,7 @@ export function Version02Page() {
                 ONE CALL. ONE BLUEPRINT.
               </h2>
               <p className={`mt-4 ${type.bodyLight}`}>
-                Tell us about your shop and we&apos;ll set up a free call to
+                Tell us about your business and we&apos;ll set up a free call to
                 map out your Blueprint. No pressure, no obligation.
               </p>
             </div>
@@ -1184,7 +1184,7 @@ export function Version02Page() {
                   <li className="flex gap-3">
                     <IconCheck className="mt-0.5 shrink-0 text-[var(--v02-gold-deep)]" />
                     We&apos;ll map which trust methods (video, testimonials,
-                    photography, and more) fit your shop and your goals.
+                    photography, and more) fit your business and your goals.
                   </li>
                   <li className="flex gap-3">
                     <IconCheck className="mt-0.5 shrink-0 text-[var(--v02-gold-deep)]" />

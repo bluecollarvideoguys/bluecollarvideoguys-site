@@ -605,7 +605,7 @@ export function Version03Design() {
                 be told.
               </h2>
               <p className="mt-8 max-w-sm text-sm leading-6 text-white/80">
-                Tell us about your shop. We&apos;ll frame up how The Blue Collar
+                Tell us about your business. We&apos;ll frame up how The Blue Collar
                 Blueprint™ turns trust into more of the right work.
               </p>
 

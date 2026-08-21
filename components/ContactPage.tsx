@@ -28,23 +28,6 @@ function IconMenu({ className }: { className?: string }) {
   );
 }
 
-function IconCheck({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      width="1em"
-      height="1em"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      aria-hidden="true"
-    >
-      <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 function IconSend({ className }: { className?: string }) {
   return (
     <svg
@@ -187,7 +170,7 @@ export function ContactPage() {
                 ONE CALL. ONE BLUEPRINT.
               </h2>
               <p className="mt-4 text-base leading-relaxed text-slate-600">
-                Tell us about your shop and we&apos;ll set up a free call to map
+                Tell us about your business and we&apos;ll set up a free call to map
                 out your Blueprint. No pressure, no obligation.
               </p>
               <a
@@ -201,7 +184,7 @@ export function ContactPage() {
               </a>
             </div>
 
-            <div className="mt-12 grid gap-8 lg:grid-cols-2">
+            <div className="mx-auto mt-12 max-w-2xl">
               <form
                 id="form"
                 action="https://formsubmit.co/hello@bluecollarvideoguys.com"
@@ -381,36 +364,6 @@ export function ContactPage() {
                   We respond within one business day.
                 </p>
               </form>
-
-              <div className="flex flex-col justify-center border border-[var(--v02-line)] bg-white p-7 sm:p-9">
-                <h2 className="v02-display text-2xl font-bold tracking-tight text-[var(--v02-ink)]">
-                  What to expect on the call
-                </h2>
-                <ul className="mt-6 space-y-3 border-b border-[var(--v02-line)] pb-7 text-sm leading-relaxed text-slate-600">
-                  <li className="flex gap-3">
-                    <IconCheck className="mt-0.5 shrink-0 text-[var(--v02-gold-deep)]" />
-                    We&apos;ll walk through your current brand, site, and
-                    content. No jargon, just a plain look at where things stand.
-                  </li>
-                  <li className="flex gap-3">
-                    <IconCheck className="mt-0.5 shrink-0 text-[var(--v02-gold-deep)]" />
-                    We&apos;ll map which trust methods fit your shop and your
-                    goals.
-                  </li>
-                  <li className="flex gap-3">
-                    <IconCheck className="mt-0.5 shrink-0 text-[var(--v02-gold-deep)]" />
-                    You&apos;ll leave with a clear next step and a rough
-                    Blueprint, whether or not we end up working together.
-                  </li>
-                </ul>
-
-                <a
-                  href="mailto:hello@bluecollarvideoguys.com"
-                  className="mt-7 text-sm font-semibold text-[var(--v02-ink)] transition hover:text-[var(--v02-gold-deep)]"
-                >
-                  hello@bluecollarvideoguys.com
-                </a>
-              </div>
             </div>
           </div>
         </section>

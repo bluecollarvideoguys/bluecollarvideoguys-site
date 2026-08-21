@@ -825,7 +825,7 @@ export function MasterPage() {
                 LET&apos;S FRAME UP YOUR BLUEPRINT
               </h2>
               <p className="mt-4 text-base text-slate-600">
-                Tell us about your shop. We&apos;ll map how trust turns into more of
+                Tell us about your business. We&apos;ll map how trust turns into more of
                 the right work.
               </p>
             </div>

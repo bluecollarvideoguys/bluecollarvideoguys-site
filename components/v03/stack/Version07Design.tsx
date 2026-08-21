@@ -24,7 +24,7 @@ const WORK = [
   },
   {
     title: "Brand stories",
-    subtitle: "Why your shop exists — told like it matters",
+    subtitle: "Why your business exists — told like it matters",
     year: "Trust",
     videoId: "jzdRmbzji-A",
     span: "lg:col-span-5 lg:pt-24",

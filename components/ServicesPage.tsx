@@ -26,7 +26,7 @@ const FULL_SCOPE = [
   {
     title: "SEO",
     outcome: "Win More Work",
-    body: "Getting found is half the battle. We tighten the pages, local signals, and content that help the right searches land on your shop, so you show up when homeowners look for your trade before they ever find the competitor.",
+    body: "Getting found is half the battle. We tighten the pages, local signals, and content that help the right searches land on your business, so you show up when homeowners look for your trade before they ever find the competitor.",
   },
   {
     title: "Social Media",
@@ -367,7 +367,7 @@ export function ServicesPage() {
             <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-[var(--v02-line)] pt-8 sm:flex-row sm:items-center">
               <p className="max-w-xl text-sm leading-relaxed text-slate-600">
                 Not sure what you need? That&apos;s what the discovery call is
-                for. We&apos;ll map the right mix for your shop.
+                for. We&apos;ll map the right mix for your business.
               </p>
               <a
                 href={CALENDLY_URL}

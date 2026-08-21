@@ -611,7 +611,7 @@ export function Version04Design() {
                 </span>
               </h2>
               <p className="mt-7 max-w-md text-base leading-7 text-stone-600">
-                Tell us about your shop. We&apos;ll frame up how The Blue Collar
+                Tell us about your business. We&apos;ll frame up how The Blue Collar
                 Blueprint™ turns trust into more of the right work.
               </p>
 
