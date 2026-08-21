@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CoverYouTubeEmbed } from "@/components/CoverYouTubeEmbed";
@@ -364,11 +364,6 @@ export function Version02Page() {
     videoId: string;
     title: string;
   } | null>(null);
-
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    openCalendly();
-  };
 
   useEffect(() => {
     if (!lightbox) return;
@@ -956,23 +951,14 @@ export function Version02Page() {
           className="border-t border-[var(--v02-line)] bg-[var(--v02-paper)] py-20 sm:py-28"
         >
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-            <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
-              <div>
-                <p className={type.eyebrowLight}>Proven Results</p>
-                <h2 className={`mt-3 ${type.titleLight}`}>
-                  REAL JOBS. REAL PROOF.
-                </h2>
-                <p className={`mt-3 ${type.eyebrowMuted}`}>
-                  Client films and testimonials
-                </p>
-              </div>
-              <a
-                href="#contact"
-                className="group inline-flex items-center gap-2 border-b border-[var(--v02-line)] pb-1 text-sm font-semibold text-[var(--v02-ink)] transition hover:border-[var(--v02-gold-deep)] hover:text-[var(--v02-gold-deep)]"
-              >
-                View all
-                <IconArrowRight className="transition group-hover:translate-x-0.5" />
-              </a>
+            <div className="mb-10">
+              <p className={type.eyebrowLight}>Proven Results</p>
+              <h2 className={`mt-3 ${type.titleLight}`}>
+                REAL JOBS. REAL PROOF.
+              </h2>
+              <p className={`mt-3 ${type.eyebrowMuted}`}>
+                Client films and testimonials
+              </p>
             </div>
 
             <div className="grid gap-3 md:grid-cols-12 md:grid-rows-2">
@@ -1066,15 +1052,33 @@ export function Version02Page() {
 
             <div className="mt-12 grid gap-8 lg:grid-cols-2">
               <form
-                onSubmit={onSubmit}
+                action="https://formsubmit.co/hello@bluecollarvideoguys.com"
+                method="POST"
                 className="rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-ink)] p-6 sm:p-8"
               >
+                {/* Submissions go to FormSubmit → hello@bluecollarvideoguys.com.
+                    First submit may need a one-time activation link in that inbox. */}
+                <input
+                  type="hidden"
+                  name="_subject"
+                  value="Homepage — new inquiry"
+                />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input
+                  type="hidden"
+                  name="_next"
+                  value="https://www.bluecollarvideoguys.com/#contact"
+                />
+
                 <div className="grid gap-5 sm:grid-cols-2">
                   <label className="block">
                     <span className={type.labelOnDarkPanel}>Name</span>
                     <input
                       type="text"
+                      name="name"
                       required
+                      autoComplete="name"
                       className="mt-2 w-full rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
                       placeholder="Your name"
                     />
@@ -1083,7 +1087,9 @@ export function Version02Page() {
                     <span className={type.labelOnDarkPanel}>Phone</span>
                     <input
                       type="tel"
+                      name="phone"
                       required
+                      autoComplete="tel"
                       className="mt-2 w-full rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
                       placeholder="000-000-0000"
                     />
@@ -1091,10 +1097,23 @@ export function Version02Page() {
                 </div>
 
                 <label className="mt-5 block">
+                  <span className={type.labelOnDarkPanel}>Email</span>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    autoComplete="email"
+                    className="mt-2 w-full rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
+                    placeholder="you@company.com"
+                  />
+                </label>
+
+                <label className="mt-5 block">
                   <span className={type.labelOnDarkPanel}>
                     What are you building?
                   </span>
                   <textarea
+                    name="message"
                     rows={5}
                     required
                     className="mt-2 w-full resize-none rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
@@ -1102,11 +1121,21 @@ export function Version02Page() {
                   />
                 </label>
 
+                {/* FormSubmit honeypot */}
+                <input
+                  type="text"
+                  name="_honey"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="absolute left-[-9999px] h-0 w-0 opacity-0"
+                />
+
                 <button
                   type="submit"
                   className="mt-5 flex w-full items-center justify-center gap-2 rounded bg-[var(--v02-gold)] px-6 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:bg-[var(--v02-gold-hot)]"
                 >
-                  Book My Discovery Call
+                  Send Message
                   <IconSend className="text-xl" />
                 </button>
                 <p className="mt-4 text-center text-xs text-slate-500">
