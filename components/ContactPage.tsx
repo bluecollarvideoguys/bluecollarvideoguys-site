@@ -326,19 +326,19 @@ export function ContactPage() {
                       <option value="" disabled>
                         Select a range
                       </option>
-                      <option value="Under $1,000 / month">
-                        Under $1,000 / month
+                      <option value="Under $5,000 / month">
+                        Under $5,000 / month
                       </option>
-                      <option value="$1,000 – $3,000 / month">
-                        $1,000 – $3,000 / month
+                      <option value="$5,000 – $10,000 / month">
+                        $5,000 – $10,000 / month
                       </option>
-                      <option value="$3,000 – $7,500 / month">
-                        $3,000 – $7,500 / month
+                      <option value="$10,000 – $15,000 / month">
+                        $10,000 – $15,000 / month
                       </option>
-                      <option value="$7,500 – $15,000 / month">
-                        $7,500 – $15,000 / month
+                      <option value="$15,000 – $25,000 / month">
+                        $15,000 – $25,000 / month
                       </option>
-                      <option value="$15,000+ / month">$15,000+ / month</option>
+                      <option value="$25,000+ / month">$25,000+ / month</option>
                       <option value="Prefer to discuss">Prefer to discuss</option>
                     </select>
                   </label>
