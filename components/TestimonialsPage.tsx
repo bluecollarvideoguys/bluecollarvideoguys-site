@@ -211,7 +211,7 @@ export function TestimonialsPage() {
   }, []);
 
   return (
-    <SiteFooter className="bg-[var(--v02-paper)] text-[var(--v02-ink)] antialiased">
+    <SiteFooter className="bg-[var(--v02-navy-deep)] text-[var(--v02-ink)] antialiased">
       <nav
         className="fixed inset-x-0 top-0 z-50 border-b border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)]/80 text-white backdrop-blur-md"
         aria-label="Main navigation"
@@ -531,7 +531,7 @@ export function TestimonialsPage() {
 
         {/* CTA BAND */}
         <section
-          className="relative overflow-hidden border-t border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] py-20 sm:py-24"
+          className="v02-lift-cap relative overflow-hidden border-t border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] py-20 sm:py-24"
           style={{
             backgroundImage:
               "linear-gradient(rgba(17,26,38,.9),rgba(17,26,38,.9)),url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=2000&q=85')",

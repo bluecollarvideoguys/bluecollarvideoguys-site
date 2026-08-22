@@ -85,7 +85,7 @@ const PACKAGES = [
   {
     tier: "Turnkey",
     duration: "12 Month",
-    badge: "#DoneForYou",
+    badge: null as string | null,
     featured: false,
     tone: "gold" as const,
     includes: [
@@ -191,7 +191,9 @@ export function ServicesPage() {
   }, []);
 
   return (
-    <SiteFooter className="bg-[var(--v02-navy-deep)] text-white antialiased">
+    <SiteFooter
+      className="bg-[var(--v02-navy-deep)] text-white antialiased"
+    >
       <nav
         className="fixed inset-x-0 top-0 z-50 border-b border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)]/80 text-white backdrop-blur-md"
         aria-label="Main navigation"
@@ -268,11 +270,11 @@ export function ServicesPage() {
         ) : null}
       </nav>
 
-      <main className="pt-20">
+      <main>
         {/* TRUST GAP: education section */}
         <section
           id="why-trust"
-          className="border-t border-[var(--v02-line)] bg-[var(--v02-paper)] py-20 sm:py-24"
+          className="bg-[var(--v02-paper)] pt-40 pb-20 sm:pt-44 sm:pb-24"
         >
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl text-center">
@@ -434,7 +436,7 @@ export function ServicesPage() {
 
         <section
           id="cta"
-          className="relative z-40 flex min-h-[70vh] w-full flex-col justify-between overflow-hidden border-t border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] py-24"
+          className="v02-lift-cap relative z-40 flex min-h-[70vh] w-full flex-col justify-between border-t border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] py-24"
         >
           <div className="mx-auto flex h-full w-full max-w-7xl flex-1 flex-col justify-between px-5 sm:px-6 lg:px-8">
             <div className="flex h-full flex-col items-start justify-center">
@@ -485,10 +487,12 @@ export function ServicesPage() {
               </div>
               <div className="flex flex-col">
                 <div className="v02-display flex items-end text-5xl font-bold tracking-tight text-white md:text-6xl">
-                  <span className="text-[var(--v02-gold)]">∞</span>
+                  <span className="cta-stat" data-target="10">
+                    0
+                  </span>
                 </div>
                 <span className="mt-3 text-xs font-semibold uppercase tracking-wider text-slate-500">
-                  Trust compounds
+                  Years experience
                 </span>
               </div>
             </div>
@@ -542,11 +546,11 @@ function PackageCard({
       }`}
     >
       <div
-        className={`relative flex h-full flex-col overflow-hidden border p-7 sm:p-8 ${
+        className={`relative flex h-full flex-col overflow-hidden border border-[var(--v02-gold)] p-7 sm:p-8 ${
           isGold
-            ? "border-[var(--v02-gold-deep)]/50 bg-gradient-to-b from-[var(--v02-gold-deep)] via-[#9a6a08] to-[var(--v02-ink)] text-white"
-            : "border-[var(--v02-gold)] bg-[var(--v02-navy)] text-white"
-        } ${featured ? "shadow-[0_0_0_1px_var(--v02-gold)]" : ""}`}
+            ? "bg-gradient-to-b from-[var(--v02-gold-deep)] via-[#9a6a08] to-[var(--v02-ink)] text-white"
+            : "bg-[var(--v02-navy)] text-white"
+        }`}
       >
         {badge ? (
           <span

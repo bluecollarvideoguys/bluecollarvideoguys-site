@@ -8,10 +8,12 @@ export function SiteFooter({
   children,
   after,
   className = "",
+  liftClassName = "",
 }: {
   children: ReactNode;
   after?: ReactNode;
   className?: string;
+  liftClassName?: string;
 }) {
   const pageLiftRef = useRef<HTMLDivElement>(null);
   const stickyFooterRef = useRef<HTMLElement>(null);
@@ -43,8 +45,9 @@ export function SiteFooter({
 
   return (
     <div className={`v02-page-shell ${className}`.trim()}>
-      <div ref={pageLiftRef} className="v02-page-lift">
+      <div ref={pageLiftRef} className={`v02-page-lift ${liftClassName}`.trim()}>
         {children}
+        <div className="v02-footer-bleed" aria-hidden="true" />
       </div>
       <footer
         ref={stickyFooterRef}
@@ -62,7 +65,7 @@ export function SiteFooter({
               <span className="v02-footer-reveal__eyebrow">
                 Ready to break ground?
               </span>
-              <span className="v02-footer-reveal__title">Let&apos;s build</span>
+              <span className="v02-footer-reveal__title">Let&apos;s Build</span>
               <div className="v02-footer-reveal__rule" aria-hidden="true" />
             </a>
 

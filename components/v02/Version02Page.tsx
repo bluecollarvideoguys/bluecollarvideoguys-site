@@ -478,7 +478,7 @@ export function Version02Page() {
 
   return (
     <SiteFooter
-      className="text-[var(--v02-ink)] antialiased"
+      className="bg-[var(--v02-navy-deep)] text-[var(--v02-ink)] antialiased"
       after={
         <>
           <a
@@ -1061,7 +1061,7 @@ export function Version02Page() {
         </section>
 
         {/* CONTACT */}
-        <section id="contact" className="border-t border-[var(--v02-line)] bg-[var(--v02-paper)] py-20 sm:py-24">
+        <section id="contact" className="v02-lift-cap border-t border-[var(--v02-line)] bg-[var(--v02-paper)] py-20 sm:py-24">
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl border-b border-[var(--v02-line)] pb-12 text-center">
               <p className={type.eyebrowLight}>Let&apos;s Talk</p>

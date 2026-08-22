@@ -16,7 +16,7 @@
 
   font-family: var(--font-v02-body), system-ui, sans-serif;
   color: var(--v02-ink);
-  background: var(--v02-paper);
+  background: var(--v02-navy-deep);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -50,12 +50,19 @@
   animation: v02marquee 35s linear infinite;
 }
 
+/* Match footer so a 1px join never flashes cream (Luma: html/body = footer) */
+html:has(.v02-root),
+html:has(.v02-root) body {
+  background: var(--v02-navy-deep);
+}
+
 /* Smooth scroll fights ScrollTrigger pin/scrub on the Blueprint section */
 html:has(.v02-root) {
   scroll-behavior: auto;
 }
 
-/* Sticky footer reveal (Luma-style: page lifts, footer fixed underneath) */
+/* Sticky footer reveal (Luma-style: last section is the rounded cap;
+   lift stays transparent so corner radii reveal the footer color — no hairline) */
 .v02-page-shell {
   position: relative;
   background: var(--v02-navy-deep);
@@ -64,7 +71,20 @@ html:has(.v02-root) {
 .v02-page-lift {
   position: relative;
   z-index: 10;
-  background: var(--v02-paper);
+  background: transparent;
+}
+
+.v02-lift-cap {
+  border-bottom-left-radius: clamp(0.5rem, 1.5vw, 0.875rem);
+  border-bottom-right-radius: clamp(0.5rem, 1.5vw, 0.875rem);
+  box-shadow: 0 16px 0 0 var(--v02-navy-deep);
+}
+
+/* Extra footer-color band at the bottom of the lifting page */
+.v02-footer-bleed {
+  height: 16px;
+  background: var(--v02-navy-deep);
+  pointer-events: none;
 }
 
 .v02-sticky-footer {
@@ -83,12 +103,9 @@ html:has(.v02-root) {
 .v02-footer-reveal {
   position: relative;
   overflow: hidden;
-  border-top: 1px solid var(--v02-line-on-dark);
   padding: clamp(4.5rem, 11vw, 7.5rem) clamp(1.25rem, 4vw, 3.25rem)
     clamp(2.5rem, 5vw, 3.5rem);
-  background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.4) 100%),
-    var(--v02-navy);
+  background: var(--v02-navy-deep);
   isolation: isolate;
 }
 

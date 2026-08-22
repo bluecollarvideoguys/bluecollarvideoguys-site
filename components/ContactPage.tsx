@@ -29,7 +29,7 @@ function IconMenu({ className }: { className?: string }) {
   );
 }
 
-function IconSend({ className }: { className?: string }) {
+function IconHammer({ className }: { className?: string }) {
   return (
     <svg
       className={className}
@@ -38,10 +38,13 @@ function IconSend({ className }: { className?: string }) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.5"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M4 12l16-8-6 16-2-6-8-2z" strokeLinejoin="round" />
+      <path d="M11.414 10 4.03 17.418a2.09 2.09 0 0 0 0 2.967 2.11 2.11 0 0 0 2.976 0L14.414 13" />
+      <path d="M18.121 15.293 20.707 12.707a1 1 0 0 0 0-1.414L13.121 3.707a1 1 0 0 0-1.414 0L9.121 6.293a1 1 0 0 0 0 1.414l7.586 7.586a1 1 0 0 0 1.414 0z" />
     </svg>
   );
 }
@@ -50,7 +53,7 @@ export function ContactPage() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <SiteFooter className="bg-[var(--v02-navy)] text-[var(--v02-ink)] antialiased">
+    <SiteFooter className="bg-[var(--v02-navy-deep)] text-[var(--v02-ink)] antialiased">
       <nav
         className="fixed inset-x-0 top-0 z-50 border-b border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)]/80 text-white backdrop-blur-md"
         aria-label="Main navigation"
@@ -161,7 +164,7 @@ export function ContactPage() {
           </div>
         </section>
 
-        <section className="border-t border-[var(--v02-line)] bg-[var(--v02-paper)] py-20 sm:py-24">
+        <section className="v02-lift-cap border-t border-[var(--v02-line)] bg-[var(--v02-paper)] py-20 sm:py-24">
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl border-b border-[var(--v02-line)] pb-12 text-center">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold-deep)]">
@@ -358,8 +361,8 @@ export function ContactPage() {
                   type="submit"
                   className="mt-8 flex w-full items-center justify-center gap-2 rounded-full bg-[var(--v02-gold)] px-6 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:bg-[var(--v02-gold-hot)]"
                 >
-                  Let&apos;s connect
-                  <IconSend className="text-xl" />
+                  Let&apos;s Build
+                  <IconHammer className="text-2xl" />
                 </button>
                 <p className="mt-4 text-center text-xs text-slate-500">
                   We respond within one business day.
