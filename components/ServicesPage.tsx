@@ -224,7 +224,7 @@ export function ServicesPage() {
             href={CALENDLY_URL}
             target="_blank"
             rel="noreferrer"
-            className="hidden rounded bg-[var(--v02-gold)] px-5 py-2.5 text-sm font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)] lg:inline-flex"
+            className="hidden rounded-full bg-[var(--v02-gold)] px-5 py-2.5 text-sm font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)] lg:inline-flex"
           >
             Book a Discovery Call
           </Link>
@@ -454,7 +454,7 @@ export function ServicesPage() {
                 href={CALENDLY_URL}
             target="_blank"
             rel="noreferrer"
-                className="cta-anim group inline-flex translate-y-6 items-center gap-2 rounded bg-[var(--v02-gold)] px-8 py-4 text-sm font-semibold uppercase tracking-wide text-[var(--v02-ink)] opacity-0 transition-all delay-200 duration-1000 ease-out hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
+                className="cta-anim group inline-flex translate-y-6 items-center gap-2 rounded-full bg-[var(--v02-gold)] px-8 py-4 text-sm font-semibold uppercase tracking-wide text-[var(--v02-ink)] opacity-0 transition-all delay-200 duration-1000 ease-out hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
               >
                 Get Your Blueprint
                 <IconArrowRight className="transition group-hover:translate-x-1" />
@@ -614,7 +614,7 @@ function PackageCard({
             href={CALENDLY_URL}
             target="_blank"
             rel="noreferrer"
-            className={`flex w-full items-center justify-center gap-2 rounded px-5 py-3.5 text-sm font-bold tracking-wide transition hover:-translate-y-0.5 ${
+            className={`flex w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-bold tracking-wide transition hover:-translate-y-0.5 ${
               isGold
                 ? "bg-white text-[var(--v02-ink)] hover:bg-[var(--v02-paper)]"
                 : "bg-[var(--v02-gold)] text-[var(--v02-ink)] hover:bg-[var(--v02-gold-hot)]"

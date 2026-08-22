@@ -83,7 +83,7 @@ export function ContactPage() {
             href={CALENDLY_URL}
             target="_blank"
             rel="noreferrer"
-            className="hidden rounded bg-[var(--v02-gold)] px-5 py-2.5 text-sm font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)] lg:inline-flex"
+            className="hidden rounded-full bg-[var(--v02-gold)] px-5 py-2.5 text-sm font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)] lg:inline-flex"
           >
             Book a Discovery Call
           </a>
@@ -178,7 +178,7 @@ export function ContactPage() {
                 href={CALENDLY_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-8 inline-flex items-center gap-2 rounded bg-[var(--v02-gold)] px-7 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-[var(--v02-gold)] px-7 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
               >
                 Book a Discovery Call
                 <IconArrowRight />
@@ -190,7 +190,7 @@ export function ContactPage() {
                 id="form"
                 action="https://formsubmit.co/build@bluecollarvideoguys.com"
                 method="POST"
-                className="rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-ink)] p-6 sm:p-8"
+                className="rounded-2xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-ink)] p-6 sm:p-8"
               >
                 <input
                   type="hidden"
@@ -220,7 +220,7 @@ export function ContactPage() {
                       name="company_name"
                       required
                       autoComplete="organization"
-                      className="mt-2 w-full rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
+                      className="mt-2 w-full rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
                       placeholder="Your company or brand"
                     />
                   </label>
@@ -235,7 +235,7 @@ export function ContactPage() {
                       name="email"
                       required
                       autoComplete="email"
-                      className="mt-2 w-full rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
+                      className="mt-2 w-full rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
                       placeholder="you@company.com"
                     />
                   </label>
@@ -250,7 +250,7 @@ export function ContactPage() {
                       name="phone"
                       required
                       autoComplete="tel"
-                      className="mt-2 w-full rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
+                      className="mt-2 w-full rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
                       placeholder="(555) 555-5555"
                     />
                   </label>
@@ -268,7 +268,7 @@ export function ContactPage() {
                       name="website"
                       inputMode="url"
                       autoComplete="url"
-                      className="mt-2 w-full rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
+                      className="mt-2 w-full rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
                       placeholder="https://… or social profile URL"
                     />
                   </label>
@@ -283,7 +283,7 @@ export function ContactPage() {
                       id="primary_marketing_goal"
                       name="marketing_goal"
                       rows={3}
-                      className="mt-2 w-full resize-none rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
+                      className="mt-2 w-full resize-none rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
                       placeholder="e.g. more qualified leads, launch a new offer, grow local awareness…"
                     />
                   </label>
@@ -296,7 +296,7 @@ export function ContactPage() {
                       id="target_audience"
                       name="target_audience"
                       rows={3}
-                      className="mt-2 w-full resize-none rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
+                      className="mt-2 w-full resize-none rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
                       placeholder="Demographics, geography, interests, or ideal customer…"
                     />
                   </label>
@@ -309,7 +309,7 @@ export function ContactPage() {
                       id="business_offer"
                       name="business_offer"
                       rows={3}
-                      className="mt-2 w-full resize-none rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
+                      className="mt-2 w-full resize-none rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
                       placeholder="Electrical, HVAC, plumbing, roofing, or other trade work…"
                     />
                   </label>
@@ -322,7 +322,7 @@ export function ContactPage() {
                       id="marketing_budget"
                       name="monthly_budget"
                       defaultValue=""
-                      className="mt-2 w-full rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition focus:border-[var(--v02-gold)]"
+                      className="mt-2 w-full rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition focus:border-[var(--v02-gold)]"
                     >
                       <option value="" disabled>
                         Select a range
@@ -356,7 +356,7 @@ export function ContactPage() {
 
                 <button
                   type="submit"
-                  className="mt-8 flex w-full items-center justify-center gap-2 rounded bg-[var(--v02-gold)] px-6 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:bg-[var(--v02-gold-hot)]"
+                  className="mt-8 flex w-full items-center justify-center gap-2 rounded-full bg-[var(--v02-gold)] px-6 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:bg-[var(--v02-gold-hot)]"
                 >
                   Let&apos;s connect
                   <IconSend className="text-xl" />

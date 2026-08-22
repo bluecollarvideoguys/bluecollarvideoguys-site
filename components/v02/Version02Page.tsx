@@ -532,7 +532,7 @@ export function Version02Page() {
               href={CALENDLY_URL}
               target="_blank"
               rel="noreferrer"
-              className="rounded bg-[var(--v02-gold)] px-5 py-2.5 text-sm font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
+              className="rounded-full bg-[var(--v02-gold)] px-5 py-2.5 text-sm font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
             >
               Book a Discovery Call
             </a>
@@ -623,13 +623,13 @@ export function Version02Page() {
                   href={CALENDLY_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-center gap-2 rounded bg-[var(--v02-gold)] px-7 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
+                  className="flex items-center justify-center gap-2 rounded-full bg-[var(--v02-gold)] px-7 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
                 >
                   Schedule Your Discovery Call
                 </a>
                 <a
                   href="#blueprint"
-                  className="flex items-center justify-center gap-2 rounded border border-white/30 px-7 py-4 text-base font-medium text-white transition hover:border-white hover:bg-white/10"
+                  className="flex items-center justify-center gap-2 rounded-full border border-white/30 px-7 py-4 text-base font-medium text-white transition hover:border-white hover:bg-white/10"
                 >
                   See the Blueprint
                   <IconArrowRight className="text-lg" />
@@ -725,7 +725,7 @@ export function Version02Page() {
         <section className="border-t border-[var(--v02-line)] bg-[var(--v02-paper)] py-20 sm:py-24">
           <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-6 lg:grid-cols-2 lg:px-8">
             <div className="relative">
-              <div className="absolute -bottom-4 -right-4 h-full w-full rounded bg-[var(--v02-gold)]/25" />
+              <div className="absolute -bottom-4 -right-4 h-full w-full rounded-2xl bg-[var(--v02-gold)]/25" />
               {/* CLIENT ASSET: Replace with real crew / job-site photo */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -1078,7 +1078,7 @@ export function Version02Page() {
               <form
                 action="https://formsubmit.co/build@bluecollarvideoguys.com"
                 method="POST"
-                className="rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-ink)] p-6 sm:p-8"
+                className="rounded-2xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-ink)] p-6 sm:p-8"
               >
                 {/* Submissions go to FormSubmit → build@bluecollarvideoguys.com.
                     First submit may need a one-time activation link in that inbox. */}
@@ -1103,7 +1103,7 @@ export function Version02Page() {
                       name="name"
                       required
                       autoComplete="name"
-                      className="mt-2 w-full rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
+                      className="mt-2 w-full rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
                       placeholder="Your name"
                     />
                   </label>
@@ -1114,7 +1114,7 @@ export function Version02Page() {
                       name="phone"
                       required
                       autoComplete="tel"
-                      className="mt-2 w-full rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
+                      className="mt-2 w-full rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
                       placeholder="000-000-0000"
                     />
                   </label>
@@ -1127,7 +1127,7 @@ export function Version02Page() {
                     name="email"
                     required
                     autoComplete="email"
-                    className="mt-2 w-full rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
+                    className="mt-2 w-full rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
                     placeholder="you@company.com"
                   />
                 </label>
@@ -1140,7 +1140,7 @@ export function Version02Page() {
                     name="message"
                     rows={5}
                     required
-                    className="mt-2 w-full resize-none rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
+                    className="mt-2 w-full resize-none rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
                     placeholder="Trade, company size, and what you want customers to trust you for..."
                   />
                 </label>
@@ -1157,7 +1157,7 @@ export function Version02Page() {
 
                 <button
                   type="submit"
-                  className="mt-5 flex w-full items-center justify-center gap-2 rounded bg-[var(--v02-gold)] px-6 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:bg-[var(--v02-gold-hot)]"
+                  className="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-[var(--v02-gold)] px-6 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:bg-[var(--v02-gold-hot)]"
                 >
                   Send Message
                   <IconSend className="text-xl" />
@@ -1193,7 +1193,7 @@ export function Version02Page() {
                   href="tel:+10000000000"
                   className="mt-7 flex items-center gap-4 border-b border-[var(--v02-line)] pb-6 transition hover:text-[var(--v02-gold-deep)]"
                 >
-                  <span className="flex h-12 w-12 items-center justify-center rounded bg-[var(--v02-gold)]/20 text-2xl text-[var(--v02-gold-deep)]">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--v02-gold)]/20 text-2xl text-[var(--v02-gold-deep)]">
                     <IconPhone />
                   </span>
                   <span>
@@ -1208,7 +1208,7 @@ export function Version02Page() {
                   href="mailto:build@bluecollarvideoguys.com"
                   className="mt-6 flex items-center gap-4 transition hover:text-[var(--v02-gold-deep)]"
                 >
-                  <span className="flex h-12 w-12 items-center justify-center rounded bg-[var(--v02-gold)]/20 text-2xl text-[var(--v02-gold-deep)]">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--v02-gold)]/20 text-2xl text-[var(--v02-gold-deep)]">
                     <IconMail />
                   </span>
                   <span>

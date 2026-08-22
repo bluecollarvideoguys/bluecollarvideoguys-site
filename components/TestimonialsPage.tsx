@@ -244,7 +244,7 @@ export function TestimonialsPage() {
             href={CALENDLY_URL}
             target="_blank"
             rel="noreferrer"
-            className="hidden rounded bg-[var(--v02-gold)] px-5 py-2.5 text-sm font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)] lg:inline-flex"
+            className="hidden rounded-full bg-[var(--v02-gold)] px-5 py-2.5 text-sm font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)] lg:inline-flex"
           >
             Book a Discovery Call
           </Link>
@@ -556,7 +556,7 @@ export function TestimonialsPage() {
               href={CALENDLY_URL}
             target="_blank"
             rel="noreferrer"
-              className="mt-9 inline-flex items-center justify-center gap-3 rounded bg-[var(--v02-gold)] px-8 py-4 v02-display text-2xl font-bold tracking-tight text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
+              className="mt-9 inline-flex items-center justify-center gap-3 rounded-full bg-[var(--v02-gold)] px-8 py-4 v02-display text-2xl font-bold tracking-tight text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
             >
               Schedule Your Free Discovery Call
             </a>
@@ -617,7 +617,7 @@ function PhilBlock({
               <button
                 type="button"
                 onClick={onCta}
-                className="v02-phil-fade mt-10 inline-flex w-fit items-center gap-2 rounded bg-[var(--v02-gold)] px-6 py-3 text-sm font-semibold text-[var(--v02-ink)] opacity-0 transition-all delay-400 duration-700 hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
+                className="v02-phil-fade mt-10 inline-flex w-fit items-center gap-2 rounded-full bg-[var(--v02-gold)] px-6 py-3 text-sm font-semibold text-[var(--v02-ink)] opacity-0 transition-all delay-400 duration-700 hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
               >
                 Schedule a Discovery Call
                 <IconArrowRight />
