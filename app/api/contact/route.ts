@@ -67,16 +67,29 @@ export async function POST(request: Request) {
   `;
 
   const resend = new Resend(key);
-  const { error } = await resend.emails.send(
-    {
-      from: FROM,
-      to: [TO],
-      replyTo: email,
-      subject: `${source} — new inquiry from ${text(body.company_name) || text(body.name) || email}`,
-      html,
-    },
-    { idempotencyKey: `contact/${email}/${Date.now()}` },
-  );
+  const subject = `${source} — new inquiry from ${text(body.company_name) || text(body.name) || email}`;
+  const stamp = Date.now();
+
+  const send = (to: string, idempotencyKey: string) =>
+    resend.emails.send(
+      {
+        from: FROM,
+        to: [to],
+        replyTo: email,
+        subject,
+        html,
+      },
+      { idempotencyKey },
+    );
+
+  let { error } = await send(TO, `contact/${email}/${stamp}`);
+
+  if (error?.message?.includes("only send testing emails")) {
+    const allowed = error.message.match(/\(([^)\s]+@[^)\s]+)\)/)?.[1];
+    if (allowed && allowed.toLowerCase() !== TO.toLowerCase()) {
+      ({ error } = await send(allowed, `contact-fallback/${email}/${stamp}`));
+    }
+  }
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 502 });
