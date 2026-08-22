@@ -2,10 +2,14 @@
 
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import { IconArrowRight } from "@/components/icons";
 import { CALENDLY_URL } from "@/lib/calendly";
 import { SiteFooter } from "@/components/SiteFooter";
-import { submitContactForm } from "@/lib/submit-contact";
+import {
+  CONTACT_CONFIRMATION_PATH,
+  submitContactForm,
+} from "@/lib/submit-contact";
 
 const NAV = [
   { href: "/", label: "Home" },
@@ -51,10 +55,11 @@ function IconHammer({ className }: { className?: string }) {
 }
 
 export function ContactPage() {
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [formStatus, setFormStatus] = useState<
-    "idle" | "sending" | "sent" | "error"
-  >("idle");
+  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "error">(
+    "idle",
+  );
 
   return (
     <SiteFooter className="bg-[var(--v02-navy-deep)] text-[var(--v02-ink)] antialiased">
@@ -201,8 +206,7 @@ export function ContactPage() {
                   setFormStatus("sending");
                   try {
                     await submitContactForm(form, "Contact page");
-                    form.reset();
-                    setFormStatus("sent");
+                    router.replace(CONTACT_CONFIRMATION_PATH);
                   } catch {
                     setFormStatus("error");
                   }
@@ -367,11 +371,9 @@ export function ContactPage() {
                   <IconHammer className="text-2xl" />
                 </button>
                 <p className="mt-4 text-center text-xs text-slate-500">
-                  {formStatus === "sent"
-                    ? "Got it — we’ll reply within one business day."
-                    : formStatus === "error"
-                      ? "Could not send. Email build@bluecollarvideoguys.com and we’ll pick it up."
-                      : "We respond within one business day."}
+                  {formStatus === "error"
+                    ? "Could not send. Email build@bluecollarvideoguys.com and we’ll pick it up."
+                    : "We respond within one business day."}
                 </p>
               </form>
             </div>

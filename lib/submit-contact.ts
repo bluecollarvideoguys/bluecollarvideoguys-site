@@ -1,3 +1,5 @@
+export const CONTACT_CONFIRMATION_PATH = "/confirmation";
+
 export async function submitContactForm(
   form: HTMLFormElement,
   source: string,

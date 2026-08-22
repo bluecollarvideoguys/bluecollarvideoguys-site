@@ -2,13 +2,17 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useRouter } from "next/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CoverYouTubeEmbed } from "@/components/CoverYouTubeEmbed";
 import { VideoSlot } from "@/components/VideoSlot";
 import { CALENDLY_URL } from "@/lib/calendly";
 import { SiteFooter } from "@/components/SiteFooter";
-import { submitContactForm } from "@/lib/submit-contact";
+import {
+  CONTACT_CONFIRMATION_PATH,
+  submitContactForm,
+} from "@/lib/submit-contact";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -362,10 +366,11 @@ function IconMegaphone({ className }: { className?: string }) {
 }
 
 export function Version02Page() {
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [formStatus, setFormStatus] = useState<
-    "idle" | "sending" | "sent" | "error"
-  >("idle");
+  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "error">(
+    "idle",
+  );
   const [lightbox, setLightbox] = useState<{
     videoId: string;
     title: string;
@@ -1086,8 +1091,7 @@ export function Version02Page() {
                   setFormStatus("sending");
                   try {
                     await submitContactForm(form, "Homepage");
-                    form.reset();
-                    setFormStatus("sent");
+                    router.replace(CONTACT_CONFIRMATION_PATH);
                   } catch {
                     setFormStatus("error");
                   }
@@ -1163,11 +1167,9 @@ export function Version02Page() {
                   <IconSend className="text-xl" />
                 </button>
                 <p className="mt-4 text-center text-xs text-slate-500">
-                  {formStatus === "sent"
-                    ? "Got it — we’ll reply within one business day."
-                    : formStatus === "error"
-                      ? "Could not send. Email build@bluecollarvideoguys.com and we’ll pick it up."
-                      : "We respond within one business day."}
+                  {formStatus === "error"
+                    ? "Could not send. Email build@bluecollarvideoguys.com and we’ll pick it up."
+                    : "We respond within one business day."}
                 </p>
               </form>
 
