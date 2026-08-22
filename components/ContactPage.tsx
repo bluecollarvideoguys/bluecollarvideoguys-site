@@ -309,7 +309,7 @@ export function ContactPage() {
                       name="business_offer"
                       rows={3}
                       className="mt-2 w-full resize-none rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
-                      placeholder="Products, services, memberships, or how you help customers…"
+                      placeholder="Electrical, HVAC, plumbing, roofing, or other trade work…"
                     />
                   </label>
 
