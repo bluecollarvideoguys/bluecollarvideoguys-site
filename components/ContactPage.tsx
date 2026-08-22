@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { IconArrowRight } from "@/components/icons";
 import { CALENDLY_URL } from "@/lib/calendly";
 import { SiteFooter } from "@/components/SiteFooter";
+import { submitContactForm } from "@/lib/submit-contact";
 
 const NAV = [
   { href: "/", label: "Home" },
@@ -51,6 +52,9 @@ function IconHammer({ className }: { className?: string }) {
 
 export function ContactPage() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [formStatus, setFormStatus] = useState<
+    "idle" | "sending" | "sent" | "error"
+  >("idle");
 
   return (
     <SiteFooter className="bg-[var(--v02-navy-deep)] text-[var(--v02-ink)] antialiased">
@@ -191,23 +195,20 @@ export function ContactPage() {
             <div className="mx-auto mt-12 max-w-2xl">
               <form
                 id="form"
-                action="https://formsubmit.co/build@bluecollarvideoguys.com"
-                method="POST"
+                onSubmit={async (e: FormEvent<HTMLFormElement>) => {
+                  e.preventDefault();
+                  const form = e.currentTarget;
+                  setFormStatus("sending");
+                  try {
+                    await submitContactForm(form, "Contact page");
+                    form.reset();
+                    setFormStatus("sent");
+                  } catch {
+                    setFormStatus("error");
+                  }
+                }}
                 className="rounded-2xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-ink)] p-6 sm:p-8"
               >
-                <input
-                  type="hidden"
-                  name="_subject"
-                  value="Contact page — new inquiry"
-                />
-                <input type="hidden" name="_template" value="table" />
-                <input type="hidden" name="_captcha" value="false" />
-                <input
-                  type="hidden"
-                  name="_next"
-                  value="https://www.bluecollarvideoguys.com/contact"
-                />
-
                 <h3 className="v02-display text-2xl font-bold tracking-tight text-white">
                   Tell us about your business
                 </h3>
@@ -359,13 +360,18 @@ export function ContactPage() {
 
                 <button
                   type="submit"
-                  className="mt-8 flex w-full items-center justify-center gap-2 rounded-full bg-[var(--v02-gold)] px-6 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:bg-[var(--v02-gold-hot)]"
+                  disabled={formStatus === "sending"}
+                  className="mt-8 flex w-full items-center justify-center gap-2 rounded-full bg-[var(--v02-gold)] px-6 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:bg-[var(--v02-gold-hot)] disabled:opacity-70"
                 >
-                  Let&apos;s Build
+                  {formStatus === "sending" ? "Sending…" : "Let's Build"}
                   <IconHammer className="text-2xl" />
                 </button>
                 <p className="mt-4 text-center text-xs text-slate-500">
-                  We respond within one business day.
+                  {formStatus === "sent"
+                    ? "Got it — we’ll reply within one business day."
+                    : formStatus === "error"
+                      ? "Could not send. Email build@bluecollarvideoguys.com and we’ll pick it up."
+                      : "We respond within one business day."}
                 </p>
               </form>
             </div>

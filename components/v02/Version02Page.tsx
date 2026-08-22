@@ -8,6 +8,7 @@ import { CoverYouTubeEmbed } from "@/components/CoverYouTubeEmbed";
 import { VideoSlot } from "@/components/VideoSlot";
 import { CALENDLY_URL } from "@/lib/calendly";
 import { SiteFooter } from "@/components/SiteFooter";
+import { submitContactForm } from "@/lib/submit-contact";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -362,6 +363,9 @@ function IconMegaphone({ className }: { className?: string }) {
 
 export function Version02Page() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [formStatus, setFormStatus] = useState<
+    "idle" | "sending" | "sent" | "error"
+  >("idle");
   const [lightbox, setLightbox] = useState<{
     videoId: string;
     title: string;
@@ -1076,25 +1080,20 @@ export function Version02Page() {
 
             <div className="mt-12 grid gap-8 lg:grid-cols-2">
               <form
-                action="https://formsubmit.co/build@bluecollarvideoguys.com"
-                method="POST"
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  const form = e.currentTarget;
+                  setFormStatus("sending");
+                  try {
+                    await submitContactForm(form, "Homepage");
+                    form.reset();
+                    setFormStatus("sent");
+                  } catch {
+                    setFormStatus("error");
+                  }
+                }}
                 className="rounded-2xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-ink)] p-6 sm:p-8"
               >
-                {/* Submissions go to FormSubmit → build@bluecollarvideoguys.com.
-                    First submit may need a one-time activation link in that inbox. */}
-                <input
-                  type="hidden"
-                  name="_subject"
-                  value="Homepage — new inquiry"
-                />
-                <input type="hidden" name="_template" value="table" />
-                <input type="hidden" name="_captcha" value="false" />
-                <input
-                  type="hidden"
-                  name="_next"
-                  value="https://www.bluecollarvideoguys.com/#contact"
-                />
-
                 <div className="grid gap-5 sm:grid-cols-2">
                   <label className="block">
                     <span className={type.labelOnDarkPanel}>Name</span>
@@ -1157,13 +1156,18 @@ export function Version02Page() {
 
                 <button
                   type="submit"
-                  className="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-[var(--v02-gold)] px-6 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:bg-[var(--v02-gold-hot)]"
+                  disabled={formStatus === "sending"}
+                  className="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-[var(--v02-gold)] px-6 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:bg-[var(--v02-gold-hot)] disabled:opacity-70"
                 >
-                  Send Message
+                  {formStatus === "sending" ? "Sending…" : "Send Message"}
                   <IconSend className="text-xl" />
                 </button>
                 <p className="mt-4 text-center text-xs text-slate-500">
-                  We respond within one business day.
+                  {formStatus === "sent"
+                    ? "Got it — we’ll reply within one business day."
+                    : formStatus === "error"
+                      ? "Could not send. Email build@bluecollarvideoguys.com and we’ll pick it up."
+                      : "We respond within one business day."}
                 </p>
               </form>
 
