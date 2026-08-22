@@ -187,7 +187,7 @@ export function ContactPage() {
             <div className="mx-auto mt-12 max-w-2xl">
               <form
                 id="form"
-                action="https://formsubmit.co/hello@bluecollarvideoguys.com"
+                action="https://formsubmit.co/build@bluecollarvideoguys.com"
                 method="POST"
                 className="rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-ink)] p-6 sm:p-8"
               >

@@ -860,10 +860,10 @@ export function Version07Design() {
                 Your story deserves to be told.
               </h2>
               <a
-                href="mailto:hello@bluecollarvideoguys.com"
+                href="mailto:build@bluecollarvideoguys.com"
                 className="inline-flex min-h-14 shrink-0 items-center justify-center gap-3 self-start rounded-md bg-black px-7 text-base font-medium text-white transition hover:bg-white hover:text-black lg:self-auto"
               >
-                hello@bluecollarvideoguys.com
+                build@bluecollarvideoguys.com
                 <IconArrowUpRight size={20} />
               </a>
             </div>
@@ -928,7 +928,7 @@ export function Version07Design() {
                   New business
                 </a>
                 <a
-                  href="mailto:hello@bluecollarvideoguys.com"
+                  href="mailto:build@bluecollarvideoguys.com"
                   className="transition hover:text-[#fa6b20]"
                 >
                   Contact

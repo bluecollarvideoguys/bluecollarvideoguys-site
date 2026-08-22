@@ -763,10 +763,10 @@ export function HomePage() {
               </p>
               <div className="flex flex-col gap-3">
                 <a
-                  href="mailto:hello@bluecollarvideoguys.com"
+                  href="mailto:build@bluecollarvideoguys.com"
                   className="text-xl md:text-3xl font-display tracking-wide text-concrete/60 hover:text-rust transition-colors"
                 >
-                  hello@bluecollarvideoguys.com
+                  build@bluecollarvideoguys.com
                 </a>
                 {/* Placeholder phone — replace with live number */}
                 <a

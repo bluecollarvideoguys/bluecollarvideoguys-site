@@ -619,11 +619,11 @@ export function Version06Design() {
                   [Phone — placeholder]
                 </a>
                 <a
-                  href="mailto:hello@bluecollarvideoguys.com"
+                  href="mailto:build@bluecollarvideoguys.com"
                   className="flex w-fit items-center gap-2 text-sm text-stone-600 transition hover:text-blue-800"
                 >
                   <IconMail />
-                  hello@bluecollarvideoguys.com
+                  build@bluecollarvideoguys.com
                 </a>
               </div>
             </div>

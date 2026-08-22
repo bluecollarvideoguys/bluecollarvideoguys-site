@@ -611,13 +611,13 @@ export function Version03Design() {
 
               <div className="mt-12 space-y-5">
                 <a
-                  href="mailto:hello@bluecollarvideoguys.com"
+                  href="mailto:build@bluecollarvideoguys.com"
                   className="flex items-center gap-4 text-sm transition hover:text-[var(--v03-ink-soft)]"
                 >
                   <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/40">
                     <IconMail />
                   </span>
-                  hello@bluecollarvideoguys.com
+                  build@bluecollarvideoguys.com
                 </a>
                 {/* CLIENT ASSET: Replace placeholder phone */}
                 <a

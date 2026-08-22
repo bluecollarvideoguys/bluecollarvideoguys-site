@@ -627,13 +627,13 @@ export function Version04Design() {
                   [Phone — placeholder]
                 </a>
                 <a
-                  href="mailto:hello@bluecollarvideoguys.com"
+                  href="mailto:build@bluecollarvideoguys.com"
                   className="flex items-center gap-3 text-stone-700 transition hover:text-amber-300"
                 >
                   <span className="flex h-9 w-9 items-center justify-center rounded-full border border-stone-300 bg-white text-amber-300">
                     <IconMail />
                   </span>
-                  hello@bluecollarvideoguys.com
+                  build@bluecollarvideoguys.com
                 </a>
               </div>
             </div>
@@ -735,7 +735,7 @@ export function Version04Design() {
               <IconCamera />
             </a>
             <a
-              href="mailto:hello@bluecollarvideoguys.com"
+              href="mailto:build@bluecollarvideoguys.com"
               aria-label="Email"
               className="text-stone-500 transition hover:text-amber-300"
             >

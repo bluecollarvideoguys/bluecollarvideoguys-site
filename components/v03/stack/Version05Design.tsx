@@ -566,13 +566,13 @@ export function Version05Design() {
                     [Phone — placeholder]
                   </a>
                   <a
-                    href="mailto:hello@bluecollarvideoguys.com"
+                    href="mailto:build@bluecollarvideoguys.com"
                     className="flex items-center gap-3 transition hover:text-white"
                   >
                     <span className="flex size-9 items-center justify-center rounded-lg border border-white/10 bg-white/5">
                       <IconMail />
                     </span>
-                    hello@bluecollarvideoguys.com
+                    build@bluecollarvideoguys.com
                   </a>
                 </div>
               </div>

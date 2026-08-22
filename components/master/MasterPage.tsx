@@ -908,7 +908,7 @@ export function MasterPage() {
                 </a>
 
                 <a
-                  href="mailto:hello@bluecollarvideoguys.com"
+                  href="mailto:build@bluecollarvideoguys.com"
                   className="mt-6 flex items-center gap-4 border-b border-slate-100 pb-6 transition hover:text-[var(--v02-gold-deep)]"
                 >
                   <span className="flex h-12 w-12 items-center justify-center rounded bg-[var(--v02-gold)]/20 text-2xl text-[var(--v02-gold-deep)]">
@@ -919,7 +919,7 @@ export function MasterPage() {
                       Email
                     </span>
                     <span className="mt-1 block text-sm font-semibold">
-                      hello@bluecollarvideoguys.com
+                      build@bluecollarvideoguys.com
                     </span>
                   </span>
                 </a>
@@ -969,10 +969,10 @@ export function MasterPage() {
           </div>
           <div className="text-sm md:text-right">
             <a
-              href="mailto:hello@bluecollarvideoguys.com"
+              href="mailto:build@bluecollarvideoguys.com"
               className="font-semibold text-white transition hover:text-[var(--v02-gold)]"
             >
-              hello@bluecollarvideoguys.com
+              build@bluecollarvideoguys.com
             </a>
             <p className="mt-2 text-xs">
               © {new Date().getFullYear()} The Blue Collar Video Guys™. All

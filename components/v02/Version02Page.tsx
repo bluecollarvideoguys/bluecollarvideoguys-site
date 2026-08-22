@@ -1081,11 +1081,11 @@ export function Version02Page() {
 
             <div className="mt-12 grid gap-8 lg:grid-cols-2">
               <form
-                action="https://formsubmit.co/hello@bluecollarvideoguys.com"
+                action="https://formsubmit.co/build@bluecollarvideoguys.com"
                 method="POST"
                 className="rounded border border-[var(--v02-line-on-dark)] bg-[var(--v02-ink)] p-6 sm:p-8"
               >
-                {/* Submissions go to FormSubmit → hello@bluecollarvideoguys.com.
+                {/* Submissions go to FormSubmit → build@bluecollarvideoguys.com.
                     First submit may need a one-time activation link in that inbox. */}
                 <input
                   type="hidden"
@@ -1210,7 +1210,7 @@ export function Version02Page() {
                 </a>
 
                 <a
-                  href="mailto:hello@bluecollarvideoguys.com"
+                  href="mailto:build@bluecollarvideoguys.com"
                   className="mt-6 flex items-center gap-4 transition hover:text-[var(--v02-gold-deep)]"
                 >
                   <span className="flex h-12 w-12 items-center justify-center rounded bg-[var(--v02-gold)]/20 text-2xl text-[var(--v02-gold-deep)]">
@@ -1219,7 +1219,7 @@ export function Version02Page() {
                   <span>
                     <span className={type.eyebrowMuted}>Email</span>
                     <span className="mt-1 block text-sm font-semibold text-[var(--v02-ink)]">
-                      hello@bluecollarvideoguys.com
+                      build@bluecollarvideoguys.com
                     </span>
                   </span>
                 </a>
@@ -1259,8 +1259,8 @@ export function Version02Page() {
               <div>
                 <span className="v02-footer-reveal__label">Let&apos;s chat</span>
                 <div className="v02-footer-reveal__links">
-                  <a href="mailto:hello@bluecollarvideoguys.com">
-                    hello@bluecollarvideoguys.com
+                  <a href="mailto:build@bluecollarvideoguys.com">
+                    build@bluecollarvideoguys.com
                   </a>
                   <a href={CALENDLY_URL} target="_blank" rel="noreferrer">
                     Book a discovery call
@@ -1290,8 +1290,8 @@ export function Version02Page() {
             © {new Date().getFullYear()} The Blue Collar Video Guys™. All
             rights reserved.
           </p>
-          <a href="mailto:hello@bluecollarvideoguys.com">
-            hello@bluecollarvideoguys.com
+          <a href="mailto:build@bluecollarvideoguys.com">
+            build@bluecollarvideoguys.com
           </a>
         </div>
       </footer>
