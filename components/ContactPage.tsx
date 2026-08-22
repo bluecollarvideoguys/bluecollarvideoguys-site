@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { IconArrowRight } from "@/components/icons";
 import { CALENDLY_URL } from "@/lib/calendly";
+import { SiteFooter } from "@/components/SiteFooter";
 
 const NAV = [
   { href: "/", label: "Home" },
@@ -49,7 +50,7 @@ export function ContactPage() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="bg-[var(--v02-navy)] text-[var(--v02-ink)] antialiased">
+    <SiteFooter className="bg-[var(--v02-navy)] text-[var(--v02-ink)] antialiased">
       <nav
         className="fixed inset-x-0 top-0 z-50 border-b border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)]/80 text-white backdrop-blur-md"
         aria-label="Main navigation"
@@ -368,12 +369,6 @@ export function ContactPage() {
           </div>
         </section>
       </main>
-
-      <footer className="border-t border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] py-10 text-center text-sm text-slate-500">
-        <Link href="/" className="text-[var(--v02-gold)] hover:underline">
-          ← Back to Home
-        </Link>
-      </footer>
-    </div>
+    </SiteFooter>
   );
 }
