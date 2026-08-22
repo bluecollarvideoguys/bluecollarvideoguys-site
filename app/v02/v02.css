@@ -103,7 +103,7 @@ html:has(.v02-root) {
 .v02-footer-reveal {
   position: relative;
   overflow: hidden;
-  padding: clamp(4.5rem, 11vw, 7.5rem) clamp(1.25rem, 4vw, 3.25rem)
+  padding: clamp(4.5rem, 11vw, 7.5rem) clamp(1.75rem, 6vw, 4.25rem)
     clamp(2.5rem, 5vw, 3.5rem);
   background: var(--v02-navy-deep);
   isolation: isolate;
@@ -144,7 +144,7 @@ html:has(.v02-root) {
   font-family: var(--font-v02-display), ui-sans-serif, sans-serif;
   font-size: clamp(3.25rem, 12vw, min(8rem, 18vw));
   font-weight: 800;
-  letter-spacing: -0.04em;
+  letter-spacing: 0.02em;
   line-height: 0.9;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.96);
@@ -231,7 +231,7 @@ html:has(.v02-root) {
 
 .v02-footer-legal {
   background: var(--v02-navy-deep);
-  padding: 1.5rem clamp(1.25rem, 4vw, 3.25rem)
+  padding: 1.5rem clamp(1.75rem, 6vw, 4.25rem)
     calc(1.5rem + env(safe-area-inset-bottom, 0px));
   border-top: 1px solid var(--v02-line-on-dark);
   display: flex;
