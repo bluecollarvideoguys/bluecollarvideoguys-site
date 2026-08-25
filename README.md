@@ -42,6 +42,20 @@ Unlisted public drop page: `/upload` (not in the site menu, `noindex`). Send
 Uploads go to **Cloudflare R2** (10 GB free tier) so multi‑GB files work without
 Hobby Blob’s 1 GB cap. Set `R2_*` env vars locally and in Vercel (see `.env.example`).
 
+## QR scan funnel
+
+Unlisted, `noindex`. Not in the site menu.
+
+| Route | Use |
+|-------|-----|
+| `/scan` | iPhone Camera target. Intro film, info form, follow-up film, then Calendly. |
+| `/scan/print` | Printable QR for stickers and leave-behinds. |
+
+Drop the pricing PDF at `public/funnel/blueprint.pdf`. Optional env vars
+`NEXT_PUBLIC_FUNNEL_INTRO_VIDEO_URL` and `NEXT_PUBLIC_FUNNEL_FOLLOWUP_VIDEO_URL`
+accept YouTube or direct MP4 URLs. Defaults to the same YouTube film for both
+steps until you split intro and follow-up.
+
 ## Deploy
 
 Push to `main` — Vercel should pick up the GitHub repo automatically.

@@ -326,6 +326,21 @@ html:has(.v02-root) {
   z-index: 1;
 }
 
+@keyframes v02-funnel-sheet {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.v02-funnel-sheet {
+  animation: v02-funnel-sheet 0.45s ease-out both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .v02-footer-reveal__rule,
   .v02-footer-reveal__title {
@@ -337,7 +352,8 @@ html:has(.v02-root) {
   }
 
   .v02-scope-cta,
-  .v02-cta-bar {
+  .v02-cta-bar,
+  .v02-funnel-sheet {
     animation: none;
     opacity: 1;
     transform: none;
