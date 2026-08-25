@@ -13,6 +13,7 @@ import {
   FUNNEL_INTRO_VIDEO,
   parseYouTubeId,
 } from "@/lib/funnel";
+import { BrandLogo } from "@/components/BrandLogo";
 import { IconArrowRight } from "@/components/icons";
 
 type Phase = "intro" | "capture" | "followup";
@@ -22,9 +23,14 @@ export function FunnelPage() {
 
   return (
     <div className="relative min-h-dvh overflow-hidden bg-[var(--v02-navy-deep)] text-white">
-      <p className="pointer-events-none absolute left-5 top-5 z-20 v02-display text-sm font-bold tracking-tight sm:left-8 sm:text-base">
-        BLUE COLLAR <span className="text-[var(--v02-gold)]">VIDEO GUYS™</span>
-      </p>
+      <div className="pointer-events-none absolute left-5 top-5 z-20 sm:left-8">
+        <BrandLogo
+          variant="compact"
+          className="h-7 w-[6.18rem] drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)] sm:h-8 sm:w-[7.06rem]"
+          loading="eager"
+          sizes="128px"
+        />
+      </div>
 
       {phase === "intro" ? (
         <FunnelVideo

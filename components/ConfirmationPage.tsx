@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { IconArrowRight } from "@/components/icons";
 import { CALENDLY_URL } from "@/lib/calendly";
+import { BrandLogo, SiteBrandLink } from "@/components/BrandLogo";
 import { SiteFooter } from "@/components/SiteFooter";
 
 const NAV = [
@@ -38,14 +39,8 @@ export function ConfirmationPage() {
         className="fixed inset-x-0 top-0 z-50 border-b border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)]/80 text-white backdrop-blur-md"
         aria-label="Main navigation"
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
-          <Link
-            href="/"
-            className="v02-display text-xl font-bold tracking-tight sm:text-2xl"
-          >
-            BLUE COLLAR{" "}
-            <span className="text-[var(--v02-gold)]">VIDEO GUYS™</span>
-          </Link>
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-6 lg:px-8">
+          <SiteBrandLink />
 
           <div className="hidden items-center gap-7 text-sm font-medium lg:flex">
             {NAV.map((v) => (
@@ -107,6 +102,12 @@ export function ConfirmationPage() {
       <main>
         <section className="v02-lift-cap min-h-[70vh] border-t border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] pt-32 pb-24 sm:pt-40 sm:pb-32">
           <div className="mx-auto max-w-2xl px-5 text-center sm:px-6">
+            <BrandLogo
+              variant="crest"
+              className="mx-auto mb-8 w-[7.5rem] sm:w-36"
+              loading="eager"
+              sizes="144px"
+            />
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold)]">
               Confirmation
             </p>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { BrandLogo } from "@/components/BrandLogo";
 
 const ACCEPT =
   "video/mp4,video/quicktime,video/x-m4v,video/webm,.mp4,.mov,.m4v,.webm";
@@ -140,10 +141,13 @@ export default function UploadPage() {
 
   return (
     <main className="mx-auto flex min-h-screen max-w-2xl flex-col px-6 py-16">
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-denim/70">
-        The Blue Collar Video Guys™
-      </p>
-      <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-denim-deep">
+      <BrandLogo
+        variant="circular"
+        className="w-24"
+        loading="eager"
+        sizes="96px"
+      />
+      <h1 className="mt-6 font-display text-4xl font-semibold tracking-tight text-denim-deep">
         Worth the Ride
       </h1>
       <p className="mt-3 max-w-lg text-base text-charcoal/80">

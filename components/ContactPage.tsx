@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { IconArrowRight } from "@/components/icons";
 import { CALENDLY_URL } from "@/lib/calendly";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
+import { SiteBrandLink } from "@/components/BrandLogo";
 import { SiteFooter } from "@/components/SiteFooter";
 import {
   CONTACT_CONFIRMATION_PATH,
@@ -68,14 +69,8 @@ export function ContactPage() {
         className="fixed inset-x-0 top-0 z-50 border-b border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)]/80 text-white backdrop-blur-md"
         aria-label="Main navigation"
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
-          <Link
-            href="/"
-            className="v02-display text-xl font-bold tracking-tight sm:text-2xl"
-          >
-            BLUE COLLAR{" "}
-            <span className="text-[var(--v02-gold)]">VIDEO GUYS™</span>
-          </Link>
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-6 lg:px-8">
+          <SiteBrandLink />
 
           <div className="hidden items-center gap-7 text-sm font-medium lg:flex">
             {NAV.map((v) => (

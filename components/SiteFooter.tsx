@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, type ReactNode } from "react";
+import { BrandLogo } from "@/components/BrandLogo";
 import { CALENDLY_URL } from "@/lib/calendly";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 
@@ -72,8 +73,17 @@ export function SiteFooter({
 
             <div className="v02-footer-reveal__grid">
               <div>
-                <Link href="/" className="v02-footer-reveal__brand">
-                  BLUE COLLAR <span>VIDEO GUYS™</span>
+                <Link
+                  href="/"
+                  className="v02-footer-reveal__brand"
+                  aria-label="The Blue Collar Video Guys home"
+                >
+                  <BrandLogo
+                    variant="stacked"
+                    alt=""
+                    className="w-[7.5rem] max-w-full sm:w-[8.75rem]"
+                    sizes="140px"
+                  />
                 </Link>
               </div>
               <div>

@@ -202,17 +202,15 @@ html:has(.v02-root) {
 }
 
 .v02-footer-reveal__brand {
-  font-family: var(--font-v02-display), ui-sans-serif, sans-serif;
-  font-size: clamp(1.25rem, 2vw, 1.5rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: white;
+  display: inline-flex;
+  max-width: 9rem;
   text-decoration: none;
-  line-height: 1.15;
 }
 
-.v02-footer-reveal__brand span {
-  color: var(--v02-gold);
+.v02-footer-reveal__brand img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .v02-footer-reveal__links a,

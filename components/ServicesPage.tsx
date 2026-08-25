@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { VideoSlot } from "@/components/VideoSlot";
 import { IconArrowRight } from "@/components/icons";
 import { CALENDLY_URL } from "@/lib/calendly";
+import { BrandLogo, SiteBrandLink } from "@/components/BrandLogo";
 import { SiteFooter } from "@/components/SiteFooter";
 
 const NAV = [
@@ -198,14 +199,8 @@ export function ServicesPage() {
         className="fixed inset-x-0 top-0 z-50 border-b border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)]/80 text-white backdrop-blur-md"
         aria-label="Main navigation"
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
-          <Link
-            href="/"
-            className="v02-display text-xl font-bold tracking-tight sm:text-2xl"
-          >
-            BLUE COLLAR{" "}
-            <span className="text-[var(--v02-gold)]">VIDEO GUYS™</span>
-          </Link>
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-6 lg:px-8">
+          <SiteBrandLink />
 
           <div className="hidden items-center gap-7 text-sm font-medium lg:flex">
             {NAV.map((v) => (
@@ -450,9 +445,15 @@ export function ServicesPage() {
 
         <section
           id="cta"
-          className="v02-lift-cap relative z-40 flex min-h-[70vh] w-full flex-col justify-between border-t border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] py-24"
+          className="v02-lift-cap relative z-40 flex min-h-[70vh] w-full flex-col justify-between overflow-hidden border-t border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] py-24"
         >
-          <div className="mx-auto flex h-full w-full max-w-7xl flex-1 flex-col justify-between px-5 sm:px-6 lg:px-8">
+          <BrandLogo
+            variant="stacked"
+            alt=""
+            className="pointer-events-none absolute top-6 right-4 w-24 select-none opacity-[0.12] sm:top-8 sm:right-6 sm:w-28 md:w-32 lg:right-8 lg:w-36"
+            sizes="144px"
+          />
+          <div className="relative mx-auto flex h-full w-full max-w-7xl flex-1 flex-col justify-between px-5 sm:px-6 lg:px-8">
             <div className="flex h-full flex-col items-start justify-center">
               <span className="cta-anim mb-8 translate-y-6 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 opacity-0 transition-all duration-1000 ease-out">
                 Ready to break ground?
