@@ -367,20 +367,34 @@ export function ServicesPage() {
               })}
             </div>
 
-            <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-[var(--v02-line)] pt-8 sm:flex-row sm:items-center">
-              <p className="max-w-xl text-sm leading-relaxed text-slate-600">
-                Not sure what you need? That&apos;s what the discovery call is
-                for. We&apos;ll map the right mix for your business.
-              </p>
-              <a
-                href={CALENDLY_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-[var(--v02-gold-deep)] transition hover:text-[var(--v02-ink)]"
-              >
-                Schedule Your Discovery Call
-                <IconArrowRight />
-              </a>
+            <div className="v02-scope-cta relative mt-10 overflow-hidden border border-[var(--v02-gold)]/40 bg-[var(--v02-navy)]">
+              <div
+                className="v02-cta-bar pointer-events-none absolute inset-y-0 left-0 w-1.5 bg-[var(--v02-gold)]"
+                aria-hidden="true"
+              />
+              <div className="flex flex-col gap-8 px-8 py-9 sm:px-10 sm:py-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+                <div className="max-w-xl pl-2">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold)]">
+                    One call. One Blueprint.
+                  </p>
+                  <h3 className="mt-3 v02-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                    NOT SURE WHAT YOU NEED?
+                  </h3>
+                  <p className="mt-4 text-sm leading-relaxed text-slate-400 sm:text-base">
+                    That&apos;s what the discovery call is for. We&apos;ll map
+                    the right mix for your business.
+                  </p>
+                </div>
+                <a
+                  href={CALENDLY_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="v02-cta-shine group relative inline-flex shrink-0 items-center justify-center gap-2 overflow-hidden rounded-full bg-[var(--v02-gold)] px-8 py-4 text-sm font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
+                >
+                  Schedule Your Discovery Call
+                  <IconArrowRight className="transition group-hover:translate-x-1" />
+                </a>
+              </div>
             </div>
           </div>
         </section>

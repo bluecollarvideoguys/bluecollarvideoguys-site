@@ -84,7 +84,7 @@ export function SiteFooter({
                   </a>
                   <a href={PHONE_HREF}>{PHONE_DISPLAY}</a>
                   <a href={CALENDLY_URL} target="_blank" rel="noreferrer">
-                    Book a discovery call
+                    Book a Discovery Call
                   </a>
                 </div>
               </div>
