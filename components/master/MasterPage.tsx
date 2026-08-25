@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { PLACEHOLDER_VIDEO } from "@/components/VideoSlot";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 
 const VERSIONS = [
   { href: "/", label: "Home", active: false },
@@ -889,9 +890,8 @@ export function MasterPage() {
                   Direct line
                 </h3>
 
-                {/* CLIENT ASSET: Replace placeholder phone */}
                 <a
-                  href="tel:+10000000000"
+                  href={PHONE_HREF}
                   className="mt-7 flex items-center gap-4 border-b border-slate-100 pb-6 transition hover:text-[var(--v02-gold-deep)]"
                 >
                   <span className="flex h-12 w-12 items-center justify-center rounded bg-[var(--v02-gold)]/20 text-2xl text-[var(--v02-gold-deep)]">
@@ -902,7 +902,7 @@ export function MasterPage() {
                       Call us
                     </span>
                     <span className="mt-1 block v02-display text-2xl font-bold tracking-tight">
-                      [Phone — placeholder]
+                      {PHONE_DISPLAY}
                     </span>
                   </span>
                 </a>

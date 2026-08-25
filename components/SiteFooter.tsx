@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, type ReactNode } from "react";
 import { CALENDLY_URL } from "@/lib/calendly";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 
 export function SiteFooter({
   children,
@@ -81,6 +82,7 @@ export function SiteFooter({
                   <a href="mailto:build@bluecollarvideoguys.com">
                     build@bluecollarvideoguys.com
                   </a>
+                  <a href={PHONE_HREF}>{PHONE_DISPLAY}</a>
                   <a href={CALENDLY_URL} target="_blank" rel="noreferrer">
                     Book a discovery call
                   </a>

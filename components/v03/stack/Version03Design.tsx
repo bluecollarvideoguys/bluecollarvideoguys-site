@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState, type FormEvent } from "react";
 import { HeroYouTubeBackground } from "@/components/HeroYouTubeBackground";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 
 /** Full-bleed still — avoid YouTube thumbs (often letterboxed) */
 const MEDIA_POSTER = "/images/purpose-videographer.png";
@@ -619,15 +620,14 @@ export function Version03Design() {
                   </span>
                   build@bluecollarvideoguys.com
                 </a>
-                {/* CLIENT ASSET: Replace placeholder phone */}
                 <a
-                  href="tel:+10000000000"
+                  href={PHONE_HREF}
                   className="flex items-center gap-4 text-sm transition hover:text-[var(--v03-ink-soft)]"
                 >
                   <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/40">
                     <IconPhone />
                   </span>
-                  [Phone — placeholder]
+                  {PHONE_DISPLAY}
                 </a>
               </div>
             </div>

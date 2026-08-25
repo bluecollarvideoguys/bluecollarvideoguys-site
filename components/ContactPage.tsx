@@ -5,6 +5,7 @@ import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { IconArrowRight } from "@/components/icons";
 import { CALENDLY_URL } from "@/lib/calendly";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 import { SiteFooter } from "@/components/SiteFooter";
 import {
   CONTACT_CONFIRMATION_PATH,
@@ -194,6 +195,12 @@ export function ContactPage() {
               >
                 Book a Discovery Call
                 <IconArrowRight />
+              </a>
+              <a
+                href={PHONE_HREF}
+                className="mt-4 block w-fit text-base font-semibold text-[var(--v02-gold-deep)] transition hover:text-[var(--v02-gold-hot)]"
+              >
+                {PHONE_DISPLAY}
               </a>
             </div>
 

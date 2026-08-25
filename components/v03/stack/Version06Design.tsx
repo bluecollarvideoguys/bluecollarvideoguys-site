@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { CoverYouTubeEmbed } from "@/components/CoverYouTubeEmbed";
 import { HeroYouTubeBackground } from "@/components/HeroYouTubeBackground";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 
 const VERSIONS = [
   { href: "/", label: "Home" },
@@ -612,11 +613,11 @@ export function Version06Design() {
               </div>
               <div className="mt-7 space-y-3">
                 <a
-                  href="tel:+10000000000"
+                  href={PHONE_HREF}
                   className="flex w-fit items-center gap-2 text-sm text-stone-600 transition hover:text-blue-800"
                 >
                   <IconPhone />
-                  [Phone — placeholder]
+                  {PHONE_DISPLAY}
                 </a>
                 <a
                   href="mailto:build@bluecollarvideoguys.com"

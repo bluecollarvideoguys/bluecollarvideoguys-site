@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CoverYouTubeEmbed } from "@/components/CoverYouTubeEmbed";
 import { VideoSlot } from "@/components/VideoSlot";
 import { CALENDLY_URL } from "@/lib/calendly";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 import { SiteFooter } from "@/components/SiteFooter";
 import {
   CONTACT_CONFIRMATION_PATH,
@@ -1194,9 +1195,8 @@ export function Version02Page() {
                   </li>
                 </ul>
 
-                {/* CLIENT ASSET: Replace placeholder phone */}
                 <a
-                  href="tel:+10000000000"
+                  href={PHONE_HREF}
                   className="mt-7 flex items-center gap-4 border-b border-[var(--v02-line)] pb-6 transition hover:text-[var(--v02-gold-deep)]"
                 >
                   <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--v02-gold)]/20 text-2xl text-[var(--v02-gold-deep)]">
@@ -1205,7 +1205,7 @@ export function Version02Page() {
                   <span>
                     <span className={type.eyebrowMuted}>Call us</span>
                     <span className={`mt-1 block ${type.subtitleLight}`}>
-                      [Phone placeholder]
+                      {PHONE_DISPLAY}
                     </span>
                   </span>
                 </a>

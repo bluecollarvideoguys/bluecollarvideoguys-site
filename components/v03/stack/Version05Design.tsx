@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { HeroYouTubeBackground } from "@/components/HeroYouTubeBackground";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 
 const VERSIONS = [
   { href: "/", label: "Home" },
@@ -557,13 +558,13 @@ export function Version05Design() {
 
                 <div className="mt-9 space-y-4 text-sm text-stone-300">
                   <a
-                    href="tel:+10000000000"
+                    href={PHONE_HREF}
                     className="flex items-center gap-3 transition hover:text-white"
                   >
                     <span className="flex size-9 items-center justify-center rounded-lg border border-white/10 bg-white/5">
                       <IconPhone />
                     </span>
-                    [Phone — placeholder]
+                    {PHONE_DISPLAY}
                   </a>
                   <a
                     href="mailto:build@bluecollarvideoguys.com"

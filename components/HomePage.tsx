@@ -12,6 +12,7 @@ import {
 } from "./icons";
 import { VideoSlot } from "./VideoSlot";
 import { VersionNav } from "./VersionNav";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -747,7 +748,7 @@ export function HomePage() {
       </section>
 
       {/* ─── FOOTER / CONTACT ──────────────────────────────────────────────── */}
-      {/* CLIENT ASSET: Replace placeholder address, phone, and email with real contact details */}
+      {/* CLIENT ASSET: Replace placeholder address with real contact details */}
       <footer
         id="contact"
         className="relative z-40 bg-denim-deep border-t border-white/10 overflow-hidden text-concrete"
@@ -768,12 +769,11 @@ export function HomePage() {
                 >
                   build@bluecollarvideoguys.com
                 </a>
-                {/* Placeholder phone — replace with live number */}
                 <a
-                  href="tel:+10000000000"
+                  href={PHONE_HREF}
                   className="text-xl md:text-3xl font-display tracking-wide text-concrete/60 hover:text-rust transition-colors"
                 >
-                  [Phone — placeholder]
+                  {PHONE_DISPLAY}
                 </a>
               </div>
             </div>

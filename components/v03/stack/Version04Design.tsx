@@ -9,6 +9,7 @@ import {
   type ReactNode,
 } from "react";
 import { HeroYouTubeBackground } from "@/components/HeroYouTubeBackground";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 
 const VERSIONS = [
   { href: "/", label: "Home" },
@@ -616,15 +617,14 @@ export function Version04Design() {
               </p>
 
               <div className="mt-12 space-y-5 text-sm">
-                {/* CLIENT ASSET: Replace placeholder phone */}
                 <a
-                  href="tel:+10000000000"
+                  href={PHONE_HREF}
                   className="flex items-center gap-3 text-stone-700 transition hover:text-amber-300"
                 >
                   <span className="flex h-9 w-9 items-center justify-center rounded-full border border-stone-300 bg-white text-amber-300">
                     <IconPhone />
                   </span>
-                  [Phone — placeholder]
+                  {PHONE_DISPLAY}
                 </a>
                 <a
                   href="mailto:build@bluecollarvideoguys.com"
