@@ -301,7 +301,7 @@ export function ServicesPage() {
         {/* TRUST STRATEGY PACKAGES */}
         <section
           id="packages"
-          className="border-t border-[var(--v02-line-on-dark)] bg-[var(--v02-navy-deep)] py-20 sm:py-24"
+          className="scroll-mt-0 border-t border-[var(--v02-line-on-dark)] bg-[var(--v02-navy-deep)] pt-28 pb-20 sm:pt-32 sm:pb-24"
         >
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="v02-scroll-reveal mx-auto max-w-3xl translate-y-10 text-center opacity-0 transition-all duration-1000 ease-out">

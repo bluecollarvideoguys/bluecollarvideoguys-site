@@ -103,11 +103,17 @@ export function SiteFooter({
                 <div className="v02-footer-reveal__links">
                   <Link href="/">Home</Link>
                   <Link href="/services">Services</Link>
+                  <Link href="/services#packages">Packages</Link>
                   <Link href="/contact">Contact</Link>
                 </div>
               </div>
               <div>
-                <span className="v02-footer-reveal__label">The Blueprint</span>
+                <Link
+                  href="/services#packages"
+                  className="v02-footer-reveal__label transition hover:text-[var(--v02-gold)]"
+                >
+                  The Blueprint
+                </Link>
                 <p className="v02-footer-reveal__copy">
                   Build Trust. Stand Out. Win More Work. Authentic video
                   marketing for blue collar businesses.
