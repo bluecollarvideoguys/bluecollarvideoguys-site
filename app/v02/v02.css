@@ -351,9 +351,11 @@ html:has(.v02-root) {
 
   .v02-scope-cta,
   .v02-cta-bar,
-  .v02-funnel-sheet {
+  .v02-funnel-sheet,
+  .v02-scroll-reveal,
+  .cta-anim {
     animation: none;
-    opacity: 1;
-    transform: none;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

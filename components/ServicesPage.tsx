@@ -130,23 +130,30 @@ export function ServicesPage() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
+    const reveal = (el: Element) => {
+      el.classList.remove("opacity-0", "translate-y-10", "translate-y-6");
+    };
+
     const scrollObserver = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          entry.target.classList.remove(
-            "opacity-0",
-            "translate-y-10",
-            "translate-y-6",
-          );
+          reveal(entry.target);
           obs.unobserve(entry.target);
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
+      { threshold: 0.05, rootMargin: "0px 0px -10% 0px" },
     );
-    document
-      .querySelectorAll(".v02-scroll-reveal")
-      .forEach((el) => scrollObserver.observe(el));
+    document.querySelectorAll(".v02-scroll-reveal").forEach((el) => {
+      scrollObserver.observe(el);
+    });
+
+    // If JS/HMR glitches, never leave content stuck invisible
+    const failSafe = window.setTimeout(() => {
+      document
+        .querySelectorAll(".v02-scroll-reveal.opacity-0")
+        .forEach(reveal);
+    }, 1200);
 
     let counted = false;
     const cta = document.getElementById("cta");
@@ -186,6 +193,7 @@ export function ServicesPage() {
     }
 
     return () => {
+      window.clearTimeout(failSafe);
       scrollObserver.disconnect();
       ctaObs?.disconnect();
     };
@@ -567,9 +575,19 @@ function PackageCard({
             : "bg-[var(--v02-navy)] text-white"
         }`}
       >
+        <BrandLogo
+          variant="icon"
+          alt=""
+          className={`pointer-events-none absolute select-none ${
+            badge
+              ? "right-3 top-10 w-16 opacity-[0.14] sm:right-4 sm:top-12 sm:w-20"
+              : "right-3 top-4 w-16 opacity-[0.14] sm:right-4 sm:top-5 sm:w-20"
+          }`}
+          sizes="80px"
+        />
         {badge ? (
           <span
-            className={`absolute right-0 top-0 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] ${
+            className={`absolute right-0 top-0 z-10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] ${
               isGold
                 ? "bg-[var(--v02-ink)] text-[var(--v02-gold)]"
                 : "bg-[var(--v02-gold)] text-[var(--v02-ink)]"
@@ -579,7 +597,7 @@ function PackageCard({
           </span>
         ) : null}
 
-        <header className="pr-16">
+        <header className="relative z-[1] pr-16">
           <p
             className={`v02-display text-3xl font-bold tracking-tight sm:text-4xl ${
               isGold ? "text-white" : "text-[var(--v02-gold)]"
