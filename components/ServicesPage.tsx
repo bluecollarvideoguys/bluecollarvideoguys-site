@@ -33,7 +33,7 @@ const FULL_SCOPE = [
   {
     title: "Social Media",
     outcome: "Stand Out",
-    body: "Social only works when it shows up like clockwork. We build a cadence of reels, stills, and behind-the-scenes posts that keep your crew, culture, and craftsmanship in front of the right people, without you living on your phone after hours.",
+    body: "Social only works when it shows up like clockwork. We build a cadence of reels, stills, and behind the scenes posts that keep your crew, culture, and craftsmanship in front of the right people, without you living on your phone after hours.",
   },
   {
     title: "Digital Marketing",
@@ -52,7 +52,7 @@ const PACKAGES = [
     includes: [
       "Trust Strategy",
       "Client Onboarding",
-      "Pre-production planning",
+      "Pre production planning",
       "3 Strategy Sessions",
     ],
     plus: [
@@ -340,7 +340,7 @@ export function ServicesPage() {
                 </h2>
               </div>
               <p className="max-w-md text-sm leading-relaxed text-slate-600 sm:pb-1">
-                These aren&apos;t à-la-carte add-ons. They&apos;re tools we use
+                These aren&apos;t a la carte add-ons. They&apos;re tools we use
                 to earn trust and market your business, so more of the right
                 leads find you and already believe you before they dial.
               </p>
@@ -427,7 +427,7 @@ export function ServicesPage() {
                 trade="Brand Video"
                 client="Origin story"
                 title="Your reputation, on film."
-                build="A cinematic brand film with founder and crew on camera, real job-site footage, and a clear through-line about how the company works and what clients can count on."
+                build="A cinematic brand film with founder and crew on camera, real job site footage, and a clear through line about how the company works and what clients can count on."
                 result="A trust anchor for the website, discovery calls, and every pitch that follows. Buyers meet the crew before they ever meet you in person."
               />
               <JobSiteCase
@@ -436,7 +436,7 @@ export function ServicesPage() {
                 client="Offer spotlight"
                 title="One offer that actually converts."
                 build="A sharp promo cut focused on a single offer or project type. Problem, process, and payoff, sized for ads, landing pages, and social."
-                result="Clearer inbound. Better-fit calls. A film that sells the work without sounding like a hard sell."
+                result="Clearer inbound. Better fit calls. A film that sells the work without sounding like a hard sell."
                 reverse
               />
               <JobSiteCase

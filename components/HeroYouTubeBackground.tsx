@@ -46,7 +46,7 @@ function disableYtCaptions(player: YtPlayer) {
   }
 }
 
-/** Muted looping YouTube background — starts at `startSec`, captions off. */
+/** Muted looping YouTube background, starts at `startSec`, captions off. */
 export function HeroYouTubeBackground({
   videoId,
   startSec = 0,

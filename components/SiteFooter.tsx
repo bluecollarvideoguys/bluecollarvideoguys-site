@@ -110,7 +110,7 @@ export function SiteFooter({
                 <span className="v02-footer-reveal__label">The Blueprint</span>
                 <p className="v02-footer-reveal__copy">
                   Build Trust. Stand Out. Win More Work. Authentic video
-                  marketing for blue-collar businesses.
+                  marketing for blue collar businesses.
                 </p>
               </div>
             </div>

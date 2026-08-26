@@ -6,7 +6,7 @@ import { BrandLogo } from "@/components/BrandLogo";
 const ACCEPT =
   "video/mp4,video/quicktime,video/x-m4v,video/webm,.mp4,.mov,.m4v,.webm";
 const ALLOWED_EXTENSIONS = /\.(mp4|mov|m4v|webm)$/i;
-/** 10 MB parts — works well for multi-GB R2 multipart uploads */
+/** 10 MB parts, works well for multi-GB R2 multipart uploads */
 const PART_SIZE = 10 * 1024 * 1024;
 
 type UploadedItem = {

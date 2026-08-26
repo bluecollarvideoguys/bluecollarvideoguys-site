@@ -395,7 +395,7 @@ export function MasterPage() {
 
               <p className="mt-7 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
                 You&apos;ve spent years earning your reputation. Our job is to make
-                sure more people see it — through The Blue Collar Blueprint™ and
+                sure more people see it, through The Blue Collar Blueprint™ and
                 our Trust Framework™.
               </p>
 
@@ -501,7 +501,7 @@ export function MasterPage() {
           <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-6 lg:grid-cols-2 lg:px-8">
             <div className="relative">
               <div className="absolute -bottom-4 -right-4 h-full w-full rounded bg-[var(--v02-gold)]/25" />
-              {/* CLIENT ASSET: Replace with real crew / job-site photo */}
+              {/* CLIENT ASSET: Replace with real crew / job site photo */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/purpose-videographer.png"
@@ -519,17 +519,17 @@ export function MasterPage() {
               </h2>
               <div className="mt-6 h-1 w-16 bg-[var(--v02-gold)]" />
               <p className="mt-7 text-base leading-relaxed text-slate-600">
-                Not because they need flashy videos — because the crews that
+                Not because they need flashy videos, because the crews that
                 build our homes, keep the lights on, and maintain our communities
                 are the backbone of America.
               </p>
               <p className="mt-5 text-base leading-relaxed text-slate-600">
                 Too many of the best shops stay hidden behind outdated websites,
-                inconsistent branding, and word-of-mouth alone. We&apos;re here to
+                inconsistent branding, and word of mouth alone. We&apos;re here to
                 change that.
               </p>
               <p className="mt-7 border-l-4 border-[var(--v02-gold)] pl-4 text-base font-semibold italic leading-relaxed text-[var(--v02-ink)]">
-                Trust Wins Jobs. People don&apos;t hire the cheapest contractor —
+                Trust Wins Jobs. People don&apos;t hire the cheapest contractor,
                 they hire the one they trust.
               </p>
             </div>
@@ -547,7 +547,7 @@ export function MasterPage() {
                 EVERYTHING WE DO FITS ONE FRAMEWORK
               </h2>
               <p className="mt-4 text-base leading-relaxed text-slate-400">
-                Three stages. One promise. Content that earns confidence — not
+                Three stages. One promise. Content that earns confidence, not
                 just attention.
               </p>
             </div>
@@ -557,11 +557,11 @@ export function MasterPage() {
                 icon={<IconShield className="text-3xl" />}
                 title="Build Trust"
                 quote="People buy confidence before they buy your service."
-                body="Answer the questions every customer already asks — who you are, if you're experienced, if you care about quality."
+                body="Answer the questions every customer already asks, who you are, if you're experienced, if you care about quality."
                 items={[
                   "Brand story films",
                   "Customer testimonials",
-                  "Meet-the-crew videos",
+                  "Meet the crew videos",
                   "Educational & BTS content",
                 ]}
                 outcome="Higher credibility before the first call"
@@ -570,7 +570,7 @@ export function MasterPage() {
                 icon={<IconCamera className="text-3xl" />}
                 title="Stand Out"
                 quote="The most memorable contractor usually wins."
-                body="Most shops look the same online. We help you separate — clear brand, sharp footage, a site that looks as solid as your work."
+                body="Most shops look the same online. We help you separate, clear brand, sharp footage, a site that looks as solid as your work."
                 items={[
                   "Cinematic project videos",
                   "Professional photography",
@@ -588,7 +588,7 @@ export function MasterPage() {
                   "Better leads & bigger projects",
                   "Referral systems",
                   "Recruiting campaigns",
-                  "Long-term growth consulting",
+                  "Long term growth consulting",
                 ]}
                 outcome="More opportunities. Better customers. Growth."
               />
@@ -623,7 +623,7 @@ export function MasterPage() {
                 {
                   n: "03",
                   t: "Win More Work",
-                  d: "Turn trust into leads, customers, and long-term growth.",
+                  d: "Turn trust into leads, customers, and long term growth.",
                 },
               ].map((step, i) => (
                 <div
@@ -676,7 +676,7 @@ export function MasterPage() {
                 id="film-1"
                 className="md:col-span-2 h-72"
                 trade="Brand Story"
-                title="Who you are — before the bid"
+                title="Who you are, before the bid"
                 playing={playing}
                 setPlaying={setPlaying}
               />
@@ -727,7 +727,7 @@ export function MasterPage() {
                 {
                   icon: <IconShield className="shrink-0 text-4xl text-[var(--v02-gold)]" />,
                   t: "Most agencies sell attention",
-                  d: "We build trust — content that earns confidence before anyone picks up the phone.",
+                  d: "We build trust, content that earns confidence before anyone picks up the phone.",
                 },
                 {
                   icon: <IconCamera className="shrink-0 text-4xl text-[var(--v02-gold)]" />,
@@ -737,12 +737,12 @@ export function MasterPage() {
                 {
                   icon: <IconUsers className="shrink-0 text-4xl text-[var(--v02-gold)]" />,
                   t: "Built for established shops",
-                  d: "Quality work. Strong reputation. Marketing as an investment — not a miracle for startups with no track record.",
+                  d: "Quality work. Strong reputation. Marketing as an investment, not a miracle for startups with no track record.",
                 },
                 {
                   icon: <IconStar className="shrink-0 text-4xl text-[var(--v02-gold)]" />,
                   t: "Strategic growth partner",
-                  d: "We don't chase trends. We tell authentic stories — because stories create trust, and trust wins jobs.",
+                  d: "We don't chase trends. We tell authentic stories, because stories create trust, and trust wins jobs.",
                 },
               ].map((item) => (
                 <div key={item.t} className="flex gap-5">
@@ -930,7 +930,7 @@ export function MasterPage() {
                   </p>
                   <p className="mt-3 text-sm leading-relaxed text-slate-600">
                     Every decision must help the client Build Trust, Stand Out,
-                    or Win More Work. If it doesn&apos;t — it doesn&apos;t belong in the
+                    or Win More Work. If it doesn&apos;t, it doesn&apos;t belong in the
                     Blueprint.
                   </p>
                   <div className="mt-4 flex flex-wrap gap-2">
@@ -963,7 +963,7 @@ export function MasterPage() {
             </Link>
             <p className="mt-3 max-w-md text-sm leading-relaxed">
               Build Trust. Stand Out. Win More Work. Authentic video marketing
-              for blue-collar businesses — powered by The Blue Collar Blueprint™
+              for blue collar businesses, powered by The Blue Collar Blueprint™
               and Trust Framework™.
             </p>
           </div>

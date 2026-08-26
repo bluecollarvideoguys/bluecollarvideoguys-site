@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand palette — adjust here, not inline */
+  /* Brand palette, adjust here, not inline */
   --denim: #1b3a5c;
   --denim-deep: #12283f;
   --denim-mid: #2a4f73;
@@ -50,7 +50,7 @@ body {
   font-family: var(--font-display), ui-sans-serif, sans-serif;
 }
 
-/* Lightweight grain — no heavy image assets */
+/* Lightweight grain, no heavy image assets */
 .texture-grain {
   position: relative;
 }
@@ -89,7 +89,7 @@ body {
   box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 35%, transparent);
 }
 
-/* Riveted / stamped CTA — not soft SaaS pills */
+/* Riveted / stamped CTA, not soft SaaS pills */
 .btn-stamp {
   display: inline-flex;
   align-items: center;

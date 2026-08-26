@@ -17,7 +17,7 @@ const body = Source_Sans_3({
 export const metadata: Metadata = {
   title: "The Blue Collar Video Guys™ | Build Trust. Stand Out. Win More Work.",
   description:
-    "Video, web, branding, and digital marketing for blue-collar trade businesses. You've spent years earning your reputation. Our job is to make sure more people see it.",
+    "Video, web, branding, and digital marketing for blue collar trade businesses. You've spent years earning your reputation. Our job is to make sure more people see it.",
 };
 
 export default function RootLayout({

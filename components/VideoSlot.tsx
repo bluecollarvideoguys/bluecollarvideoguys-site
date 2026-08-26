@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { IconPlay } from "./icons";
 
-/** Temporary stand-in until real job-site films are ready */
+/** Temporary stand-in until real job site films are ready */
 export const PLACEHOLDER_VIDEO =
   "https://youtu.be/EU7qo4Iev9k?si=BJ6GrYdE0BWntxEP";
 
@@ -12,7 +12,7 @@ type VideoSlotProps = {
   label: string;
   /** Trade or project type */
   trade?: string;
-  /** YouTube or direct video URL — defaults to shared placeholder */
+  /** YouTube or direct video URL, defaults to shared placeholder */
   src?: string;
   poster?: string;
   aspect?: "video" | "square" | "wide";
@@ -43,7 +43,7 @@ function parseYouTubeId(url: string): string | null {
 
 /**
  * Portfolio video slot.
- * CLIENT ASSET: Swap `src` (and optional `poster`) for real job-site footage when ready.
+ * CLIENT ASSET: Swap `src` (and optional `poster`) for real job site footage when ready.
  */
 export function VideoSlot({
   label,
@@ -129,7 +129,7 @@ export function VideoSlot({
             className={`absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 p-6 text-center transition-colors ${
               src ? "cursor-pointer hover:bg-denim-deep/25" : "cursor-default"
             }`}
-            aria-label={src ? `Play ${label}` : `${label} — footage coming soon`}
+            aria-label={src ? `Play ${label}` : `${label}, footage coming soon`}
           >
             <span
               className={`flex h-14 w-14 items-center justify-center border-2 transition-transform duration-300 group-hover:scale-105 ${

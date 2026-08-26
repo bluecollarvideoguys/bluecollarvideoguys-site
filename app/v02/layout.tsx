@@ -17,7 +17,7 @@ const body = Inter({
 export const metadata: Metadata = {
   title: "Home | The Blue Collar Video Guys™",
   description:
-    "Authentic video marketing for blue-collar businesses. Build Trust. Stand Out. Win More Work.",
+    "Authentic video marketing for blue collar businesses. Build Trust. Stand Out. Win More Work.",
 };
 
 export default function Version02Layout({

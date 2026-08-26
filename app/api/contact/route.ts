@@ -67,7 +67,7 @@ export async function POST(request: Request) {
   `;
 
   const resend = new Resend(key);
-  const subject = `${source} — new inquiry from ${text(body.company_name) || text(body.name) || email}`;
+  const subject = `${source}: new inquiry from ${text(body.company_name) || text(body.name) || email}`;
   const stamp = Date.now();
 
   const send = (to: string, idempotencyKey: string) =>

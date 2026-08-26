@@ -15,7 +15,7 @@ const HERO_START_SEC = 15;
 
 const WORK = [
   {
-    title: "Job-site films",
+    title: "Job site films",
     subtitle: "Crew stories that earn trust before the bid",
     year: "Blueprint",
     videoId: "ss-3eS8oCTs",
@@ -24,7 +24,7 @@ const WORK = [
   },
   {
     title: "Brand stories",
-    subtitle: "Why your business exists — told like it matters",
+    subtitle: "Why your business exists, told like it matters",
     year: "Trust",
     videoId: "jzdRmbzji-A",
     span: "lg:col-span-5 lg:pt-24",
@@ -58,7 +58,7 @@ const PROCESS = [
   },
   {
     title: "Stand Out",
-    body: "Project films, photography, web, and branding — so you don’t look like every other truck on the street.",
+    body: "Project films, photography, web, and branding, so you don’t look like every other truck on the street.",
     output: "Output: a distinctive visual and digital system",
   },
   {
@@ -76,7 +76,7 @@ const JOURNAL = [
   },
   {
     tag: "Practice · 5 min",
-    title: "How job-site films outperform stock footage every time",
+    title: "How job site films outperform stock footage every time",
     src: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80",
   },
   {
@@ -513,7 +513,7 @@ export function Version07Design() {
             <div className="mt-8 grid gap-7 border-t border-white/35 pt-6 md:grid-cols-12 md:items-end">
               <p className="text-lg leading-relaxed text-white/90 md:col-span-6 lg:col-span-5">
                 You&apos;ve spent years earning your reputation. We frame it up
-                through one clear growth system — so more of the right customers
+                through one clear growth system, so more of the right customers
                 find you.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row md:col-span-6 md:justify-end">
@@ -534,7 +534,7 @@ export function Version07Design() {
             </div>
 
             <div className="mt-10 flex items-center justify-between text-xs text-white/70">
-              <span>Trust Framework™. Built for blue-collar shops.</span>
+              <span>Trust Framework™. Built for blue collar shops.</span>
               <a
                 href="#capabilities"
                 className="inline-flex items-center gap-2 transition hover:text-white"
@@ -582,7 +582,7 @@ export function Version07Design() {
                 What we build
               </p>
               <h2 className="max-w-4xl text-4xl font-medium leading-tight tracking-tight sm:text-6xl lg:col-span-8">
-                One Blueprint — from the first useful question to the final
+                One Blueprint, from the first useful question to the final
                 polished frame.
               </h2>
             </div>
@@ -636,7 +636,7 @@ export function Version07Design() {
                     Digital presence
                   </h3>
                   <p className="mt-3 max-w-xl text-lg leading-relaxed text-white/65">
-                    Sites and systems that make your reputation tangible —
+                    Sites and systems that make your reputation tangible,
                     accessible the moment someone searches.
                   </p>
                   <p className="mt-5 text-sm text-white/45">
@@ -655,7 +655,7 @@ export function Version07Design() {
                     Win More Work
                   </h3>
                   <p className="mt-3 max-w-xl text-lg leading-relaxed text-black/70">
-                    Better leads, bigger projects, more referrals — growth that
+                    Better leads, bigger projects, more referrals, growth that
                     compounds with every frame.
                   </p>
                   <p className="mt-5 text-sm text-black/50">
@@ -676,7 +676,7 @@ export function Version07Design() {
                   Work with evidence.
                 </h2>
                 <p className="mt-2 text-xs uppercase tracking-widest text-black/40">
-                  Placeholder stills — swap with client films
+                  Placeholder stills, swap with client films
                 </p>
               </div>
               <a
@@ -810,7 +810,7 @@ export function Version07Design() {
               <footer className="mt-10 border-t border-black/25 pt-5">
                 <p className="text-base font-medium">[Client Name]</p>
                 <p className="mt-1 text-sm text-black/60">
-                  Trade partner — placeholder quote
+                  Trade partner, placeholder quote
                 </p>
               </footer>
             </blockquote>
@@ -885,7 +885,7 @@ export function Version07Design() {
                 The Blue Collar Video Guys™
               </p>
               <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/45">
-                Authentic video marketing for blue-collar businesses. Build
+                Authentic video marketing for blue collar businesses. Build
                 Trust. Stand Out. Win More Work.
               </p>
             </div>

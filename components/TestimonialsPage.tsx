@@ -18,13 +18,13 @@ const TOOLBOX = [
   {
     num: "01",
     title: "BUILD TRUST",
-    body: "Content that proves who you are before the first handshake. Story films, testimonials, crew intros, education, BTS, culture, and community — the foundation of the Trust Framework™.",
+    body: "Content that proves who you are before the first handshake. Story films, testimonials, crew intros, education, BTS, culture, and community, the foundation of the Trust Framework™.",
     items: [
       "Brand story films",
       "Customer testimonials",
-      "Meet-the-crew videos",
+      "Meet the crew videos",
       "Educational / how-we-work content",
-      "Behind-the-scenes & culture",
+      "Behind the scenes & culture",
       "Community involvement pieces",
     ],
   },
@@ -34,7 +34,7 @@ const TOOLBOX = [
     body: "Make your brand impossible to confuse with the next truck on the street. Cinematic project films, photography, web, identity, and a steady social cadence that keeps you top of mind.",
     items: [
       "Cinematic project videos",
-      "Job-site photography",
+      "Job site photography",
       "Modern website design",
       "Brand identity systems",
       "Social strategy & monthly content",
@@ -45,10 +45,10 @@ const TOOLBOX = [
     title: "WIN MORE WORK",
     body: "The punch list that matters: leads that convert, projects that grow, referrals that compound, and a brand strong enough to attract better people and bigger work.",
     items: [
-      "Lead-quality strategy",
-      "Referral-ready content systems",
+      "Lead quality strategy",
+      "Referral ready content systems",
       "Hiring & culture films",
-      "Long-term brand equity plays",
+      "Long term brand equity plays",
     ],
   },
 ] as const;
@@ -56,21 +56,21 @@ const TOOLBOX = [
 const QUOTES = [
   {
     quote:
-      "They didn't just shoot pretty footage. They framed up how we talk about our work — and the phone started ringing differently.",
+      "They didn't just shoot pretty footage. They framed up how we talk about our work, and the phone started ringing differently.",
     name: "[Client Name]",
-    trade: "[Trade / Company — placeholder]",
+    trade: "[Trade / Company, placeholder]",
   },
   {
     quote:
       "Finally a crew that gets the trades. No fluff. Just a blueprint that made us look as solid as our installs.",
     name: "[Client Name]",
-    trade: "[Trade / Company — placeholder]",
+    trade: "[Trade / Company, placeholder]",
   },
   {
     quote:
       "We stopped sounding like every other contractor on Facebook. Now GCs know who we are before we bid.",
     name: "[Client Name]",
-    trade: "[Trade / Company — placeholder]",
+    trade: "[Trade / Company, placeholder]",
   },
 ] as const;
 
@@ -315,7 +315,7 @@ export function TestimonialsPage() {
           <PhilBlock
             num="01"
             label="Belief"
-            line1="Blue-collar businesses"
+            line1="Blue collar businesses"
             line2="deserve to be seen."
             body="You've built something real: crews that show up, work that lasts, a name people trust. That story shouldn't sit buried under the same stock photos every competitor uses. We believe the trades deserve the same sharp storytelling the big brands get."
           />

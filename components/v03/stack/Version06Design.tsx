@@ -340,7 +340,7 @@ export function Version06Design() {
               </h1>
               <p className="mt-7 max-w-xl text-base font-normal leading-7 text-white/80 sm:text-lg">
                 You&apos;ve spent years earning your reputation. We frame it up
-                through one clear growth system — so more of the right customers
+                through one clear growth system, so more of the right customers
                 find you.
               </p>
             </div>
@@ -400,8 +400,8 @@ export function Version06Design() {
 
             <div className="lg:col-span-8">
               <p className="max-w-3xl text-xl font-normal leading-9 tracking-tight text-stone-700 sm:text-2xl">
-                The Blue Collar Blueprint™ is our proven system for blue-collar
-                growth — powered by the Trust Framework™. We don&apos;t sell
+                The Blue Collar Blueprint™ is our proven system for blue collar
+                growth, powered by the Trust Framework™. We don&apos;t sell
                 cameras. We sell trust.
               </p>
 
@@ -446,7 +446,7 @@ export function Version06Design() {
                       Built for the trades
                     </p>
                     <p className="mt-1 text-xs leading-5 text-stone-500">
-                      HVAC, electrical, roofing, concrete — shops that care.
+                      HVAC, electrical, roofing, concrete, shops that care.
                     </p>
                   </div>
                 </div>
@@ -466,7 +466,7 @@ export function Version06Design() {
                   Work that looks like the job.
                 </h2>
                 <p className="mt-2 text-xs uppercase tracking-widest text-stone-500">
-                  Placeholder stills — swap with client films
+                  Placeholder stills, swap with client films
                 </p>
               </div>
               <a
@@ -482,12 +482,12 @@ export function Version06Design() {
               <figure className="relative min-h-80 overflow-hidden bg-stone-900 md:col-span-7 md:row-span-2 md:min-h-[42rem]">
                 <CoverYouTubeEmbed
                   videoId={WORK_VIDEOS.jobSite}
-                  title="Job-site films testimonial"
+                  title="Job site films testimonial"
                   background
                   zoom={1.45}
                 />
                 <figcaption className="pointer-events-none absolute bottom-0 left-0 z-10 bg-stone-950/70 px-4 py-3 text-xs uppercase tracking-[0.14em] text-white backdrop-blur-sm">
-                  Job-site films
+                  Job site films
                 </figcaption>
               </figure>
               <figure className="relative min-h-64 overflow-hidden bg-stone-900 md:col-span-5">
@@ -534,8 +534,8 @@ export function Version06Design() {
                 Prepared for lasting growth.
               </h2>
               <p className="mt-6 max-w-md text-sm leading-7 text-blue-50/75">
-                Not a one-off edit. A growth partner who maps every film,
-                website, and strategy to the Blueprint — so reputation turns
+                Not a one off edit. A growth partner who maps every film,
+                website, and strategy to the Blueprint, so reputation turns
                 into jobs.
               </p>
               <a
@@ -565,12 +565,12 @@ export function Version06Design() {
               <h2 className="v06-display mt-5 text-4xl tracking-tight text-white sm:text-5xl">
                 Built for
                 <br />
-                blue-collar shops.
+                blue collar shops.
               </h2>
             </div>
             <div className="self-end">
               <p className="max-w-md text-base leading-7 text-white/75">
-                Contractors, HVAC, electricians, roofers, concrete crews — trades
+                Contractors, HVAC, electricians, roofers, concrete crews, trades
                 that already care about quality and need marketing that matches.
               </p>
               <a
@@ -679,7 +679,7 @@ export function Version06Design() {
                 type="submit"
                 className="mt-8 inline-flex items-center gap-2 rounded-full bg-blue-950 px-6 py-3.5 text-sm font-medium text-white transition hover:bg-blue-800"
               >
-                {formSent ? "Thank you — we'll be in touch" : "Send inquiry"}
+                {formSent ? "Thank you, we'll be in touch" : "Send inquiry"}
                 <IconArrowRight />
               </button>
             </form>

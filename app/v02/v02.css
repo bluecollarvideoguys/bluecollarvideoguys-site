@@ -62,7 +62,7 @@ html:has(.v02-root) {
 }
 
 /* Sticky footer reveal (Luma-style: last section is the rounded cap;
-   lift stays transparent so corner radii reveal the footer color — no hairline) */
+   lift stays transparent so corner radii reveal the footer color, no hairline) */
 .v02-page-shell {
   position: relative;
   background: var(--v02-navy-deep);

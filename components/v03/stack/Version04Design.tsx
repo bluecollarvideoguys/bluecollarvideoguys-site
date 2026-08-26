@@ -270,7 +270,7 @@ export function Version04Design() {
         {/* HERO */}
         <header className="relative min-h-screen overflow-hidden">
           <div className="absolute inset-0">
-            {/* CLIENT ASSET: Branded production / job-site hero reel */}
+            {/* CLIENT ASSET: Branded production / job site hero reel */}
             <HeroYouTubeBackground
               videoId={HERO_YT}
               startSec={HERO_START_SEC}
@@ -352,7 +352,7 @@ export function Version04Design() {
               <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3 py-1.5 backdrop-blur-md">
                 <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
                 <span className="text-xs font-medium uppercase tracking-[0.14em] text-stone-100">
-                  Authentic video marketing for blue-collar businesses
+                  Authentic video marketing for blue collar businesses
                 </span>
               </div>
 
@@ -387,7 +387,7 @@ export function Version04Design() {
 
               <p className="max-w-sm text-sm leading-6 text-stone-200 md:text-right">
                 You&apos;ve spent years earning your reputation. Our job is to make
-                sure more people see it — through The Blue Collar Blueprint™.
+                sure more people see it, through The Blue Collar Blueprint™.
               </p>
             </div>
           </div>
@@ -405,7 +405,7 @@ export function Version04Design() {
 
             <div className="lg:col-span-9">
               <p className="max-w-4xl text-2xl font-normal leading-relaxed tracking-tight text-stone-600 sm:text-3xl">
-                Trust Wins Jobs. People don&apos;t hire the cheapest contractor —
+                Trust Wins Jobs. People don&apos;t hire the cheapest contractor,
                 they hire the one they trust. We make sure the answer is{" "}
                 <span className="text-stone-950">yes</span> before they ever pick up
                 the phone.
@@ -522,7 +522,7 @@ export function Version04Design() {
               </div>
               <p className="max-w-xl text-base leading-7 text-stone-600 lg:justify-self-end">
                 Most agencies chase attention. We create content that earns
-                confidence — every video, website, and strategy moves you through
+                confidence, every video, website, and strategy moves you through
                 The Blue Collar Blueprint™.
               </p>
             </div>
@@ -547,7 +547,7 @@ export function Version04Design() {
                 {
                   icon: <IconHardHat className="text-amber-300" />,
                   t: "Built for the trades",
-                  d: "Established shops that care about quality — we help more people see it.",
+                  d: "Established shops that care about quality, we help more people see it.",
                 },
               ].map((item) => (
                 <div key={item.t} className="bg-[var(--v04-paper-card)] p-7">
@@ -576,7 +576,7 @@ export function Version04Design() {
                 </span>
               </h2>
               <p className="mt-3 text-xs uppercase tracking-[0.14em] text-stone-500">
-                Placeholder quotes — swap with real client stories
+                Placeholder quotes, swap with real client stories
               </p>
             </div>
 
@@ -705,7 +705,7 @@ export function Version04Design() {
                 className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-amber-300 px-5 py-3.5 text-sm font-medium text-stone-950 transition hover:bg-amber-200"
               >
                 {formSent
-                  ? "Thank you — we'll be in touch"
+                  ? "Thank you, we'll be in touch"
                   : "Request my Blueprint"}
                 <IconArrowRight />
               </button>

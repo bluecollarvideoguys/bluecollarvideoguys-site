@@ -149,13 +149,13 @@ export function ContactPage() {
               </h1>
               <p className="mt-6 text-base leading-relaxed text-slate-300 sm:text-lg">
                 Blue Collar Video Guys was founded by Anthony Fowler and Kathy
-                Coker, two filmmakers with nearly a decade of hands-on experience
+                Coker, two filmmakers with nearly a decade of hands on experience
                 telling brands&apos; stories on camera. That experience runs deep
                 in brand messaging videos and the digital marketing strategy to
                 get them seen.
               </p>
               <p className="mt-4 text-base leading-relaxed text-slate-300 sm:text-lg">
-                The name says it all: we bring a blue-collar work ethic to video
+                The name says it all: we bring a blue collar work ethic to video
                 production. Show up, do the job right, and treat every
                 client&apos;s business like our own. No jargon, no smoke and
                 mirrors. Just honest work and a finished product that actually
@@ -333,14 +333,14 @@ export function ContactPage() {
                       <option value="Under $5,000 / month">
                         Under $5,000 / month
                       </option>
-                      <option value="$5,000 – $10,000 / month">
-                        $5,000 – $10,000 / month
+                      <option value="$5,000 - $10,000 / month">
+                        $5,000 - $10,000 / month
                       </option>
-                      <option value="$10,000 – $15,000 / month">
-                        $10,000 – $15,000 / month
+                      <option value="$10,000 - $15,000 / month">
+                        $10,000 - $15,000 / month
                       </option>
-                      <option value="$15,000 – $25,000 / month">
-                        $15,000 – $25,000 / month
+                      <option value="$15,000 - $25,000 / month">
+                        $15,000 - $25,000 / month
                       </option>
                       <option value="$25,000+ / month">$25,000+ / month</option>
                       <option value="Prefer to discuss">Prefer to discuss</option>

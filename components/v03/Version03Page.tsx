@@ -50,7 +50,7 @@ const STACK = [
 ] as const;
 
 /**
- * Reference scrapbook: Version 01, Version 02 Master, and designs 03–07.
+ * Reference scrapbook: Version 01, Version 02 Master, and designs 03-07.
  * Not a unified brand page.
  */
 export function Version03Page() {

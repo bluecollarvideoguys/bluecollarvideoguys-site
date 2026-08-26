@@ -232,7 +232,7 @@ export function Version05Design() {
 
               <p className="v05-stamp mb-5 text-white/90">Trust Framework™</p>
               <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-stone-200">
-                Authentic video marketing for blue-collar businesses
+                Authentic video marketing for blue collar businesses
               </p>
               <h1 className="v05-display max-w-4xl text-5xl leading-[0.92] tracking-tight sm:text-7xl lg:text-8xl">
                 Build Trust.
@@ -243,7 +243,7 @@ export function Version05Design() {
               </h1>
               <p className="mt-7 max-w-xl text-base leading-relaxed text-stone-200 sm:text-lg">
                 You&apos;ve spent years earning your reputation. Our job is to make
-                sure more people see it — framed up through one clear growth
+                sure more people see it, framed up through one clear growth
                 system.
               </p>
 
@@ -310,12 +310,12 @@ export function Version05Design() {
         >
           <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <div>
-              <SheetLabel>Drawing A — Process</SheetLabel>
+              <SheetLabel>Drawing A, Process</SheetLabel>
               <h2 className="v05-display mt-4 text-4xl leading-[1.04] tracking-tight text-stone-900 sm:text-5xl">
                 Every project follows a clear plan.
               </h2>
               <p className="mt-6 max-w-md text-base leading-relaxed text-stone-600">
-                The Blue Collar Blueprint™ is our proven system — powered by the
+                The Blue Collar Blueprint™ is our proven system, powered by the
                 Trust Framework™. Content built to earn confidence, not just
                 attention.
               </p>
@@ -361,7 +361,7 @@ export function Version05Design() {
                   Stand Out
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-stone-300">
-                  Project films, photography, web, and branding — so you don&apos;t
+                  Project films, photography, web, and branding, so you don&apos;t
                   look like every other truck.
                 </p>
                 <span className="mt-6 inline-flex items-center gap-1 text-sm font-medium">
@@ -412,7 +412,7 @@ export function Version05Design() {
                   “We don&apos;t sell cameras. We sell trust.”
                 </p>
                 <p className="mt-1 text-xs text-stone-300">
-                  — The Blue Collar Video Guys™
+                  The Blue Collar Video Guys™
                 </p>
               </div>
               <span className="absolute left-5 top-5 font-mono text-[10px] uppercase tracking-widest text-white/80">
@@ -421,14 +421,14 @@ export function Version05Design() {
             </div>
 
             <div className="lg:pl-12">
-              <SheetLabel light>Drawing B — Positioning</SheetLabel>
+              <SheetLabel light>Drawing B, Positioning</SheetLabel>
               <h2 className="v05-display mt-4 text-4xl leading-[1.05] tracking-tight text-white sm:text-5xl">
                 Experience the trades can feel good about.
               </h2>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-stone-300">
                 Most marketing companies sell attention. We build trust. Every
                 film, website, and strategy is drawn to move established
-                blue-collar businesses through the Blueprint.
+                blue collar businesses through the Blueprint.
               </p>
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -436,7 +436,7 @@ export function Version05Design() {
                   <IconMap className="text-stone-300" />
                   <p className="mt-4 text-sm font-medium">Built for the trades</p>
                   <p className="mt-2 text-sm leading-relaxed text-stone-400">
-                    Contractors, HVAC, electricians, roofers, concrete crews —
+                    Contractors, HVAC, electricians, roofers, concrete crews,
                     shops that already care about quality.
                   </p>
                 </div>
@@ -444,7 +444,7 @@ export function Version05Design() {
                   <IconHandshake className="text-stone-300" />
                   <p className="mt-4 text-sm font-medium">Growth partner</p>
                   <p className="mt-2 text-sm leading-relaxed text-stone-400">
-                    Not a one-off edit. A strategic partner for reputation that
+                    Not a one off edit. A strategic partner for reputation that
                     turns into jobs.
                   </p>
                 </div>
@@ -465,7 +465,7 @@ export function Version05Design() {
                 Trusted through every chapter.
               </h2>
               <p className="mt-2 text-xs uppercase tracking-widest text-stone-400">
-                Placeholder quotes — swap with real client stories
+                Placeholder quotes, swap with real client stories
               </p>
             </div>
             <a
@@ -492,7 +492,7 @@ export function Version05Design() {
               </div>
               <p className="mt-8 text-sm text-stone-500">
                 <span className="font-medium text-stone-800">[Client Name]</span>{" "}
-                · Electrical — placeholder
+                · Electrical, placeholder
               </p>
             </article>
 
@@ -510,7 +510,7 @@ export function Version05Design() {
               </div>
               <p className="mt-8 text-sm text-stone-600">
                 <span className="font-medium text-stone-800">[Client Name]</span>{" "}
-                · HVAC — placeholder
+                · HVAC, placeholder
               </p>
             </article>
 
@@ -527,7 +527,7 @@ export function Version05Design() {
               </div>
               <p className="mt-8 text-sm text-stone-400">
                 <span className="font-medium text-white">[Client Name]</span> ·
-                Roofing — placeholder
+                Roofing, placeholder
               </p>
             </article>
           </div>
@@ -547,7 +547,7 @@ export function Version05Design() {
             />
             <div className="relative grid gap-12 lg:grid-cols-[1fr_0.85fr]">
               <div>
-                <SheetLabel light>Punch list — Contact</SheetLabel>
+                <SheetLabel light>Punch list, Contact</SheetLabel>
                 <h2 className="v05-display mt-4 max-w-xl text-4xl leading-[1.04] tracking-tight text-white sm:text-5xl">
                   Your story deserves to be told.
                 </h2>
@@ -615,7 +615,7 @@ export function Version05Design() {
                     className="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--v05-blueprint)] px-5 py-3.5 text-sm font-medium text-white transition hover:bg-[var(--v05-blueprint-mid)]"
                   >
                     {formSent
-                      ? "Thank you — we'll be in touch"
+                      ? "Thank you, we'll be in touch"
                       : "Send message"}
                     <IconArrowRight />
                   </button>

@@ -15,7 +15,7 @@ export function VersionPlaceholder({ version }: { version: SiteVersion }) {
           Coming up next
         </h1>
         <p className="text-concrete/60 font-light text-sm md:text-base max-w-md leading-relaxed mb-10">
-          This layout is framed up but not built yet. Version 01 is live — we
+          This layout is framed up but not built yet. Version 01 is live, we
           break ground on {label} next.
         </p>
         <Link

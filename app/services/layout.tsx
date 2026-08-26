@@ -17,7 +17,7 @@ const body = Inter({
 export const metadata: Metadata = {
   title: "Services · Job Sites | The Blue Collar Video Guys™",
   description:
-    "Field-report case studies for blue-collar shops. What we built with each crew, and what it did for their pipeline.",
+    "Field report case studies for blue collar shops. What we built with each crew, and what it did for their pipeline.",
 };
 
 export default function ServicesLayout({

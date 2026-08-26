@@ -5,7 +5,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { HeroYouTubeBackground } from "@/components/HeroYouTubeBackground";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 
-/** Full-bleed still — avoid YouTube thumbs (often letterboxed) */
+/** Full-bleed still, avoid YouTube thumbs (often letterboxed) */
 const MEDIA_POSTER = "/images/purpose-videographer.png";
 /** Direct MP4 so we can object-fit: cover (YouTube iframes letterbox) */
 const PLACEHOLDER_MP4 =
@@ -115,7 +115,7 @@ const STANDARDS = [
     id: "standout",
     label: "Stand Out",
     title: "Become the memorable shop",
-    body: "Cinematic project films, photography, modern web, and consistent branding — so you don’t blend in with every other truck.",
+    body: "Cinematic project films, photography, modern web, and consistent branding, so you don’t blend in with every other truck.",
   },
   {
     id: "win",
@@ -127,7 +127,7 @@ const STANDARDS = [
     id: "partner",
     label: "Growth partner",
     title: "Not just another video vendor",
-    body: "Every video, website, and strategy moves you through The Blue Collar Blueprint™ — powered by the Trust Framework™.",
+    body: "Every video, website, and strategy moves you through The Blue Collar Blueprint™, powered by the Trust Framework™.",
   },
 ] as const;
 
@@ -234,7 +234,7 @@ export function Version03Design() {
       </div>
 
       <main>
-        {/* HERO — full-viewport media */}
+        {/* HERO, full-viewport media */}
         <section className="relative flex min-h-screen items-end overflow-hidden px-5 pb-10 pt-28 sm:px-8 sm:pb-14 lg:px-12 lg:pb-16">
           <div className="absolute inset-0">
             {/* CLIENT ASSET: Branded production reel */}
@@ -250,7 +250,7 @@ export function Version03Design() {
             <div className="max-w-5xl">
               <p className="mb-6 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.16em] text-white/65">
                 <span className="h-px w-8 bg-[var(--v03-copper-hot)]" />
-                Authentic video marketing for blue-collar businesses
+                Authentic video marketing for blue collar businesses
               </p>
               <h1 className="max-w-4xl font-semibold text-5xl uppercase leading-[0.88] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl">
                 Build Trust.
@@ -264,7 +264,7 @@ export function Version03Design() {
             <div className="flex w-full items-end justify-between gap-8 lg:w-auto">
               <p className="max-w-xs text-sm font-normal leading-6 text-white/75">
                 You&apos;ve spent years earning your reputation. Our job is to make
-                sure more people see it — through The Blue Collar Blueprint™.
+                sure more people see it, through The Blue Collar Blueprint™.
               </p>
               <a
                 href="#philosophy"
@@ -293,13 +293,13 @@ export function Version03Design() {
               Our belief
             </p>
             <h2 className="font-medium text-3xl leading-tight tracking-tight sm:text-4xl lg:text-5xl">
-              “Trust Wins Jobs. People don&apos;t hire the cheapest contractor —
+              “Trust Wins Jobs. People don&apos;t hire the cheapest contractor,
               they hire the one they trust.”
             </h2>
             <p className="mx-auto mt-8 max-w-2xl text-sm leading-6 text-neutral-600 sm:text-base">
               Every homeowner asks the same question before they call:{" "}
               <em>Can I trust this company?</em> Our job is to make sure the
-              answer is yes — before they ever pick up the phone.
+              answer is yes, before they ever pick up the phone.
             </p>
             <div className="mt-11 flex items-center justify-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--v03-ink-soft)] text-[10px] font-semibold uppercase tracking-wider text-white">
@@ -399,7 +399,7 @@ export function Version03Design() {
                       {String(
                         STANDARDS.findIndex((s) => s.id === active.id) + 1,
                       ).padStart(2, "0")}{" "}
-                      — 04
+                      04
                     </span>
                   </div>
                   <div className="pointer-events-none absolute bottom-6 left-6 right-6 z-[1] max-w-md border border-white/30 bg-black/20 px-4 py-3 text-xs uppercase tracking-[0.12em] leading-5 text-white backdrop-blur-sm sm:bottom-10 sm:left-10">
@@ -427,7 +427,7 @@ export function Version03Design() {
               </div>
               <p className="max-w-xs text-sm leading-6 text-white/55">
                 This isn&apos;t just a tagline. Every project moves through three
-                stages — Build Trust → Stand Out → Win More Work.
+                stages, Build Trust → Stand Out → Win More Work.
               </p>
             </div>
 
@@ -468,7 +468,7 @@ export function Version03Design() {
                     Win More Work
                   </h3>
                   <p className="mt-3 max-w-xs text-sm leading-6 text-white/55">
-                    More opportunities. Better customers. Long-term business
+                    More opportunities. Better customers. Long term business
                     growth that lasts.
                   </p>
                 </div>
@@ -677,7 +677,7 @@ export function Version03Design() {
               >
                 <span>
                   {formSent
-                    ? "Thank you — we'll be in touch"
+                    ? "Thank you, we'll be in touch"
                     : "Send enquiry"}
                 </span>
                 <IconArrowRight className="transition-transform group-hover:translate-x-1" />
@@ -698,7 +698,7 @@ export function Version03Design() {
             </Link>
             <p className="mt-5 max-w-xs text-sm leading-6 text-white/45">
               Build Trust. Stand Out. Win More Work. Authentic video marketing
-              for blue-collar businesses.
+              for blue collar businesses.
             </p>
           </div>
 

@@ -379,7 +379,7 @@ export function HomePage() {
         </div>
       </div>
 
-      {/* NAV — version switcher */}
+      {/* NAV, version switcher */}
       <VersionNav
         active={1}
         cta={{
@@ -388,7 +388,7 @@ export function HomePage() {
         }}
       />
 
-      {/* CLIENT ASSET: Scroll-scrubbed hero — /public/video/hero-scroll.mp4 */}
+      {/* CLIENT ASSET: Scroll-scrubbed hero, /public/video/hero-scroll.mp4 */}
       <video
         id="scrollVideo"
         muted
@@ -499,7 +499,7 @@ export function HomePage() {
                   label="Build Trust"
                   icon={<IconHardHat className="text-rust mb-6" />}
                   title="Show them who you are before they ever call."
-                  body="Brand story films. Testimonials. Meet-the-crew videos. Educational content. Behind-the-scenes. Culture. Community. Trust isn't a slogan — it's footage that proves you show up and do the work right."
+                  body="Brand story films. Testimonials. Meet the crew videos. Educational content. Behind the scenes. Culture. Community. Trust isn't a slogan, it's footage that proves you show up and do the work right."
                 />
                 <BlueprintPanel
                   num="02"
@@ -513,7 +513,7 @@ export function HomePage() {
                   label="Win More Work"
                   icon={<IconWrench className="text-rust mb-6" />}
                   title="Better leads. Bigger projects. More referrals."
-                  body="That's the payoff. Stronger hires. Brand equity that compounds. Growth you can sustain — not a one-off ad blitz. We don't sell cameras. We sell trust that turns into jobs."
+                  body="That's the payoff. Stronger hires. Brand equity that compounds. Growth you can sustain, not a one off ad blitz. We don't sell cameras. We sell trust that turns into jobs."
                   cta
                   onCta={() => scrollToSection("contact")}
                 />
@@ -528,19 +528,19 @@ export function HomePage() {
             num="01"
             label="Build Trust"
             title="Show them who you are before they ever call."
-            body="Brand stories, testimonials, crew films, education, culture — trust you can see."
+            body="Brand stories, testimonials, crew films, education, culture, trust you can see."
           />
           <MobileBlueprint
             num="02"
             label="Stand Out"
             title="Look like the shop that should win the job."
-            body="Project films, photo, web, branding, social — so you don't blend in with every other truck."
+            body="Project films, photo, web, branding, social, so you don't blend in with every other truck."
           />
           <MobileBlueprint
             num="03"
             label="Win More Work"
             title="Better leads. Bigger projects. More referrals."
-            body="Growth built on reputation — not gimmicks."
+            body="Growth built on reputation, not gimmicks."
             cta
             onCta={() => scrollToSection("contact")}
           />
@@ -564,8 +564,8 @@ export function HomePage() {
               </h2>
             </div>
             <p className="text-concrete/55 font-light text-sm max-w-sm leading-relaxed md:text-right">
-              Short clips from real crews and real jobs. Drop your films in —
-              these slots are framed up and ready.
+              Short clips from real crews and real jobs. Drop your films in.
+              These slots are framed up and ready.
             </p>
           </div>
 
@@ -635,9 +635,9 @@ export function HomePage() {
         <PhilBlock
           num="01"
           label="Belief"
-          line1="Blue-collar businesses"
+          line1="Blue collar businesses"
           line2="deserve to be seen."
-          body="You've built something real — crews that show up, work that lasts, a name people trust. That story shouldn't sit buried under the same stock photos every competitor uses. We believe the trades deserve the same sharp storytelling the big brands get."
+          body="You've built something real, crews that show up, work that lasts, a name people trust. That story shouldn't sit buried under the same stock photos every competitor uses. We believe the trades deserve the same sharp storytelling the big brands get."
         />
 
         {/* Inline portfolio spot mid-manifesto */}
@@ -654,8 +654,8 @@ export function HomePage() {
                   <span className="text-denim/45">Not just on a truck door.</span>
                 </h3>
                 <p className="text-charcoal/70 font-light text-sm md:text-base leading-relaxed max-w-md">
-                  A brand film that shows how you work — the crew, the craft, the
-                  finish — does more than any slogan. Slot your best story film
+                  A brand film that shows how you work, the crew, the craft, the
+                  finish, does more than any slogan. Slot your best story film
                   here.
                 </p>
               </div>
@@ -676,14 +676,14 @@ export function HomePage() {
           label="Difference"
           line1="We don't sell cameras."
           line2="We sell trust."
-          body="Plenty of vendors will shoot a video and walk away. We're a growth partner. Powered by the Trust Framework™, every piece of content is built to earn belief, then demand, then jobs — not just fill a feed."
+          body="Plenty of vendors will shoot a video and walk away. We're a growth partner. Powered by the Trust Framework™, every piece of content is built to earn belief, then demand, then jobs, not just fill a feed."
         />
         <PhilBlock
           num="03"
           label="Right Fit"
           line1="Established shops."
           line2="Quality first."
-          body="We work with contractors, electricians, plumbers, HVAC, roofers, welders, concrete crews — businesses that already care about reputation and treat marketing like an investment. Not a startup with no track record looking for a miracle."
+          body="We work with contractors, electricians, plumbers, HVAC, roofers, welders, concrete crews, businesses that already care about reputation and treat marketing like an investment. Not a startup with no track record looking for a miracle."
           cta
           onCta={() => scrollToSection("contact")}
         />
@@ -704,11 +704,11 @@ export function HomePage() {
               Job Sites
             </h2>
             <p className="mt-6 max-w-xl text-concrete/60 font-light text-sm md:text-base leading-relaxed">
-              Case studies, blue-collar style. What we built with each crew —
+              Case studies, blue collar style. What we built with each crew,
               and what it did for their pipeline.
             </p>
             <p className="mt-3 text-xs text-rust uppercase tracking-widest">
-              Placeholder builds — swap with live client stories
+              Placeholder builds, swap with live client stories
             </p>
           </div>
 
@@ -717,7 +717,7 @@ export function HomePage() {
               num="01"
               trade="Electrical"
               client="[Company Name]"
-              title="From word-of-mouth only to the shop GCs call first."
+              title="From word of mouth only to the shop GCs call first."
               challenge="Great work. Almost no proof online. Bids landed cold."
               build="Brand story film, crew intros, project reels, and a site that looked as sharp as their installs."
               result="Stronger inbound. Shorter sales cycles. Crews that recruit themselves."
@@ -727,7 +727,7 @@ export function HomePage() {
               num="02"
               trade="Roofing"
               client="[Company Name]"
-              title="Looked like every other truck — until they didn't."
+              title="Looked like every other truck, until they didn't."
               challenge="Same Facebook ads. Same stock photos. Same ignore rate."
               build="Cinematic project films, consistent brand kit, monthly content on a Blueprint cadence."
               result="Homeowners recognized the brand before the estimate. Referrals climbed."
@@ -739,8 +739,8 @@ export function HomePage() {
               client="[Company Name]"
               title="Trust on file. Bigger commercial work on the books."
               challenge="Residential was steady. Commercial buyers needed more proof."
-              build="Testimonial system, meet-the-crew series, and a Trust Framework™ content plan."
-              result="Better-fit leads. Bigger tickets. A brand that hired easier."
+              build="Testimonial system, meet the crew series, and a Trust Framework™ content plan."
+              result="Better fit leads. Bigger tickets. A brand that hired easier."
               reverse={false}
             />
           </div>
@@ -941,7 +941,7 @@ function PhilBlock({
           </div>
           <div className="flex flex-col justify-center md:pl-16 py-16">
             <span className="md:hidden text-xs font-medium text-steel mb-4 block uppercase tracking-widest">
-              {num} — {label}
+              {num}, {label}
             </span>
             <h3 className="font-display text-3xl md:text-5xl lg:text-6xl font-semibold tracking-wide text-denim mb-8 leading-tight uppercase">
               <span className="phil-line block opacity-0 translate-y-10 transition-all duration-700 ease-out">

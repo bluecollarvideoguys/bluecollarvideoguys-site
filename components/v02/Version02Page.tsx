@@ -29,7 +29,7 @@ const VERSIONS = [
   { href: "/contact", label: "Contact", active: false },
 ] as const;
 
-/** Home type system — Inter eyebrows/body, Barlow titles, gold accents */
+/** Home type system, Inter eyebrows/body, Barlow titles, gold accents */
 const type = {
   eyebrowLight:
     "text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold-deep)]",
@@ -734,7 +734,7 @@ export function Version02Page() {
           <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-6 lg:grid-cols-2 lg:px-8">
             <div className="relative">
               <div className="absolute -bottom-4 -right-4 h-full w-full rounded-2xl bg-[var(--v02-gold)]/25" />
-              {/* CLIENT ASSET: Replace with real crew / job-site photo */}
+              {/* CLIENT ASSET: Replace with real crew / job site photo */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/purpose-videographer.png"
@@ -770,7 +770,7 @@ export function Version02Page() {
           </div>
         </section>
 
-        {/* PROCESS / TRUST FRAMEWORK — desktop only (matches Blueprint scroll breakpoint) */}
+        {/* PROCESS / TRUST FRAMEWORK, desktop only (matches Blueprint scroll breakpoint) */}
         <section
           id="framework"
           className="hidden border-t border-[var(--v02-line)] bg-white py-20 sm:py-24 md:block"
@@ -798,7 +798,7 @@ export function Version02Page() {
                 {
                   n: "03",
                   t: "Win More Work",
-                  d: "Turn trust into leads, customers, and long-term growth.",
+                  d: "Turn trust into leads, customers, and long term growth.",
                 },
               ].map((step) => (
                 <div
@@ -854,7 +854,7 @@ export function Version02Page() {
                     items={[
                       "Brand story films",
                       "Customer testimonials",
-                      "Meet-the-crew videos",
+                      "Meet the crew videos",
                       "Educational & BTS content",
                     ]}
                   />
@@ -881,7 +881,7 @@ export function Version02Page() {
                       "Better leads & bigger projects",
                       "Referral systems",
                       "Recruiting campaigns",
-                      "Long-term growth consulting",
+                      "Long term growth consulting",
                     ]}
                     cta
                     onCta={openCalendly}
@@ -977,7 +977,7 @@ export function Version02Page() {
           </div>
         </section>
 
-        {/* PORTFOLIO — cover gallery from Version 06 */}
+        {/* PORTFOLIO, cover gallery from Version 06 */}
         <section
           id="work"
           className="border-t border-[var(--v02-line)] bg-[var(--v02-paper)] py-20 sm:py-28"

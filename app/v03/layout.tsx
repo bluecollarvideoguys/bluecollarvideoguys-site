@@ -69,9 +69,9 @@ const v07Sans = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Versions 03–07 archive | The Blue Collar Video Guys™",
+  title: "Versions 03-07 archive | The Blue Collar Video Guys™",
   description:
-    "Stacked archive of design explorations 03–07 for element reference.",
+    "Stacked archive of design explorations 03-07 for element reference.",
 };
 
 export default function Version03Layout({

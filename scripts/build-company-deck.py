@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a branded BCVG company intro deck — site copy and v02 styling."""
+"""Build a branded BCVG company intro deck, site copy and v02 styling."""
 
 from __future__ import annotations
 
@@ -341,7 +341,7 @@ def build():
             set_run_font(run, name=FONT_BODY, size=Pt(10), color=PAPER)
     footer(s, "05")
 
-    # ── 6. Full Scope (Services — exact copy) ──────────────────
+    # ── 6. Full Scope (Services, exact copy) ──────────────────
     s = blank(prs, PAPER)
     eyebrow(s, Inches(0.75), Inches(0.45), "Full Scope", light=True)
     headline(s, Inches(0.75), Inches(0.85), Inches(7), ["ONE CREW.", "EVERY TRADE YOU NEED."], light=True, size=Pt(36))
@@ -385,7 +385,7 @@ def build():
     set_run_font(run, name=FONT_BODY, size=Pt(12), color=SLATE_LIGHT)
     footer(s, "06", dark=False)
 
-    # ── 7. Packages (Services — exact) ───────────────────────
+    # ── 7. Packages (Services, exact) ───────────────────────
     s = blank(prs, NAVY_DEEP)
     eyebrow(s, Inches(0.75), Inches(0.45), "The Blue Collar Blueprint™")
     headline(s, Inches(0.75), Inches(0.85), Inches(11), ["TRUST STRATEGY PACKAGES"], size=Pt(40))
