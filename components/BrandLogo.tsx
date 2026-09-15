@@ -12,8 +12,18 @@ const LOGOS = {
     width: 1024,
     height: 269,
   },
+  alternate: {
+    src: "/brand/alternate-horizontal.png",
+    width: 1024,
+    height: 290,
+  },
   stacked: {
     src: "/brand/primary-stacked.png",
+    width: 1024,
+    height: 890,
+  },
+  "alternate-stacked": {
+    src: "/brand/alternate-stacked.png",
     width: 1024,
     height: 890,
   },

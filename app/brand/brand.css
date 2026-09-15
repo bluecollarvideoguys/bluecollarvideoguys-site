@@ -1,0 +1,131 @@
+/* Official Brand Guide tokens — from Blue_Collar_Video_Guys_Official_Brand_Guide.pdf */
+.brand-guide {
+  --off-white: #f2f2f2;
+  --gold: #f5b000;
+  --charcoal: #1a1a1a;
+  --charcoal-soft: #242424;
+  --muted: color-mix(in srgb, var(--off-white) 55%, transparent);
+  --line: color-mix(in srgb, var(--off-white) 12%, transparent);
+  --line-on-light: color-mix(in srgb, var(--charcoal) 10%, transparent);
+
+  font-family: var(--font-brand-body), system-ui, sans-serif;
+  color: var(--off-white);
+  background: var(--charcoal);
+  -webkit-font-smoothing: antialiased;
+}
+
+.brand-guide ::selection {
+  background: var(--gold);
+  color: var(--charcoal);
+}
+
+.brand-display {
+  font-family: var(--font-brand-display), ui-sans-serif, sans-serif;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.brand-label {
+  font-family: var(--font-brand-display), ui-sans-serif, sans-serif;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+html:has(.brand-guide),
+html:has(.brand-guide) body {
+  background: var(--charcoal);
+}
+
+@keyframes brand-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes brand-gold-sweep {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes brand-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.brand-hero-copy {
+  animation: brand-fade-up 0.9s ease-out both;
+}
+
+.brand-hero-rule {
+  transform-origin: left center;
+  animation: brand-gold-sweep 1s 0.35s ease-out both;
+}
+
+.brand-hero-logo {
+  animation:
+    brand-fade-up 1s 0.2s ease-out both,
+    brand-float 7s 1.2s ease-in-out infinite;
+}
+
+.brand-reveal {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+.brand-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.brand-swatch {
+  transition: transform 0.35s ease;
+}
+
+.brand-swatch:hover {
+  transform: translateY(-4px);
+}
+
+.brand-logo-tile {
+  transition:
+    border-color 0.3s ease,
+    transform 0.35s ease;
+}
+
+.brand-logo-tile:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--gold) 45%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-hero-copy,
+  .brand-hero-rule,
+  .brand-hero-logo,
+  .brand-reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .brand-swatch:hover,
+  .brand-logo-tile:hover {
+    transform: none;
+  }
+}
