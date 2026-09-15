@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, Inter } from "next/font/google";
+import { Barlow_Condensed, Inter } from "next/font/google";
+import "../v02/v02.css";
 import "./brand.css";
 
-const display = Bebas_Neue({
+const display = Barlow_Condensed({
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-brand-display",
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-v02-display",
 });
 
 const body = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
-  variable: "--font-brand-body",
+  variable: "--font-v02-body",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +29,7 @@ export default function BrandLayout({
 }) {
   return (
     <div
-      className={`${display.variable} ${body.variable} brand-guide min-h-screen`}
+      className={`${display.variable} ${body.variable} v02-root brand-guide min-h-screen`}
     >
       {children}
     </div>

@@ -15,7 +15,7 @@ const LOGOS = {
   alternate: {
     src: "/brand/alternate-horizontal.png",
     width: 1024,
-    height: 290,
+    height: 274,
   },
   stacked: {
     src: "/brand/primary-stacked.png",
@@ -25,7 +25,7 @@ const LOGOS = {
   "alternate-stacked": {
     src: "/brand/alternate-stacked.png",
     width: 1024,
-    height: 890,
+    height: 924,
   },
   icon: {
     src: "/brand/icon-mark.png",

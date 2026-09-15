@@ -1,40 +1,4 @@
-/* Official Brand Guide tokens — from Blue_Collar_Video_Guys_Official_Brand_Guide.pdf */
-.brand-guide {
-  --off-white: #f2f2f2;
-  --gold: #f5b000;
-  --charcoal: #1a1a1a;
-  --charcoal-soft: #242424;
-  --muted: color-mix(in srgb, var(--off-white) 55%, transparent);
-  --line: color-mix(in srgb, var(--off-white) 12%, transparent);
-  --line-on-light: color-mix(in srgb, var(--charcoal) 10%, transparent);
-
-  font-family: var(--font-brand-body), system-ui, sans-serif;
-  color: var(--off-white);
-  background: var(--charcoal);
-  -webkit-font-smoothing: antialiased;
-}
-
-.brand-guide ::selection {
-  background: var(--gold);
-  color: var(--charcoal);
-}
-
-.brand-display {
-  font-family: var(--font-brand-display), ui-sans-serif, sans-serif;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-
-.brand-label {
-  font-family: var(--font-brand-display), ui-sans-serif, sans-serif;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-
-html:has(.brand-guide),
-html:has(.brand-guide) body {
-  background: var(--charcoal);
-}
+/* Brand guide motion — colors/type come from v02-root (home page system) */
 
 @keyframes brand-fade-up {
   from {
@@ -81,17 +45,10 @@ html:has(.brand-guide) body {
     brand-float 7s 1.2s ease-in-out infinite;
 }
 
+/* Visible by default — never leave empty bordered boxes */
 .brand-reveal {
-  opacity: 0;
-  transform: translateY(1.5rem);
-  transition:
-    opacity 0.8s ease,
-    transform 0.8s ease;
-}
-
-.brand-reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 .brand-swatch {
@@ -110,18 +67,16 @@ html:has(.brand-guide) body {
 
 .brand-logo-tile:hover {
   transform: translateY(-3px);
-  border-color: color-mix(in srgb, var(--gold) 45%, transparent);
+  border-color: color-mix(in srgb, var(--v02-gold) 40%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .brand-hero-copy,
   .brand-hero-rule,
-  .brand-hero-logo,
-  .brand-reveal {
+  .brand-hero-logo {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
-    transition: none !important;
   }
 
   .brand-swatch:hover,

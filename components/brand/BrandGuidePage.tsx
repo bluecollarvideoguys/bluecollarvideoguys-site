@@ -1,28 +1,62 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { BrandLogo, type BrandLogoVariant } from "@/components/BrandLogo";
+import {
+  BrandLogo,
+  SiteBrandLink,
+  type BrandLogoVariant,
+} from "@/components/BrandLogo";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 
-/** Official palette from Blue_Collar_Video_Guys_Official_Brand_Guide.pdf */
+/** Live site / home page palette (v02) */
 const COLORS = [
   {
-    name: "Off White",
-    hex: "#F2F2F2",
-    role: "Primary light / lettering",
+    name: "Navy Deep",
+    hex: "#0D1520",
+    role: "Page shell, footer, darkest ground",
+    on: "light" as const,
+  },
+  {
+    name: "Navy",
+    hex: "#111A26",
+    role: "Primary dark surfaces and headers",
+    on: "light" as const,
+  },
+  {
+    name: "Ink",
+    hex: "#16202D",
+    role: "Body text on paper, headlines",
+    on: "light" as const,
+  },
+  {
+    name: "Paper",
+    hex: "#F5F5F2",
+    role: "Light sections, reading surfaces",
     on: "dark" as const,
   },
   {
     name: "Gold",
-    hex: "#F5B000",
-    role: "Brand accent / emphasis",
+    hex: "#F2AE26",
+    role: "Primary accent, CTAs, VIDEO GUYS",
     on: "dark" as const,
   },
   {
-    name: "Charcoal",
-    hex: "#1A1A1A",
-    role: "Primary dark / backgrounds",
+    name: "Gold Hot",
+    hex: "#FFC64D",
+    role: "Hover states, highlight lift",
+    on: "dark" as const,
+  },
+  {
+    name: "Gold Deep",
+    hex: "#BD7C00",
+    role: "Eyebrows and secondary accent text",
+    on: "light" as const,
+  },
+  {
+    name: "Slate",
+    hex: "#64748B",
+    role: "Supporting copy, metadata",
     on: "light" as const,
   },
 ];
@@ -41,6 +75,11 @@ const LOGO_VARIANTS: {
     variant: "alternate",
     label: "Alternate Horizontal",
     use: "Secondary horizontal applications and flexible layouts",
+  },
+  {
+    variant: "compact",
+    label: "Compact Horizontal",
+    use: "Navigation bars and tight horizontal spaces",
   },
   {
     variant: "stacked",
@@ -112,69 +151,68 @@ const DONT = [
 const DO = [
   "Keep the BC monogram, play symbol, roof form, and proportions consistent.",
   "Use clean, continuous solid borders on icon marks, submarks, and badges.",
-  "Prefer charcoal or off-white grounds with gold as accent, not decoration.",
+  "Prefer navy or paper grounds with gold as accent, not decoration.",
   "Lead with reputation and outcomes before cameras and gear.",
   "Ask: does this help BUILD TRUST, STAND OUT, or WIN MORE WORK?",
 ];
 
-function SectionEyebrow({ children }: { children: string }) {
-  return (
-    <span className="brand-label mb-4 block text-[11px] text-[var(--gold)]">
-      {children}
-    </span>
-  );
-}
+const MOCKUPS: {
+  src: string;
+  label: string;
+  use: string;
+}[] = [
+  {
+    src: "/brand/mockups/apparel-hat-photo.png",
+    label: "Apparel",
+    use: "BC house mark embroidered on a black trucker hat — clean at small size, solid borders intact.",
+  },
+  {
+    src: "/brand/mockups/vehicle-truck-photo.png",
+    label: "Vehicle Decal",
+    use: "Primary horizontal lockup on a black pickup tailgate — high contrast for distance legibility.",
+  },
+  {
+    src: "/brand/mockups/social-profile-photo.png",
+    label: "Social Profile",
+    use: "Circular gold-ring profile mark for avatars, stickers, and platform seals.",
+  },
+  {
+    src: "/brand/mockups/social-banner-photo.png",
+    label: "Social Banner",
+    use: "Cover treatment with lockup, job-site photography, and Real People. Real Work. Real Results.",
+  },
+];
+
+/** Matches home page type system */
+const type = {
+  eyebrowLight:
+    "text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold-deep)]",
+  eyebrowDark:
+    "text-xs font-semibold uppercase tracking-[0.18em] text-[var(--v02-gold)]",
+  titleLight:
+    "v02-display text-4xl font-bold tracking-tight text-[var(--v02-ink)] sm:text-5xl",
+  titleDark:
+    "v02-display text-4xl font-bold tracking-tight text-white sm:text-5xl",
+  titleHero:
+    "v02-display text-5xl font-bold leading-[0.9] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl",
+  bodyLight: "text-base leading-relaxed text-slate-600",
+  bodyDark: "text-base leading-relaxed text-slate-400",
+  bodySmLight: "text-sm leading-relaxed text-slate-600",
+  bodySmDark: "text-sm leading-relaxed text-slate-400",
+} as const;
 
 export function BrandGuidePage() {
-  const rootRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-
-    const nodes = root.querySelectorAll<HTMLElement>(".brand-reveal");
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            io.unobserve(entry.target);
-          }
-        }
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
-    );
-
-    nodes.forEach((node) => io.observe(node));
-    const failSafe = window.setTimeout(() => {
-      nodes.forEach((node) => node.classList.add("is-visible"));
-    }, 1800);
-
-    return () => {
-      io.disconnect();
-      window.clearTimeout(failSafe);
-    };
-  }, []);
-
   return (
-    <div ref={rootRef} className="relative">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--line)] bg-[var(--charcoal)]/85 text-[var(--off-white)] backdrop-blur-md">
+    <div className="relative">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)]/80 text-white backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-          <Link href="/" className="flex items-center" aria-label="Home">
-            <BrandLogo
-              variant="compact"
-              alt=""
-              className="h-8 w-[7.06rem] sm:h-9 sm:w-[7.94rem]"
-              loading="eager"
-              fetchPriority="high"
-              sizes="127px"
-            />
-          </Link>
-          <nav className="brand-label hidden items-center gap-6 text-[10px] text-[var(--off-white)]/55 sm:flex">
+          <SiteBrandLink />
+          <nav className="hidden items-center gap-6 text-xs font-semibold uppercase tracking-[0.14em] text-white/60 sm:flex">
             {(
               [
                 ["#foundation", "Foundation"],
                 ["#logos", "Logos"],
+                ["#mockups", "Mockups"],
                 ["#color", "Color"],
                 ["#type", "Type"],
                 ["#voice", "Voice"],
@@ -184,49 +222,59 @@ export function BrandGuidePage() {
               <a
                 key={href}
                 href={href}
-                className="transition hover:text-[var(--gold)]"
+                className="transition hover:text-[var(--v02-gold)]"
               >
                 {label}
               </a>
             ))}
           </nav>
+          <div className="flex items-center gap-3">
+            <a
+              href="/brand/BCVG-Official-Brand-Guide.pdf"
+              download
+              className="hidden text-xs font-semibold uppercase tracking-[0.14em] text-white/60 transition hover:text-[var(--v02-gold)] sm:inline"
+            >
+              Download PDF
+            </a>
+            <Link
+              href="/"
+              className="rounded-full bg-[var(--v02-gold)] px-4 py-2 text-xs font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)] sm:px-5 sm:py-2.5 sm:text-sm"
+            >
+              Back to Site
+            </Link>
+          </div>
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b border-[var(--line)] pt-16">
+      {/* Hero — home page language */}
+      <section className="relative overflow-hidden border-b border-[var(--v02-line-on-dark)] pt-16">
         <div
           className="pointer-events-none absolute inset-0"
           aria-hidden
           style={{
             background:
-              "radial-gradient(ellipse 75% 55% at 72% 18%, color-mix(in srgb, var(--gold) 16%, transparent), transparent 58%), linear-gradient(165deg, var(--charcoal-soft) 0%, var(--charcoal) 52%, #111111 100%)",
+              "radial-gradient(ellipse 80% 60% at 70% 20%, color-mix(in srgb, var(--v02-gold) 18%, transparent), transparent 55%), linear-gradient(165deg, var(--v02-navy) 0%, var(--v02-navy-deep) 55%, #0a1018 100%)",
           }}
         />
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.035]"
+          className="pointer-events-none absolute inset-0 opacity-[0.04] texture-grain"
           aria-hidden
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-            backgroundSize: "180px 180px",
-          }}
         />
 
         <div className="relative mx-auto grid min-h-[88vh] max-w-6xl items-center gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:py-24">
           <div className="brand-hero-copy">
-            <p className="brand-label text-[11px] text-[var(--gold)]">
-              Official Brand Guide
-            </p>
-            <div className="brand-hero-rule mt-5 h-[3px] w-16 bg-[var(--gold)]" />
-            <h1 className="brand-display mt-7 text-6xl leading-[0.9] text-[var(--off-white)] sm:text-7xl md:text-8xl">
-              The Blue Collar
-              <span className="mt-1 block text-[var(--gold)]">Video Guys™</span>
+            <p className={type.eyebrowDark}>Official Brand Guide</p>
+            <div className="brand-hero-rule mt-5 h-1 w-16 bg-[var(--v02-gold)]" />
+            <h1 className={`${type.titleHero} mt-7`}>
+              THE BLUE COLLAR
+              <span className="mt-1 block text-[var(--v02-gold)]">
+                VIDEO GUYS™
+              </span>
             </h1>
-            <p className="brand-label mt-6 text-sm text-[var(--off-white)]/70">
+            <p className="mt-6 max-w-md text-base font-semibold tracking-wide text-white/80 sm:text-lg">
               Build Trust. Stand Out. Win More Work.
             </p>
-            <p className="mt-5 max-w-md text-base leading-relaxed text-[var(--off-white)]/55">
+            <p className={`mt-4 max-w-md ${type.bodyDark}`}>
               Media Team for the Trades. Built for the businesses that build
               America.
             </p>
@@ -247,15 +295,15 @@ export function BrandGuidePage() {
       {/* Foundation */}
       <section
         id="foundation"
-        className="scroll-mt-20 border-b border-[var(--line)] bg-[var(--charcoal)] py-20 sm:py-24"
+        className="scroll-mt-24 border-b border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] py-20 sm:py-24"
       >
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <div className="brand-reveal max-w-3xl">
-            <SectionEyebrow>01 — Brand Foundation</SectionEyebrow>
-            <h2 className="brand-display text-5xl text-[var(--off-white)] sm:text-6xl">
+            <p className={type.eyebrowDark}>01 — Brand Foundation</p>
+            <h2 className={`${type.titleDark} mt-4`}>
               Built for the businesses that build America.
             </h2>
-            <p className="mt-6 text-base leading-relaxed text-[var(--off-white)]/60 sm:text-lg">
+            <p className={`mt-6 ${type.bodyDark}`}>
               The Blue Collar Video Guys is a video marketing and growth brand
               built specifically for the trades. We help established blue-collar
               businesses turn the reputation they have already earned into
@@ -263,7 +311,7 @@ export function BrandGuidePage() {
             </p>
           </div>
 
-          <div className="mt-14 grid gap-px overflow-hidden border border-[var(--line)] bg-[var(--line)] sm:grid-cols-3">
+          <div className="mt-14 grid gap-px overflow-hidden border border-[var(--v02-line-on-dark)] bg-[var(--v02-line-on-dark)] sm:grid-cols-3">
             {[
               {
                 k: "Brand Promise",
@@ -280,26 +328,22 @@ export function BrandGuidePage() {
             ].map((item, i) => (
               <div
                 key={item.k}
-                className="brand-reveal bg-[var(--charcoal-soft)] p-7 sm:p-8"
+                className="brand-reveal bg-[var(--v02-navy-deep)] p-7 sm:p-8"
                 style={{ transitionDelay: `${i * 70}ms` }}
               >
-                <p className="brand-label text-[10px] text-[var(--gold)]">
-                  {item.k}
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-[var(--off-white)]/75">
-                  {item.v}
-                </p>
+                <p className={type.eyebrowDark}>{item.k}</p>
+                <p className={`mt-3 ${type.bodySmDark}`}>{item.v}</p>
               </div>
             ))}
           </div>
 
-          <div className="brand-reveal mt-10 border border-[var(--line)] bg-[var(--charcoal-soft)] p-8 sm:p-10">
-            <SectionEyebrow>02 — Positioning</SectionEyebrow>
-            <h3 className="brand-display text-3xl text-[var(--off-white)] sm:text-4xl">
+          <div className="brand-reveal mt-10 border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy-deep)] p-8 sm:p-10">
+            <p className={type.eyebrowDark}>02 — Positioning</p>
+            <h3 className="v02-display mt-4 text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
               We help blue-collar businesses become the company people trust
               before they ever call.
             </h3>
-            <p className="mt-5 max-w-3xl text-base leading-relaxed text-[var(--off-white)]/55">
+            <p className={`mt-5 max-w-3xl ${type.bodyDark}`}>
               Our position is not &quot;another video production company.&quot; We
               are the strategic media and marketing partner for companies whose
               reputation, craftsmanship, people, and proof deserve to be seen.
@@ -309,14 +353,14 @@ export function BrandGuidePage() {
         </div>
       </section>
 
-      {/* Blueprint + Trust Framework */}
-      <section className="border-b border-[var(--line-on-light)] bg-[var(--off-white)] py-20 text-[var(--charcoal)] sm:py-24">
+      {/* Blueprint on paper like home */}
+      <section className="border-b border-[var(--v02-line)] bg-[var(--v02-paper)] py-20 sm:py-24">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <div className="brand-reveal max-w-2xl">
-            <span className="brand-label mb-4 block text-[11px] text-[var(--gold)]">
+            <p className={type.eyebrowLight}>
               03 — The Blue Collar Blueprint™
-            </span>
-            <h2 className="brand-display text-5xl text-[var(--charcoal)] sm:text-6xl">
+            </p>
+            <h2 className={`${type.titleLight} mt-4`}>
               Build Trust. Stand Out. Win More Work.
             </h2>
           </div>
@@ -325,30 +369,28 @@ export function BrandGuidePage() {
             {BLUEPRINT.map((item, i) => (
               <article
                 key={item.title}
-                className="brand-reveal border border-[var(--line-on-light)] bg-white p-7 sm:p-8"
+                className="brand-reveal border-t-2 border-[var(--v02-gold)] bg-white/60 pt-8"
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
-                <p className="brand-label text-[10px] text-[var(--gold)]">
+                <p className="v02-display text-4xl font-bold tracking-tight text-[var(--v02-gold)]">
                   0{i + 1}
                 </p>
-                <h3 className="brand-display mt-3 text-3xl text-[var(--charcoal)]">
+                <h3 className="v02-display mt-3 text-2xl font-bold tracking-tight text-[var(--v02-ink)] sm:text-3xl">
                   {item.title}
                 </h3>
-                <p className="mt-4 text-sm leading-relaxed text-[var(--charcoal)]/65">
-                  {item.body}
-                </p>
+                <p className={`mt-4 ${type.bodySmLight}`}>{item.body}</p>
               </article>
             ))}
           </div>
 
-          <div className="brand-reveal mt-10 border border-[var(--charcoal)] bg-[var(--charcoal)] p-8 text-[var(--off-white)] sm:p-10">
-            <span className="brand-label mb-4 block text-[11px] text-[var(--gold)]">
-              04 — The Trust Framework™
-            </span>
-            <p className="brand-display text-3xl sm:text-4xl">
-              Build Trust → Stand Out → Win More Work
+          <div className="brand-reveal mt-12 border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] p-8 text-white sm:p-10">
+            <p className={type.eyebrowDark}>04 — The Trust Framework™</p>
+            <p className="v02-display mt-4 text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
+              Build Trust{" "}
+              <span className="text-[var(--v02-gold)]">→</span> Stand Out{" "}
+              <span className="text-[var(--v02-gold)]">→</span> Win More Work
             </p>
-            <p className="mt-5 max-w-3xl text-sm leading-relaxed text-[var(--off-white)]/60 sm:text-base">
+            <p className={`mt-5 max-w-3xl ${type.bodyDark}`}>
               The Trust Framework™ is the core philosophy that powers the Blue
               Collar Blueprint™. Every video, testimonial, website, social post,
               photograph, campaign, and sales asset should help move the client
@@ -361,15 +403,15 @@ export function BrandGuidePage() {
       {/* Logos */}
       <section
         id="logos"
-        className="scroll-mt-20 border-b border-[var(--line)] bg-[var(--charcoal)] py-20 sm:py-24"
+        className="scroll-mt-24 border-b border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] py-20 sm:py-24"
       >
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <div className="brand-reveal max-w-2xl">
-            <SectionEyebrow>05 — Logo System</SectionEyebrow>
-            <h2 className="brand-display text-5xl text-[var(--off-white)] sm:text-6xl">
+            <p className={type.eyebrowDark}>05 — Logo System</p>
+            <h2 className={`${type.titleDark} mt-4`}>
               Lockups that carry the crew
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-[var(--off-white)]/55">
+            <p className={`mt-5 ${type.bodyDark}`}>
               The BC monogram, play symbol, roof form, proportions, and
               solid-border treatment stay consistent across applications. Icon
               marks, submarks, and badges use clean, continuous solid borders.
@@ -380,10 +422,10 @@ export function BrandGuidePage() {
             {LOGO_VARIANTS.map((item, i) => (
               <article
                 key={item.variant}
-                className="brand-reveal brand-logo-tile overflow-hidden border border-[var(--line)]"
-                style={{ transitionDelay: `${i * 55}ms` }}
+                className="brand-reveal brand-logo-tile overflow-hidden border border-[var(--v02-line-on-dark)]"
+                style={{ transitionDelay: `${i * 50}ms` }}
               >
-                <div className="flex min-h-[11rem] items-center justify-center bg-black px-8 py-10">
+                <div className="flex min-h-[11rem] items-center justify-center bg-[var(--v02-navy-deep)] px-8 py-10">
                   <BrandLogo
                     variant={item.variant}
                     className={
@@ -397,13 +439,11 @@ export function BrandGuidePage() {
                     sizes="280px"
                   />
                 </div>
-                <div className="border-t border-[var(--line)] bg-[var(--charcoal-soft)] px-5 py-4">
-                  <h3 className="brand-display text-xl text-[var(--off-white)]">
+                <div className="border-t border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-5 py-4">
+                  <h3 className="v02-display text-lg font-bold tracking-tight text-white">
                     {item.label}
                   </h3>
-                  <p className="mt-1 text-sm leading-relaxed text-[var(--off-white)]/50">
-                    {item.use}
-                  </p>
+                  <p className={`mt-1 ${type.bodySmDark}`}>{item.use}</p>
                 </div>
               </article>
             ))}
@@ -411,49 +451,103 @@ export function BrandGuidePage() {
         </div>
       </section>
 
-      {/* Color */}
+      {/* Mockups — from original brand board */}
       <section
-        id="color"
-        className="scroll-mt-20 border-b border-[var(--line)] bg-[var(--charcoal)] py-20 sm:py-24"
+        id="mockups"
+        className="scroll-mt-24 border-b border-[var(--v02-line)] bg-[var(--v02-paper)] py-20 sm:py-24"
       >
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <div className="brand-reveal max-w-2xl">
-            <SectionEyebrow>06 — Color Palette</SectionEyebrow>
-            <h2 className="brand-display text-5xl text-[var(--off-white)] sm:text-6xl">
-              Three colors. Full force.
+            <p className={type.eyebrowLight}>14 — Logo Mockups</p>
+            <h2 className={`${type.titleLight} mt-4`}>
+              How the mark shows up in the wild
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-[var(--off-white)]/55">
-              Charcoal for authority. Off white for lettering. Gold for emphasis,
-              never decoration.
+            <p className={`mt-5 ${type.bodyLight}`}>
+              Application stills from the original brand board — apparel,
+              vehicle, and social — using the current logo system.
             </p>
           </div>
 
-          <div className="mt-14 grid gap-4 md:grid-cols-3">
+          <div className="brand-reveal mt-14 overflow-hidden border border-[var(--v02-line)] bg-[var(--v02-navy-deep)]">
+            <Image
+              src="/brand/mockups/applications-strip.png"
+              alt="Blue Collar Video Guys logo applications: hat, truck decal, social profile, and social banner"
+              width={1535}
+              height={230}
+              className="h-auto w-full"
+              sizes="(max-width: 1152px) 100vw, 1152px"
+            />
+          </div>
+
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {MOCKUPS.map((item, i) => (
+              <article
+                key={item.src}
+                className="brand-reveal brand-logo-tile overflow-hidden border border-[var(--v02-line)] bg-white"
+                style={{ transitionDelay: `${i * 50}ms` }}
+              >
+                <div className="relative aspect-[16/10] bg-[var(--v02-navy-deep)]">
+                  <Image
+                    src={item.src}
+                    alt={`${item.label} mockup — The Blue Collar Video Guys`}
+                    fill
+                    className="object-cover object-center"
+                    sizes="(max-width: 640px) 100vw, 560px"
+                  />
+                </div>
+                <div className="border-t border-[var(--v02-line)] px-5 py-4">
+                  <h3 className="v02-display text-lg font-bold tracking-tight text-[var(--v02-ink)]">
+                    {item.label}
+                  </h3>
+                  <p className={`mt-1 ${type.bodySmLight}`}>{item.use}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Color — home tokens */}
+      <section
+        id="color"
+        className="scroll-mt-24 border-b border-[var(--v02-line)] bg-[var(--v02-paper)] py-20 sm:py-24"
+      >
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <div className="brand-reveal max-w-2xl">
+            <p className={type.eyebrowLight}>06 — Color Palette</p>
+            <h2 className={`${type.titleLight} mt-4`}>
+              Navy grit. Gold signal.
+            </h2>
+            <p className={`mt-5 ${type.bodyLight}`}>
+              Live site tokens. Dark grounds carry authority. Paper carries
+              reading. Gold is the job-won moment, never wallpaper.
+            </p>
+          </div>
+
+          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {COLORS.map((c, i) => (
               <article
                 key={c.hex}
-                className="brand-reveal brand-swatch overflow-hidden border border-[var(--line)]"
-                style={{ transitionDelay: `${i * 70}ms` }}
+                className="brand-reveal brand-swatch overflow-hidden border border-[var(--v02-line)]"
+                style={{ transitionDelay: `${i * 45}ms` }}
               >
                 <div
-                  className="flex h-40 items-end px-5 pb-4"
+                  className="flex h-28 items-end px-4 pb-3"
                   style={{ background: c.hex }}
                 >
                   <span
-                    className={`font-mono text-sm font-medium tracking-wide ${
-                      c.on === "light"
-                        ? "text-[var(--off-white)]"
-                        : "text-[var(--charcoal)]"
+                    className={`font-mono text-xs font-medium tracking-wide ${
+                      c.on === "light" ? "text-white/90" : "text-[var(--v02-ink)]"
                     }`}
                   >
                     {c.hex}
                   </span>
                 </div>
-                <div className="bg-[var(--charcoal-soft)] px-5 py-5">
-                  <h3 className="brand-display text-2xl text-[var(--off-white)]">
+                <div className="bg-white px-4 py-4">
+                  <h3 className="v02-display text-base font-bold tracking-tight text-[var(--v02-ink)]">
                     {c.name}
                   </h3>
-                  <p className="mt-1 text-sm text-[var(--off-white)]/50">
+                  <p className="mt-1 text-xs leading-relaxed text-slate-500">
                     {c.role}
                   </p>
                 </div>
@@ -463,110 +557,101 @@ export function BrandGuidePage() {
         </div>
       </section>
 
-      {/* Typography */}
+      {/* Typography — Barlow + Inter like home */}
       <section
         id="type"
-        className="scroll-mt-20 border-b border-[var(--line-on-light)] bg-[var(--off-white)] py-20 text-[var(--charcoal)] sm:py-24"
+        className="scroll-mt-24 border-b border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] py-20 sm:py-24"
       >
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <div className="brand-reveal max-w-2xl">
-            <span className="brand-label mb-4 block text-[11px] text-[var(--gold)]">
-              07 — Typography
-            </span>
-            <h2 className="brand-display text-5xl text-[var(--charcoal)] sm:text-6xl">
-              Condensed. Direct. Industrial.
+            <p className={type.eyebrowDark}>07 — Typography</p>
+            <h2 className={`${type.titleDark} mt-4`}>
+              Condensed power. Clean body.
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-[var(--charcoal)]/60">
-              Primary display is Bebas Neue. Supporting labels use Bebas Neue
-              with increased tracking. Long paragraphs use a clean neutral sans.
-              The BC monogram is custom artwork, never typed text.
+            <p className={`mt-5 ${type.bodyDark}`}>
+              Display headlines use Barlow Condensed. Body and UI use Inter.
+              Pair them. Do not mix in a third family. The BC monogram is custom
+              artwork, never typed text.
             </p>
           </div>
 
           <div className="mt-14 grid gap-6 lg:grid-cols-2">
-            <div className="brand-reveal border border-[var(--line-on-light)] bg-white p-8 sm:p-10">
-              <p className="brand-label text-[10px] text-[var(--gold)]">
-                Primary Display · Bebas Neue
-              </p>
-              <p className="brand-display mt-6 text-5xl leading-[0.92] text-[var(--charcoal)] sm:text-6xl">
-                Build Trust.
+            <div className="brand-reveal border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy-deep)] p-8 sm:p-10">
+              <p className={type.eyebrowDark}>Display · Barlow Condensed</p>
+              <p className="v02-display mt-6 text-5xl font-bold leading-[0.95] tracking-tight text-white sm:text-6xl">
+                BUILD TRUST.
                 <br />
-                Stand Out.
+                STAND OUT.
                 <br />
-                <span className="text-[var(--gold)]">Win More Work.</span>
+                <span className="text-[var(--v02-gold)]">WIN MORE WORK.</span>
               </p>
-              <p className="mt-8 text-sm text-[var(--charcoal)]/55">
-                Large headlines, campaign statements, key website headings,
-                signage-style graphics
+              <p className={`mt-8 ${type.bodySmDark}`}>
+                Weights 500–800 · All-caps headlines · Tight tracking on large
+                sizes
               </p>
             </div>
 
-            <div className="brand-reveal border border-[var(--line-on-light)] bg-white p-8 sm:p-10">
-              <p className="brand-label text-[10px] text-[var(--gold)]">
-                Supporting · Bebas Neue · Tracked
-              </p>
-              <p className="brand-label mt-6 text-xl text-[var(--charcoal)] sm:text-2xl">
-                Media Team for the Trades
-              </p>
-              <p className="mt-10 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--gold)]">
-                Body · Neutral Sans
-              </p>
-              <p className="mt-4 text-base leading-relaxed text-[var(--charcoal)]/70">
+            <div className="brand-reveal border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy-deep)] p-8 sm:p-10">
+              <p className={type.eyebrowDark}>Body · Inter</p>
+              <p className="mt-6 text-xl font-medium leading-snug text-white sm:text-2xl">
                 You&apos;ve spent years earning your reputation. Our job is to
-                make sure more people see it. Through the Blue Collar Blueprint™
-                and our Trust Framework™, we create authentic video marketing
-                that helps blue-collar businesses grow.
+                make sure more people see it.
               </p>
-              <p className="mt-8 text-sm text-[var(--charcoal)]/55">
-                Bold, condensed, legible, confident, premium, hardworking. Avoid
-                decorative scripts, playful rounded fonts, tech-startup futurism,
-                or distressed novelty fonts.
+              <p className={`mt-6 ${type.bodyDark}`}>
+                Use Inter for paragraphs, forms, navigation, and supporting
+                sentences. Keep line length readable. Prefer sentence case for
+                body, Title Case for CTAs.
+              </p>
+              <p className={`mt-8 ${type.bodySmDark}`}>
+                Weights 400–600 · Comfortable line height · No decorative italics
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Voice + Messaging */}
+      {/* Voice */}
       <section
         id="voice"
-        className="scroll-mt-20 border-b border-[var(--line)] bg-[var(--charcoal)] py-20 sm:py-24"
+        className="scroll-mt-24 border-b border-[var(--v02-line)] bg-[var(--v02-paper)] py-20 sm:py-24"
       >
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <div className="brand-reveal max-w-2xl">
-            <SectionEyebrow>08 — Brand Voice</SectionEyebrow>
-            <h2 className="brand-display text-5xl text-[var(--off-white)] sm:text-6xl">
+            <p className={type.eyebrowLight}>08 — Brand Voice</p>
+            <h2 className={`${type.titleLight} mt-4`}>
               A capable growth partner
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-[var(--off-white)]/55">
+            <p className={`mt-5 ${type.bodyLight}`}>
               Direct, confident, practical, grounded, and clear. Speak to
               business outcomes and reputation before cameras and gear.
             </p>
           </div>
 
           <div className="mt-14 grid gap-6 lg:grid-cols-2">
-            <div className="brand-reveal border border-[var(--line)] bg-[var(--charcoal-soft)] p-8">
-              <h3 className="brand-display text-3xl text-[var(--gold)]">Use</h3>
+            <div className="brand-reveal border border-[var(--v02-line)] bg-white p-8">
+              <h3 className="v02-display text-2xl font-bold tracking-tight text-[var(--v02-gold-deep)]">
+                Use
+              </h3>
               <ul className="mt-6 space-y-4">
                 {VOICE_USE.map((line) => (
                   <li
                     key={line}
-                    className="border-l-2 border-[var(--gold)] pl-4 text-sm leading-relaxed text-[var(--off-white)]/80"
+                    className="border-l-2 border-[var(--v02-gold)] pl-4 text-sm leading-relaxed text-slate-600"
                   >
                     {line}
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="brand-reveal border border-[var(--line)] bg-[var(--charcoal-soft)] p-8">
-              <h3 className="brand-display text-3xl text-[var(--off-white)]/70">
+            <div className="brand-reveal border border-[var(--v02-line)] bg-white p-8">
+              <h3 className="v02-display text-2xl font-bold tracking-tight text-slate-400">
                 Avoid
               </h3>
               <ul className="mt-6 space-y-4">
                 {VOICE_AVOID.map((line) => (
                   <li
                     key={line}
-                    className="border-l-2 border-[var(--off-white)]/20 pl-4 text-sm leading-relaxed text-[var(--off-white)]/45"
+                    className="border-l-2 border-slate-200 pl-4 text-sm leading-relaxed text-slate-400"
                   >
                     {line}
                   </li>
@@ -575,15 +660,13 @@ export function BrandGuidePage() {
             </div>
           </div>
 
-          <div className="brand-reveal mt-10 border border-[var(--line)] bg-black px-8 py-10 sm:px-12">
-            <p className="brand-label text-[11px] text-[var(--gold)]">
-              11 — Core Messaging
-            </p>
+          <div className="brand-reveal mt-10 border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy-deep)] px-8 py-10 sm:px-12">
+            <p className={type.eyebrowDark}>11 — Core Messaging</p>
             <ul className="mt-7 space-y-5">
               {MESSAGING.map((line) => (
                 <li
                   key={line}
-                  className="brand-display text-2xl text-[var(--off-white)] sm:text-3xl"
+                  className="v02-display text-2xl font-bold tracking-tight text-white sm:text-3xl"
                 >
                   {line}
                 </li>
@@ -591,11 +674,9 @@ export function BrandGuidePage() {
             </ul>
           </div>
 
-          <div className="brand-reveal mt-6 border border-[var(--gold)]/40 bg-[var(--charcoal-soft)] p-8 sm:p-10">
-            <p className="brand-label text-[11px] text-[var(--gold)]">
-              12 — Elevator Pitch
-            </p>
-            <p className="mt-5 max-w-3xl text-base leading-relaxed text-[var(--off-white)]/75 sm:text-lg">
+          <div className="brand-reveal mt-6 border border-[var(--v02-gold)]/35 bg-[var(--v02-navy)] p-8 sm:p-10">
+            <p className={type.eyebrowDark}>12 — Elevator Pitch</p>
+            <p className={`mt-5 max-w-3xl ${type.bodyDark}`}>
               You&apos;ve spent years earning your reputation. Our job is to make
               sure more people see it. Through the Blue Collar Blueprint™ and our
               Trust Framework™, we create authentic video marketing that helps
@@ -606,24 +687,22 @@ export function BrandGuidePage() {
         </div>
       </section>
 
-      {/* Visual + Applications + Usage */}
+      {/* Usage */}
       <section
         id="usage"
-        className="scroll-mt-20 border-b border-[var(--line)] bg-[var(--charcoal)] py-20 sm:py-24"
+        className="scroll-mt-24 border-b border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] py-20 sm:py-24"
       >
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <div className="brand-reveal max-w-2xl">
-            <SectionEyebrow>09 — Photography & Video</SectionEyebrow>
-            <h2 className="brand-display text-5xl text-[var(--off-white)] sm:text-6xl">
-              Real work. Real proof.
-            </h2>
-            <p className="mt-5 text-base leading-relaxed text-[var(--off-white)]/55">
+            <p className={type.eyebrowDark}>09 — Photography & Video</p>
+            <h2 className={`${type.titleDark} mt-4`}>Real work. Real proof.</h2>
+            <p className={`mt-5 ${type.bodyDark}`}>
               Show real people, real environments, and real proof. Favor
               cinematic but believable imagery: job sites, crews, equipment,
               craftsmanship, owners, customers, before/after progress. Lighting
               may be dramatic, but the story should never feel fake.
             </p>
-            <p className="brand-label mt-6 text-[11px] text-[var(--gold)]">
+            <p className={`mt-6 ${type.eyebrowDark}`}>
               Premium · Rugged · Honest · American · Modern · Intentional · Strong
               · Understated
             </p>
@@ -650,29 +729,29 @@ export function BrandGuidePage() {
             ].map((item) => (
               <div
                 key={item.t}
-                className="border border-[var(--line)] bg-[var(--charcoal-soft)] p-6"
+                className="border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy-deep)] p-6"
               >
-                <h3 className="brand-display text-xl text-[var(--off-white)]">
+                <h3 className="v02-display text-xl font-bold tracking-tight text-white">
                   {item.t}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-[var(--off-white)]/50">
-                  {item.d}
-                </p>
+                <p className={`mt-2 ${type.bodySmDark}`}>{item.d}</p>
               </div>
             ))}
           </div>
 
           <div className="mt-14 grid gap-8 lg:grid-cols-2">
             <div className="brand-reveal">
-              <h3 className="brand-display text-3xl text-[var(--gold)]">Do</h3>
+              <h3 className="v02-display text-2xl font-bold tracking-tight text-[var(--v02-gold)]">
+                Do
+              </h3>
               <ul className="mt-6 space-y-4">
                 {DO.map((item) => (
                   <li
                     key={item}
-                    className="flex gap-3 text-sm leading-relaxed text-[var(--off-white)]/75"
+                    className="flex gap-3 text-sm leading-relaxed text-slate-300"
                   >
                     <span
-                      className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--gold)]"
+                      className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--v02-gold)]"
                       aria-hidden
                     />
                     {item}
@@ -681,17 +760,17 @@ export function BrandGuidePage() {
               </ul>
             </div>
             <div className="brand-reveal">
-              <h3 className="brand-display text-3xl text-[var(--off-white)]/70">
+              <h3 className="v02-display text-2xl font-bold tracking-tight text-white/70">
                 Don&apos;t
               </h3>
               <ul className="mt-6 space-y-4">
                 {DONT.map((item) => (
                   <li
                     key={item}
-                    className="flex gap-3 text-sm leading-relaxed text-[var(--off-white)]/45"
+                    className="flex gap-3 text-sm leading-relaxed text-slate-500"
                   >
                     <span
-                      className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-[var(--off-white)]/25"
+                      className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-white/25"
                       aria-hidden
                     />
                     {item}
@@ -703,28 +782,26 @@ export function BrandGuidePage() {
         </div>
       </section>
 
-      {/* North Star close */}
-      <section className="relative overflow-hidden bg-[var(--charcoal)] py-20 sm:py-28">
+      {/* North Star — home closing cadence */}
+      <section className="relative overflow-hidden bg-[var(--v02-navy-deep)] py-20 sm:py-28">
         <div
           className="pointer-events-none absolute inset-0 opacity-50"
           aria-hidden
           style={{
             background:
-              "radial-gradient(ellipse 55% 45% at 50% 100%, color-mix(in srgb, var(--gold) 20%, transparent), transparent 70%)",
+              "radial-gradient(ellipse 55% 45% at 50% 100%, color-mix(in srgb, var(--v02-gold) 22%, transparent), transparent 70%)",
           }}
         />
         <div className="relative mx-auto max-w-3xl px-5 text-center sm:px-8">
           <div className="brand-reveal">
-            <p className="brand-label text-[11px] text-[var(--gold)]">
-              13 — North Star
-            </p>
-            <p className="brand-display mt-6 text-4xl text-[var(--off-white)] sm:text-5xl md:text-6xl">
+            <p className={type.eyebrowDark}>13 — North Star</p>
+            <p className="v02-display mt-6 text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
               Does this help the client
-              <span className="mt-2 block text-[var(--gold)]">
+              <span className="mt-2 block text-[var(--v02-gold)]">
                 Build Trust, Stand Out, or Win More Work?
               </span>
             </p>
-            <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-[var(--off-white)]/50">
+            <p className={`mx-auto mt-6 max-w-xl ${type.bodyDark}`}>
               If it does, it belongs in the Blue Collar system. If it only looks
               cool but does not strengthen trust, differentiation, or business
               outcomes, it is not enough.
@@ -734,22 +811,28 @@ export function BrandGuidePage() {
               className="mx-auto mt-12 h-12 w-auto sm:h-14"
               sizes="280px"
             />
-            <div className="mt-8 flex flex-col items-center gap-3 text-sm text-[var(--off-white)]/50 sm:flex-row sm:justify-center sm:gap-8">
+            <div className="mt-8 flex flex-col items-center gap-3 text-sm text-slate-400 sm:flex-row sm:justify-center sm:gap-8">
               <a
                 href="mailto:build@bluecollarvideoguys.com"
-                className="transition hover:text-[var(--gold)]"
+                className="transition hover:text-[var(--v02-gold)]"
               >
                 build@bluecollarvideoguys.com
               </a>
               <a
                 href={PHONE_HREF}
-                className="transition hover:text-[var(--gold)]"
+                className="transition hover:text-[var(--v02-gold)]"
               >
                 {PHONE_DISPLAY}
               </a>
             </div>
-            <p className="brand-label mt-10 text-[10px] text-[var(--off-white)]/30">
-              The Blue Collar Video Guys™ · Official Brand Guide
+            <Link
+              href="/"
+              className="mt-10 inline-flex items-center justify-center rounded-full bg-[var(--v02-gold)] px-7 py-3.5 text-sm font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
+            >
+              Back to Home
+            </Link>
+            <p className="mt-10 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/30">
+              The Blue Collar Video Guys™ · Brand Guide
             </p>
           </div>
         </div>

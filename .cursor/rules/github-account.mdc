@@ -1,0 +1,15 @@
+---
+description: GitHub for this repo is bluecollarvideoguys via Gmail Google sign-in, not Luma
+alwaysApply: true
+---
+
+# GitHub account (this repo)
+
+`origin` is `https://github.com/bluecollarvideoguys/bluecollarvideoguys-site.git`.
+
+The GitHub user that can push is **bluecollarvideoguys**. Login is **bluecollarvideoguys@gmail.com** with **Google sign-in**. It is not Luma, not `lumafilms`, and not `cokerkathy`.
+
+- Prefer `~/.local/bin/gh` if `gh` is not on PATH.
+- Before a push, `gh auth status` / `gh api user` should show **bluecollarvideoguys**.
+- If git is still `cokerkathy` or `lumafilms`, switch with `gh auth login --hostname github.com --git-protocol https --web` and authorize **bluecollarvideoguys** (Google), or `gh auth switch --user bluecollarvideoguys` if that account is already stored.
+- Do not send the user to the Luma workspace or lumafilms GitHub to push this site.
