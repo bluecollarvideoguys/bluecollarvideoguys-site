@@ -46,65 +46,129 @@ const PACKAGES = [
   {
     tier: "Foundation",
     duration: "3 Month",
+    tagline: "Build your credibility.",
     badge: null as string | null,
     featured: false,
     tone: "gold" as const,
-    includes: [
-      "Trust Strategy",
-      "Client Onboarding",
-      "Pre production planning",
-      "3 Strategy Sessions",
-    ],
-    plus: [
-      "1 Brand Message Video",
-      "1 Promotional Video",
-      "3 Testimonial Videos",
-      "15 Branding Photos",
-      "15 Social Reels",
+    sections: [
+      {
+        title: "Strategy & Planning",
+        items: [
+          "Trust Strategy",
+          "Client Onboarding",
+          "Pre Production Planning",
+          "3 Strategy Sessions",
+        ],
+      },
+      {
+        title: "Content Creation",
+        items: [
+          "1 Brand Message Video",
+          "1 Promotional Video",
+          "3 Testimonial Videos",
+          "15 Branding Photos",
+          "10 Social Reels",
+        ],
+      },
+      {
+        title: "Foundation Extras",
+        items: [
+          "Pre Production Guide & Checklist",
+          "Shot List Planning",
+        ],
+      },
     ],
   },
   {
     tier: "Structure",
     duration: "6 Month",
-    badge: "#BestDeal",
+    tagline: "Turn your content into a growth system.",
+    badge: "Most Popular",
     featured: true,
     tone: "navy" as const,
-    includes: [
-      "6 Strategy Sessions",
-      "1 Brand Message Video",
-      "2 Promotional Videos",
-      "4 Testimonial Videos",
-      "30 Branding Photos",
-      "30 Social Reels",
-    ],
-    plus: [
-      "2 Sales Funnels",
-      "Ad Management",
-      "Ad Package (*$1,000 min ad spend required)",
+    sections: [
+      {
+        title: "Strategy & Planning",
+        items: ["6 Total Strategy Sessions"],
+      },
+      {
+        title: "Content Creation",
+        items: [
+          "1 Brand Message Video",
+          "5 Promotional Videos",
+          "6 Testimonial Videos",
+          "60 Branding Photos",
+          "30 Social Reels",
+        ],
+      },
+      {
+        title: "Growth & Marketing",
+        items: [
+          "2 Sales Funnels",
+          "Ad Management",
+          "Ad Campaign / Package",
+        ],
+        note: "Ad spend is not included in package price.",
+      },
+      {
+        title: "Business & Systems",
+        items: [
+          "Website + Hosting",
+          "CRM Setup / Support",
+          "CRM Management",
+          "Social Media Management",
+        ],
+      },
+      {
+        title: "Extras",
+        items: ["Monthly Content Calendar", "Social Media Management"],
+      },
     ],
   },
   {
     tier: "Turnkey",
     duration: "12 Month",
+    tagline: "Your complete outsourced video marketing department.",
     badge: null as string | null,
     featured: false,
     tone: "gold" as const,
-    includes: [
-      "12 Strategy Sessions",
-      "1 Brand Message Video",
-      "6 Promotional Videos",
-      "4 Testimonial Videos",
-      "3 Sales Funnels",
-      "Ad Management",
-      "Ad Package (*$4,000 min ad spend required)",
-      "60 Branding Photos",
-      "60 Social Reels",
-    ],
-    plus: [
-      "Website + Hosting",
-      "CRM Setup/Support",
-      "CRM Manager",
-      "Social Media Management",
+    sections: [
+      {
+        title: "Strategy & Planning",
+        items: ["12 Total Strategy Sessions"],
+      },
+      {
+        title: "Content Creation",
+        items: [
+          "1 Brand Message Video",
+          "12 Promotional Videos",
+          "12 Testimonial Videos",
+          "120 Branding Photos",
+          "60 Social Reels",
+        ],
+      },
+      {
+        title: "Growth & Marketing",
+        items: [
+          "6 Sales Funnels",
+          "Ad Management",
+          "Ad Campaigns",
+        ],
+        note: "Ad spend is not included in package price.",
+      },
+      {
+        title: "Business & Systems",
+        items: [
+          "Website + Hosting",
+          "CRM Setup / Support",
+          "CRM Management",
+          "Social Media Management",
+        ],
+      },
+      {
+        title: "Extras",
+        items: ["Priority Support"],
+      },
     ],
   },
 ] as const;
@@ -546,21 +610,27 @@ function IconCheck({ className }: { className?: string }) {
 function PackageCard({
   tier,
   duration,
+  tagline,
   badge,
   featured,
   tone,
-  includes,
-  plus,
+  sections,
 }: {
   tier: string;
   duration: string;
+  tagline: string;
   badge: string | null;
   featured: boolean;
   tone: "gold" | "navy";
-  includes: readonly string[];
-  plus: readonly string[];
+  sections: readonly {
+    title: string;
+    items: readonly string[];
+    note?: string;
+  }[];
 }) {
   const isGold = tone === "gold";
+  const checkClass = isGold ? "text-white" : "text-[var(--v02-gold)]";
+  const sectionTitleClass = isGold ? "text-white/80" : "text-[var(--v02-gold)]";
 
   return (
     <article
@@ -608,43 +678,36 @@ function PackageCard({
           <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-white/80">
             {duration}
           </p>
-          <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/70">
-            Trust Strategy Package
-          </p>
+          <p className="mt-3 text-sm leading-snug text-white/75">{tagline}</p>
         </header>
 
-        <ul className="mt-8 space-y-2.5 border-t border-white/15 pt-6">
-          {includes.map((item) => (
-            <li key={item} className="flex gap-2.5 text-sm leading-snug">
-              <IconCheck
-                className={`mt-0.5 shrink-0 ${
-                  isGold ? "text-white" : "text-[var(--v02-gold)]"
-                }`}
-              />
-              <span>{item}</span>
-            </li>
+        <div className="mt-8 space-y-6 border-t border-white/15 pt-6">
+          {sections.map((section) => (
+            <div key={section.title}>
+              <p
+                className={`text-[10px] font-semibold uppercase tracking-[0.16em] ${sectionTitleClass}`}
+              >
+                {section.title}
+              </p>
+              <ul className="mt-3 space-y-2">
+                {section.items.map((item) => (
+                  <li
+                    key={`${section.title}-${item}`}
+                    className="flex gap-2.5 text-sm leading-snug"
+                  >
+                    <IconCheck className={`mt-0.5 shrink-0 ${checkClass}`} />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              {section.note ? (
+                <p className="mt-3 text-[11px] font-semibold uppercase leading-snug tracking-[0.08em] text-[var(--v02-gold)]">
+                  {section.note}
+                </p>
+              ) : null}
+            </div>
           ))}
-        </ul>
-
-        <p
-          className={`mt-7 text-xs font-semibold uppercase tracking-[0.18em] ${
-            isGold ? "text-white/80" : "text-[var(--v02-gold)]"
-          }`}
-        >
-          Plus…
-        </p>
-        <ul className="mt-3 space-y-2.5">
-          {plus.map((item) => (
-            <li key={item} className="flex gap-2.5 text-sm leading-snug">
-              <IconCheck
-                className={`mt-0.5 shrink-0 ${
-                  isGold ? "text-white" : "text-[var(--v02-gold)]"
-                }`}
-              />
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
+        </div>
 
         <div className="mt-auto pt-10">
           <a
