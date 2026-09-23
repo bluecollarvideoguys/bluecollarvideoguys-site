@@ -614,7 +614,7 @@ def build():
     )
     contacts = [
         ("Book a Discovery Call", "calendly.com/bluecollarvideoguys/30min"),
-        ("Phone", "(707) 532-5007"),
+        ("Phone", "(530) 500-0201"),
         ("Email", "build@bluecollarvideoguys.com"),
         ("Website", "bluecollarvideoguys.com"),
     ]

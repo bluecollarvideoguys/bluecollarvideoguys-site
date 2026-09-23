@@ -36,41 +36,51 @@ PAGE_W, PAGE_H = letter
 MARGIN = 0.7 * inch
 
 
+FONT_DIRS = [
+    Path.home() / "Library" / "Fonts",
+    Path("/Library/Fonts"),
+    Path("/System/Library/Fonts/Supplemental"),
+]
+
+# The brand type system: Barlow Condensed for display, Inter for body.
+# Generic sans fallbacks only apply if the real families are not installed.
+FONT_CANDIDATES = {
+    "BCVGDisplay": (
+        ["BarlowCondensed-Bold.ttf", "BarlowCondensed-SemiBold.ttf"],
+        "Helvetica-Bold",
+    ),
+    "BCVGBody": (
+        [
+            "Inter-VariableFont_opsz,wght.ttf",
+            "Inter-V.ttf",
+            "Inter-Regular.ttf",
+            "InterTight-VariableFont_wght.ttf",
+        ],
+        "Helvetica",
+    ),
+}
+
+
 def try_register_fonts() -> tuple[str, str]:
-    """Prefer system fonts close to Barlow Condensed + Inter."""
-    display = "Helvetica-Bold"
-    body = "Helvetica"
-    candidates = [
-        (
-            "BCVGDisplay",
-            [
-                "/System/Library/Fonts/Supplemental/Impact.ttf",
-                "/Library/Fonts/Arial Narrow Bold.ttf",
-                "/System/Library/Fonts/Supplemental/Arial Narrow Bold.ttf",
-            ],
-        ),
-        (
-            "BCVGBody",
-            [
-                "/System/Library/Fonts/Supplemental/Arial.ttf",
-                "/Library/Fonts/Arial.ttf",
-                "/System/Library/Fonts/Helvetica.ttc",
-            ],
-        ),
-    ]
-    registered: dict[str, str] = {}
-    for name, paths in candidates:
-        for path in paths:
-            p = Path(path)
-            if not p.exists():
+    """Register the real brand fonts, falling back to generic sans."""
+    resolved: dict[str, str] = {}
+    for name, (filenames, fallback) in FONT_CANDIDATES.items():
+        resolved[name] = fallback
+        for filename in filenames:
+            path = next(
+                (d / filename for d in FONT_DIRS if (d / filename).exists()), None
+            )
+            if path is None:
                 continue
             try:
-                pdfmetrics.registerFont(TTFont(name, str(p)))
-                registered[name] = name
+                pdfmetrics.registerFont(TTFont(name, str(path)))
+                resolved[name] = name
                 break
             except Exception:
                 continue
-    return registered.get("BCVGDisplay", display), registered.get("BCVGBody", body)
+        if resolved[name] == fallback:
+            print(f"WARNING: {name} not found, falling back to {fallback}")
+    return resolved["BCVGDisplay"], resolved["BCVGBody"]
 
 
 DISPLAY, BODY = try_register_fonts()
@@ -86,10 +96,48 @@ def gold_rule(c: canvas.Canvas, x: float, y: float, w: float = 1.1 * inch) -> No
     c.rect(x, y, w, 3, fill=1, stroke=0)
 
 
+# Site eyebrow spec: Inter 600, uppercase, tracking 0.18em
+EYEBROW_TRACKING = 0.18
+# Site display headings use Tailwind `tracking-tight`
+HEADING_TRACKING = -0.025
+
+
 def eyebrow(c: canvas.Canvas, text: str, x: float, y: float, dark: bool = True) -> None:
-    c.setFillColor(GOLD if dark else GOLD_DEEP)
-    c.setFont(BODY, 9)
-    c.drawString(x, y, text.upper())
+    color = GOLD if dark else GOLD_DEEP
+    size = 9
+    # Char spacing and render mode are graphics state and would otherwise
+    # leak into every later text block, so keep them inside save/restore.
+    c.saveState()
+    c.setFillColor(color)
+    # Only the Inter variable font is installed and it embeds at Regular, so
+    # stroke the glyphs to approximate the site's semibold eyebrow.
+    c.setStrokeColor(color)
+    c.setLineWidth(size * 0.024)
+    t = c.beginText(x, y)
+    t.setFont(BODY, size)
+    t.setCharSpace(size * EYEBROW_TRACKING)
+    t.setTextRenderMode(2)  # fill + stroke
+    t.textOut(text.upper())
+    c.drawText(t)
+    c.restoreState()
+
+
+def tracked_width(
+    c: canvas.Canvas, text: str, font: str, size: float, tracking: float
+) -> float:
+    return c.stringWidth(text, font, size) + tracking * size * max(len(text) - 1, 0)
+
+
+def draw_tracked(
+    c: canvas.Canvas, text: str, x: float, y: float, font: str, size: float, tracking: float
+) -> None:
+    c.saveState()
+    t = c.beginText(x, y)
+    t.setFont(font, size)
+    t.setCharSpace(tracking * size)
+    t.textOut(text)
+    c.drawText(t)
+    c.restoreState()
 
 
 def heading(
@@ -100,19 +148,19 @@ def heading(
     size: float = 28,
     color: Color = white,
     max_width: float | None = None,
+    leading: float = 1.05,
+    tracking: float = HEADING_TRACKING,
 ) -> float:
     c.setFillColor(color)
     c.setFont(DISPLAY, size)
     if max_width is None:
-        c.drawString(x, y, text)
-        return y - size * 1.15
-    # crude wrap
-    words = text.split()
+        draw_tracked(c, text, x, y, DISPLAY, size, tracking)
+        return y - size * leading
     lines: list[str] = []
     cur = ""
-    for w in words:
+    for w in text.split():
         trial = f"{cur} {w}".strip()
-        if c.stringWidth(trial, DISPLAY, size) <= max_width:
+        if tracked_width(c, trial, DISPLAY, size, tracking) <= max_width:
             cur = trial
         else:
             if cur:
@@ -122,9 +170,43 @@ def heading(
         lines.append(cur)
     yy = y
     for line in lines:
-        c.drawString(x, yy, line)
-        yy -= size * 1.05
+        draw_tracked(c, line, x, yy, DISPLAY, size, tracking)
+        yy -= size * leading
     return yy
+
+
+def wrap_lines(
+    c: canvas.Canvas,
+    text: str,
+    width: float,
+    size: float,
+    font: str | None = None,
+) -> list[str]:
+    font = font or BODY
+    lines: list[str] = []
+    cur = ""
+    for w in text.split():
+        trial = f"{cur} {w}".strip()
+        if c.stringWidth(trial, font, size) <= width:
+            cur = trial
+        else:
+            if cur:
+                lines.append(cur)
+            cur = w
+    if cur:
+        lines.append(cur)
+    return lines
+
+
+def body_height(
+    c: canvas.Canvas,
+    text: str,
+    width: float,
+    size: float = 10.5,
+    leading: float = 15,
+) -> float:
+    """Height a body_text block will occupy, so boxes can hug their content."""
+    return len(wrap_lines(c, text, width, size)) * leading
 
 
 def body_text(
@@ -139,21 +221,8 @@ def body_text(
 ) -> float:
     c.setFillColor(color)
     c.setFont(BODY, size)
-    words = text.split()
-    lines: list[str] = []
-    cur = ""
-    for w in words:
-        trial = f"{cur} {w}".strip()
-        if c.stringWidth(trial, BODY, size) <= width:
-            cur = trial
-        else:
-            if cur:
-                lines.append(cur)
-            cur = w
-    if cur:
-        lines.append(cur)
     yy = y
-    for line in lines:
+    for line in wrap_lines(c, text, width, size):
         c.drawString(x, yy, line)
         yy -= leading
     return yy
@@ -192,15 +261,41 @@ def page_footer(c: canvas.Canvas, page: int, total: int = 7, dark: bool = True) 
     c.drawRightString(PAGE_W - MARGIN, 0.4 * inch, f"{page} / {total}")
 
 
+def gold_glow(
+    c: canvas.Canvas,
+    cx: float,
+    cy: float,
+    radius: float,
+    strength: float = 0.14,
+) -> None:
+    """Soft radial gold bloom, matching the hero glow on the live site.
+
+    Stops blend gold into the navy ground rather than using alpha, so the
+    falloff is smooth in print instead of a hard-edged disc.
+    """
+    steps = 28
+    for i in range(steps, 0, -1):
+        t = i / steps
+        # ease-out falloff so the centre stays warm and the edge disappears
+        mix = strength * (1 - t) ** 2
+        c.setFillColor(
+            Color(
+                NAVY_DEEP.red + (GOLD.red - NAVY_DEEP.red) * mix,
+                NAVY_DEEP.green + (GOLD.green - NAVY_DEEP.green) * mix,
+                NAVY_DEEP.blue + (GOLD.blue - NAVY_DEEP.blue) * mix,
+            )
+        )
+        c.circle(cx, cy, radius * t, fill=1, stroke=0)
+
+
 def cover(c: canvas.Canvas) -> None:
     fill(c, NAVY_DEEP)
-    # gold glow
-    c.setFillColor(Color(0.95, 0.68, 0.15, alpha=0.12))
-    c.circle(PAGE_W * 0.78, PAGE_H * 0.72, 180, fill=1, stroke=0)
+    gold_glow(c, PAGE_W * 0.82, PAGE_H * 0.74, 250)
 
     eyebrow(c, "Official Brand Guide", MARGIN, PAGE_H - 1.15 * inch)
     gold_rule(c, MARGIN, PAGE_H - 1.35 * inch)
 
+    # Hero headline mirrors the site: leading-[0.9], tracking-tight
     y = heading(
         c,
         "THE BLUE COLLAR",
@@ -208,8 +303,9 @@ def cover(c: canvas.Canvas) -> None:
         PAGE_H - 2.2 * inch,
         size=42,
         color=white,
+        leading=0.9,
     )
-    y = heading(c, "VIDEO GUYS™", MARGIN, y - 4, size=42, color=GOLD)
+    y = heading(c, "VIDEO GUYS™", MARGIN, y, size=42, color=GOLD, leading=0.9)
 
     c.setFillColor(white)
     c.setFont(BODY, 13)
@@ -236,7 +332,15 @@ def cover(c: canvas.Canvas) -> None:
         2.3 * inch,
     )
 
-    draw_logo(c, "primary-horizontal.png", MARGIN, 0.85 * inch, 2.8 * inch, 0.7 * inch)
+    # draw_logo centers on cx, so offset by half the width to sit on the margin
+    draw_logo(
+        c,
+        "primary-horizontal.png",
+        MARGIN + 1.4 * inch,
+        1.05 * inch,
+        2.8 * inch,
+        0.7 * inch,
+    )
     page_footer(c, 1)
     c.showPage()
 
@@ -273,7 +377,9 @@ def foundation(c: canvas.Canvas) -> None:
         ("Descriptor", "Media Team for the Trades"),
     ]
     card_w = (PAGE_W - 2 * MARGIN - 2 * 10) / 3
-    card_h = 2.15 * inch
+    card_h = 54 + max(
+        body_height(c, copy, card_w - 24, size=9.5, leading=13) for _, copy in cards
+    )
     top = y - 30
     for i, (title, copy) in enumerate(cards):
         x = MARGIN + i * (card_w + 10)
@@ -294,26 +400,34 @@ def foundation(c: canvas.Canvas) -> None:
             leading=13,
         )
 
-    # Positioning panel
+    # Positioning panel — height follows its own copy
     panel_top = top - card_h - 28
+    panel_w = PAGE_W - 2 * MARGIN
+    inner_w = panel_w - 32
+    pos_head = "We help blue-collar businesses become the company people trust before they ever call."
+    pos_body = 'Our position is not "another video production company." We are the strategic media and marketing partner for companies whose reputation, craftsmanship, people, and proof deserve to be seen. The camera is a tool. Trust is the product.'
+    head_h = len(wrap_lines(c, pos_head, inner_w, 16, DISPLAY)) * 16 * 1.05
+    panel_h = 40 + head_h + 18 + body_height(c, pos_body, inner_w, size=10, leading=14) + 20
+    panel_bottom = panel_top - panel_h
+
     c.setFillColor(NAVY_DEEP)
-    c.rect(MARGIN, 0.85 * inch, PAGE_W - 2 * MARGIN, panel_top - 0.85 * inch, fill=1, stroke=0)
+    c.rect(MARGIN, panel_bottom, panel_w, panel_h, fill=1, stroke=0)
     eyebrow(c, "02 — Positioning", MARGIN + 16, panel_top - 24)
-    heading(
+    hy = heading(
         c,
-        "We help blue-collar businesses become the company people trust before they ever call.",
+        pos_head,
         MARGIN + 16,
-        panel_top - 55,
+        panel_top - 48,
         size=16,
         color=white,
-        max_width=PAGE_W - 2 * MARGIN - 32,
+        max_width=inner_w,
     )
     body_text(
         c,
-        'Our position is not "another video production company." We are the strategic media and marketing partner for companies whose reputation, craftsmanship, people, and proof deserve to be seen. The camera is a tool. Trust is the product.',
+        pos_body,
         MARGIN + 16,
-        panel_top - 115,
-        PAGE_W - 2 * MARGIN - 32,
+        hy - 12,
+        inner_w,
         size=10,
         color=SLATE_LIGHT,
         leading=14,
@@ -371,17 +485,32 @@ def blueprint(c: canvas.Canvas) -> None:
     c.setFillColor(NAVY)
     c.rect(MARGIN, 0.85 * inch, PAGE_W - 2 * MARGIN, band_h, fill=1, stroke=0)
     eyebrow(c, "04 — The Trust Framework™", MARGIN + 16, 0.85 * inch + band_h - 24)
-    c.setFillColor(white)
-    c.setFont(DISPLAY, 18)
-    c.drawString(MARGIN + 16, 0.85 * inch + band_h - 55, "BUILD TRUST")
-    c.setFillColor(GOLD)
-    c.drawString(MARGIN + 16 + 115, 0.85 * inch + band_h - 55, "→")
-    c.setFillColor(white)
-    c.drawString(MARGIN + 16 + 135, 0.85 * inch + band_h - 55, "STAND OUT")
-    c.setFillColor(GOLD)
-    c.drawString(MARGIN + 16 + 245, 0.85 * inch + band_h - 55, "→")
-    c.setFillColor(white)
-    c.drawString(MARGIN + 16 + 265, 0.85 * inch + band_h - 55, "WIN MORE WORK")
+
+    # Build Trust → Stand Out → Win More Work. Barlow Condensed has no
+    # U+2192 glyph, so the connector is drawn as a vector arrow and the
+    # steps are positioned from measured widths rather than fixed offsets.
+    step_size = 18
+    step_y = 0.85 * inch + band_h - 55
+    x = MARGIN + 16
+    steps = ["BUILD TRUST", "STAND OUT", "WIN MORE WORK"]
+    for i, step in enumerate(steps):
+        if i:
+            arrow_w = 22
+            mid = step_y + step_size * 0.3
+            c.setStrokeColor(GOLD)
+            c.setFillColor(GOLD)
+            c.setLineWidth(1.6)
+            c.line(x + 4, mid, x + arrow_w - 9, mid)
+            head = c.beginPath()
+            head.moveTo(x + arrow_w - 10, mid + 3.4)
+            head.lineTo(x + arrow_w - 2, mid)
+            head.lineTo(x + arrow_w - 10, mid - 3.4)
+            head.close()
+            c.drawPath(head, fill=1, stroke=0)
+            x += arrow_w + 6
+        c.setFillColor(white)
+        draw_tracked(c, step, x, step_y, DISPLAY, step_size, HEADING_TRACKING)
+        x += tracked_width(c, step, DISPLAY, step_size, HEADING_TRACKING) + 6
     body_text(
         c,
         "The Trust Framework™ is the core philosophy that powers the Blue Collar Blueprint™. Every video, testimonial, website, social post, photograph, campaign, and sales asset should help move the client through these three outcomes.",
@@ -555,7 +684,7 @@ def type_voice(c: canvas.Canvas) -> None:
     heading(c, "Condensed power. Clean body.", MARGIN, PAGE_H - 1.35 * inch, size=24, color=INK)
     body_text(
         c,
-        "Display headlines use Barlow Condensed. Body and UI use Inter. The BC monogram is custom artwork, never typed text.",
+        "Three roles, two families. Display headlines use Barlow Condensed. Body, UI, and eyebrow titles use Inter. The BC monogram is custom artwork, never typed text.",
         MARGIN,
         PAGE_H - 1.65 * inch,
         PAGE_W - 2 * MARGIN,
@@ -564,46 +693,129 @@ def type_voice(c: canvas.Canvas) -> None:
         leading=14,
     )
 
+    half_w = (PAGE_W - 2 * MARGIN - 12) / 2
+    card_top = PAGE_H - 2.05 * inch
+    card_h = 1.85 * inch
+
     # Display sample card
     c.setFillColor(white)
     c.setStrokeColor(Color(0.09, 0.13, 0.18, alpha=0.12))
-    c.rect(MARGIN, PAGE_H - 4.35 * inch, (PAGE_W - 2 * MARGIN - 12) / 2, 2.3 * inch, fill=1, stroke=1)
-    c.setFillColor(GOLD_DEEP)
-    c.setFont(BODY, 8)
-    c.drawString(MARGIN + 14, PAGE_H - 2.25 * inch, "DISPLAY · BARLOW CONDENSED")
+    c.rect(MARGIN, card_top - card_h, half_w, card_h, fill=1, stroke=1)
+    eyebrow(c, "Display · Barlow Condensed", MARGIN + 14, card_top - 22, dark=False)
     c.setFillColor(INK)
-    c.setFont(DISPLAY, 22)
-    c.drawString(MARGIN + 14, PAGE_H - 2.65 * inch, "BUILD TRUST.")
-    c.drawString(MARGIN + 14, PAGE_H - 2.95 * inch, "STAND OUT.")
+    draw_tracked(c, "BUILD TRUST.", MARGIN + 14, card_top - 52, DISPLAY, 22, HEADING_TRACKING)
+    draw_tracked(c, "STAND OUT.", MARGIN + 14, card_top - 74, DISPLAY, 22, HEADING_TRACKING)
     c.setFillColor(GOLD_DEEP)
-    c.drawString(MARGIN + 14, PAGE_H - 3.25 * inch, "WIN MORE WORK.")
+    draw_tracked(c, "WIN MORE WORK.", MARGIN + 14, card_top - 96, DISPLAY, 22, HEADING_TRACKING)
+    body_text(
+        c,
+        "Weights 500–800 · All-caps headlines · Tight tracking at large sizes",
+        MARGIN + 14,
+        card_top - card_h + 24,
+        half_w - 28,
+        size=8.5,
+        color=SLATE,
+        leading=11,
+    )
 
     # Body sample
-    right = MARGIN + (PAGE_W - 2 * MARGIN - 12) / 2 + 12
+    right = MARGIN + half_w + 12
     c.setFillColor(white)
-    c.rect(right, PAGE_H - 4.35 * inch, (PAGE_W - 2 * MARGIN - 12) / 2, 2.3 * inch, fill=1, stroke=1)
-    c.setFillColor(GOLD_DEEP)
-    c.setFont(BODY, 8)
-    c.drawString(right + 14, PAGE_H - 2.25 * inch, "BODY · INTER")
+    c.rect(right, card_top - card_h, half_w, card_h, fill=1, stroke=1)
+    eyebrow(c, "Body · Inter", right + 14, card_top - 22, dark=False)
     body_text(
         c,
         "You've spent years earning your reputation. Our job is to make sure more people see it.",
         right + 14,
-        PAGE_H - 2.6 * inch,
-        (PAGE_W - 2 * MARGIN - 12) / 2 - 28,
+        card_top - 52,
+        half_w - 28,
         size=11,
         color=INK,
         leading=15,
     )
+    body_text(
+        c,
+        "Weights 400–600 · Comfortable line height · No decorative italics",
+        right + 14,
+        card_top - card_h + 24,
+        half_w - 28,
+        size=8.5,
+        color=SLATE,
+        leading=11,
+    )
+
+    # Eyebrow titles card — documents the gold section labels
+    eb_top = card_top - card_h - 14
+    eb_intro = "Every section opens with a gold eyebrow title. It orients the reader before the headline lands, and it is the smallest piece of type carrying brand color."
+    eb_inner_w = PAGE_W - 2 * MARGIN - 28
+    swatch_h = 34
+    spec_rows = 2
+    eb_h = (
+        30  # label
+        + body_height(c, eb_intro, eb_inner_w, size=9.5, leading=13)
+        + 16
+        + swatch_h
+        + 22
+        + spec_rows * 13
+        + 16
+    )
+    c.setFillColor(white)
+    c.setStrokeColor(Color(0.09, 0.13, 0.18, alpha=0.12))
+    c.rect(MARGIN, eb_top - eb_h, PAGE_W - 2 * MARGIN, eb_h, fill=1, stroke=1)
+    eyebrow(c, "Eyebrow Titles · Inter", MARGIN + 14, eb_top - 22, dark=False)
+    intro_end = body_text(
+        c,
+        eb_intro,
+        MARGIN + 14,
+        eb_top - 42,
+        eb_inner_w,
+        size=9.5,
+        color=SLATE,
+        leading=13,
+    )
+
+    # Live samples: the same eyebrow on paper and on navy
+    sample_top = intro_end - 10
+    sample_w = (eb_inner_w - 10) / 2
+    c.setFillColor(PAPER)
+    c.setStrokeColor(Color(0.09, 0.13, 0.18, alpha=0.12))
+    c.rect(MARGIN + 14, sample_top - swatch_h, sample_w, swatch_h, fill=1, stroke=1)
+    eyebrow(c, "06 — Color Palette", MARGIN + 26, sample_top - 21, dark=False)
+    c.setFillColor(NAVY)
+    c.rect(MARGIN + 24 + sample_w, sample_top - swatch_h, sample_w, swatch_h, fill=1, stroke=0)
+    eyebrow(c, "01 — Brand Foundation", MARGIN + 36 + sample_w, sample_top - 21)
+
+    specs = [
+        "Family: Inter",
+        "Weight: 600 semibold",
+        "Size: 12px / 9pt in print",
+        "Tracking: 0.18em",
+        "Case: Uppercase",
+        "Color: Gold on dark, Gold Deep on paper",
+    ]
+    spec_y = sample_top - swatch_h - 20
+    spec_col_w = eb_inner_w / 3
+    for i, spec in enumerate(specs):
+        body_text(
+            c,
+            spec,
+            MARGIN + 14 + (i % 3) * spec_col_w,
+            spec_y - (i // 3) * 13,
+            spec_col_w - 8,
+            size=8.5,
+            color=SLATE,
+            leading=11,
+        )
 
     # Voice
-    eyebrow(c, "08 — Brand Voice", MARGIN, PAGE_H - 4.7 * inch, dark=False)
-    heading(c, "A capable growth partner", MARGIN, PAGE_H - 5.1 * inch, size=20, color=INK)
-    body_text(
+    voice_top = eb_top - eb_h - 0.28 * inch
+    eyebrow(c, "08 — Brand Voice", MARGIN, voice_top, dark=False)
+    heading(c, "A capable growth partner", MARGIN, voice_top - 30, size=20, color=INK)
+    voice_body_y = body_text(
         c,
         "Direct, confident, practical, grounded, and clear. Speak to business outcomes and reputation before cameras and gear.",
         MARGIN,
-        PAGE_H - 5.4 * inch,
+        voice_top - 52,
         PAGE_W - 2 * MARGIN,
         size=10,
         color=SLATE,
@@ -623,22 +835,24 @@ def type_voice(c: canvas.Canvas) -> None:
         "Trying to sound like the contractor itself.",
     ]
     col_w = (PAGE_W - 2 * MARGIN - 14) / 2
+    voice_col_top = voice_body_y - 16
+    voice_col_h = voice_col_top - 0.75 * inch
     for i, (title, items, accent) in enumerate(
         [("USE", use, GOLD_DEEP), ("AVOID", avoid, SLATE)]
     ):
         x = MARGIN + i * (col_w + 14)
         c.setFillColor(white)
-        c.rect(x, 0.85 * inch, col_w, 2.55 * inch, fill=1, stroke=1)
+        c.setStrokeColor(Color(0.09, 0.13, 0.18, alpha=0.12))
+        c.rect(x, voice_col_top - voice_col_h, col_w, voice_col_h, fill=1, stroke=1)
         c.setFillColor(accent)
-        c.setFont(DISPLAY, 14)
-        c.drawString(x + 12, 0.85 * inch + 2.25 * inch, title)
-        yy = 0.85 * inch + 2.0 * inch
+        draw_tracked(c, title, x + 12, voice_col_top - 24, DISPLAY, 14, HEADING_TRACKING)
+        yy = voice_col_top - 50
         for line in items:
             c.setStrokeColor(accent)
             c.setLineWidth(1.5)
             c.line(x + 12, yy + 4, x + 12, yy - 10)
             body_text(c, line, x + 20, yy, col_w - 36, size=9, color=SLATE, leading=12)
-            yy -= 36
+            yy -= 32
 
     page_footer(c, 6, dark=False)
     c.showPage()

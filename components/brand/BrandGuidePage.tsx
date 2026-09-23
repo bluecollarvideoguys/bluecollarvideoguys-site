@@ -569,9 +569,9 @@ export function BrandGuidePage() {
               Condensed power. Clean body.
             </h2>
             <p className={`mt-5 ${type.bodyDark}`}>
-              Display headlines use Barlow Condensed. Body and UI use Inter.
-              Pair them. Do not mix in a third family. The BC monogram is custom
-              artwork, never typed text.
+              Three roles, two families. Display headlines use Barlow Condensed.
+              Body, UI, and eyebrow titles use Inter. Do not mix in a third
+              family. The BC monogram is custom artwork, never typed text.
             </p>
           </div>
 
@@ -606,6 +606,71 @@ export function BrandGuidePage() {
                 Weights 400–600 · Comfortable line height · No decorative italics
               </p>
             </div>
+          </div>
+
+          {/* Eyebrow titles — the gold section labels used across the brand */}
+          <div className="brand-reveal mt-6 border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy-deep)] p-8 sm:p-10">
+            <p className={type.eyebrowDark}>Eyebrow Titles · Inter</p>
+            <p className={`mt-6 max-w-3xl ${type.bodyDark}`}>
+              Every section in this guide opens with a gold eyebrow title. It
+              orients the reader before the headline lands, and it is the
+              smallest piece of type carrying brand color.
+            </p>
+
+            <div className="mt-8 grid gap-px overflow-hidden border border-[var(--v02-line-on-dark)] bg-[var(--v02-line-on-dark)] sm:grid-cols-3">
+              {[
+                { label: "On dark", value: "01 — Brand Foundation", dark: true },
+                { label: "On paper", value: "06 — Color Palette", dark: false },
+                { label: "As a card label", value: "Body · Inter", dark: true },
+              ].map((item) => (
+                <div
+                  key={item.value}
+                  className={`px-6 py-7 ${
+                    item.dark ? "bg-[var(--v02-navy)]" : "bg-[var(--v02-paper)]"
+                  }`}
+                >
+                  <p
+                    className={
+                      item.dark ? type.eyebrowDark : type.eyebrowLight
+                    }
+                  >
+                    {item.value}
+                  </p>
+                  <p
+                    className={`mt-4 text-xs ${
+                      item.dark ? "text-slate-500" : "text-slate-400"
+                    }`}
+                  >
+                    {item.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <dl className="mt-8 grid gap-x-8 gap-y-3 text-sm sm:grid-cols-2">
+              {[
+                ["Family", "Inter"],
+                ["Weight", "600 semibold"],
+                ["Size", "0.75rem / 12px"],
+                ["Tracking", "0.18em"],
+                ["Case", "Uppercase"],
+                ["Color", "Gold #F2AE26 on dark · Gold Deep #BD7C00 on paper"],
+              ].map(([k, v]) => (
+                <div
+                  key={k}
+                  className="flex justify-between gap-4 border-b border-[var(--v02-line-on-dark)] pb-2"
+                >
+                  <dt className="text-slate-500">{k}</dt>
+                  <dd className="text-right font-medium text-white">{v}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <p className={`mt-8 ${type.bodySmDark}`}>
+              Keep them short — a number and two or three words. Never set an
+              eyebrow in Barlow Condensed, and never let one run to a second
+              line.
+            </p>
           </div>
         </div>
       </section>
