@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { describeSmsConsent, parseSmsConsent } from "@/lib/contact";
 
 export const runtime = "nodejs";
 
@@ -49,11 +50,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "A valid email is required." }, { status: 400 });
   }
 
-  // Carrier rules require proof of express consent, so never accept a
-  // submission that skipped the checkbox even if the client was bypassed.
-  if (text(body.privacy_consent) !== "yes") {
+  const smsConsent = parseSmsConsent(body);
+  if (!smsConsent) {
     return NextResponse.json(
-      { error: "Please accept the Privacy Policy to continue." },
+      { error: "Please choose a texting option to continue." },
       { status: 400 },
     );
   }
@@ -73,10 +73,7 @@ export async function POST(request: Request) {
       ${row("Offer", text(body.business_offer))}
       ${row("Monthly budget", text(body.monthly_budget))}
       ${row("Message", text(body.message))}
-      ${row(
-        "Consent",
-        `Accepted calls, texts, and email + Privacy Policy on ${consentedAt}`,
-      )}
+      ${row("SMS consent", describeSmsConsent(smsConsent, consentedAt))}
     </table>
   `;
 

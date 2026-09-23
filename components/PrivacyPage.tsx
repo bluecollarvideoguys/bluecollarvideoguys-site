@@ -158,13 +158,11 @@ export function PrivacyPage() {
               <li>Send you the SMS messages you&apos;ve opted in to receive</li>
             </ul>
             <p className={paragraph}>
-              When you check the consent box on one of our forms, you agree that
-              we may contact you at the phone number and email address you
-              provide by text message, phone call, and email, for both
-              communication about your inquiry and for marketing purposes. You
-              can withdraw consent at any time by texting STOP to our messages,
-              by replying unsubscribe to an email, or by contacting us at{" "}
-              <MailLink />. Consent is not a condition of purchase.
+              On our website forms you can opt in to customer care messages,
+              marketing text messages, both, or decline texts entirely. We only
+              send the SMS content you explicitly choose. Consent is not a
+              condition of purchase. You can withdraw SMS consent at any time by
+              texting STOP, or contact us at <MailLink />.
             </p>
 
             <h2 className={`${heading} mt-12`}>Data Sharing</h2>

@@ -3,7 +3,7 @@ import { join } from "path";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { CALENDLY_URL } from "@/lib/calendly";
-import { PHONE_DISPLAY } from "@/lib/contact";
+import { describeSmsConsent, parseSmsConsent, PHONE_DISPLAY } from "@/lib/contact";
 import { FUNNEL_PDF_FILENAME, FUNNEL_PDF_RELATIVE_PATH } from "@/lib/funnel";
 
 export const runtime = "nodejs";
@@ -72,11 +72,10 @@ export async function POST(request: Request) {
     );
   }
 
-  // Carrier rules require proof of express consent, so never accept a
-  // submission that skipped the checkbox even if the client was bypassed.
-  if (text(body.privacy_consent) !== "yes") {
+  const smsConsent = parseSmsConsent(body);
+  if (!smsConsent) {
     return NextResponse.json(
-      { error: "Please accept the Privacy Policy to continue." },
+      { error: "Please choose a texting option to continue." },
       { status: 400 },
     );
   }
@@ -98,10 +97,7 @@ export async function POST(request: Request) {
       ${row("Email", email)}
       ${row("Phone", phone)}
       ${row("Trade", trade)}
-      ${row(
-        "Consent",
-        `Accepted calls, texts, and email + Privacy Policy on ${consentedAt}`,
-      )}
+      ${row("SMS consent", describeSmsConsent(smsConsent, consentedAt))}
     </table>
   `;
 
