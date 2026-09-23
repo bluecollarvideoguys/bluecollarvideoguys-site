@@ -15,6 +15,7 @@ import {
 } from "@/lib/funnel";
 import { BrandLogo } from "@/components/BrandLogo";
 import { IconArrowRight } from "@/components/icons";
+import { PrivacyConsent } from "@/components/PrivacyConsent";
 
 type Phase = "intro" | "capture" | "followup";
 
@@ -411,6 +412,11 @@ function CaptureForm({ onDone }: { onDone: () => void }) {
             placeholder="Electrical, HVAC, plumbing…"
           />
         </div>
+
+        <PrivacyConsent
+          id="funnel-privacy-consent"
+          className="mt-6 border-t border-[var(--v02-line-on-dark)] pt-5"
+        />
 
         {status === "error" ? (
           <p className="mt-4 text-sm text-red-400">

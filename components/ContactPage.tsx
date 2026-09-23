@@ -7,6 +7,7 @@ import { IconArrowRight } from "@/components/icons";
 import { CALENDLY_URL } from "@/lib/calendly";
 import { SiteBrandLink } from "@/components/BrandLogo";
 import { SiteFooter } from "@/components/SiteFooter";
+import { PrivacyConsent } from "@/components/PrivacyConsent";
 import {
   CONTACT_CONFIRMATION_PATH,
   submitContactForm,
@@ -355,6 +356,11 @@ export function ContactPage() {
                   autoComplete="off"
                   aria-hidden="true"
                   className="absolute left-[-9999px] h-0 w-0 opacity-0"
+                />
+
+                <PrivacyConsent
+                  id="contact-privacy-consent"
+                  className="mt-8 border-t border-[var(--v02-line-on-dark)] pt-6"
                 />
 
                 <button

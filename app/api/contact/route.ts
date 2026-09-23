@@ -49,7 +49,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "A valid email is required." }, { status: 400 });
   }
 
+  // Carrier rules require proof of express consent, so never accept a
+  // submission that skipped the checkbox even if the client was bypassed.
+  if (text(body.privacy_consent) !== "yes") {
+    return NextResponse.json(
+      { error: "Please accept the Privacy Policy to continue." },
+      { status: 400 },
+    );
+  }
+
   const source = text(body.source) || "Website";
+  const consentedAt = new Date().toISOString();
   const html = `
     <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;max-width:640px">
       ${row("Source", source)}
@@ -63,6 +73,10 @@ export async function POST(request: Request) {
       ${row("Offer", text(body.business_offer))}
       ${row("Monthly budget", text(body.monthly_budget))}
       ${row("Message", text(body.message))}
+      ${row(
+        "Consent",
+        `Accepted calls, texts, and email + Privacy Policy on ${consentedAt}`,
+      )}
     </table>
   `;
 

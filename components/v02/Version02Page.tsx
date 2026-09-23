@@ -9,6 +9,7 @@ import { CoverYouTubeEmbed } from "@/components/CoverYouTubeEmbed";
 import { VideoSlot } from "@/components/VideoSlot";
 import { CALENDLY_URL } from "@/lib/calendly";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
+import { PrivacyConsent } from "@/components/PrivacyConsent";
 import { SiteBrandLink } from "@/components/BrandLogo";
 import { SiteFooter } from "@/components/SiteFooter";
 import {
@@ -1155,6 +1156,11 @@ export function Version02Page() {
                   autoComplete="off"
                   aria-hidden="true"
                   className="absolute left-[-9999px] h-0 w-0 opacity-0"
+                />
+
+                <PrivacyConsent
+                  id="home-privacy-consent"
+                  className="mt-6 border-t border-[var(--v02-line-on-dark)] pt-6"
                 />
 
                 <button

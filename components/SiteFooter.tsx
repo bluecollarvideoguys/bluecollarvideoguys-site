@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, type ReactNode } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { CALENDLY_URL } from "@/lib/calendly";
-import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
+import { PHONE_DISPLAY, PHONE_HREF, PRIVACY_PATH } from "@/lib/contact";
 
 export function SiteFooter({
   children,
@@ -105,6 +105,7 @@ export function SiteFooter({
                   <Link href="/services">Services</Link>
                   <Link href="/services#packages">Packages</Link>
                   <Link href="/contact">Contact</Link>
+                  <Link href={PRIVACY_PATH}>Privacy Policy</Link>
                 </div>
               </div>
               <div>
@@ -127,6 +128,7 @@ export function SiteFooter({
             © {new Date().getFullYear()} The Blue Collar Video Guys™. All
             rights reserved.
           </p>
+          <Link href={PRIVACY_PATH}>Privacy Policy</Link>
           <a href="mailto:build@bluecollarvideoguys.com">
             build@bluecollarvideoguys.com
           </a>

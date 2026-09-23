@@ -72,10 +72,20 @@ export async function POST(request: Request) {
     );
   }
 
+  // Carrier rules require proof of express consent, so never accept a
+  // submission that skipped the checkbox even if the client was bypassed.
+  if (text(body.privacy_consent) !== "yes") {
+    return NextResponse.json(
+      { error: "Please accept the Privacy Policy to continue." },
+      { status: 400 },
+    );
+  }
+
   const name = text(body.name);
   const company = text(body.company_name);
   const phone = text(body.phone);
   const trade = text(body.trade);
+  const consentedAt = new Date().toISOString();
   const stamp = Date.now();
   const resend = new Resend(key);
   const pdf = await loadPdf();
@@ -88,6 +98,10 @@ export async function POST(request: Request) {
       ${row("Email", email)}
       ${row("Phone", phone)}
       ${row("Trade", trade)}
+      ${row(
+        "Consent",
+        `Accepted calls, texts, and email + Privacy Policy on ${consentedAt}`,
+      )}
     </table>
   `;
 
