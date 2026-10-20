@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { unlockScanStats } from "@/app/scan/stats/actions";
 import { BrandLogo } from "@/components/BrandLogo";
+import { getR2WriteContext } from "@/lib/r2";
 import {
   SCAN_STATS_COOKIE,
   formatScanTime,
@@ -118,6 +119,9 @@ function LoginForm({ error }: { error: boolean }) {
         Password-protected counts, locations, and devices for the printed
         business-card QR.
       </p>
+      <p className="mt-2 text-xs text-slate-500">
+        Tracking storage: {getR2WriteContext() ? "connected" : "not connected"}
+      </p>
       {configured ? (
         <form action={unlockScanStats} className="mt-8 w-full max-w-xs">
           <label className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
@@ -177,6 +181,12 @@ export default async function ScanStatsPage({
           Location is city-level from IP (same as typical QR dashboards), not
           GPS. Bots and page prefetches are skipped.
         </p>
+        {!getR2WriteContext() ? (
+          <p className="mt-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+            Tracking storage is not connected on this server, so new scans
+            cannot be saved.
+          </p>
+        ) : null}
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           <StatCard label="Total scans" value={stats.total} />

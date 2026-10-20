@@ -9,7 +9,7 @@ import path from "path";
 import { userAgentFromString } from "next/server";
 import { getR2WriteContext } from "@/lib/r2";
 
-export const QR_SCAN_PREFIX = "qr-scans/";
+export const QR_SCAN_PREFIX = "videos/qr-scans/";
 export const SCAN_STATS_COOKIE = "bcvg_scan_stats";
 
 export type QrScanEvent = {

@@ -17,16 +17,19 @@ export function getR2Config() {
   };
 }
 
-export function getR2Client() {
-  const { accountId, accessKeyId, secretAccessKey } = getR2Config();
+function r2Client(accountId: string, accessKeyId: string, secretAccessKey: string) {
   return new S3Client({
     region: "auto",
     endpoint: `https://${accountId}.r2.cloudflarestorage.com`,
-    credentials: {
-      accessKeyId,
-      secretAccessKey,
-    },
+    credentials: { accessKeyId, secretAccessKey },
+    requestChecksumCalculation: "WHEN_REQUIRED",
+    responseChecksumValidation: "WHEN_REQUIRED",
   });
+}
+
+export function getR2Client() {
+  const { accountId, accessKeyId, secretAccessKey } = getR2Config();
+  return r2Client(accountId, accessKeyId, secretAccessKey);
 }
 
 /** Write/list client that does not require the public bucket URL. */
@@ -38,11 +41,7 @@ export function getR2WriteContext() {
   if (!accountId || !accessKeyId || !secretAccessKey || !bucket) return null;
   return {
     bucket,
-    client: new S3Client({
-      region: "auto",
-      endpoint: `https://${accountId}.r2.cloudflarestorage.com`,
-      credentials: { accessKeyId, secretAccessKey },
-    }),
+    client: r2Client(accountId, accessKeyId, secretAccessKey),
   };
 }
 
