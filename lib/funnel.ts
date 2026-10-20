@@ -7,6 +7,27 @@ export const FUNNEL_DEFAULT_VIDEO_URL =
 export const FUNNEL_PATH = "/scan";
 export const FUNNEL_PRINT_PATH = "/scan/print";
 
+/** Homepage for printed QR scans until we point /scan somewhere else. */
+export const SCAN_DEFAULT_REDIRECT_URL = "https://www.bluecollarvideoguys.com";
+
+/**
+ * The printed QR always goes to /scan. Default is the website.
+ * Set SCAN_REDIRECT_URL to another https URL (YouTube, Calendly, etc.),
+ * or to `funnel` to keep the Blueprint intro instead.
+ */
+export function getScanRedirectUrl(): string | null {
+  const raw = process.env.SCAN_REDIRECT_URL?.trim();
+  if (raw === "funnel" || raw === "off") return null;
+  const target = raw || SCAN_DEFAULT_REDIRECT_URL;
+  try {
+    const url = new URL(target);
+    if (url.protocol !== "http:" && url.protocol !== "https:") return null;
+    return url.toString();
+  } catch {
+    return null;
+  }
+}
+
 export const FUNNEL_INTRO_VIDEO =
   process.env.NEXT_PUBLIC_FUNNEL_INTRO_VIDEO_URL?.trim() ||
   FUNNEL_DEFAULT_VIDEO_URL;
