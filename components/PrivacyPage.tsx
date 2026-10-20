@@ -150,6 +150,13 @@ export function PrivacyPage() {
               address and the business details you choose to share with us, such
               as your company name, website, marketing goals, and budget range.
             </p>
+            <p className={paragraph}>
+              When you scan a Blue Collar Video Guys QR code, we record that the
+              scan happened, plus approximate city/region from IP address,
+              device type, and browser. We use this to understand how printed
+              materials perform. We do not collect GPS coordinates or sell this
+              data.
+            </p>
 
             <h2 className={`${heading} mt-12`}>How We Use Your Data</h2>
             <p className={paragraph}>We use your information to:</p>
