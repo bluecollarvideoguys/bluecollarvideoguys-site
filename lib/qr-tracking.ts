@@ -7,7 +7,7 @@ import { createHash, randomUUID, timingSafeEqual } from "crypto";
 import { mkdir, readFile, writeFile } from "fs/promises";
 import path from "path";
 import { userAgentFromString } from "next/server";
-import { getR2Client, getR2Config } from "@/lib/r2";
+import { getR2WriteContext } from "@/lib/r2";
 
 export const QR_SCAN_PREFIX = "qr-scans/";
 export const SCAN_STATS_COOKIE = "bcvg_scan_stats";
@@ -101,15 +101,19 @@ function countryName(code: string): string {
 }
 
 function isPrefetch(headers: Headers): boolean {
-  const purpose = (
-    headers.get("purpose") ||
-    headers.get("sec-purpose") ||
-    ""
-  ).toLowerCase();
   return (
     headers.get("next-router-prefetch") === "1" ||
-    headers.get("x-middleware-prefetch") === "1" ||
-    purpose.includes("prefetch")
+    headers.get("x-middleware-prefetch") === "1"
+  );
+}
+
+function isCrawler(uaString: string, isBot: boolean): boolean {
+  if (/iphone|ipad|android|mobile/i.test(uaString)) return false;
+  return (
+    isBot ||
+    /(googlebot|bingbot|slurp|duckduckbot|baiduspider|yandex|bytespider|semrush|ahrefs|facebookexternalhit|twitterbot)/i.test(
+      uaString,
+    )
   );
 }
 
@@ -120,7 +124,7 @@ export function buildQrScanEvent(
   if (isPrefetch(headers)) return null;
   const uaString = headers.get("user-agent") || "";
   const ua = userAgentFromString(uaString);
-  if (ua.isBot) return null;
+  if (isCrawler(uaString, ua.isBot)) return null;
 
   const device =
     ua.device.type === "mobile"
@@ -168,30 +172,23 @@ async function writeLocalEvent(event: QrScanEvent): Promise<void> {
   await writeFile(LOCAL_STORE, JSON.stringify(events, null, 2));
 }
 
-function hasR2(): boolean {
-  return Boolean(
-    process.env.R2_ACCOUNT_ID?.trim() &&
-      process.env.R2_ACCESS_KEY_ID?.trim() &&
-      process.env.R2_SECRET_ACCESS_KEY?.trim() &&
-      process.env.R2_BUCKET_NAME?.trim(),
-  );
-}
-
 export async function recordQrScan(event: QrScanEvent): Promise<void> {
   const body = JSON.stringify(event);
   const key = `${QR_SCAN_PREFIX}${event.at.slice(0, 10)}/${event.id}.json`;
-  if (hasR2()) {
-    const client = getR2Client();
-    const { bucket } = getR2Config();
-    await client.send(
+  const r2 = getR2WriteContext();
+  if (r2) {
+    await r2.client.send(
       new PutObjectCommand({
-        Bucket: bucket,
+        Bucket: r2.bucket,
         Key: key,
         Body: body,
         ContentType: "application/json",
       }),
     );
     return;
+  }
+  if (process.env.VERCEL) {
+    throw new Error("R2 is not configured; cannot store QR scans on Vercel");
   }
   await writeLocalEvent(event);
 }
@@ -210,14 +207,14 @@ export async function recordQrScanFromHeaders(
 }
 
 async function listR2Events(): Promise<QrScanEvent[]> {
-  const client = getR2Client();
-  const { bucket } = getR2Config();
+  const r2 = getR2WriteContext();
+  if (!r2) return [];
   const events: QrScanEvent[] = [];
   let token: string | undefined;
   do {
-    const page = await client.send(
+    const page = await r2.client.send(
       new ListObjectsV2Command({
-        Bucket: bucket,
+        Bucket: r2.bucket,
         Prefix: QR_SCAN_PREFIX,
         ContinuationToken: token,
       }),
@@ -225,8 +222,8 @@ async function listR2Events(): Promise<QrScanEvent[]> {
     for (const object of page.Contents ?? []) {
       if (!object.Key) continue;
       try {
-        const file = await client.send(
-          new GetObjectCommand({ Bucket: bucket, Key: object.Key }),
+        const file = await r2.client.send(
+          new GetObjectCommand({ Bucket: r2.bucket, Key: object.Key }),
         );
         const text = await file.Body?.transformToString();
         if (!text) continue;
@@ -242,7 +239,7 @@ async function listR2Events(): Promise<QrScanEvent[]> {
 }
 
 export async function loadQrScanEvents(): Promise<QrScanEvent[]> {
-  if (hasR2()) {
+  if (getR2WriteContext()) {
     try {
       return await listR2Events();
     } catch (error) {
@@ -250,6 +247,7 @@ export async function loadQrScanEvents(): Promise<QrScanEvent[]> {
       return [];
     }
   }
+  if (process.env.VERCEL) return [];
   return readLocalEvents();
 }
 

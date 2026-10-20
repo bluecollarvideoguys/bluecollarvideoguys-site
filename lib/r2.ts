@@ -29,6 +29,23 @@ export function getR2Client() {
   });
 }
 
+/** Write/list client that does not require the public bucket URL. */
+export function getR2WriteContext() {
+  const accountId = process.env.R2_ACCOUNT_ID?.trim();
+  const accessKeyId = process.env.R2_ACCESS_KEY_ID?.trim();
+  const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY?.trim();
+  const bucket = process.env.R2_BUCKET_NAME?.trim();
+  if (!accountId || !accessKeyId || !secretAccessKey || !bucket) return null;
+  return {
+    bucket,
+    client: new S3Client({
+      region: "auto",
+      endpoint: `https://${accountId}.r2.cloudflarestorage.com`,
+      credentials: { accessKeyId, secretAccessKey },
+    }),
+  };
+}
+
 export function publicObjectUrl(key: string) {
   const { publicBaseUrl } = getR2Config();
   return `${publicBaseUrl}/${key.split("/").map(encodeURIComponent).join("/")}`;
