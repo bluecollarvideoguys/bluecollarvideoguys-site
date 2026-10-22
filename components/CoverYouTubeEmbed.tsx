@@ -22,6 +22,24 @@ export function CoverYouTubeEmbed({
 }: CoverYouTubeEmbedProps) {
   const hostRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ w: 0, h: 0 });
+  // Performance: only load the YouTube player once the tile is near the viewport.
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = hostRef.current;
+    if (!el || inView) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setInView(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "300px 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [inView]);
 
   useEffect(() => {
     const el = hostRef.current;
@@ -71,8 +89,19 @@ export function CoverYouTubeEmbed({
       ref={hostRef}
       className={`absolute inset-0 overflow-hidden bg-stone-900 ${className}`}
     >
-      {frameW > 0 ? (
+      {/* Poster shown until the player loads, so the tile never looks empty. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      {inView && frameW > 0 ? (
         <iframe
+          loading="lazy"
           className="absolute left-1/2 top-1/2 border-0"
           style={{
             width: frameW,
