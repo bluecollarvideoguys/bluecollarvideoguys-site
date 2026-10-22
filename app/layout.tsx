@@ -34,6 +34,13 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
   },
+  // Search Console / Bing ownership tags. Set the tokens as Vercel env vars.
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION || undefined,
+    other: process.env.BING_SITE_VERIFICATION
+      ? { "msvalidate.01": process.env.BING_SITE_VERIFICATION }
+      : undefined,
+  },
 };
 
 export default function RootLayout({
