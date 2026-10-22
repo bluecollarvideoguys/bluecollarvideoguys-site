@@ -74,6 +74,11 @@ export async function POST(request: Request) {
       ${row("Monthly budget", text(body.monthly_budget))}
       ${row("Message", text(body.message))}
       ${row("SMS consent", describeSmsConsent(smsConsent, consentedAt))}
+      ${row("Landing page", text(body.landing_page))}
+      ${row("UTM source / medium", [text(body.utm_source), text(body.utm_medium)].filter(Boolean).join(" / "))}
+      ${row("UTM campaign", text(body.utm_campaign))}
+      ${row("UTM term", text(body.utm_term))}
+      ${row("Ad click", text(body.gclid) ? "Google Ads" : text(body.fbclid) ? "Meta Ads" : "")}
     </table>
   `;
 

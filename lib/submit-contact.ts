@@ -1,3 +1,5 @@
+import { getAttribution, trackEvent } from "@/lib/track";
+
 export const CONTACT_CONFIRMATION_PATH = "/confirmation";
 
 export async function submitContactForm(
@@ -8,7 +10,7 @@ export async function submitContactForm(
   const res = await fetch("/api/contact", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ...data, source }),
+    body: JSON.stringify({ ...data, ...getAttribution(), source }),
   });
   if (!res.ok) {
     const payload = (await res.json().catch(() => null)) as {
@@ -16,4 +18,5 @@ export async function submitContactForm(
     } | null;
     throw new Error(payload?.error || "Could not send the message.");
   }
+  trackEvent("generate_lead", { form_location: source });
 }

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Oswald, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
+import { OrganizationSchema } from "@/components/seo/schemas";
+import { Analytics } from "@/components/analytics/Analytics";
+import { SITE } from "@/lib/site";
 
 const display = Oswald({
   variable: "--font-display",
@@ -15,9 +18,22 @@ const body = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-  title: "The Blue Collar Video Guys™ | Build Trust. Stand Out. Win More Work.",
+  metadataBase: new URL(SITE.url),
+  title: {
+    default: "Video Marketing for Contractors | Blue Collar Video Guys",
+    template: "%s | Blue Collar Video Guys",
+  },
   description:
-    "Video, web, branding, and digital marketing for blue collar trade businesses. You've spent years earning your reputation. Our job is to make sure more people see it.",
+    "Cinematic video, websites, and local SEO for roofers, HVAC, plumbers, and electricians from Medford to Sacramento. Book a free Blueprint call.",
+  applicationName: SITE.name,
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: SITE.name,
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({
@@ -31,7 +47,9 @@ export default function RootLayout({
       className={`${display.variable} ${body.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-concrete text-charcoal">
+        <OrganizationSchema />
         {children}
+        <Analytics />
       </body>
     </html>
   );

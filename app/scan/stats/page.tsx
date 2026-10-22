@@ -183,8 +183,10 @@ export default async function ScanStatsPage({
         </p>
         {!getR2WriteContext() ? (
           <p className="mt-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-            Tracking storage is not connected on this server, so new scans
-            cannot be saved.
+            Tracking storage is not connected on the live server. Add
+            R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, and
+            R2_BUCKET_NAME in Vercel (same keys as video uploads), then
+            Redeploy. Until that is set, phone scans cannot be saved.
           </p>
         ) : null}
 

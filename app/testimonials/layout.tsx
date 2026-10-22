@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import { Barlow_Condensed, Inter } from "next/font/google";
 import "../v02/v02.css";
 
@@ -14,11 +15,14 @@ const body = Inter({
   variable: "--font-v02-body",
 });
 
-export const metadata: Metadata = {
-  title: "Testimonials · Manifesto | The Blue Collar Video Guys™",
+// Noindexed until the placeholder quotes and sample clips are replaced with real client proof.
+export const metadata: Metadata = buildMetadata({
+  title: "Manifesto and Toolbox",
   description:
     "Why we exist: the Blue Collar Video Guys manifesto, toolbox, and proof from the job site.",
-};
+  path: "/testimonials",
+  noindex: true,
+});
 
 export default function TestimonialsLayout({
   children,

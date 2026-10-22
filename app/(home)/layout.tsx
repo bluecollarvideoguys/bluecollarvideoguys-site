@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import { Barlow_Condensed, Inter } from "next/font/google";
 import "../v02/v02.css";
 
@@ -14,11 +15,13 @@ const body = Inter({
   variable: "--font-v02-body",
 });
 
-export const metadata: Metadata = {
-  title: "Home | The Blue Collar Video Guys™",
+export const metadata: Metadata = buildMetadata({
+  title: "Video Marketing for Contractors | Blue Collar Video Guys",
   description:
-    "Authentic video marketing for blue collar businesses. Build Trust. Stand Out. Win More Work.",
-};
+    "Cinematic video, websites, and local SEO for roofers, HVAC, plumbers, and electricians from Medford to Sacramento. Book a free Blueprint call.",
+  path: "/",
+  absoluteTitle: true,
+});
 
 export default function HomeLayout({
   children,

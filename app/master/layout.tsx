@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { NOINDEX } from "@/lib/seo";
 import { Barlow_Condensed, Inter } from "next/font/google";
 import "./master.css";
 
@@ -14,10 +15,10 @@ const body = Inter({
   variable: "--font-v02-body",
 });
 
+// Internal design snapshot. Not for search results.
 export const metadata: Metadata = {
-  title: "Master | The Blue Collar Video Guys™",
-  description:
-    "Master copy of Version 02. Authentic video marketing for blue collar businesses. Build Trust. Stand Out. Win More Work.",
+  title: "Master (archive)",
+  robots: NOINDEX,
 };
 
 export default function MasterLayout({

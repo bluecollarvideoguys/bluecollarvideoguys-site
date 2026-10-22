@@ -554,7 +554,7 @@ export function ServicesPage() {
               <div className="flex flex-col">
                 <div className="v02-display flex items-end text-5xl font-bold tracking-tight text-white md:text-6xl">
                   <span className="cta-stat" data-target="3">
-                    0
+                    3
                   </span>
                 </div>
                 <span className="mt-3 text-xs font-semibold uppercase tracking-wider text-slate-500">
@@ -564,7 +564,7 @@ export function ServicesPage() {
               <div className="flex flex-col">
                 <div className="v02-display flex items-end text-5xl font-bold tracking-tight text-white md:text-6xl">
                   <span className="cta-stat" data-target="100">
-                    0
+                    100
                   </span>
                   <span className="ml-1 text-3xl text-white/40">%</span>
                 </div>
@@ -575,7 +575,7 @@ export function ServicesPage() {
               <div className="flex flex-col">
                 <div className="v02-display flex items-end text-5xl font-bold tracking-tight text-white md:text-6xl">
                   <span className="cta-stat" data-target="10">
-                    0
+                    10
                   </span>
                 </div>
                 <span className="mt-3 text-xs font-semibold uppercase tracking-wider text-slate-500">

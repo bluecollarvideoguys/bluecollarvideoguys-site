@@ -1,0 +1,21 @@
+---
+description: SEO standards for every page, component, and copy change on bluecollarvideoguys.com
+alwaysApply: true
+---
+
+# SEO rules (bluecollarvideoguys.com)
+
+The Blue Collar Video Guys is a video marketing and production company for skilled trades businesses (roofers, HVAC, plumbers, electricians, concrete, landscapers) across Southern Oregon and Northern California, from Medford to Sacramento. Business facts (name, phone, email, service area, founders, social links) live in `lib/site.ts` and `lib/contact.ts`. Never hard-code them elsewhere.
+
+1. Every public route sets metadata with `buildMetadata()` from `lib/seo.ts`: a unique title (under 60 characters, primary keyword first; the root layout appends "| Blue Collar Video Guys"), a unique description (140 to 160 characters, keyword + call to action) and a canonical path.
+2. Exactly one H1 per page, containing the page's primary keyword. Headings go H1, H2, H3 with no skipped levels. Stylized slogans can stay as large visual text, but keyword headings must exist in the HTML.
+3. Important text (headings, body copy, numbers, links) must be in the server-rendered HTML. GSAP may animate content that already exists; never inject copy only after an animation or effect. Counters render their final value in the HTML.
+4. Use `next/image` with descriptive alt text (what is shown + trade + place when true). Decorative images get `alt=""`. Only the LCP hero image gets `priority`.
+5. Do not embed YouTube iframes on load in new work. Use a click-to-load facade so video loads on click.
+6. JSON-LD lives in `components/seo/`. Never invent reviews, ratings, prices, or addresses in schema.
+7. Internal links use `next/link` with descriptive anchor text (never "click here"). Each page links to its hub, two related pages, and the discovery call.
+8. No placeholder text ([Company Name], [Client Name], "Placeholder", lorem ipsum) may be indexable. Pages with placeholders get `noindex` via `buildMetadata({ noindex: true })` and stay out of `app/sitemap.ts`.
+9. Every new indexable route must be added to `app/sitemap.ts`. Private or test routes (archive versions, /scan, /upload, /brand, /confirmation) stay `noindex`.
+10. Respect `prefers-reduced-motion` in all animations.
+11. Target Core Web Vitals on mobile: LCP under 2.5s, INP under 200ms, CLS under 0.1.
+12. Never use em dashes in visible copy.

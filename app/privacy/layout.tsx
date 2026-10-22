@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import { Barlow_Condensed, Inter } from "next/font/google";
 import "../v02/v02.css";
 
@@ -14,11 +15,13 @@ const body = Inter({
   variable: "--font-v02-body",
 });
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | The Blue Collar Video Guys™",
+export const metadata: Metadata = buildMetadata({
+  title: "Privacy Policy",
   description:
     "How The Blue Collar Video Guys collects and uses your information, including our SMS messaging program terms, opt-out instructions, and data sharing practices.",
-};
+  path: "/privacy",
+  noindex: true,
+});
 
 export default function PrivacyLayout({
   children,

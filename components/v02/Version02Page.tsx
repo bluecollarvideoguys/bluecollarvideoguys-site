@@ -606,25 +606,27 @@ export function Version02Page() {
 
           <div className="relative mx-auto w-full max-w-7xl px-5 pb-20 pt-36 sm:px-6 lg:px-8">
             <div className="max-w-4xl">
-              <div
+              {/* SEO: the keyword H1 is the small eyebrow pill; the slogan stays the big visual line. */}
+              <h1
                 className={`mb-7 inline-flex items-center gap-2 rounded-full border border-[var(--v02-gold)]/40 bg-[var(--v02-ink)]/70 px-4 py-2 ${type.eyebrowDark}`}
               >
                 <IconStar className="text-base" />
-                Marketing for Contractors
-              </div>
+                Video Marketing for Contractors
+              </h1>
 
-              <h1 className={type.titleHero}>
+              <p className={type.titleHero}>
                 BUILD TRUST.
                 <br />
                 STAND OUT.
                 <br />
                 <span className={type.highlight}>WIN MORE WORK.</span>
-              </h1>
+              </p>
 
               <p className="mt-7 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
                 You&apos;ve spent years earning your reputation. Our job is to make
                 sure more people see it through The Blue Collar Blueprint™ and
-                our Trust Framework™.
+                our Trust Framework™, for contractors across Southern Oregon and
+                Northern California.
               </p>
 
               <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">

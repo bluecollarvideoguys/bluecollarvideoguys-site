@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { NOINDEX } from "@/lib/seo";
 import { Bebas_Neue, DM_Mono, DM_Sans, Inter, Manrope, Satisfy } from "next/font/google";
 import localFont from "next/font/local";
 import "./v03.css";
@@ -68,10 +69,10 @@ const v07Sans = Inter({
   variable: "--font-v07-sans",
 });
 
+// Internal design archive. Not for search results.
 export const metadata: Metadata = {
-  title: "Versions 03-07 archive | The Blue Collar Video Guys™",
-  description:
-    "Stacked archive of design explorations 03-07 for element reference.",
+  title: "Design archive",
+  robots: NOINDEX,
 };
 
 export default function Version03Layout({
