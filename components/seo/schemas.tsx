@@ -87,10 +87,12 @@ type ServiceSchemaProps = {
   serviceType: string;
   description: string;
   path: string;
+  /** Limit to specific cities, for example [{ name: "Redding", state: "CA" }]. Defaults to the full service area. */
+  cities?: { name: string; state: string }[];
 };
 
 /** Service schema for individual service pages. */
-export function ServiceSchema({ name, serviceType, description, path }: ServiceSchemaProps) {
+export function ServiceSchema({ name, serviceType, description, path, cities }: ServiceSchemaProps) {
   return (
     <JsonLd
       data={{
@@ -101,7 +103,7 @@ export function ServiceSchema({ name, serviceType, description, path }: ServiceS
         description,
         url: `${SITE.url}${path}`,
         provider: { "@id": ORG_ID },
-        areaServed: SITE.areaServed.cities.map((c) => ({
+        areaServed: (cities ?? SITE.areaServed.cities).map((c) => ({
           "@type": "City",
           name: `${c.name}, ${c.state}`,
         })),

@@ -15,14 +15,14 @@ export const SITE = {
   /** E.164 format for schema, derived from the tel: link. */
   phoneE164: PHONE_HREF.replace("tel:", ""),
   description:
-    "Video marketing for contractors and trades businesses in Southern Oregon and Northern California: cinematic video, photography, websites, SEO, social media, and ads.",
+    "Video marketing for contractors and trades businesses in Redding and the North State: cinematic video, photography, websites, SEO, social media, and ads.",
   logo: `${SITE_ORIGIN}/brand/primary-stacked.png`,
   image: `${SITE_ORIGIN}/opengraph-image.png`,
-  /** TODO: fill in the base city and ZIP used for the Google Business Profile. */
+  /** Base city and ZIP used for the Google Business Profile. */
   address: {
-    addressLocality: "",
-    addressRegion: "",
-    postalCode: "",
+    addressLocality: "Redding",
+    addressRegion: "CA",
+    postalCode: "96001",
     addressCountry: "US",
   },
   /** TODO: founding year (for example "2026"). */
@@ -31,11 +31,11 @@ export const SITE = {
   areaServed: {
     cities: [
       { name: "Redding", state: "CA" },
-      { name: "Chico", state: "CA" },
+      { name: "Anderson", state: "CA" },
+      { name: "Shasta Lake", state: "CA" },
       { name: "Red Bluff", state: "CA" },
-      { name: "Sacramento", state: "CA" },
-      { name: "Medford", state: "OR" },
-      { name: "Grants Pass", state: "OR" },
+      { name: "Corning", state: "CA" },
+      { name: "Mount Shasta", state: "CA" },
     ],
     states: ["California", "Oregon"],
   },

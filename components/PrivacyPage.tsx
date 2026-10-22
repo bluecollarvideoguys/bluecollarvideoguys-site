@@ -10,6 +10,8 @@ import { PHONE_DISPLAY, SUPPORT_EMAIL } from "@/lib/contact";
 const NAV = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
+  { href: "/industries", label: "Industries" },
+  { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ] as const;
 

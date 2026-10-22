@@ -27,6 +27,8 @@ function scrollToSection(id: string) {
 const VERSIONS = [
   { href: "/", label: "Home", active: true },
   { href: "/services", label: "Services", active: false },
+  { href: "/industries", label: "Industries", active: false },
+  { href: "/about", label: "About", active: false },
   { href: "/contact", label: "Contact", active: false },
 ] as const;
 
@@ -938,26 +940,31 @@ export function Version02Page() {
               <ServiceCard
                 icon={<IconCamera className="text-3xl text-[var(--v02-gold-deep)]" />}
                 title="Cinematic Video and Photo"
+                href="/services/video-production"
                 body="Brand story films, project showcases, crew profiles, and photography that show your craftsmanship, not stock photos."
               />
               <ServiceCard
                 icon={<IconGlobe className="text-3xl text-[var(--v02-gold-deep)]" />}
                 title="Website Design"
+                href="/services/website-design"
                 body="A site that looks as solid as your work, built to turn visitors into discovery calls, not just page views."
               />
               <ServiceCard
                 icon={<IconChart className="text-3xl text-[var(--v02-gold-deep)]" />}
                 title="SEO"
+                href="/services/seo"
                 body="Show up when local homeowners search for the trade you do best, before they ever find your competitor."
               />
               <ServiceCard
                 icon={<IconUsers className="text-3xl text-[var(--v02-gold-deep)]" />}
                 title="Social Media"
+                href="/services/social-media"
                 body="Monthly content that keeps your crew, culture, and craftsmanship in front of the right people, consistently."
               />
               <ServiceCard
                 icon={<IconMegaphone className="text-3xl text-[var(--v02-gold-deep)]" />}
                 title="Digital Marketing"
+                href="/services/ads"
                 body="Strategy, ad management, and content planning that turns your story into a steady pipeline of the right jobs."
               />
               <div className="flex flex-col justify-center rounded border border-dashed border-[var(--v02-line)] bg-[var(--v02-paper)] p-7">
@@ -1439,15 +1446,21 @@ function ServiceCard({
   icon,
   title,
   body,
+  href,
 }: {
   icon: ReactNode;
   title: string;
   body: string;
+  href: string;
 }) {
   return (
-    <div className="rounded border border-[var(--v02-line)] bg-white p-7 transition hover:-translate-y-1 hover:shadow-lg">
+    <div className="relative rounded border border-[var(--v02-line)] bg-white p-7 transition hover:-translate-y-1 hover:shadow-lg">
       {icon}
-      <p className={`mt-5 ${type.labelLight}`}>{title}</p>
+      <h3 className={`mt-5 ${type.labelLight}`}>
+        <Link href={href} className="after:absolute after:inset-0">
+          {title}
+        </Link>
+      </h3>
       <p className={`mt-3 ${type.bodySmLight}`}>{body}</p>
     </div>
   );

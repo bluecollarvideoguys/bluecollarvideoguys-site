@@ -11,32 +11,39 @@ import { SiteFooter } from "@/components/SiteFooter";
 const NAV = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services", active: true },
+  { href: "/industries", label: "Industries" },
+  { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ] as const;
 
 const FULL_SCOPE = [
   {
     title: "Cinematic Video and Photo",
+    href: "/services/video-production",
     outcome: "Build Trust",
     body: "Video is one of the strongest tools we use to earn trust, not the whole business. Brand stories, project films, testimonials, and photography show your craftsmanship the way it actually looks on site, so buyers feel your crew before they ever call.",
   },
   {
     title: "Website Design",
+    href: "/services/website-design",
     outcome: "Stand Out",
     body: "Your website is often the first job site a buyer walks onto. We design it to prove quality fast: clear proof, easy contact paths, and a layout that matches the caliber of your trucks and installs. Built to turn visitors into discovery calls, not just page views.",
   },
   {
     title: "SEO",
+    href: "/services/seo",
     outcome: "Win More Work",
     body: "Getting found is half the battle. We tighten the pages, local signals, and content that help the right searches land on your business, so you show up when homeowners look for your trade before they ever find the competitor.",
   },
   {
     title: "Social Media",
+    href: "/services/social-media",
     outcome: "Stand Out",
     body: "Social only works when it shows up like clockwork. We build a cadence of reels, stills, and behind the scenes posts that keep your crew, culture, and craftsmanship in front of the right people, without you living on your phone after hours.",
   },
   {
     title: "Digital Marketing",
+    href: "/services/ads",
     outcome: "Win More Work",
     body: "Attention without a plan is expensive noise. We put your trust assets to work in funnels and ads that pull in fit jobs, with strategy and spend management so every dollar earns the right calls, not vanity metrics.",
   },
@@ -429,6 +436,13 @@ export function ServicesPage() {
                     <p className="mt-4 text-sm leading-relaxed text-slate-600">
                       {service.body}
                     </p>
+                    <Link
+                      href={service.href}
+                      className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[var(--v02-gold-deep)] hover:underline"
+                    >
+                      More about {service.title.toLowerCase()}
+                      <IconArrowRight />
+                    </Link>
                   </article>
                 );
               })}

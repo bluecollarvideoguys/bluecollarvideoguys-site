@@ -104,6 +104,10 @@ export function SiteFooter({
                   <Link href="/">Home</Link>
                   <Link href="/services">Services</Link>
                   <Link href="/services#packages">Packages</Link>
+                  <Link href="/industries">Industries</Link>
+                  <Link href="/areas">Service Area</Link>
+                  <Link href="/about">About</Link>
+                  <Link href="/faq">FAQ</Link>
                   <Link href="/contact">Contact</Link>
                   <Link href={PRIVACY_PATH}>Privacy Policy</Link>
                 </div>
