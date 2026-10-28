@@ -1,17 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useState, type FormEvent } from "react";
-import { useRouter } from "next/navigation";
+import Script from "next/script";
+import { useState } from "react";
 import { IconArrowRight } from "@/components/icons";
 import { CALENDLY_URL } from "@/lib/calendly";
 import { SiteBrandLink } from "@/components/BrandLogo";
 import { SiteFooter } from "@/components/SiteFooter";
-import { PrivacyConsent } from "@/components/PrivacyConsent";
-import {
-  CONTACT_CONFIRMATION_PATH,
-  submitContactForm,
-} from "@/lib/submit-contact";
+
+const CONTACT_FORM_ID = "BsHdWsCK3at42ohrxrlK";
 
 const NAV = [
   { href: "/", label: "Home" },
@@ -38,32 +35,8 @@ function IconMenu({ className }: { className?: string }) {
   );
 }
 
-function IconHammer({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      width="1em"
-      height="1em"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M11.414 10 4.03 17.418a2.09 2.09 0 0 0 0 2.967 2.11 2.11 0 0 0 2.976 0L14.414 13" />
-      <path d="M18.121 15.293 20.707 12.707a1 1 0 0 0 0-1.414L13.121 3.707a1 1 0 0 0-1.414 0L9.121 6.293a1 1 0 0 0 0 1.414l7.586 7.586a1 1 0 0 0 1.414 0z" />
-    </svg>
-  );
-}
-
 export function ContactPage() {
-  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "error">(
-    "idle",
-  );
 
   return (
     <SiteFooter className="bg-[var(--v02-navy-deep)] text-[var(--v02-ink)] antialiased">
@@ -196,189 +169,31 @@ export function ContactPage() {
             </div>
 
             <div className="mx-auto mt-12 max-w-2xl">
-              <form
-                id="form"
-                onSubmit={async (e: FormEvent<HTMLFormElement>) => {
-                  e.preventDefault();
-                  const form = e.currentTarget;
-                  setFormStatus("sending");
-                  try {
-                    await submitContactForm(form, "Contact page");
-                    router.replace(CONTACT_CONFIRMATION_PATH);
-                  } catch {
-                    setFormStatus("error");
-                  }
-                }}
-                className="rounded-2xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-ink)] p-6 sm:p-8"
-              >
-                <h3 className="v02-display text-2xl font-bold tracking-tight text-white">
-                  Tell us about your business
-                </h3>
-
-                <div className="mt-8 space-y-5">
-                  <label className="block">
-                    <span className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">
-                      Company name<span className="text-[var(--v02-gold)]"> *</span>
-                    </span>
-                    <input
-                      id="company_name"
-                      type="text"
-                      name="company_name"
-                      required
-                      autoComplete="organization"
-                      className="mt-2 w-full rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
-                      placeholder="Your company or brand"
-                    />
-                  </label>
-
-                  <label className="block">
-                    <span className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">
-                      Email address<span className="text-[var(--v02-gold)]"> *</span>
-                    </span>
-                    <input
-                      id="email"
-                      type="email"
-                      name="email"
-                      required
-                      autoComplete="email"
-                      className="mt-2 w-full rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
-                      placeholder="you@company.com"
-                    />
-                  </label>
-
-                  <label className="block">
-                    <span className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">
-                      Phone number<span className="text-[var(--v02-gold)]"> *</span>
-                    </span>
-                    <input
-                      id="phone"
-                      type="tel"
-                      name="phone"
-                      required
-                      autoComplete="tel"
-                      className="mt-2 w-full rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
-                      placeholder="(555) 555-5555"
-                    />
-                  </label>
-
-                  <label className="block">
-                    <span className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">
-                      Website or social URL
-                    </span>
-                    <span className="mt-1 block text-xs text-slate-500">
-                      Company site, Instagram, LinkedIn, or other profile link
-                    </span>
-                    <input
-                      id="website_or_social"
-                      type="text"
-                      name="website"
-                      inputMode="url"
-                      autoComplete="url"
-                      className="mt-2 w-full rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
-                      placeholder="https://… or social profile URL"
-                    />
-                  </label>
-                </div>
-
-                <div className="mt-8 space-y-5">
-                  <label className="block">
-                    <span className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">
-                      What is your primary marketing goal?
-                    </span>
-                    <textarea
-                      id="primary_marketing_goal"
-                      name="marketing_goal"
-                      rows={3}
-                      className="mt-2 w-full resize-none rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
-                      placeholder="e.g. more qualified leads, launch a new offer, grow local awareness…"
-                    />
-                  </label>
-
-                  <label className="block">
-                    <span className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">
-                      Who is your target audience?
-                    </span>
-                    <textarea
-                      id="target_audience"
-                      name="target_audience"
-                      rows={3}
-                      className="mt-2 w-full resize-none rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
-                      placeholder="Demographics, geography, interests, or ideal customer…"
-                    />
-                  </label>
-
-                  <label className="block">
-                    <span className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">
-                      What does your business sell or offer?
-                    </span>
-                    <textarea
-                      id="business_offer"
-                      name="business_offer"
-                      rows={3}
-                      className="mt-2 w-full resize-none rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
-                      placeholder="Electrical, HVAC, plumbing, roofing, or other trade work…"
-                    />
-                  </label>
-
-                  <label className="block">
-                    <span className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">
-                      What is your monthly marketing budget?
-                    </span>
-                    <select
-                      id="marketing_budget"
-                      name="monthly_budget"
-                      defaultValue=""
-                      className="mt-2 w-full rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition focus:border-[var(--v02-gold)]"
-                    >
-                      <option value="" disabled>
-                        Select a range
-                      </option>
-                      <option value="Under $5,000 / month">
-                        Under $5,000 / month
-                      </option>
-                      <option value="$5,000 - $10,000 / month">
-                        $5,000 - $10,000 / month
-                      </option>
-                      <option value="$10,000 - $15,000 / month">
-                        $10,000 - $15,000 / month
-                      </option>
-                      <option value="$15,000 - $25,000 / month">
-                        $15,000 - $25,000 / month
-                      </option>
-                      <option value="$25,000+ / month">$25,000+ / month</option>
-                      <option value="Prefer to discuss">Prefer to discuss</option>
-                    </select>
-                  </label>
-                </div>
-
-                <input
-                  type="text"
-                  name="_honey"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  aria-hidden="true"
-                  className="absolute left-[-9999px] h-0 w-0 opacity-0"
-                />
-
-                <PrivacyConsent
-                  id="contact-privacy-consent"
-                  className="mt-8 border-t border-[var(--v02-line-on-dark)] pt-6"
-                />
-
-                <button
-                  type="submit"
-                  disabled={formStatus === "sending"}
-                  className="mt-8 flex w-full items-center justify-center gap-2 rounded-full bg-[var(--v02-gold)] px-6 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:bg-[var(--v02-gold-hot)] disabled:opacity-70"
-                >
-                  {formStatus === "sending" ? "Sending…" : "Let's Build"}
-                  <IconHammer className="text-2xl" />
-                </button>
-                <p className="mt-4 text-center text-xs text-slate-500">
-                  {formStatus === "error"
-                    ? "Could not send. Email build@bluecollarvideoguys.com and we’ll pick it up."
-                    : "We respond within one business day."}
-                </p>
-              </form>
+              <h3 className="v02-display text-2xl font-bold tracking-tight text-[var(--v02-ink)]">
+                Tell us about your business
+              </h3>
+              <iframe
+                src={`https://api.leadconnectorhq.com/widget/form/${CONTACT_FORM_ID}`}
+                id={`inline-${CONTACT_FORM_ID}`}
+                title="Tell us about your business"
+                data-layout="{'id':'INLINE'}"
+                data-trigger-type="alwaysShow"
+                data-trigger-value=""
+                data-activation-type="alwaysActivated"
+                data-activation-value=""
+                data-deactivation-type="neverDeactivate"
+                data-deactivation-value=""
+                data-form-name="Contact"
+                data-height="1680"
+                data-layout-iframe-id={`inline-${CONTACT_FORM_ID}`}
+                data-form-id={CONTACT_FORM_ID}
+                className="mt-6 w-full border-0"
+                style={{ height: 1680 }}
+              />
+              <Script
+                src="https://link.msgsndr.com/js/form_embed.js"
+                strategy="afterInteractive"
+              />
             </div>
           </div>
         </section>
