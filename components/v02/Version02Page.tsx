@@ -1,21 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import Script from "next/script";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { useRouter } from "next/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CoverYouTubeEmbed } from "@/components/CoverYouTubeEmbed";
 import { VideoSlot } from "@/components/VideoSlot";
 import { CALENDLY_URL } from "@/lib/calendly";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
-import { PrivacyConsent } from "@/components/PrivacyConsent";
 import { SiteBrandLink } from "@/components/BrandLogo";
 import { SiteFooter } from "@/components/SiteFooter";
-import {
-  CONTACT_CONFIRMATION_PATH,
-  submitContactForm,
-} from "@/lib/submit-contact";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,6 +26,8 @@ const VERSIONS = [
   { href: "/about", label: "About", active: false },
   { href: "/contact", label: "Contact", active: false },
 ] as const;
+
+const HOMEPAGE_FORM_ID = "AF4dckQQ4pFslMDgU2IY";
 
 /** Home type system, Inter eyebrows/body, Barlow titles, gold accents */
 const type = {
@@ -335,14 +332,6 @@ function IconMail({ className }: { className?: string }) {
   );
 }
 
-function IconSend({ className }: { className?: string }) {
-  return (
-    <svg className={className} width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-      <path d="M4 12l16-8-6 16-2-6-8-2z" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 function IconGlobe({ className }: { className?: string }) {
   return (
     <svg className={className} width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
@@ -371,11 +360,7 @@ function IconMegaphone({ className }: { className?: string }) {
 }
 
 export function Version02Page() {
-  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "error">(
-    "idle",
-  );
   const [lightbox, setLightbox] = useState<{
     videoId: string;
     title: string;
@@ -1093,99 +1078,30 @@ export function Version02Page() {
             </div>
 
             <div className="mt-12 grid gap-8 lg:grid-cols-2">
-              <form
-                onSubmit={async (e) => {
-                  e.preventDefault();
-                  const form = e.currentTarget;
-                  setFormStatus("sending");
-                  try {
-                    await submitContactForm(form, "Homepage");
-                    router.replace(CONTACT_CONFIRMATION_PATH);
-                  } catch {
-                    setFormStatus("error");
-                  }
-                }}
-                className="rounded-2xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-ink)] p-6 sm:p-8"
-              >
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <label className="block">
-                    <span className={type.labelOnDarkPanel}>Name</span>
-                    <input
-                      type="text"
-                      name="name"
-                      required
-                      autoComplete="name"
-                      className="mt-2 w-full rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
-                      placeholder="Your name"
-                    />
-                  </label>
-                  <label className="block">
-                    <span className={type.labelOnDarkPanel}>Phone</span>
-                    <input
-                      type="tel"
-                      name="phone"
-                      required
-                      autoComplete="tel"
-                      className="mt-2 w-full rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
-                      placeholder="000-000-0000"
-                    />
-                  </label>
-                </div>
-
-                <label className="mt-5 block">
-                  <span className={type.labelOnDarkPanel}>Email</span>
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    autoComplete="email"
-                    className="mt-2 w-full rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
-                    placeholder="you@company.com"
-                  />
-                </label>
-
-                <label className="mt-5 block">
-                  <span className={type.labelOnDarkPanel}>
-                    What are you building?
-                  </span>
-                  <textarea
-                    name="message"
-                    rows={5}
-                    required
-                    className="mt-2 w-full resize-none rounded-xl border border-[var(--v02-line-on-dark)] bg-[var(--v02-navy)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[var(--v02-gold)]"
-                    placeholder="Trade, company size, and what you want customers to trust you for..."
-                  />
-                </label>
-
-                {/* FormSubmit honeypot */}
-                <input
-                  type="text"
-                  name="_honey"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  aria-hidden="true"
-                  className="absolute left-[-9999px] h-0 w-0 opacity-0"
+              <div>
+                <iframe
+                  src={`https://api.leadconnectorhq.com/widget/form/${HOMEPAGE_FORM_ID}`}
+                  id={`inline-${HOMEPAGE_FORM_ID}`}
+                  title="Tell us about your business"
+                  data-layout="{'id':'INLINE'}"
+                  data-trigger-type="alwaysShow"
+                  data-trigger-value=""
+                  data-activation-type="alwaysActivated"
+                  data-activation-value=""
+                  data-deactivation-type="neverDeactivate"
+                  data-deactivation-value=""
+                  data-form-name="Homepage"
+                  data-height="1120"
+                  data-layout-iframe-id={`inline-${HOMEPAGE_FORM_ID}`}
+                  data-form-id={HOMEPAGE_FORM_ID}
+                  className="w-full border-0"
+                  style={{ height: 1120 }}
                 />
-
-                <PrivacyConsent
-                  id="home-privacy-consent"
-                  className="mt-6 border-t border-[var(--v02-line-on-dark)] pt-6"
+                <Script
+                  src="https://link.msgsndr.com/js/form_embed.js"
+                  strategy="afterInteractive"
                 />
-
-                <button
-                  type="submit"
-                  disabled={formStatus === "sending"}
-                  className="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-[var(--v02-gold)] px-6 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:bg-[var(--v02-gold-hot)] disabled:opacity-70"
-                >
-                  {formStatus === "sending" ? "Sending…" : "Send Message"}
-                  <IconSend className="text-xl" />
-                </button>
-                <p className="mt-4 text-center text-xs text-slate-500">
-                  {formStatus === "error"
-                    ? "Could not send. Email build@bluecollarvideoguys.com and we’ll pick it up."
-                    : "We respond within one business day."}
-                </p>
-              </form>
+              </div>
 
               <div className="flex flex-col justify-center border border-[var(--v02-line)] bg-white p-7 sm:p-9">
                 <h3 className={type.subtitleLight}>What to expect on the call</h3>
