@@ -78,3 +78,67 @@ export function getAttribution(): Record<string, string> {
     return {};
   }
 }
+
+const GHL_EVENTS_URL = "https://backend.leadconnectorhq.com/external-tracking/events";
+
+function readHighLevelSession(trackingId: string): string | null {
+  const key = `lc_session_${trackingId}`;
+  try {
+    const fromCookie = document.cookie
+      .split("; ")
+      .find((part) => part.startsWith(`${key}=`))
+      ?.slice(key.length + 1);
+    if (fromCookie) return decodeURIComponent(fromCookie);
+  } catch {
+    // Cookie blocked. Fall through to session storage.
+  }
+  try {
+    return sessionStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * GoHighLevel's script records only the first full page load. Next.js moves
+ * between pages without a reload, so later pages need their own page view.
+ * Returns false when the script has not created a session yet.
+ */
+export async function trackHighLevelPageView(
+  trackingId: string,
+  referrer: string,
+): Promise<boolean> {
+  const sessionId = readHighLevelSession(trackingId);
+  if (!sessionId) return false;
+  const agent = navigator.userAgent.toLowerCase();
+  const deviceType =
+    agent.includes("mobi") ||
+    agent.includes("iphone") ||
+    agent.includes("ipod") ||
+    (agent.includes("android") && agent.includes("mobile"))
+      ? "mobile"
+      : "desktop";
+  const event = {
+    type: "external_script_page_view",
+    timestamp: Date.now(),
+    title: document.title,
+    url: window.location.href,
+    path: window.location.pathname,
+    referrer,
+    userAgent: navigator.userAgent,
+    properties: { sessionId, deviceType },
+    trackingId,
+    sessionId,
+  };
+  try {
+    const response = await fetch(GHL_EVENTS_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(event),
+      keepalive: true,
+    });
+    return response.ok;
+  } catch {
+    return false;
+  }
+}

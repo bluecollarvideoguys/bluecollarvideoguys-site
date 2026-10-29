@@ -1,8 +1,9 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect } from "react";
-import { captureAttribution, trackEvent } from "@/lib/track";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
+import { captureAttribution, trackEvent, trackHighLevelPageView } from "@/lib/track";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 const GADS_ID = process.env.NEXT_PUBLIC_GADS_ID;
@@ -16,6 +17,42 @@ const GHL_TRACKING_ID = "tk_33a1c715e4e242d0b463561c484e7e79";
  * discovery-call clicks, and Calendly bookings with one delegated listener.
  */
 export function Analytics() {
+  const pathname = usePathname();
+  const reportedUrl = useRef<string | null>(null);
+
+  useEffect(() => {
+    const current = window.location.href;
+    const previous = reportedUrl.current;
+    if (previous === current) return;
+
+    let cancelled = false;
+    let attempts = 0;
+    let timer = 0;
+    const send = () => {
+      if (cancelled) return;
+      // The GoHighLevel script already records the first full page load.
+      if (!previous) {
+        reportedUrl.current = current;
+        return;
+      }
+      void trackHighLevelPageView(GHL_TRACKING_ID, previous).then((sent) => {
+        if (cancelled) return;
+        if (sent) {
+          reportedUrl.current = current;
+          return;
+        }
+        if (attempts >= 8) return;
+        attempts += 1;
+        timer = window.setTimeout(send, 250);
+      });
+    };
+    send();
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, [pathname]);
+
   useEffect(() => {
     captureAttribution();
 
