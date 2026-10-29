@@ -159,6 +159,12 @@ export function PrivacyPage() {
               materials perform. We do not collect GPS coordinates or sell this
               data.
             </p>
+            <p className={paragraph}>
+              When you visit this website, our customer system (GoHighLevel)
+              records the page you viewed. We use that to see which pages people
+              use and to connect a later form or booking to that visit. We do
+              not sell this data.
+            </p>
 
             <h2 className={`${heading} mt-12`}>How We Use Your Data</h2>
             <p className={paragraph}>We use your information to:</p>

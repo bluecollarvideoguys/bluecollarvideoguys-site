@@ -7,11 +7,13 @@ import { captureAttribution, trackEvent } from "@/lib/track";
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 const GADS_ID = process.env.NEXT_PUBLIC_GADS_ID;
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+/** Public id from GoHighLevel Settings → External Tracking. Safe to ship in the page. */
+const GHL_TRACKING_ID = "tk_33a1c715e4e242d0b463561c484e7e79";
 
 /**
- * Loads GA4, Google Ads, and Meta Pixel when their IDs are set, and tracks
- * calls, emails, discovery-call clicks, and Calendly bookings site-wide
- * with one delegated listener (no per-button wiring needed).
+ * Loads GoHighLevel external tracking on every page, plus GA4, Google Ads,
+ * and Meta Pixel when their IDs are set. Also tracks calls, emails,
+ * discovery-call clicks, and Calendly bookings with one delegated listener.
  */
 export function Analytics() {
   useEffect(() => {
@@ -49,6 +51,11 @@ export function Analytics() {
 
   return (
     <>
+      <Script
+        src="https://link.msgsndr.com/js/external-tracking.js"
+        strategy="afterInteractive"
+        data-tracking-id={GHL_TRACKING_ID}
+      />
       {googleId ? (
         <>
           <Script
