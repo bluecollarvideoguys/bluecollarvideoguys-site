@@ -15,7 +15,7 @@ export const SITE = {
   /** E.164 format for schema, derived from the tel: link. */
   phoneE164: PHONE_HREF.replace("tel:", ""),
   description:
-    "Video marketing for contractors and trades businesses in Redding and the North State: cinematic video, photography, websites, SEO, social media, and ads.",
+    "Media Team for the Trades. Cinematic video, photography, websites, SEO, social media, and ads for contractors in Redding and the North State.",
   logo: `${SITE_ORIGIN}/brand/primary-stacked.png`,
   image: `${SITE_ORIGIN}/opengraph-image.png`,
   /** Base city and ZIP used for the Google Business Profile. */

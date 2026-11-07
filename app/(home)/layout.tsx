@@ -16,7 +16,7 @@ const body = Inter({
 });
 
 export const metadata: Metadata = buildMetadata({
-  title: "Video Marketing for Contractors | Blue Collar Video Guys",
+  title: "Media Team for the Trades | Blue Collar Video Guys",
   description:
     "Cinematic video, websites, and local SEO for roofers, HVAC, plumbers, and electricians from Medford to Sacramento. Book a free Blueprint call.",
   path: "/",

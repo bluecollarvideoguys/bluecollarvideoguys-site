@@ -4,43 +4,43 @@ import Link from "next/link";
 const LOGOS = {
   compact: {
     src: "/brand/compact-horizontal.png",
-    width: 1024,
-    height: 290,
+    width: 792,
+    height: 239,
   },
   primary: {
     src: "/brand/primary-horizontal.png",
-    width: 1024,
-    height: 269,
+    width: 792,
+    height: 239,
   },
   alternate: {
     src: "/brand/alternate-horizontal.png",
-    width: 1024,
-    height: 274,
+    width: 1028,
+    height: 343,
   },
   stacked: {
     src: "/brand/primary-stacked.png",
-    width: 1024,
-    height: 890,
+    width: 803,
+    height: 989,
   },
   "alternate-stacked": {
     src: "/brand/alternate-stacked.png",
-    width: 1024,
-    height: 924,
+    width: 803,
+    height: 989,
   },
   icon: {
     src: "/brand/icon-mark.png",
-    width: 1024,
-    height: 901,
+    width: 851,
+    height: 846,
   },
   circular: {
     src: "/brand/circular-badge.png",
-    width: 1016,
-    height: 1020,
+    width: 684,
+    height: 677,
   },
   crest: {
     src: "/brand/badge-crest.png",
-    width: 867,
-    height: 1024,
+    width: 803,
+    height: 989,
   },
 } as const;
 
@@ -90,7 +90,7 @@ export function SiteBrandLink({
       <BrandLogo
         variant="compact"
         alt=""
-        className="h-8 w-[7.06rem] sm:h-9 sm:w-[7.94rem] lg:h-10 lg:w-[8.81rem]"
+        className="h-8 w-auto sm:h-9 lg:h-10"
         loading="eager"
         fetchPriority="high"
         sizes="141px"

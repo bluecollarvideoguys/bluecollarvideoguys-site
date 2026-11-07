@@ -352,7 +352,7 @@ export function Version04Design() {
               <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3 py-1.5 backdrop-blur-md">
                 <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
                 <span className="text-xs font-medium uppercase tracking-[0.14em] text-stone-100">
-                  Authentic video marketing for blue collar businesses
+                  Media Team for the Trades
                 </span>
               </div>
 

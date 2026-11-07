@@ -108,7 +108,7 @@ export async function POST(request: Request) {
 
   const clientHtml = `
     <div style="background:#0d1520;padding:32px 20px;font-family:Inter,system-ui,sans-serif;color:#f5f5f2">
-      <img src="https://www.bluecollarvideoguys.com/brand/compact-horizontal.png" alt="The Blue Collar Video Guys" width="220" height="62" style="display:block;margin:0 0 20px;width:220px;height:auto;border:0" />
+      <img src="https://www.bluecollarvideoguys.com/brand/compact-horizontal.png" alt="The Blue Collar Video Guys" width="220" height="66" style="display:block;margin:0 0 20px;width:220px;height:auto;border:0" />
       <h1 style="margin:0 0 16px;font:700 28px/1.1 'Barlow Condensed',sans-serif;color:#ffffff">Your Blueprint packet is on the way.</h1>
       <p style="margin:0 0 20px;font:16px/1.5 Inter,system-ui,sans-serif;color:#94a3b8">${escapeHtml(packetNote)} Book the discovery call when you are ready.</p>
       <p style="margin:0 0 28px">

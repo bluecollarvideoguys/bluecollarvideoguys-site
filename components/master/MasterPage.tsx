@@ -382,7 +382,7 @@ export function MasterPage() {
             <div className="max-w-4xl">
               <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-[var(--v02-gold)]/40 bg-[var(--v02-ink)]/70 px-4 py-2 text-xs font-semibold tracking-wide text-[#f7bd45]">
                 <IconStar className="text-base" />
-                AUTHENTIC VIDEO MARKETING FOR BLUE-COLLAR BUSINESSES
+                MEDIA TEAM FOR THE TRADES
               </div>
 
               <h1 className="v02-display text-5xl font-bold leading-[0.9] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl">
@@ -962,9 +962,9 @@ export function MasterPage() {
               <span className="text-[var(--v02-gold)]">VIDEO GUYS™</span>
             </Link>
             <p className="mt-3 max-w-md text-sm leading-relaxed">
-              Build Trust. Stand Out. Win More Work. Authentic video marketing
-              for blue collar businesses, powered by The Blue Collar Blueprint™
-              and Trust Framework™.
+              Build Trust. Stand Out. Win More Work. Media Team for the
+              Trades, powered by The Blue Collar Blueprint™ and Trust
+              Framework™.
             </p>
           </div>
           <div className="text-sm md:text-right">

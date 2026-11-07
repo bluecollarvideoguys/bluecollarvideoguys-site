@@ -304,8 +304,8 @@ export function BrandGuidePage() {
               Built for the businesses that build America.
             </h2>
             <p className={`mt-6 ${type.bodyDark}`}>
-              The Blue Collar Video Guys is a video marketing and growth brand
-              built specifically for the trades. We help established blue-collar
+              The Blue Collar Video Guys is the media team for the trades. We
+              help established blue-collar
               businesses turn the reputation they have already earned into
               visible trust, stronger differentiation, and more opportunities.
             </p>

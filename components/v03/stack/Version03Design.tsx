@@ -250,7 +250,7 @@ export function Version03Design() {
             <div className="max-w-5xl">
               <p className="mb-6 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.16em] text-white/65">
                 <span className="h-px w-8 bg-[var(--v03-copper-hot)]" />
-                Authentic video marketing for blue collar businesses
+                Media Team for the Trades
               </p>
               <h1 className="max-w-4xl font-semibold text-5xl uppercase leading-[0.88] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl">
                 Build Trust.
@@ -697,8 +697,8 @@ export function Version03Design() {
               BCVG™
             </Link>
             <p className="mt-5 max-w-xs text-sm leading-6 text-white/45">
-              Build Trust. Stand Out. Win More Work. Authentic video marketing
-              for blue collar businesses.
+              Build Trust. Stand Out. Win More Work. Media Team for the
+              Trades.
             </p>
           </div>
 

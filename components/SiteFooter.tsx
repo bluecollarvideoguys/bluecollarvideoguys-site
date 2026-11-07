@@ -120,9 +120,9 @@ export function SiteFooter({
                   The Blueprint
                 </Link>
                 <p className="v02-footer-reveal__copy">
-                  Build Trust. Stand Out. Win More Work. Video marketing for
-                  contractors and trades businesses, serving Southern Oregon
-                  and Northern California from Medford to Sacramento.
+                  Build Trust. Stand Out. Win More Work. Media Team for the
+                  Trades, serving Southern Oregon and Northern California from
+                  Medford to Sacramento.
                 </p>
               </div>
             </div>

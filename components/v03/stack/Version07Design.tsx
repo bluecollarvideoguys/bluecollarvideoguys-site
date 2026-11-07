@@ -502,7 +502,7 @@ export function Version07Design() {
 
           <div className="relative mx-auto w-full max-w-screen-2xl px-4 pb-8 pt-28 sm:px-6 sm:pb-10 lg:px-8">
             <p className="mb-5 text-sm font-medium text-white/80">
-              The Blue Collar Blueprint™ · Video marketing for the trades
+              The Blue Collar Blueprint™ · Media Team for the Trades
             </p>
             <h1 className="max-w-6xl text-5xl font-medium leading-[0.91] tracking-tight text-white sm:text-7xl lg:text-8xl">
               Build Trust. Stand Out.
@@ -885,8 +885,8 @@ export function Version07Design() {
                 The Blue Collar Video Guys™
               </p>
               <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/45">
-                Authentic video marketing for blue collar businesses. Build
-                Trust. Stand Out. Win More Work.
+                Media Team for the Trades. Build Trust. Stand Out. Win More
+                Work.
               </p>
             </div>
             <div>

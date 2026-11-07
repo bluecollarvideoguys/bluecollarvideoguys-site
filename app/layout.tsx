@@ -20,7 +20,7 @@ const body = Source_Sans_3({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "Video Marketing for Contractors | Blue Collar Video Guys",
+    default: "Media Team for the Trades | Blue Collar Video Guys",
     template: "%s | Blue Collar Video Guys",
   },
   description:

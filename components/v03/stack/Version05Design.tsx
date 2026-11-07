@@ -232,7 +232,7 @@ export function Version05Design() {
 
               <p className="v05-stamp mb-5 text-white/90">Trust Framework™</p>
               <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-stone-200">
-                Authentic video marketing for blue collar businesses
+                Media Team for the Trades
               </p>
               <h1 className="v05-display max-w-4xl text-5xl leading-[0.92] tracking-tight sm:text-7xl lg:text-8xl">
                 Build Trust.

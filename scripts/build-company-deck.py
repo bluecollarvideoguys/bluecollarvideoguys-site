@@ -644,7 +644,7 @@ def build():
         set_run_font(run, name=FONT_BODY, size=Pt(8), bold=True, color=SLATE_LIGHT)
     tag = add_textbox(s, Inches(0.75), Inches(7.05), Inches(11), Inches(0.25))
     run = tag.text_frame.paragraphs[0].add_run()
-    run.text = "Build Trust. Stand Out. Win More Work. Authentic video marketing for blue-collar businesses."
+    run.text = "Build Trust. Stand Out. Win More Work. Media Team for the Trades."
     set_run_font(run, name=FONT_BODY, size=Pt(9), color=SLATE_LIGHT)
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
