@@ -3,6 +3,7 @@
 import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
+import { BOOKING_URL } from "@/lib/booking";
 import { captureAttribution, trackEvent, trackHighLevelPageView } from "@/lib/track";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
@@ -14,7 +15,7 @@ const GHL_TRACKING_ID = "tk_33a1c715e4e242d0b463561c484e7e79";
 /**
  * Loads GoHighLevel external tracking on every page, plus GA4, Google Ads,
  * and Meta Pixel when their IDs are set. Also tracks calls, emails,
- * discovery-call clicks, and Calendly bookings with one delegated listener.
+ * discovery-call clicks, and booking-link clicks with one delegated listener.
  */
 export function Analytics() {
   const pathname = usePathname();
@@ -63,24 +64,16 @@ export function Analytics() {
       const location = link.closest("[id]")?.id || window.location.pathname;
       if (href.startsWith("tel:")) trackEvent("phone_click", { link_location: location });
       else if (href.startsWith("mailto:")) trackEvent("email_click", { link_location: location });
-      else if (href.includes("calendly.com"))
+      else if (href === BOOKING_URL || href.startsWith(`${BOOKING_URL}?`))
         trackEvent("book_call_click", {
           link_location: location,
           link_text: link.textContent?.trim().slice(0, 60),
         });
     };
 
-    const onMessage = (e: MessageEvent) => {
-      if (typeof e.origin !== "string" || !e.origin.includes("calendly.com")) return;
-      const data = e.data as { event?: string } | undefined;
-      if (data?.event === "calendly.event_scheduled") trackEvent("calendly_booked");
-    };
-
     document.addEventListener("click", onClick);
-    window.addEventListener("message", onMessage);
     return () => {
       document.removeEventListener("click", onClick);
-      window.removeEventListener("message", onMessage);
     };
   }, []);
 

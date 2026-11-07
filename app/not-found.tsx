@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CALENDLY_URL } from "@/lib/calendly";
+import { BOOKING_URL } from "@/lib/booking";
 
 export const metadata: Metadata = {
   title: "Page not found",
@@ -39,12 +39,12 @@ export default function NotFound() {
         ))}
       </nav>
       <a
-        href={CALENDLY_URL}
+        href={BOOKING_URL}
         target="_blank"
         rel="noreferrer"
         className="mt-8 rounded-full bg-[var(--rust)] px-7 py-4 text-base font-semibold text-white transition hover:bg-[var(--rust-hover)]"
       >
-        Book a Discovery Call
+        Book a Free Strategy Call
       </a>
     </main>
   );

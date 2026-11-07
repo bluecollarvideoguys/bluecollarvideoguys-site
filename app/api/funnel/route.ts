@@ -2,9 +2,10 @@ import { readFile } from "fs/promises";
 import { join } from "path";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { CALENDLY_URL } from "@/lib/calendly";
+import { BOOKING_URL } from "@/lib/booking";
 import { describeSmsConsent, parseSmsConsent, PHONE_DISPLAY } from "@/lib/contact";
 import { FUNNEL_PDF_FILENAME, FUNNEL_PDF_RELATIVE_PATH } from "@/lib/funnel";
+import { leadFromBody, syncLeadToGoHighLevel } from "@/lib/gohighlevel";
 
 export const runtime = "nodejs";
 
@@ -111,7 +112,7 @@ export async function POST(request: Request) {
       <h1 style="margin:0 0 16px;font:700 28px/1.1 'Barlow Condensed',sans-serif;color:#ffffff">Your Blueprint packet is on the way.</h1>
       <p style="margin:0 0 20px;font:16px/1.5 Inter,system-ui,sans-serif;color:#94a3b8">${escapeHtml(packetNote)} Book the discovery call when you are ready.</p>
       <p style="margin:0 0 28px">
-        <a href="${CALENDLY_URL}" style="display:inline-block;background:#f2ae26;color:#16202d;text-decoration:none;font:600 15px/1 Inter,system-ui,sans-serif;padding:14px 22px;border-radius:999px">Book a Discovery Call</a>
+        <a href="${BOOKING_URL}" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#f2ae26;color:#16202d;text-decoration:none;font:600 15px/1 Inter,system-ui,sans-serif;padding:14px 22px;border-radius:999px">Book a Free Strategy Call</a>
       </p>
       <p style="margin:0;font:14px/1.5 Inter,system-ui,sans-serif;color:#94a3b8">Questions? Call ${PHONE_DISPLAY} or reply to this email.</p>
     </div>
@@ -178,6 +179,15 @@ export async function POST(request: Request) {
   if (clientError) {
     console.error("Funnel client email failed:", clientError.message);
   }
+
+  await syncLeadToGoHighLevel(
+    leadFromBody(
+      { ...body, source: "QR scan funnel" },
+      smsConsent,
+      consentedAt,
+      "QR scan funnel",
+    ),
+  );
 
   return NextResponse.json({ ok: true });
 }

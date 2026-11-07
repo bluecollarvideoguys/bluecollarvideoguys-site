@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, type ReactNode } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
-import { CALENDLY_URL } from "@/lib/calendly";
+import { BOOKING_URL } from "@/lib/booking";
 import { PHONE_DISPLAY, PHONE_HREF, PRIVACY_PATH } from "@/lib/contact";
 
 export function SiteFooter({
@@ -59,7 +59,7 @@ export function SiteFooter({
         <div className="v02-footer-reveal">
           <div className="v02-footer-reveal__inner">
             <a
-              href={CALENDLY_URL}
+              href={BOOKING_URL}
               target="_blank"
               rel="noreferrer"
               className="v02-footer-reveal__cta"
@@ -93,8 +93,8 @@ export function SiteFooter({
                     build@bluecollarvideoguys.com
                   </a>
                   <a href={PHONE_HREF}>{PHONE_DISPLAY}</a>
-                  <a href={CALENDLY_URL} target="_blank" rel="noreferrer">
-                    Book a Discovery Call
+                  <a href={BOOKING_URL} target="_blank" rel="noreferrer">
+                    Book a Free Strategy Call
                   </a>
                 </div>
               </div>

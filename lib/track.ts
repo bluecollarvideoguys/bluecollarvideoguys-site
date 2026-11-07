@@ -16,6 +16,7 @@ const GADS_ID = process.env.NEXT_PUBLIC_GADS_ID;
 /** Google Ads conversion labels, set once conversions exist in Google Ads. */
 const GADS_LABELS: Record<string, string | undefined> = {
   generate_lead: process.env.NEXT_PUBLIC_GADS_LEAD_LABEL,
+  /** Google Ads label for a confirmed booking. Nothing on the site fires this until the new calendar reports a completion event. */
   calendly_booked: process.env.NEXT_PUBLIC_GADS_BOOKED_LABEL,
 };
 /** GA4 event name to Meta standard event. */

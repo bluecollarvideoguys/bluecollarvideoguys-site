@@ -4,7 +4,7 @@ import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { IconArrowRight } from "@/components/icons";
-import { CALENDLY_URL } from "@/lib/calendly";
+import { BOOKING_URL } from "@/lib/booking";
 
 type Crumb = { name: string; path: string };
 
@@ -52,12 +52,12 @@ export function PageShell({
 export function CallButton({ className = "" }: { className?: string }) {
   return (
     <a
-      href={CALENDLY_URL}
+      href={BOOKING_URL}
       target="_blank"
       rel="noreferrer"
       className={`inline-flex items-center gap-2 rounded-full bg-[var(--v02-gold)] px-7 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)] ${className}`}
     >
-      Book a Discovery Call
+      Book a Free Strategy Call
       <IconArrowRight />
     </a>
   );

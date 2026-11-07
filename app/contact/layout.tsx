@@ -16,7 +16,7 @@ const body = Inter({
 });
 
 export const metadata: Metadata = buildMetadata({
-  title: "Book a Discovery Call",
+  title: "Book a Free Strategy Call",
   description:
     "Tell us about your trade business and book a free 30-minute Blueprint call. Serving contractors in Southern Oregon and Northern California.",
   path: "/contact",

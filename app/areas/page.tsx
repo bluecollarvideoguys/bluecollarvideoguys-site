@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { IconArrowRight } from "@/components/icons";
 import { AREAS } from "@/content/areas";
-import { CALENDLY_URL } from "@/lib/calendly";
+import { BOOKING_URL } from "@/lib/booking";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -42,12 +42,12 @@ export default function AreasPage() {
                 California and Southern Oregon are welcome too.
               </p>
               <a
-                href={CALENDLY_URL}
+                href={BOOKING_URL}
                 target="_blank"
                 rel="noreferrer"
                 className="mt-8 inline-flex items-center gap-2 rounded-full bg-[var(--v02-gold)] px-7 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
               >
-                Book a Discovery Call
+                Book a Free Strategy Call
                 <IconArrowRight />
               </a>
             </div>

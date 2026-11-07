@@ -4,7 +4,7 @@ import Link from "next/link";
 import Script from "next/script";
 import { useState } from "react";
 import { IconArrowRight } from "@/components/icons";
-import { CALENDLY_URL } from "@/lib/calendly";
+import { BOOKING_URL } from "@/lib/booking";
 import { SiteBrandLink } from "@/components/BrandLogo";
 import { SiteFooter } from "@/components/SiteFooter";
 
@@ -63,12 +63,12 @@ export function ContactPage() {
           </div>
 
           <a
-            href={CALENDLY_URL}
+            href={BOOKING_URL}
             target="_blank"
             rel="noreferrer"
             className="hidden rounded-full bg-[var(--v02-gold)] px-5 py-2.5 text-sm font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)] lg:inline-flex"
           >
-            Book a Discovery Call
+            Book a Free Strategy Call
           </a>
 
           <button
@@ -97,13 +97,13 @@ export function ContactPage() {
                 </Link>
               ))}
               <a
-                href={CALENDLY_URL}
+                href={BOOKING_URL}
                 target="_blank"
                 rel="noreferrer"
                 className="mt-2 font-semibold text-[var(--v02-gold)]"
                 onClick={() => setMenuOpen(false)}
               >
-                Book a Discovery Call
+                Book a Free Strategy Call
               </a>
             </div>
           </div>
@@ -158,12 +158,12 @@ export function ContactPage() {
                 out your Blueprint. No pressure, no obligation.
               </p>
               <a
-                href={CALENDLY_URL}
+                href={BOOKING_URL}
                 target="_blank"
                 rel="noreferrer"
                 className="mt-8 inline-flex items-center gap-2 rounded-full bg-[var(--v02-gold)] px-7 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
               >
-                Book a Discovery Call
+                Book a Free Strategy Call
                 <IconArrowRight />
               </a>
             </div>

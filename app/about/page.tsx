@@ -99,7 +99,7 @@ export default function AboutPage() {
             { href: "/services", label: "Contractor marketing services" },
             { href: "/industries", label: "Trades we serve" },
             { href: "/faq", label: "Common questions" },
-            { href: "/contact", label: "Book a discovery call" },
+            { href: "/contact", label: "Book a Free Strategy Call" },
           ]}
         />
       </PageShell>

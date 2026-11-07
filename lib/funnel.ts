@@ -1,4 +1,4 @@
-import { CALENDLY_URL } from "@/lib/calendly";
+import { BOOKING_URL } from "@/lib/booking";
 
 /** Default intro + follow-up film (YouTube) */
 export const FUNNEL_DEFAULT_VIDEO_URL =
@@ -12,7 +12,7 @@ export const SCAN_DEFAULT_REDIRECT_URL = "https://www.bluecollarvideoguys.com";
 
 /**
  * The printed QR always goes to /scan. Default is the website.
- * Set SCAN_REDIRECT_URL to another https URL (YouTube, Calendly, etc.),
+ * Set SCAN_REDIRECT_URL to another https URL (YouTube, the booking calendar, etc.),
  * or to `funnel` to keep the Blueprint intro instead.
  */
 export function getScanRedirectUrl(): string | null {
@@ -36,7 +36,7 @@ export const FUNNEL_FOLLOWUP_VIDEO =
   process.env.NEXT_PUBLIC_FUNNEL_FOLLOWUP_VIDEO_URL?.trim() ||
   FUNNEL_DEFAULT_VIDEO_URL;
 
-export const FUNNEL_CALENDLY_URL = CALENDLY_URL;
+export const FUNNEL_BOOKING_URL = BOOKING_URL;
 
 export const FUNNEL_PDF_FILENAME = "Blue-Collar-Blueprint.pdf";
 export const FUNNEL_PDF_RELATIVE_PATH = "public/funnel/blueprint.pdf";

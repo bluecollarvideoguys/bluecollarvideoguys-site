@@ -48,7 +48,7 @@ Unlisted, `noindex`. Not in the site menu.
 
 | Route | Use |
 |-------|-----|
-| `/scan` | iPhone Camera target. Intro film, info form, follow-up film, then Calendly. |
+| `/scan` | iPhone Camera target. Intro film, info form, follow-up film, then the booking calendar. |
 | `/scan/print` | Printable QR for stickers and leave-behinds. |
 
 Drop the pricing PDF at `public/funnel/blueprint.pdf`. Optional env vars

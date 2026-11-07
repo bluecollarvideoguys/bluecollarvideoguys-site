@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { VideoSlot } from "@/components/VideoSlot";
 import { IconArrowRight } from "@/components/icons";
-import { CALENDLY_URL } from "@/lib/calendly";
+import { BOOKING_URL } from "@/lib/booking";
 import { BrandLogo, SiteBrandLink } from "@/components/BrandLogo";
 import { SiteFooter } from "@/components/SiteFooter";
 
@@ -297,12 +297,12 @@ export function ServicesPage() {
           </div>
 
           <Link
-            href={CALENDLY_URL}
+            href={BOOKING_URL}
             target="_blank"
             rel="noreferrer"
             className="hidden rounded-full bg-[var(--v02-gold)] px-5 py-2.5 text-sm font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)] lg:inline-flex"
           >
-            Book a Discovery Call
+            Book a Free Strategy Call
           </Link>
 
           <button
@@ -331,13 +331,13 @@ export function ServicesPage() {
                 </Link>
               ))}
               <Link
-                href={CALENDLY_URL}
+                href={BOOKING_URL}
             target="_blank"
             rel="noreferrer"
                 className="mt-2 font-semibold text-[var(--v02-gold)]"
                 onClick={() => setMenuOpen(false)}
               >
-                Book a Discovery Call
+                Book a Free Strategy Call
               </Link>
             </div>
           </div>
@@ -467,12 +467,12 @@ export function ServicesPage() {
                   </p>
                 </div>
                 <a
-                  href={CALENDLY_URL}
+                  href={BOOKING_URL}
                   target="_blank"
                   rel="noreferrer"
                   className="v02-cta-shine group relative inline-flex shrink-0 items-center justify-center gap-2 overflow-hidden rounded-full bg-[var(--v02-gold)] px-8 py-4 text-sm font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
                 >
-                  Schedule Your Discovery Call
+                  Book a Free Strategy Call
                   <IconArrowRight className="transition group-hover:translate-x-1" />
                 </a>
               </div>
@@ -554,7 +554,7 @@ export function ServicesPage() {
                 the trust system that turns it into more of the right work.
               </p>
               <Link
-                href={CALENDLY_URL}
+                href={BOOKING_URL}
             target="_blank"
             rel="noreferrer"
                 className="cta-anim group inline-flex translate-y-6 items-center gap-2 rounded-full bg-[var(--v02-gold)] px-8 py-4 text-sm font-semibold uppercase tracking-wide text-[var(--v02-ink)] opacity-0 transition-all delay-200 duration-1000 ease-out hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
@@ -725,7 +725,7 @@ function PackageCard({
 
         <div className="mt-auto pt-10">
           <a
-            href={CALENDLY_URL}
+            href={BOOKING_URL}
             target="_blank"
             rel="noreferrer"
             className={`flex w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-bold tracking-wide transition hover:-translate-y-0.5 ${
@@ -734,7 +734,7 @@ function PackageCard({
                 : "bg-[var(--v02-gold)] text-[var(--v02-ink)] hover:bg-[var(--v02-gold-hot)]"
             }`}
           >
-            Schedule Discovery Call
+            Book a Free Strategy Call
           </a>
         </div>
       </div>

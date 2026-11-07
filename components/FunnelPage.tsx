@@ -8,7 +8,7 @@ import {
   type SyntheticEvent,
 } from "react";
 import {
-  FUNNEL_CALENDLY_URL,
+  FUNNEL_BOOKING_URL,
   FUNNEL_FOLLOWUP_VIDEO,
   FUNNEL_INTRO_VIDEO,
   parseYouTubeId,
@@ -48,7 +48,7 @@ export function FunnelPage() {
         <FunnelVideo
           src={FUNNEL_FOLLOWUP_VIDEO}
           onEnded={() => {
-            window.location.assign(FUNNEL_CALENDLY_URL);
+            window.location.assign(FUNNEL_BOOKING_URL);
           }}
         />
       ) : null}

@@ -613,7 +613,7 @@ def build():
         size=Pt(14),
     )
     contacts = [
-        ("Book a Discovery Call", "calendly.com/bluecollarvideoguys/30min"),
+        ("Book a Free Strategy Call", "api.leadconnectorhq.com/widget/booking/XsWGjZKCObXLVh3K5mU9"),
         ("Phone", "(530) 338-3391"),
         ("Email", "build@bluecollarvideoguys.com"),
         ("Website", "bluecollarvideoguys.com"),
@@ -629,7 +629,7 @@ def build():
         v = add_textbox(s, left + Inches(0.2), Inches(5.68), Inches(2.5), Inches(0.35))
         run = v.text_frame.paragraphs[0].add_run()
         run.text = value
-        set_run_font(run, name=FONT_BODY, size=Pt(11), color=PAPER)
+        set_run_font(run, name=FONT_BODY, size=Pt(8 if len(value) > 40 else 11), color=PAPER)
     stats = [("3", "Blueprint stages"), ("100%", "Built for the trades"), ("10", "Years experience")]
     for i, (num, label) in enumerate(stats):
         left = Inches(0.75) + i * Inches(2.8)

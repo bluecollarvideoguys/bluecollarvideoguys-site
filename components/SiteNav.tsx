@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { SiteBrandLink } from "@/components/BrandLogo";
-import { CALENDLY_URL } from "@/lib/calendly";
+import { BOOKING_URL } from "@/lib/booking";
 
 const NAV = [
   { href: "/", label: "Home" },
@@ -41,12 +41,12 @@ export function SiteNav() {
           ))}
         </div>
         <a
-          href={CALENDLY_URL}
+          href={BOOKING_URL}
           target="_blank"
           rel="noreferrer"
           className="hidden rounded-full bg-[var(--v02-gold)] px-5 py-2.5 text-sm font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)] lg:inline-flex"
         >
-          Book a Discovery Call
+          Book a Free Strategy Call
         </a>
         <button
           type="button"
@@ -73,8 +73,8 @@ export function SiteNav() {
                 {v.label}
               </Link>
             ))}
-            <a href={CALENDLY_URL} target="_blank" rel="noreferrer" className="mt-2 font-semibold text-[var(--v02-gold)]">
-              Book a Discovery Call
+            <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="mt-2 font-semibold text-[var(--v02-gold)]">
+              Book a Free Strategy Call
             </a>
           </div>
         </div>

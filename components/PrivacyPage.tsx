@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { SiteBrandLink } from "@/components/BrandLogo";
 import { SiteFooter } from "@/components/SiteFooter";
-import { CALENDLY_URL } from "@/lib/calendly";
+import { BOOKING_URL } from "@/lib/booking";
 import { PHONE_DISPLAY, SUPPORT_EMAIL } from "@/lib/contact";
 
 const NAV = [
@@ -73,12 +73,12 @@ export function PrivacyPage() {
           </div>
 
           <a
-            href={CALENDLY_URL}
+            href={BOOKING_URL}
             target="_blank"
             rel="noreferrer"
             className="hidden rounded-full bg-[var(--v02-gold)] px-5 py-2.5 text-sm font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)] lg:inline-flex"
           >
-            Book a Discovery Call
+            Book a Free Strategy Call
           </a>
 
           <button
@@ -104,13 +104,13 @@ export function PrivacyPage() {
                 </Link>
               ))}
               <a
-                href={CALENDLY_URL}
+                href={BOOKING_URL}
                 target="_blank"
                 rel="noreferrer"
                 className="mt-2 font-semibold text-[var(--v02-gold)]"
                 onClick={() => setMenuOpen(false)}
               >
-                Book a Discovery Call
+                Book a Free Strategy Call
               </a>
             </div>
           </div>

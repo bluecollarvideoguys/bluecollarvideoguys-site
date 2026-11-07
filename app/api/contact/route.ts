@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { describeSmsConsent, parseSmsConsent } from "@/lib/contact";
+import { leadFromBody, syncLeadToGoHighLevel } from "@/lib/gohighlevel";
 
 export const runtime = "nodejs";
 
@@ -110,6 +111,8 @@ export async function POST(request: Request) {
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 502 });
   }
+
+  await syncLeadToGoHighLevel(leadFromBody(body, smsConsent, consentedAt, source));
 
   return NextResponse.json({ ok: true });
 }

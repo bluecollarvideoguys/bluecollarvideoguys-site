@@ -6,7 +6,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { FAQSchema, ServiceSchema } from "@/components/seo/schemas";
 import { IconArrowRight } from "@/components/icons";
 import { AREAS, AREA_TRADES, getArea } from "@/content/areas";
-import { CALENDLY_URL } from "@/lib/calendly";
+import { BOOKING_URL } from "@/lib/booking";
 import { buildMetadata } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -85,12 +85,12 @@ export default async function AreaPage({ params }: Props) {
                 {area.intro}
               </p>
               <a
-                href={CALENDLY_URL}
+                href={BOOKING_URL}
                 target="_blank"
                 rel="noreferrer"
                 className="mt-8 inline-flex items-center gap-2 rounded-full bg-[var(--v02-gold)] px-7 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
               >
-                Book a Discovery Call
+                Book a Free Strategy Call
                 <IconArrowRight />
               </a>
             </div>

@@ -7,7 +7,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CoverYouTubeEmbed } from "@/components/CoverYouTubeEmbed";
 import { VideoSlot } from "@/components/VideoSlot";
-import { CALENDLY_URL } from "@/lib/calendly";
+import { BOOKING_URL } from "@/lib/booking";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 import { SiteBrandLink } from "@/components/BrandLogo";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -74,8 +74,8 @@ const WORK_VIDEOS = {
   craftEdit: "emhLh58qP94",
 } as const;
 
-function openCalendly() {
-  window.open(CALENDLY_URL, "_blank", "noopener,noreferrer");
+function openBooking() {
+  window.open(BOOKING_URL, "_blank", "noopener,noreferrer");
 }
 
 const HERO_VIDEO =
@@ -481,10 +481,10 @@ export function Version02Page() {
       after={
         <>
           <a
-            href={CALENDLY_URL}
+            href={BOOKING_URL}
             target="_blank"
             rel="noreferrer"
-            aria-label="Schedule a discovery call"
+            aria-label="Book a free strategy call"
             className="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--v02-gold)] text-2xl text-[var(--v02-ink)] shadow-xl transition hover:scale-110"
           >
             <IconPhone />
@@ -525,12 +525,12 @@ export function Version02Page() {
 
           <div className="hidden items-center gap-5 lg:flex">
             <a
-              href={CALENDLY_URL}
+              href={BOOKING_URL}
               target="_blank"
               rel="noreferrer"
               className="rounded-full bg-[var(--v02-gold)] px-5 py-2.5 text-sm font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
             >
-              Book a Discovery Call
+              Book a Free Strategy Call
             </a>
           </div>
 
@@ -558,13 +558,13 @@ export function Version02Page() {
                 </Link>
               ))}
               <a
-                href={CALENDLY_URL}
+                href={BOOKING_URL}
                 target="_blank"
                 rel="noreferrer"
                 className="mt-2 font-semibold text-[var(--v02-gold)]"
                 onClick={() => setMenuOpen(false)}
               >
-                Book a Discovery Call
+                Book a Free Strategy Call
               </a>
             </div>
           </div>
@@ -618,12 +618,12 @@ export function Version02Page() {
 
               <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <a
-                  href={CALENDLY_URL}
+                  href={BOOKING_URL}
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center justify-center gap-2 rounded-full bg-[var(--v02-gold)] px-7 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
                 >
-                  Schedule Your Discovery Call
+                  Book a Free Strategy Call
                 </a>
                 <a
                   href="#blueprint"
@@ -874,7 +874,7 @@ export function Version02Page() {
                       "Long term growth consulting",
                     ]}
                     cta
-                    onCta={openCalendly}
+                    onCta={openBooking}
                   />
                 </div>
               </div>
@@ -900,7 +900,7 @@ export function Version02Page() {
               title="More Trust. More Work."
               body="Growth built on reputation, not gimmicks."
               cta
-              onCta={openCalendly}
+              onCta={openBooking}
             />
           </div>
         </section>
@@ -959,12 +959,12 @@ export function Version02Page() {
                   out the right mix together.
                 </p>
                   <a
-                  href={CALENDLY_URL}
+                  href={BOOKING_URL}
                   target="_blank"
                   rel="noreferrer"
                   className="mt-5 inline-flex w-fit items-center gap-2 text-sm font-semibold text-[var(--v02-gold-deep)] transition hover:text-[var(--v02-ink)]"
                 >
-                  Schedule Your Discovery Call
+                  Book a Free Strategy Call
                   <IconArrowRight />
                 </a>
               </div>
@@ -1309,7 +1309,7 @@ function BlueprintPanel({
               onClick={onCta}
               className={`group mt-10 inline-flex cursor-pointer items-center gap-2 ${type.eyebrowDark}`}
             >
-              Schedule Your Discovery Call
+              Book a Free Strategy Call
               <IconArrowRight className="transition-transform group-hover:translate-x-1" />
             </button>
           ) : null}
@@ -1350,7 +1350,7 @@ function MobileBlueprint({
           onClick={onCta}
           className={`group mt-8 inline-flex cursor-pointer items-center gap-2 ${type.eyebrowDark}`}
         >
-          Schedule Your Discovery Call
+          Book a Free Strategy Call
           <IconArrowRight className="transition-transform group-hover:translate-x-1" />
         </button>
       ) : null}
