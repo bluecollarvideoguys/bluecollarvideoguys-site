@@ -1,0 +1,72 @@
+/* Lighter than the homepage: paper pages, one short rise, no GSAP. */
+html:has(.v02-root.funnel-root),
+html:has(.v02-root.funnel-root) body {
+  background: var(--v02-paper);
+}
+
+.funnel-root {
+  background: var(--v02-paper);
+  color: var(--v02-ink);
+}
+
+.funnel-rise {
+  animation: funnel-rise 0.55s ease both;
+}
+
+@keyframes funnel-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.funnel-cta {
+  display: flex;
+  min-height: 48px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  background: var(--v02-gold);
+  padding: 0.75rem 1.25rem;
+  font-family: var(--font-v02-display), ui-sans-serif, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--v02-ink);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.funnel-cta:hover {
+  background: var(--v02-gold-hot);
+}
+
+.funnel-cta:focus-visible {
+  outline: 2px solid var(--v02-ink);
+  outline-offset: 3px;
+}
+
+@media (min-width: 640px) {
+  .funnel-cta {
+    width: auto;
+  }
+}
+
+.funnel-sticky .funnel-cta {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .funnel-rise {
+    animation: none;
+  }
+
+  .funnel-cta {
+    transition: none;
+  }
+}

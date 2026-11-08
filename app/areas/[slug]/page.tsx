@@ -7,6 +7,7 @@ import { FAQSchema, ServiceSchema } from "@/components/seo/schemas";
 import { IconArrowRight } from "@/components/icons";
 import { AREAS, AREA_TRADES, getArea } from "@/content/areas";
 import { BOOKING_URL } from "@/lib/booking";
+import { SITE_ORIGIN } from "@/lib/contact";
 import { buildMetadata } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -92,6 +93,12 @@ export default async function AreaPage({ params }: Props) {
               >
                 Book a Free Strategy Call
                 <IconArrowRight />
+              </a>
+              <a
+                href={`${SITE_ORIGIN}/book`}
+                className="mt-4 inline-flex min-h-12 items-center gap-2 rounded-full border border-white/30 px-7 py-4 text-base font-semibold text-white transition hover:border-[var(--v02-gold)] hover:text-[var(--v02-gold)] sm:ml-3 sm:mt-8"
+              >
+                Book a Free Strategy Call
               </a>
             </div>
           </div>

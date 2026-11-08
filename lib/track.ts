@@ -9,6 +9,8 @@ declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
     fbq?: (...args: unknown[]) => void;
+    __bcvgMetaPageView?: string;
+    __bcvgGooglePageView?: string;
   }
 }
 
@@ -77,6 +79,30 @@ export function getAttribution(): Record<string, string> {
     return raw ? (JSON.parse(raw) as Record<string, string>) : {};
   } catch {
     return {};
+  }
+}
+
+/**
+ * Put stored ad parameters back on the current URL when a redirect drops them.
+ * Used so /strategy-call to /book keeps utm, fbclid, and gclid.
+ */
+export function restoreAttributionToUrl(keys: readonly string[]) {
+  try {
+    const stored = getAttribution();
+    const url = new URL(window.location.href);
+    let changed = false;
+    for (const key of keys) {
+      const value = stored[key];
+      if (value && !url.searchParams.get(key)) {
+        url.searchParams.set(key, value);
+        changed = true;
+      }
+    }
+    if (changed) {
+      window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+    }
+  } catch {
+    // Storage or history blocked. The calendar still loads.
   }
 }
 

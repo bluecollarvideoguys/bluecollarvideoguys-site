@@ -5,6 +5,7 @@ import { FAQSchema, ServiceSchema } from "@/components/seo/schemas";
 import { AREAS } from "@/content/areas";
 import { INDUSTRIES, getIndustry } from "@/content/industries";
 import { SERVICES } from "@/content/services";
+import { SITE_ORIGIN } from "@/lib/contact";
 import { buildMetadata } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -90,6 +91,14 @@ export default async function IndustryPage({ params }: Props) {
           <FaqList faqs={ind.faqs} />
         </Section>
         <RelatedLinks title="Services and other trades" links={links} />
+        <p className="bg-[var(--v02-paper)] px-5 pb-16 sm:px-6 lg:px-8">
+          <a
+            href={`${SITE_ORIGIN}/book`}
+            className="inline-flex items-center gap-2 rounded-full bg-[var(--v02-gold)] px-7 py-4 text-base font-semibold text-[var(--v02-ink)] transition hover:-translate-y-0.5 hover:bg-[var(--v02-gold-hot)]"
+          >
+            Book a Free Strategy Call
+          </a>
+        </p>
       </PageShell>
     </>
   );

@@ -193,7 +193,7 @@ export function PrivacyPage() {
               </li>
             </ul>
 
-            <h2 className={`${heading} mt-12`}>
+            <h2 id="messaging-terms" className={`${heading} mt-12`}>
               Messaging Program Terms and Conditions
             </h2>
             <ol className="mt-4 list-decimal space-y-4 pl-5 text-base leading-relaxed text-slate-600">

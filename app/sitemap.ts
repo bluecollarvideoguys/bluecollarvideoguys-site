@@ -8,7 +8,8 @@ import { SERVICES } from "@/content/services";
  * Indexable routes only. When you add a public page, add it here with the date
  * its content last meaningfully changed (not today's date on every build).
  * Noindexed pages (archive versions, /testimonials while it has placeholders,
- * /privacy, /brand, /scan, /upload, /confirmation) stay out.
+ * /privacy, /brand, /scan, /upload, /confirmation, /strategy-call, /book,
+ * /booked) stay out.
  */
 const ROUTES: { path: string; lastModified: string; priority: number }[] = [
   { path: "/", lastModified: "2026-10-21", priority: 1 },
