@@ -30,9 +30,18 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: SITE.name,
+    images: [
+      {
+        url: `${SITE.image}?v=2`,
+        width: 1200,
+        height: 630,
+        alt: "The Blue Collar Video Guys",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
+    images: [`${SITE.image}?v=2`],
   },
   other: {
     "facebook-domain-verification": "ikur60asuv3ghlhwk48b0lf398kcdh",

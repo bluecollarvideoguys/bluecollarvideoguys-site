@@ -1,4 +1,13 @@
 import type { Metadata } from "next";
+import { SITE } from "@/lib/site";
+
+/** Explicit share image. The query keeps Facebook from reusing a cached logo. */
+const shareImage = {
+  url: `${SITE.image}?v=2`,
+  width: 1200,
+  height: 630,
+  alt: "The Blue Collar Video Guys",
+};
 
 type BuildMetadataInput = {
   /** Page title. The root layout template appends "| Blue Collar Video Guys". */
@@ -27,10 +36,13 @@ export function buildMetadata({
       title: absoluteTitle ? title : `${title} | Blue Collar Video Guys`,
       description,
       url: path,
+      images: [shareImage],
     },
     twitter: {
+      card: "summary_large_image",
       title: absoluteTitle ? title : `${title} | Blue Collar Video Guys`,
       description,
+      images: [shareImage.url],
     },
     ...(noindex ? { robots: { index: false, follow: true } } : {}),
   };
