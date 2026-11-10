@@ -6,14 +6,10 @@ import { useEffect } from "react";
 import { funnelConfig, FUNNEL_ATTRIBUTION_KEYS } from "@/lib/funnel-config";
 import { restoreAttributionToUrl } from "@/lib/track";
 
-const sent = new Set<string>();
+/** Survives React strict mode's extra effect run, so each route fires once. */
+const sentMeta = new Set<string>();
+const sentGoogle = new Set<string>();
 let entryPath: string | null = null;
-
-function ready(pixel: string | undefined, tag: string | undefined) {
-  const pixelReady = !pixel || typeof window.fbq === "function";
-  const tagReady = !tag || typeof window.gtag === "function";
-  return pixelReady && tagReady;
-}
 
 export function RestoreFunnelAttribution() {
   useEffect(() => {
@@ -22,73 +18,69 @@ export function RestoreFunnelAttribution() {
   return null;
 }
 
-/** Pixel and Google tag events for the three funnel routes. No-ops until IDs exist. */
+/**
+ * Meta Pixel on the funnel routes, plus site-wide gtag events.
+ * /book fires generate_lead. /booked fires book_appointment.
+ * Google Ads counts /booked from the site-wide AW- config, so this does not
+ * send a conversion snippet or load gtag.js again.
+ */
 export function FunnelTracking() {
   const pathname = usePathname();
   const pixel = funnelConfig.metaPixelId;
-  const tag = funnelConfig.googleTagId;
-  const conversion = funnelConfig.googleAdsConversion;
 
   useEffect(() => {
     if (entryPath === null) entryPath = pathname;
     const includePageView = pathname !== entryPath;
+    const googleEvent =
+      pathname === "/book"
+        ? "generate_lead"
+        : pathname === "/booked"
+          ? "book_appointment"
+          : null;
     let cancelled = false;
-    let tries = 0;
-    let timer = 0;
+    let metaTries = 0;
+    let googleTries = 0;
+    let metaTimer = 0;
+    let googleTimer = 0;
 
-    const send = () => {
-      if (cancelled || sent.has(pathname)) return;
-      if (!ready(pixel, tag)) {
-        if (tries++ > 24) return;
-        timer = window.setTimeout(send, 125);
+    const sendMeta = () => {
+      if (cancelled || sentMeta.has(pathname)) return;
+      if (pixel && typeof window.fbq !== "function") {
+        if (metaTries++ > 24) return;
+        metaTimer = window.setTimeout(sendMeta, 125);
         return;
       }
-      sent.add(pathname);
+      sentMeta.add(pathname);
       if (includePageView && pixel && window.__bcvgMetaPageView !== pathname) {
         window.fbq?.("track", "PageView");
         window.__bcvgMetaPageView = pathname;
       }
-      if (includePageView && tag && window.__bcvgGooglePageView !== pathname) {
-        window.gtag?.("event", "page_view", { page_path: pathname });
-        window.__bcvgGooglePageView = pathname;
-      }
-      if (pathname === "/book") {
-        if (pixel) window.fbq?.("track", "Lead");
-        if (tag) window.gtag?.("event", "generate_lead");
-      }
-      if (pathname === "/booked") {
-        if (pixel) window.fbq?.("track", "Schedule");
-        if (tag && conversion) {
-          window.gtag?.("event", "conversion", { send_to: conversion });
-        }
-      }
+      if (pathname === "/book" && pixel) window.fbq?.("track", "Lead");
+      if (pathname === "/booked" && pixel) window.fbq?.("track", "Schedule");
     };
 
-    send();
+    const sendGoogle = () => {
+      if (!googleEvent || cancelled || sentGoogle.has(pathname)) return;
+      if (typeof window.gtag !== "function") {
+        if (googleTries++ > 24) return;
+        googleTimer = window.setTimeout(sendGoogle, 125);
+        return;
+      }
+      sentGoogle.add(pathname);
+      window.gtag("event", googleEvent);
+    };
+
+    sendMeta();
+    sendGoogle();
     return () => {
       cancelled = true;
-      window.clearTimeout(timer);
+      window.clearTimeout(metaTimer);
+      window.clearTimeout(googleTimer);
     };
-  }, [pathname, pixel, tag, conversion]);
+  }, [pathname, pixel]);
 
   return (
     <>
-      {tag ? (
-        <>
-          <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${tag}`}
-            strategy="afterInteractive"
-          />
-          <Script id="funnel-google-tag" strategy="afterInteractive">
-            {`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-window.gtag = window.gtag || gtag;
-gtag('js', new Date());
-gtag('config', '${tag}');
-window.__bcvgGooglePageView = location.pathname;`}
-          </Script>
-        </>
-      ) : null}
       {pixel ? (
         <Script id="funnel-meta-pixel" strategy="afterInteractive">
           {`if(!window.fbq){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?

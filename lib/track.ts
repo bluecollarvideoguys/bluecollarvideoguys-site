@@ -10,7 +10,6 @@ declare global {
     gtag?: (...args: unknown[]) => void;
     fbq?: (...args: unknown[]) => void;
     __bcvgMetaPageView?: string;
-    __bcvgGooglePageView?: string;
   }
 }
 
