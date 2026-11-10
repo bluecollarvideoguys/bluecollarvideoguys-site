@@ -57,6 +57,17 @@ export default function RootLayout({
         <OrganizationSchema />
         {children}
         <Analytics />
+        {process.env.NEXT_PUBLIC_META_PIXEL_ID ? (
+          <noscript>
+            <img
+              height="1"
+              width="1"
+              style={{ display: "none" }}
+              alt=""
+              src={`https://www.facebook.com/tr?id=${process.env.NEXT_PUBLIC_META_PIXEL_ID}&ev=PageView&noscript=1`}
+            />
+          </noscript>
+        ) : null}
       </body>
     </html>
   );

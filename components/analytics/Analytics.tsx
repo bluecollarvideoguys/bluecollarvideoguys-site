@@ -55,6 +55,30 @@ export function Analytics() {
   }, [pathname]);
 
   useEffect(() => {
+    if (!META_PIXEL_ID) return;
+    let cancelled = false;
+    let tries = 0;
+    let timer = 0;
+    const send = () => {
+      if (cancelled) return;
+      if (typeof window.fbq !== "function") {
+        if (tries++ > 40) return;
+        timer = window.setTimeout(send, 125);
+        return;
+      }
+      // The base snippet already records the first full load.
+      if (window.__bcvgMetaPageView === pathname) return;
+      window.__bcvgMetaPageView = pathname;
+      window.fbq("track", "PageView");
+    };
+    send();
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, [pathname]);
+
+  useEffect(() => {
     captureAttribution();
 
     const onClick = (e: MouseEvent) => {
@@ -116,8 +140,8 @@ n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '${META_PIXEL_ID}');
-fbq('track', 'PageView');
-window.__bcvgMetaPageView = location.pathname;`}
+window.__bcvgMetaPageView = location.pathname;
+fbq('track', 'PageView');`}
         </Script>
       ) : null}
     </>

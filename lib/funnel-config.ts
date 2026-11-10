@@ -42,7 +42,7 @@ export const funnelConfig = {
     scarcity:
       "Book your strategy call this month and get a bonus client testimonial video added to any package, free. That's one more customer on camera telling homeowners why they hired you.",
   },
-  metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID, // add later
+  metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID,
 };
 
 export const FUNNEL_ATTRIBUTION_KEYS = [
