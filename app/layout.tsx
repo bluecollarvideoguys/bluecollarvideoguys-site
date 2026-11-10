@@ -34,6 +34,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
   },
+  other: {
+    "facebook-domain-verification": "ikur60asuv3ghlhwk48b0lf398kcdh",
+  },
   // Search Console / Bing ownership tags. Set the tokens as Vercel env vars.
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION || undefined,
